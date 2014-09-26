@@ -18,6 +18,12 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 	.when('/projects', {
 		templateUrl: 'partials/partial-projects.html'
 	})
+	.when('/clients', {
+		templateUrl: 'partials/partial-clients.html'
+	})
+	.when('/profile', {
+		templateUrl: 'partials/partial-profile.html'
+	})
 	.otherwise({
 		redirectTo: '/tracks'
 	});
