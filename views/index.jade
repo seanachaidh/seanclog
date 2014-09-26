@@ -3,7 +3,10 @@ html
 	head
 		title Seanclog
 		link(rel='stylesheet', type='text/css', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-	body
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js')
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js')
+		script(type='text/javascript', src='/javascripts/ang-app.js')
+	body(ng-app='seanclogApp')
 		nav.navbar.navbar-default(role='navigation')
 			div.container-fluid
 				div.navbar-header
@@ -16,4 +19,4 @@ html
 					div(class='navbar-form navbar-right', role='search')
 						div(class='form-group'): input(type='text' class='form-control', placeholder='Search')
 						button(type='submit' class='btn btn-default') Search!
-						
+		div.ng-view
