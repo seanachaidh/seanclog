@@ -32,3 +32,8 @@ var trackSchema = new Schema({
 	project: {type: Schema.types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.types.ObjectId, ref: 'Gebruiker'}
 });
+
+var Track = mongoose.model('Track', trackschema);
+var Project = mongoose.model('Project', projectSchema);
+var Klant = mongoose.model('Klant', klantSchema);
+var Gebruiker = mongoose.model('Gebruiker', userSchema);
