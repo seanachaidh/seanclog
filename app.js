@@ -3,7 +3,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var routes = require('./routes');
-var passport = require('passport'):
+var passport = require('passport');
 
 var app = express();
 
