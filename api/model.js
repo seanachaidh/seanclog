@@ -3,6 +3,10 @@
  */
 
 var mongoose = require('mongoose');
+
+//connecteren met de databank
+mongoose.connect('mongodb://pietervk:ragnarok@lennon.mongohq.com:10094/app29880742');
+
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -15,25 +19,25 @@ var userSchema = new Schema({
 var projectSchema = new Schema({
 	titel: String,
 	prijs: Number,
-	gebruiker: {type: Schema.types.ObjectId, ref: 'Gebruiker'}
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 });
 
 var klantSchema = new Schema ({
 	naam: String,
 	telefoonnummer: String,
 	email: String,
-	gebruiker: {type: Schema.types.ObjectId, ref: 'Gebruiker'}
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 });
 
 var trackSchema = new Schema({
 	titel: String,
 	begintijd: Date,
 	eindtijd: Date,
-	project: {type: Schema.types.ObjectId, ref: 'Project'},
-	gebruiker: {type: Schema.types.ObjectId, ref: 'Gebruiker'}
+	project: {type: Schema.Types.ObjectId, ref: 'Project'},
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 });
 
-var Track = mongoose.model('Track', trackschema);
-var Project = mongoose.model('Project', projectSchema);
-var Klant = mongoose.model('Klant', klantSchema);
-var Gebruiker = mongoose.model('Gebruiker', userSchema);
+exports.Track = mongoose.model('Track', trackSchema);
+exports.Project = mongoose.model('Project', projectSchema);
+exports.Klant = mongoose.model('Klant', klantSchema);
+exports.Gebruiker = mongoose.model('Gebruiker', userSchema);

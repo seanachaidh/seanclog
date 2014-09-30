@@ -3,6 +3,9 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var routes = require('./routes');
+var mongodb = require('mongodb');
+var mongoose = require('mongoose');
+var clogapi = require('./api');
 
 var app = express();
 
@@ -21,6 +24,8 @@ if('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/:userid/tracks', clogapi.tracks.getTracksOfUser);
+app.get('/:userid/projects', clogapi.projects.getProjectsOfUser);
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
