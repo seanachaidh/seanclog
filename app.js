@@ -7,7 +7,11 @@ var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var clogapi = require('./api');
 
+var monk = require('monk');
+
 var app = express();
+
+var db = monk('mongodb://pietervk:ragnarok@lennon.mongohq.com:10094/app29880742');
 
 app.set('port', process.env.PORT || 5000);
 app.set('views', __dirname + '/views');
@@ -18,6 +22,11 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+	req.db = db;
+	next();
+});
 
 if('development' == app.get('env')) {
 	app.use(express.errorHandler());

@@ -6,7 +6,9 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getProjectsOfUser = function(req, res) {
 	var id = req.param('userid');
-	model.Project.find({gebruiker: new ObjectId(id)}, function(err, docs) {
-		res.send('projects', docs);
+	model.Gebruiker.findById(id, '', {lean:true}, function(err, docs) {
+		model.Project.find({gebruiker: docs._id}, function(err, projs){
+			res.json(projs);
+		});
 	});
 };
