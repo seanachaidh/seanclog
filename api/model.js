@@ -14,20 +14,20 @@ var userSchema = new Schema({
 	wachtwoord: String,
 	naam: String,
 	email: String
-});
+}, {collection: "gebruikers"});
 
 var projectSchema = new Schema({
 	titel: String,
 	prijs: Number,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
-});
+}, {collection: "projecten"});
 
 var klantSchema = new Schema ({
 	naam: String,
 	telefoonnummer: String,
 	email: String,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
-});
+}, {collection: "klanten"});
 
 var trackSchema = new Schema({
 	titel: String,
@@ -35,7 +35,7 @@ var trackSchema = new Schema({
 	eindtijd: Date,
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
-});
+}, {collection: "tracks"});
 
 exports.Track = mongoose.model('Track', trackSchema);
 exports.Project = mongoose.model('Project', projectSchema);
