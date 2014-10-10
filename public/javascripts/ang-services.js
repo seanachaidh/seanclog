@@ -3,7 +3,7 @@
  */
 
 var clogService = angular.module('seanClogServices', ['ngResource']);
-clogService.factory('Projects', function($resource) {
-	var fact = $resource('/:userid/projects',{},{ query: {method:'GET', params: {userid: 'user'}, isArray: true}});
+clogService.factory('Projects', ['$resource', function($resource) {
+	var fact = $resource('/api/:userid/projects.json',{},{'query': {method:'GET', isArray: true}});
 	return fact;
-});
+}]);

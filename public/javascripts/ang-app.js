@@ -5,7 +5,7 @@
 /*
  * de controller module mot hier nog aan worden toegevoegd
  */
-var seanclogApp = angular.module('seanclogApp', ['seanClogControllers', 'ngRoute']);
+var seanclogApp = angular.module('seanclogApp', ['seanClogServices', 'seanClogControllers', 'ngRoute']);
 
 /*
  * definieer alle routes

@@ -4,7 +4,8 @@
  */
 var seanControllers = angular.module('seanClogControllers', ['seanClogServices', 'ngRoute']);
 
-seanControllers.controller('ProjectController', ['$scope', '$routeParams', function($scope, $routeParams){
-	//var projects = Projects.get({userid: $routeParams.uid});
-	$scope.projects = 'hello world';
+seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Projects', function($scope, $routeParams, Projects){
+	Projects.query({userid: $routeParams.uid}, function(project) {
+		$scope.projects = project;
+	});
 }]);
