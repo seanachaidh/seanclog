@@ -6,6 +6,7 @@ var routes = require('./routes');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var clogapi = require('./api');
+var passport = require('passport');
 
 var monk = require('monk');
 
@@ -36,7 +37,10 @@ app.get('/', routes.index);
 app.get('/api/:userid/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/:userid/projects.json', clogapi.projects.getProjectsOfUser);
 app.post('/api/posttest', clogapi.tests.posttest);
-app.post('/login')
+app.post('/login', passport.authenticiate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login'
+}));
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
