@@ -9,3 +9,7 @@ seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Proj
 		$scope.projects = project;
 	});
 }]);
+seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {
+	var resp = Tests.testuser({gebruikersnaam: 'Testuser', naam:'Pieter', wachtwoord:'12345', email:'hello@hello.com'});
+	$scope.resp = resp;
+}]);

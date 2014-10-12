@@ -25,6 +25,10 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 	.when('/profile', {
 		templateUrl: 'partials/partial-profile.html'
 	})
+	.when('/test', {
+		templateUrl: 'partials/partial-test.html',
+		controller: 'TestController'
+	})
 	.otherwise({
 		redirectTo: '/tracks'
 	});

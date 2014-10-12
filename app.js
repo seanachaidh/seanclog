@@ -36,6 +36,7 @@ app.get('/', routes.index);
 app.get('/api/:userid/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/:userid/projects.json', clogapi.projects.getProjectsOfUser);
 app.post('/api/posttest', clogapi.tests.posttest);
+app.post('/login')
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
