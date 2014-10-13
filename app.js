@@ -31,10 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticiate('local', {
-	successRedirect: '/',
+app.post('/login', passport.authenticate('local', {
+	successRedirect: '/app',
 	failureRedirect: '/login'
 }));
+
+passport.use(clogapi.strategy.mainstrategy);
 
 
 /* ------------------------------------------ */
@@ -44,6 +46,7 @@ if('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/app', routes.app);
 app.get('/api/:userid/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/:userid/projects.json', clogapi.projects.getProjectsOfUser);
 app.post('/api/posttest', clogapi.tests.posttest);
