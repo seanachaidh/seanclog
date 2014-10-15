@@ -24,6 +24,17 @@ function authUser(username, password, done) {
 exports.initpassport = function (app) {
 	app.use(passport.initialize());
 	app.use(passport.session());
+	
+	passport.serializeUser(function(user, done) {
+		done(null, user._id);
+	});
+	
+	passport.deserializeUser(function(id, done) {
+		model.Gebruiker.findById(id, function(err, user) {
+			done(err, user);
+		});
+	});
+	
 };
 
 exports.passroute = function(app) {

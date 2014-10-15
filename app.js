@@ -8,8 +8,6 @@ var mongoose = require('mongoose');
 var clogapi = require('./api');
 var passport = require('passport');
 
-var monk = require('monk');
-
 var app = express();
 
 app.set('port', process.env.PORT || 5000);
