@@ -19,6 +19,7 @@ app.use(express.logger('dev'));
 app.use(express.favicon());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+clogapi.auth.initpassport(app); //dit mag niet van plek veranderen
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,15 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Alles dat te maken heeft met authenticatie
  */
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.post('/login', passport.authenticate('local', {
-	successRedirect: '/app',
-	failureRedirect: '/login'
-}));
-
-passport.use(clogapi.strategy.mainstrategy);
+clogapi.auth.passroute(app);
 
 
 /* ------------------------------------------ */
