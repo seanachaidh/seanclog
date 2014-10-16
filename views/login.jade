@@ -1,12 +1,9 @@
 extends ./heading.jade
 
 block content
-	form(action='/login', method='post')
-		div
-			label Username:
-			input(type='text', name='username')
-		div
-			label Password:
-			input(type='text', name='password')
-		div
-			input(type='submit' value='Log in')
+	.container
+		form(class='form-signin', action='/login', method='post')
+			h2(class='form-signin-heading') Please sign in
+			input(type='text', class='form-control', placeholder='username', name='password', required, autofocus)
+			input(type='password', class='form-control', placeholder='Password', name='password', required)
+			button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in

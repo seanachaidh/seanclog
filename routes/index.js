@@ -4,5 +4,5 @@ exports.index = function(req, res) {
 };
 
 exports.app = function(req, res) {
-	res.render('index', {});
+	res.render('index', {usernaam: req.user.naam});
 };
