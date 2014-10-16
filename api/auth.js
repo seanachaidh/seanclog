@@ -38,10 +38,10 @@ exports.initpassport = function (app) {
 };
 
 exports.passroute = function(app) {
+	passport.use(mainstrategy);
 	app.post('/login', passport.authenticate('local', {
 		successRedirect: '/app',
-		failureRedirect: '/login'
+		failureRedirect: '/'
 	}));
 
-	passport.use(mainstrategy);
 };
