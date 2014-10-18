@@ -17,6 +17,8 @@ app.use(express.logger('dev'));
 app.use(express.favicon());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(express.session({secret: '72854'}));
 clogapi.auth.initpassport(app); //dit mag niet van plek veranderen
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,6 +43,9 @@ app.get('/app', routes.app);
 app.get('/api/:userid/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/:userid/projects.json', clogapi.projects.getProjectsOfUser);
 app.post('/api/posttest', clogapi.tests.posttest);
+
+//api functies
+app.get('/api/currentuser', clogapi.getCurrentUser);
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));

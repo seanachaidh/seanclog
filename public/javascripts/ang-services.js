@@ -12,3 +12,11 @@ clogService.factory('Tests', ['$resource', function ($resource) {
 	var fact = $resource('/api/posttest', {}, {'testuser': {method: 'POST'}});
 	return fact;
 }]);
+
+/*
+ * ik moet deze functie nog testen.
+ */
+clogService.factory('Userapi', ['$resource', function($resource) {
+	var fact = $resource('/api/currentuser', {}, {'getcurrent': {method: 'GET'}});
+	return fact;
+}]);
