@@ -19,37 +19,24 @@ clogService.factory('Tests', ['$resource', function ($resource) {
  * de 'verouderde' http service
  */
 clogService.factory('Session', ['$http', function($http) {
-	var fact = {};
+	var fact = function(){};
 	
-	//TODO: Vervang dit door dubbelepuntnotatie
-	/*
-	 * fact = {
-	 *   dosomething: function() {
-	 *     code voor dosomething
-	 *   }
-	 * }
-	 */
-	
-	/*
-	 * Verkrijg de huidige gebruiker van de sessie
-	 */
-	fact.getCurrentUser = function() {
+	fact.prototype.getCurrentUser = function() {
 		var retval = $http.get('/api/currentuser')
 		.success(function(r) {
 			return r;
 		});
-		return retval;
 	};
 	
-	fact.saveToSession = function(key, value) {
-		//bewaar een variable naar de sessie
-	};
-	fact.getFromSession = function(key) {
-		//Verkrijg een variable van de sessie
-		//dummy code
-		var retval = 'dummy';
-		return retval;
+	fact.prototype.saveToSession = function(key, value) {
+		//bewaar een variabele naar de sessie
+	}
+	
+	fact.prototype.getFromSession = function(key) {
+		//krijg een variabele van de sessie
 	};
 	
-	return fact;
+	var retval = new fact();
+	
+	return retval;
 }]);
