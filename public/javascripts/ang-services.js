@@ -19,23 +19,5 @@ clogService.factory('Tests', ['$resource', function ($resource) {
  * de 'verouderde' http service
  */
 clogService.factory('Session', ['$resource', function($resource) {
-	var fact = {};
-	var result;
-	
-	fact.getCurrentUser = function() {
-		var cur = $resource('/api/currentuser', {});
-		var retval = cur.get();
-		
-		return retval;
-	};
-	
-	fact.saveToSession = function(key, value) {
-		//bewaar een variabele naar de sessie
-	}
-	
-	fact.getFromSession = function(key) {
-		//krijg een variabele van de sessie
-	};
-	
-	return fact;
+	var fact = $resource('/api/:varname');
 }]);
