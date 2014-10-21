@@ -18,25 +18,24 @@ clogService.factory('Tests', ['$resource', function ($resource) {
  * Ik moet ervoor zorgen dat ik hier de angular resource gebruik in plaats van
  * de 'verouderde' http service
  */
-clogService.factory('Session', ['$http', function($http) {
-	var fact = function(){};
+clogService.factory('Session', ['$resource', function($resource) {
+	var fact = {};
+	var result;
 	
-	fact.prototype.getCurrentUser = function() {
-		var retval = $http.get('/api/currentuser')
-		.success(function(r) {
-			return r;
-		});
+	fact.getCurrentUser = function() {
+		var cur = $resource('/api/currentuser', {});
+		var retval = cur.get();
+		
+		return retval;
 	};
 	
-	fact.prototype.saveToSession = function(key, value) {
+	fact.saveToSession = function(key, value) {
 		//bewaar een variabele naar de sessie
 	}
 	
-	fact.prototype.getFromSession = function(key) {
+	fact.getFromSession = function(key) {
 		//krijg een variabele van de sessie
 	};
 	
-	var retval = new fact();
-	
-	return retval;
+	return fact;
 }]);
