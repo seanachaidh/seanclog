@@ -3,28 +3,17 @@ exports.projects = require('./projects');
 exports.tests = require('./tests');
 exports.auth = require('./auth');
 
-/* Enkele basisfuncties */
-//exports.getCurrentUser = function(req, res) {
-//	if(req.user) {
-//		res.send(req.user);
-//	} else {
-//		res.send('not logged in');
-//	}
-//}
+/*
+ * enkele nuttige hulpfuncties
+ */
 
-exports.retrieveFromSession = function(req, res) {
-	if(req.params.varname == "user") {
-		if(req.user) {
-			res.send(req.user);
-		} else {
-			res.send('Er is niemand aangelogd');
-		}
+/*
+ * Verkrijg de gebruiker die op dit moment aangemeld is
+ */
+exports.getCurrentUser = function(req, res) {
+	if(!req.user) {
+		res.send({value: false});
 	} else {
-		var vartofind = req.params.varname;
-		res.send(req.session[vartofind]);
+		req.send(req.user);
 	}
-};
-
-exports.saveToSession = function(req, res) {
-	req.session[req.params.varname] = varvalue
-};
+}
