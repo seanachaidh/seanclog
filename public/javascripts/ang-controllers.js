@@ -4,14 +4,9 @@
  */
 var seanControllers = angular.module('seanClogControllers', ['seanClogServices', 'ngRoute']);
 
-seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Projects', 'Session',
-function($scope, $routeParams, Projects, Session){
-	/*
-	 * Verkrijg het gebruikersindentificatienummer van de gebruiker die
-	 * op dit moment aangemeld is.
-	 */
-	var uid = Session.getCurrentUser()._id;
-	Projects.query({userid: uid}, function(proj){
+seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Projects',
+function($scope, $routeParams, Projects){
+	Projects.query(function(proj){
 		//volgens mij geeft dit maar één project terug. De variable wordt telkens overschreven
 		$scope.projects = proj;
 	});

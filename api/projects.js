@@ -11,8 +11,8 @@ exports.getProjectsOfUser = function(req, res) {
 	if(!req.user) {
 		res.json([{value:false}]);
 	} else {
-		f// vergeet de api en gebruik hier direct de gewone sessie
-		var id = req.param('userid');
+		// vergeet de api en gebruik hier direct de gewone sessie
+		var id = req.user._id;
 		model.Project.find({
 			gebruiker : new ObjectId(id)
 		}, function(err, docs) {
