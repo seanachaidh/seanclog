@@ -42,6 +42,7 @@ app.get('/', routes.index);
 app.get('/app', routes.app);
 app.get('/api/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/projects', clogapi.projects.getProjectsOfUser);
+app.get('/api/clients', clogapi.clients.getClientsOfUser);
 app.post('/api/posttest', clogapi.tests.posttest);
 
 

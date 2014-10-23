@@ -1,14 +1,13 @@
 var model = require('./model');
-var mongoose = require('mongoose');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getTracksOfUser = function(req, res) {
-	var id = req.param('userid');
-	var projects = req.db.get('projects');
-	projects.find({gebruiker: projects.id(id)}, function(err, doc) {
-		if(!err) {
-			res.send(doc);
-		} else {
-			res.send('niets gevonden');
-		}
-	});
+	if(!req.user) {
+		res.json([{value: false}]);
+	} else {
+		var id = req.user._id;
+		model.Track.find({gebruiker: new ObjectId(id)}, function(err,track) {
+			res.json(track);
+		});
+	}
 };

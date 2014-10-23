@@ -21,3 +21,13 @@ clogService.factory('Tests', ['$resource', function ($resource) {
 clogService.factory('Session', ['$resource', function($resource) {
 	var fact = $resource('/api/:varname');
 }]);
+
+clogService.factory('Tracks', ['$resource', function($resource) {
+	var fact = $resource('/api/tracks', {}, {'query': {method:'GET', isArray: true}});
+	return fact;
+}]);
+
+clogService.factory('Klanten', ['$resource', function($resource) {
+	var fact = $resource('/api/clients', {}, {'query': {method: 'GET', isArray: true}});
+	return fact;
+}]);

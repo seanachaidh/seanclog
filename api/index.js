@@ -1,5 +1,6 @@
 exports.tracks = require('./tracks');
 exports.projects = require('./projects');
+exports.clients = require('./clients');
 exports.tests = require('./tests');
 exports.auth = require('./auth');
 

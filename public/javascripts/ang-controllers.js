@@ -6,11 +6,28 @@ var seanControllers = angular.module('seanClogControllers',['seanClogServices', 
 
 seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Projects',
 function($scope, $routeParams, Projects){
+	$scope.tableTitle = "Mijn Projecten";
 	Projects.query(function(proj){
 		$scope.myData = proj;
 	});
 }]);
+
+seanControllers.controller('TracksController',
+		['$scope', '$routeParams', 'Tracks', function($scope, $routeParams, Tracks){
+			$scope.tableTitle = "Mijn Tracks";
+			Tracks.query(function(t){
+				$scope.myData = t;
+			}); 
+		}]);
+
 seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {
 	var resp = Tests.testuser({gebruikersnaam: 'Testuser', naam:'Pieter', wachtwoord:'12345', email:'hello@hello.com'});
 	$scope.resp = resp;
+}]);
+
+seanControllers.controller('KlantenController', ['$scope', 'Klanten', function($scope, Klanten){
+	$scope.tableTitle = "Mijn Klanten";
+	Klanten.query(function(k) {
+		$scope.myData = k;
+	})
 }]);

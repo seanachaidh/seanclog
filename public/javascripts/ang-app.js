@@ -18,14 +18,16 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 	 */
 	$routeProvider
 	.when('/tracks', {
-		templateUrl: 'partials/partial-tracks.html'
+		templateUrl: 'partials/partial-table.html',
+		controller: 'TracksController'
 	})
 	.when('/projects', {
 		templateUrl: 'partials/partial-table.html',
 		controller: 'ProjectController'
 	})
 	.when('/clients', {
-		templateUrl: 'partials/partial-clients.html'
+		templateUrl: 'partials/partial-table.html',
+		controller: 'KlantenController'
 	})
 	.when('/profile', {
 		templateUrl: 'partials/partial-profile.html'
