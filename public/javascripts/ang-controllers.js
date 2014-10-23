@@ -2,13 +2,12 @@
  * De controllers van mijn app
  * auteur: Pieter Van Keymeulen
  */
-var seanControllers = angular.module('seanClogControllers', ['seanClogServices', 'ngRoute']);
+var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute']);
 
 seanControllers.controller('ProjectController', ['$scope', '$routeParams', 'Projects',
 function($scope, $routeParams, Projects){
 	Projects.query(function(proj){
-		//volgens mij geeft dit maar één project terug. De variable wordt telkens overschreven
-		$scope.projects = proj;
+		$scope.myData = proj;
 	});
 }]);
 seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {

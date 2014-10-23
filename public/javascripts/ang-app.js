@@ -5,7 +5,8 @@
 /*
  * de controller module mot hier nog aan worden toegevoegd
  */
-var seanclogApp = angular.module('seanclogApp', ['seanClogServices', 'seanClogControllers', 'ngRoute']);
+var seanclogApp = angular.module('seanclogApp',
+		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid']);
 
 /*
  * definieer alle routes
@@ -20,7 +21,7 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'partials/partial-tracks.html'
 	})
 	.when('/projects', {
-		templateUrl: 'partials/partial-projects.html',
+		templateUrl: 'partials/partial-table.html',
 		controller: 'ProjectController'
 	})
 	.when('/clients', {
