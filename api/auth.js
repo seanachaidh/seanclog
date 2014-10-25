@@ -1,7 +1,9 @@
 var passport = require('passport');
 var crypto = require('crypto');
 var LocalStrategy = require('passport-local').Strategy;
+
 var model = require('./model');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 var mainstrategy = new LocalStrategy(authUser);
 
@@ -45,3 +47,12 @@ exports.passroute = function(app) {
 	}));
 
 };
+
+/**
+ * De user api. Misschien past dit beter in een aparte module
+ */
+exports.addUser = function(req, res) {
+	/**
+	 * Een gebruiker opslaan
+	 */
+}
