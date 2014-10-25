@@ -11,3 +11,7 @@ exports.getClientsOfUser = function(req, res) {
 		});
 	}
 }
+
+exports.saveClient = function(req, res) {
+	res.send('nog niet gemaakt');
+}

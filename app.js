@@ -40,9 +40,21 @@ if('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/app', routes.app);
+
+/**
+ * Het verkrijgen van data
+ */
 app.get('/api/tracks', clogapi.tracks.getTracksOfUser);
 app.get('/api/projects', clogapi.projects.getProjectsOfUser);
 app.get('/api/clients', clogapi.clients.getClientsOfUser);
+
+/**
+ * Het opslaan van data
+ */
+app.post('/api/tracks', clogapi.tracks.saveTrack);
+app.post('/api/projects', clogapi.projects.saveProject);
+app.post('/api/clients', clogapi.clients.saveClient);
+
 app.post('/api/posttest', clogapi.tests.posttest);
 
 

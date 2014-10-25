@@ -21,3 +21,7 @@ exports.getProjectsOfUser = function(req, res) {
 	}
 
 };
+
+exports.saveProject = function(req, res) {
+	res.send('Nog niet gemaakt');
+}

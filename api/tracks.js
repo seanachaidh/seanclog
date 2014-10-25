@@ -11,3 +11,7 @@ exports.getTracksOfUser = function(req, res) {
 		});
 	}
 };
+
+exports.saveTrack = function(req, res) {
+	res.send('nog niet gemaakt');
+}
