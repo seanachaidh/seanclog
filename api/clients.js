@@ -13,5 +13,20 @@ exports.getClientsOfUser = function(req, res) {
 }
 
 exports.saveClient = function(req, res) {
-	res.send('nog niet gemaakt');
+	var new_naam = req.body.naam,
+		new_telefoonnummer = req.body.telefoonnummer,
+		new_email = req.body.email,
+		new_gebruiker = req.body.gebruiker;
+	var new_cient = new model.Klant({
+		naam: new_naam,
+		telefoonnummer: new_telefoonnummer,
+		email: new_email,
+		gebruiker: new ObjectId(new_gebruiker)
+	});
+	
+	new_client.save(function(err){
+		if(err){
+			console.log('Het bewaren van een klant is niet gelukt');
+		}
+	});
 }
