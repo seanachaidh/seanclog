@@ -9,6 +9,7 @@ function($scope, $routeParams, Projects){
 	$scope.tableTitle = "Mijn Projecten";
 	Projects.query(function(proj){
 		$scope.myData = proj;
+		$scope.createForm = '/partials/forms/form_createproject.html';
 	});
 }]);
 
