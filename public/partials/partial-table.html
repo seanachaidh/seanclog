@@ -1,7 +1,10 @@
 <div class="container-fluid">
-	<h1>{{tableTitle}}</h1>
-	<div ui-grid="{data: myData}" class="mygrid"></div>
-	<div ng-include="createForm">
 
-	</div>
+	<h1>
+		{{tableTitle}}
+		<button type="button" class="btn btn-default" data-toggle="modal"
+			data-target="#createModal">Create new</button>
+	</h1>
+	<div ui-grid="{data: myData}" class="mygrid"></div>
+	<div ng-include="createForm"></div>
 </div>

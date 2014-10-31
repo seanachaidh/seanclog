@@ -1,10 +1,24 @@
-<div class="modal fade">
+<div class="modal fade" id="createModal" data-backdrop="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4>Create Project</h4>
 			</div>
-			<div class="modal-body">Nog niet gemaakt</div>
+			<div class="modal-body">
+				<form action="#" method="post" role="form">
+					<div class="form-group">
+						<label>Titel</label> 
+						<input type="text" class="form-control" placeholder="Titel"/>
+					</div>
+					<div class="form-group">
+						<label>Prijs</label>
+						<!-- Zou ik ervoor kunnen zorgen dat de gebruiker
+							 hier alleenmaar een prijs kan invoeren?
+						 -->
+						<input type="text" class="form-control" placeholder="Prijs">
+					</div>
+				</form>
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
