@@ -10,6 +10,10 @@ function($scope, $routeParams, Projects){
 	Projects.query(function(proj){
 		$scope.myData = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
+		$scope.createProj = function(proj) {
+			//TODO: Deze functie maken
+			//nog niet gemaakt!
+		}
 	});
 }]);
 
