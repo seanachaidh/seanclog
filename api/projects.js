@@ -23,13 +23,15 @@ exports.getProjectsOfUser = function(req, res) {
 };
 
 exports.saveProject = function(req, res) {
-	var gebruikerid = req.body.userid,
+	var gebruikerid = req.user._id;
 		new_titel = req.body.titel,
 		new_prijs = req.body.prijs;
 	var new_proj = new model.Project({titel: new_titel, prijs: new_prijs, gebruiker: new ObjectId(gebruikerid)});
 	new_proj.save(function(err) {
 		if(err) {
 			console.log("Er was een fout bij het bewaren van een project");
+		} else {
+			console.log('het bewaren van het project is goed verlopen (hopelijk)');
 		}
 	});
 }

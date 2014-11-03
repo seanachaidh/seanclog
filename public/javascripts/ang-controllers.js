@@ -11,8 +11,10 @@ function($scope, $routeParams, Projects){
 		$scope.myData = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
 		$scope.createProj = function(proj) {
-			//TODO: Deze functie maken
-			//nog niet gemaakt!
+			//estas tiu funkcio necesa?
+			var tmp = angular.copy(proj);
+			//post la kreo de la projecta. fermu la fenestra
+			Projects.post(proj);
 		}
 	});
 }]);
