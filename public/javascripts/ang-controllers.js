@@ -40,7 +40,7 @@ seanControllers.controller('TracksController',
 			 * Ansi l' utilisateur peut choisisez un project 
 			 */
 			Projects.query(function(proj){
-				$scope.pojects = proj;
+				$scope.projects = proj;
 			});
 			
 			
