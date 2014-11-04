@@ -13,6 +13,7 @@ exports.getTracksOfUser = function(req, res) {
 };
 
 exports.saveTrack = function(req, res) {
+	//sauvegarde un track
 	var new_titel = req.body.titel,
 		new_begintijd = req.body.begintijd,
 		new_eindtijd = req.body.eindtijd,

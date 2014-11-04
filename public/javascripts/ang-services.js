@@ -16,17 +16,20 @@ clogService.factory('Tests', ['$resource', function ($resource) {
 	return fact;
 }]);
 
-/*
- * ik moet deze functie nog testen.
- * Ik moet ervoor zorgen dat ik hier de angular resource gebruik in plaats van
- * de 'verouderde' http service
+/**
+ * Deze functie is verouderd.
+ * Dit omdat deze functie is onnodig is omdat we er nu in elke functie direct
+ * gebruik maken van de user
  */
 clogService.factory('Session', ['$resource', function($resource) {
 	var fact = $resource('/api/:varname');
 }]);
 
 clogService.factory('Tracks', ['$resource', function($resource) {
-	var fact = $resource('/api/tracks', {}, {'query': {method:'GET', isArray: true}});
+	var fact = $resource('/api/tracks', {},
+			{'query': {method:'GET', isArray: true},
+			 'post': {method:'POST', params: {}}
+	});
 	return fact;
 }]);
 

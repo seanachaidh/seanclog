@@ -13,7 +13,7 @@ function($scope, $route, Projects){
 		$scope.myData = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
 		$scope.createProj = function(proj) {
-			//Is deze functie nodig
+			//Est-ce que ce function est necessaire?
 			var tmp = angular.copy(proj);
 			Projects.post(proj);
 			angular.element("#createModal").modal("hide");
@@ -31,6 +31,13 @@ seanControllers.controller('TracksController',
 			$scope.tableTitle = "Mijn Tracks";
 			//choisit la dialogue pour faire des tracks
 			$scope.createForm = '/partials/forms/form_createtrack.html';
+			$scope.createTrack = function(track){
+				//ik moet nog nakijken of deze functie wel degelijk werkt.
+				Tracks.post(angular.copy(track));
+				angular.element('#createModal').modal('hide');
+				
+				$route.reload();
+			};
 			
 			Tracks.query(function(t){
 				$scope.myData = t;
@@ -42,9 +49,6 @@ seanControllers.controller('TracksController',
 			Projects.query(function(proj){
 				$scope.projects = proj;
 			});
-			
-			
-			
 		}]);
 
 seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {
