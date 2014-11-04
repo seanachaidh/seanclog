@@ -1,4 +1,33 @@
-<!-- Formulier om een track te maken -->
+<!-- Dialogue pour faire un track -->
 <div class="modal fade" id="createModal" data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Track maken</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<label>Titel</label> <input type="text" ng-model="track.titel"
+						class="form-control" placeholder="Titel" /> <label>Begintijd</label>
+					<!-- Ceci doit être remplacé par un calendier -->
+					<input type="text" ng-model="track.begintijd" class="form-control"
+						placeholder="Begintijd" /> <label>Eindtijd</label>
+					<!-- Ceci doit être remplacé par un calendier -->
+					<input type="text" ng-model="track.eindtijd" class="form-control"
+						placeholder="Eindtijd" /> <label>Project</label>
+					<!-- Comment est-ce que je peux faire un "combobox"? -->
+					
+					<!-- Les projects dans ce combobox ne sont pas visible -->
+					<select ng-model="track.project"
+						ng-options="projects.titel for project in projects"></select>
+						
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 
 </div>
