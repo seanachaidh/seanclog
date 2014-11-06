@@ -54,7 +54,7 @@ exports.passroute = function(app) {
 			success: true
 		};
 		
-		res.json(retval);
+		res.send(retval);
 	});
 
 };
