@@ -12,10 +12,6 @@ var seanclogApp = angular.module('seanclogApp',
  * definieer alle routes
  */
 seanclogApp.config(['$routeProvider', function($routeProvider) {
-	/*
-	 * Bewaar het gebruikersindentificatienummer van de gebruiker die nu
-	 * aangemeld is.
-	 */
 	$routeProvider
 	.when('/tracks', {
 		templateUrl: 'partials/partial-table.html',

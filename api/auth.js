@@ -19,6 +19,7 @@ function authUser(username, password, done) {
 			done(null, false, {message: 'Gebruiker niet gesvonden'});
 		}
 		
+		//Comment est-ce que je peux evoyer une reponse?
 		return done(null, user);
 	});
 }
@@ -41,10 +42,20 @@ exports.initpassport = function (app) {
 
 exports.passroute = function(app) {
 	passport.use(mainstrategy);
+	//est-ce que ce function envoie une reponse?
 	app.post('/login', passport.authenticate('local', {
 		successRedirect: '/app',
 		failureRedirect: '/'
-	}));
+	}), function(res, req) {
+		//Cette function est appelé si le authentication est une success
+		var username = req.user.gebruikersnaam;
+		var retval = {
+			value: username,
+			success: true
+		};
+		
+		res.json(retval);
+	});
 
 };
 
