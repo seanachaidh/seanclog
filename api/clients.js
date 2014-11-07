@@ -27,6 +27,8 @@ exports.saveClient = function(req, res) {
 	new_client.save(function(err){
 		if(err){
 			console.log('Het bewaren van een klant is niet gelukt');
+		} else {
+			console.log('De klant is successvol bewaard');
 		}
 	});
 }

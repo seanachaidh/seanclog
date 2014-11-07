@@ -56,9 +56,17 @@ seanControllers.controller('TestController', ['$scope', 'Tests', function($scope
 	$scope.resp = resp;
 }]);
 
-seanControllers.controller('KlantenController', ['$scope', 'Klanten', function($scope, Klanten){
+seanControllers.controller('KlantenController', ['$scope', '$route', 'Klanten', function($scope, $route, Klanten){
 	$scope.tableTitle = "Mijn Klanten";
 	Klanten.query(function(k) {
 		$scope.myData = k;
-	})
+	});
+	$scope.createForm = "/partials/forms/form_createclient.html";
+	
+	$scope.createclient = function(client) {
+		Klanten.post(angular.copy(client));
+		angular.element("#createModal").modal('hide');
+		$route.reload();
+	};
+	
 }]);
