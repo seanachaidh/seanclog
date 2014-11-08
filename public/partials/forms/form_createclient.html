@@ -1,0 +1,27 @@
+<!-- Le dialogue pour faire une cliente -->
+
+<div class="modal fade" id="createModal" data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Create client</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<label>Naam</label> <input type="text" class="form-control"
+						ng-model="client.naam" placeholder="Naam" /> <label>Telefoonnummer</label>
+					<input type="text" class="form-control"
+						ng-model="client.telefoonnummer" placeholder="Tel." /> <label>Email</label>
+					<input type="email" class="form-control" ng-model="client.email"
+						placeholder="Email" />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" type="button"
+					ng-click="createclient(client)">Create client</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
