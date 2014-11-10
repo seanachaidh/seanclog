@@ -50,7 +50,11 @@ exports.passroute = function(app) {
 			value: username,
 			success: true
 		};
-		
+		//TODO: Ik heb hier het probleem dat er hier eigenlijk een redirectie moet gebeuren
+		/*
+		 * Een mogelijke oplossing is om deze waarde in angular op te vangen
+		 * en dan een redirectie uit te voeren
+		 */
 		res.send(retval);
 	});
 
