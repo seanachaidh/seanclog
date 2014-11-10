@@ -43,10 +43,7 @@ exports.initpassport = function (app) {
 exports.passroute = function(app) {
 	passport.use(mainstrategy);
 	//est-ce que ce function envoie une reponse?
-	app.post('/login', passport.authenticate('local', {
-		successRedirect: '/app',
-		failureRedirect: '/'
-	}), function(res, req) {
+	app.post('/login', passport.authenticate('local'), function(res, req) {
 		//Cette function est appelé si le authentication est une success
 		var username = req.user.gebruikersnaam;
 		var retval = {

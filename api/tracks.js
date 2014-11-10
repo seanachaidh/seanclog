@@ -17,15 +17,16 @@ exports.saveTrack = function(req, res) {
 	var new_titel = req.body.titel,
 		new_begintijd = req.body.begintijd,
 		new_eindtijd = req.body.eindtijd,
-		new_project = req.body.project,
-		new_gebruiker = req.body.gebruiker;
+		new_project = req.body.project._id,
+		new_gebruiker = req.user._id;
+	//j' ai seulement besoin de l' Id du project et de l'utilisateur
 	
 	var new_track = new model.Track({
 		titel: new_titel,
 		begintijd: new_begintijd,
 		eindtijd: new_eindtijd,
-		project: new ObjectId(new_project),
-		gebruiker: new ObjectId(new_gebruiker)
+		project: new ObjectId(new_project._id),
+		gebruiker: new ObjectId(req.user._id)
 	});
 	
 	new_track.save(function(err){
