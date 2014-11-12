@@ -12,4 +12,7 @@ html
 				//print de namen van de kolommen
 				each x in tabel.names
 					td= x
-//hier moet nog de tabeldata onder komen
+			each r in table.data
+				tr
+					each v in r
+					 td= v
