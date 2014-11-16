@@ -21,7 +21,7 @@ exports.getClients = function(req, res) {
 			if(err) {
 				res.send({value: false});
 			} else {
-				res.json(f);
+				res.render("pdf", {tabel: f});
 			}
 		});
 	}
@@ -36,7 +36,7 @@ exports.getProjects = function(req, res) {
 			if(err) {
 				res.json({value: false});
 			} else {
-				res.json(f);
+				res.render("pdf", {tabel: f});
 			}
 		});
 	}
@@ -51,7 +51,7 @@ exports.getTracks = function(req, res) {
 			if(err) {
 				res.json({value: false});
 			} else {
-				res.json(f);
+				res.render("pdf", {tabel: f});
 			}
 		});
 	}

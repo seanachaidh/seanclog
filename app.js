@@ -52,9 +52,9 @@ app.get('/api/clients', clogapi.clients.getClientsOfUser);
  * commandes de pdf
  */
 
-api.get('/api/createpdf/tracks');
-api.get('/api/createpdf/projects');
-api.get('/api/createpdf/clients');
+app.get('/api/createpdf/tracks');
+app.get('/api/createpdf/projects');
+app.get('/api/createpdf/clients');
 
 /**
  * Het opslaan van data

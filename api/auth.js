@@ -43,21 +43,27 @@ exports.initpassport = function (app) {
 exports.passroute = function(app) {
 	passport.use(mainstrategy);
 	//est-ce que ce function envoie une reponse?
-	app.post('/login', passport.authenticate('local'), function(res, req) {
-		//Cette function est appelé si le authentication est une success
-		var username = req.user.gebruikersnaam;
-		var retval = {
-			value: username,
-			success: true
-		};
-		//TODO: Ik heb hier het probleem dat er hier eigenlijk een redirectie moet gebeuren
-		/*
-		 * Een mogelijke oplossing is om deze waarde in angular op te vangen
-		 * en dan een redirectie uit te voeren
-		 */
-		res.send(retval);
+	app.post('/login', passport.authenticate('local'), function(req, res) {
+		//?gotoapp=1
+		if(req.query.gotoapp) {
+			/*
+			 * Hier gaan we direct naar de webapplicatie
+			 */
+			res.redirect('/app');
+		} else {
+			/*
+			 * hier sturen we enkel een jsonobject door met hierin de verificatie dat de
+			 * authenticatie juist is verlopen
+			 * Dit is handig voor het maken van extra clients, zoals mijn eigen android applicatie
+			 */
+			var username = req.user.gebruikersnaam;
+			var retval = {
+				success: true,
+				gebruikersnaam: username
+			};
+			res.json(retval);
+		}
 	});
-
 };
 
 /**
