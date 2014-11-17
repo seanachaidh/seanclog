@@ -7,6 +7,7 @@ var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var clogapi = require('./api');
 var passport = require('passport');
+var ws = require('ws');
 
 var app = express();
 
@@ -66,6 +67,8 @@ app.post('/api/clients', clogapi.clients.saveClient);
 app.post('/api/posttest', clogapi.tests.posttest);
 
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
+//dit zou normaalgezien een websocketservice moeten maken
+var wss = new WebSocketService({server: server});
