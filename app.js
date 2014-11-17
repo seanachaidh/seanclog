@@ -71,4 +71,4 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
 //dit zou normaalgezien een websocketservice moeten maken
-var wss = new WebSocketService({server: server});
+var wss = new ws.Server({server: server});
