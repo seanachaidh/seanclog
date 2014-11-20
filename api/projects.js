@@ -22,6 +22,10 @@ exports.getProjectsOfUser = function(req, res) {
 
 };
 
+exports.deleteProject = function(req, res) {
+	//TODO: Het verwijderen van projecten implementeren
+}
+
 exports.saveProject = function(req, res) {
 	var gebruikerid = req.user._id;
 		new_titel = req.body.titel,

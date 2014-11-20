@@ -4,6 +4,11 @@
 
 \documentclass[a4paper,11pt]{article}
 
+%Een commando voor een mooie tabelhoofding
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+
+\bibliography{tex.bib}
+
 \begin{document}
 \title{Seanclog: Simple and Fancy timetracker}
 \author{Pieter Van Keymeulen}
@@ -38,9 +43,22 @@ onder honderden mails bedolven zit en uw mail niet eens opmerkt.
 %ici je raconte sur notre solution: Seanclog
 
 \section{Interne structuur}
-\subsection{Gebruikte technieken}
-\subsection{Intern design}
+
 \subsection{Gebruikte software}
+
+\begin{tabular}{c|c|c}
+ik & ben & cool \\
+dag & mooie & wereld
+\end{tabular}
+
+\subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
+Hier bespreken wij de RESTAPI \cite{wiki001}
+Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
+ervoor dat we makkelijk meerdere clients kunnen maken die ook op op desktops
+werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
+eindeloos.
+
+\subsection{Intern design}
 
 \section{vormgeving}
 

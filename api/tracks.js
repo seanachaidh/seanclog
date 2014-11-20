@@ -12,6 +12,10 @@ exports.getTracksOfUser = function(req, res) {
 	}
 };
 
+exports.deleteTrack = function(req, res) {
+	//TODO: Het verwijderen van tracks implementeren
+}
+
 exports.saveTrack = function(req, res) {
 	//sauvegarde un track
 	var new_titel = req.body.titel,

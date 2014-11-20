@@ -64,6 +64,15 @@ app.post('/api/tracks', clogapi.tracks.saveTrack);
 app.post('/api/projects', clogapi.projects.saveProject);
 app.post('/api/clients', clogapi.clients.saveClient);
 
+/**
+ * Het verwijderen van data
+ * Welk record er precies verwijderd moet worden wordt gedetermineerd door de post variabelen
+ */
+app.del('/api/tracks', clogapi.tracks.deleteTrack);
+app.del('/api/projects', clogapi.projects.deleteProject);
+app.del('/api/clients', clogapi.projects.deleteClient);
+
+
 app.post('/api/posttest', clogapi.tests.posttest);
 
 

@@ -12,6 +12,10 @@ exports.getClientsOfUser = function(req, res) {
 	}
 }
 
+exports.deleteClient = function(req, res) {
+	//TODO: Het verwijderen van klanten implementeren
+}
+
 exports.saveClient = function(req, res) {
 	var new_naam = req.body.naam,
 		new_telefoonnummer = req.body.telefoonnummer,
