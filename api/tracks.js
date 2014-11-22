@@ -12,6 +12,10 @@ exports.getTracksOfUser = function(req, res) {
 	}
 };
 
+exports.pdfTrack = function(req, res) {
+	res.send('een pdf van een track');
+};
+
 exports.deleteTrack = function(req, res) {
 	//TODO: Het verwijderen van tracks implementeren
 }

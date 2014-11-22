@@ -7,7 +7,8 @@
 %Een commando voor een mooie tabelhoofding
 \newcommand{\head}[1]{\textnormal{\textbf{#1}}}
 
-\bibliography{tex.bib}
+\bibliographystyle{plain}
+\bibliography{tex}
 
 \begin{document}
 \title{Seanclog: Simple and Fancy timetracker}
@@ -52,11 +53,19 @@ dag & mooie & wereld
 \end{tabular}
 
 \subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
-Hier bespreken wij de RESTAPI \cite{wiki001}
+Hier bespreken wij de RESTAPI \cite{restwiki}
 Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
 ervoor dat we makkelijk meerdere clients kunnen maken die ook op op desktops
 werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
 eindeloos.
+
+Een RESTApi bestaat uit de volgende componenten.
+\begin{itemize}
+  \item [Get] Een get request
+  \item [Delete] Verwijder data
+  \item [Put] Verander data
+  \item [Post] Bewaar data
+\end{itemize}
 
 \subsection{Intern design}
 

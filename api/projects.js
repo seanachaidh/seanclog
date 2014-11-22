@@ -22,6 +22,12 @@ exports.getProjectsOfUser = function(req, res) {
 
 };
 
+exports.pdfProject = function(req, res) {
+	
+	
+	res.send('een pdf van een project');
+},
+
 exports.deleteProject = function(req, res) {
 	//TODO: Het verwijderen van projecten implementeren
 }

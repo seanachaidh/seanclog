@@ -53,9 +53,9 @@ app.get('/api/clients', clogapi.clients.getClientsOfUser);
  * commandes de pdf
  */
 
-app.get('/api/createpdf/tracks');
-app.get('/api/createpdf/projects');
-app.get('/api/createpdf/clients');
+app.get('/api/tracks/createpdf');
+app.get('/api/projects/createpdf');
+app.get('/api/clients/createpdf');
 
 /**
  * Het opslaan van data
@@ -70,7 +70,7 @@ app.post('/api/clients', clogapi.clients.saveClient);
  */
 app.del('/api/tracks', clogapi.tracks.deleteTrack);
 app.del('/api/projects', clogapi.projects.deleteProject);
-app.del('/api/clients', clogapi.projects.deleteClient);
+app.del('/api/clients', clogapi.clients.deleteClient);
 
 
 app.post('/api/posttest', clogapi.tests.posttest);
