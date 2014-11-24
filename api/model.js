@@ -18,6 +18,7 @@ var userSchema = new Schema({
 
 var projectSchema = new Schema({
 	titel: String,
+	//Is dit een geode naam voor deze kolom?
 	prijs: Number,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "projecten"});

@@ -23,9 +23,16 @@ exports.getProjectsOfUser = function(req, res) {
 };
 
 exports.pdfProject = function(req, res) {
+	var retval = {
+		names: ["titel", "prijs", "gebruiker"]
+	};
 	
+	var data = new Array();
+	var query = model.Project.find().select("titel prijs gebruiker -_id");
 	
-	res.send('een pdf van een project');
+	query.exec(function(err, docs) {
+		
+	});
 },
 
 exports.deleteProject = function(req, res) {
