@@ -31,7 +31,7 @@ parser.onopentag = function(node) {
 	ctext = node.name;
 };
 
-fs.readFile('../passconf.xml', 'utf8', function(err, data) {
+fs.readFile('passconf.xml', 'utf8', function(err, data) {
 	if(err) {
 		console.log('er is geen paswoord vastgelegd');
 	} else {
