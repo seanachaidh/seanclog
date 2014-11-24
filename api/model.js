@@ -9,22 +9,47 @@ var ctext = '';
 var fs = require('fs');
 var parser = require('sax').parser(true);
 
+//gegevens om te connecteren
+var pass = '',
+	host = '',
+	user = '';
+	connectstr = '';
+
 parser.onerror = function(e) {
 	console.log('er was een fout in het xmlbestand');
 };
 
 parser.ontext = function(t) {
+	//TODO: De string t moet getrimed worden
 	if(ctext == "password") {
-		
+		pass = t;
+		ctext = '';
 	}
 	
 	if(ctext == "username") {
-		
+		user = t;
+		ctext = '';
 	}
 	
 	if(ctext == "host") {
-		
+		host = t;
+		ctext = '';
 	}
+};
+
+parser.onend = function() {
+	console.log('parser voltooid');
+	console.log('user: ' + user);
+	console.log('password: '+ pass);
+	console.log('host: ' + host);
+	
+	if((user != '') && (pass != '')) {
+		connectstr = 'mongodb://' + host;
+	} else {
+		connectstr = 'mongodb://' + user + ':' + pass + '@' + host;
+	}
+	console.log(connectstr);
+	mongoose.connect(connectstr);
 };
 
 parser.onopentag = function(node) {
@@ -38,12 +63,11 @@ fs.readFile('passconf.xml', 'utf8', function(err, data) {
 		//deze code is slechts tijdelijk om mijn app makkelijker te kunnen debuggen
 		console.log('pasconf gevonden');
 		console.log(data);
+		
+		parser.write(data);
+		parser.close();
 	}
 });
-
-
-//connecteren met de databank
-mongoose.connect('mongodb://pietervk:ragnarok@lennon.mongohq.com:10094/app29880742');
 
 var Schema = mongoose.Schema;
 
