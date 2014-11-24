@@ -12,6 +12,7 @@
 		"mongoose": "*",
 		"passport": "*",
 		"passport-local": "*",
-		"ws": "*"
+		"ws": "*",
+		"sax": "*"
 	}
 }
