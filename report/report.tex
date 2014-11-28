@@ -38,16 +38,22 @@ Verwachten dat uw klant deze zal opmerken. Dat terwijl de klant in kwestie zelf
 onder honderden mails bedolven zit en uw mail niet eens opmerkt.
 
 \subsection{Het licht gezien!}
-%ici je raconte sur notre solution: Seanclog
+Na heel lang zoeken heb ik uiteindelijk de oplossing gevonden. Wanneer er geen
+enkele goede oplossing ter beschikking staat rest de meesten slechts één ding.
+Maak het zelf. Met dit project heb ik het doel om een timetracker te maken die
+alle eigenschappen die ik aan timetrackers haat niet heeft. Hoofdzakelijk houdt
+dit het volgende in.
+\begin{itemize}
+  \item Minder manueel invoeren
+  \item Offline toegang
+  \item Toegang vanop meerdere apparaten
+  \item Een interface met zo weinig mogelijk afleiding
+  \item Gemakkelijke filtering van ingevoerde tracks
+\end{itemize}
 
 \section{Interne structuur}
 
 \subsection{Gebruikte software}
-
-\begin{tabular}{c|c|c}
-ik & ben & cool \\
-dag & mooie & wereld
-\end{tabular}
 
 \subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
 Hier bespreken wij de RESTAPI
@@ -56,15 +62,28 @@ ervoor dat we makkelijk meerdere clients kunnen maken die ook op op desktops
 werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
 eindeloos.
 
+RestApi's worden doorgaans gebruikt voor het ophalen en het wegschrijven van
+data. Deze data kunnen uiteenlopende dingen zijn. Afbeeldingen, blogartikels,
+zelfs volledige objecten. Deze RestApi is meestal toegankelijk via het HTTP
+protocol. Dit zorgt ervoor dat het makkelijker is om clients te maken die deze
+API kunnen gebruiken omdat HTTP een alomvertegenwoordigd protocol heeft. Het is
+een protocol dat standaard in praktisch iedere networking api geïmplementeerd is
+en dat als dus danig door vele computers begrepen wordt.
+
+Elk type data (of resource) wordt voorgesteld door een uniform resource
+identifier (ofwel URI)
+
 Een RESTApi bestaat uit de volgende componenten.
-\begin{itemize}
+\begin{description}
   \item [Get] Een get request
   \item [Delete] Verwijder data
   \item [Put] Verander data
   \item [Post] Bewaar data
-\end{itemize}
+\end{description}
 
 \subsection{Intern design}
+
+\subsection{PhantomJS}
 
 \section{vormgeving}
 
