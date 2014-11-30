@@ -43,7 +43,7 @@ parser.onend = function() {
 	console.log('password: '+ pass);
 	console.log('host: ' + host);
 	
-	if((user != '') && (pass != '')) {
+	if((user == '') && (pass == '')) {
 		connectstr = 'mongodb://' + host;
 	} else {
 		connectstr = 'mongodb://' + user + ':' + pass + '@' + host;

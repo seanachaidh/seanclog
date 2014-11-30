@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <passconf>
     <host>localhost/test</host>
-    <password></password>
-    <user></user>
 </passconf>
