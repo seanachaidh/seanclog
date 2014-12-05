@@ -12,7 +12,8 @@ var parser = require('sax').parser(true);
 //gegevens om te connecteren
 var pass = '',
 	host = '',
-	user = '';
+	user = '',
+	db = '';
 	connectstr = '';
 
 parser.onerror = function(e) {
@@ -43,20 +44,14 @@ parser.onend = function() {
 	console.log('password: '+ pass);
 	console.log('host: ' + host);
 	
-	if((user == '') && (pass == '')) {
-		connectstr = 'mongodb://' + host;
-	} else {
-		connectstr = 'mongodb://' + user + ':' + pass + '@' + host;
-	}
-	console.log(connectstr);
-	mongoose.connect(connectstr);
+
 };
 
 parser.onopentag = function(node) {
 	ctext = node.name;
 };
 
-fs.readFile('passconf.xml', 'utf8', function(err, data) {
+fs.readFile('passconf.json', 'utf8', function(err, data) {
 	if(err) {
 		console.log('er is geen paswoord vastgelegd');
 	} else {
@@ -64,8 +59,21 @@ fs.readFile('passconf.xml', 'utf8', function(err, data) {
 		console.log('pasconf gevonden');
 		console.log(data);
 		
-		parser.write(data);
-		parser.close();
+		var tmpobj = JSON.parse(data);
+		pass = tmpobj.password;
+		host = tmpobj.host;
+		user = tmpobj.user;
+		db = tmpobj.db;
+		
+		//connecteren
+		if((user == '') && (pass == '')) {
+			connectstr = 'mongodb://' + host + '/' + db;
+		} else {
+			connectstr = 'mongodb://' + user + ':' + pass + '@' + host + '/' + db;
+		}
+		
+		console.log(connectstr);
+		mongoose.connect(connectstr);
 	}
 });
 
