@@ -25,7 +25,7 @@ exports.saveClient = function(req, res) {
 		new_telefoonnummer = req.body.telefoonnummer,
 		new_email = req.body.email,
 		new_gebruiker = req.body.gebruiker;
-	var new_cient = new model.Klant({
+	var new_client = new model.Klant({
 		naam: new_naam,
 		telefoonnummer: new_telefoonnummer,
 		email: new_email,

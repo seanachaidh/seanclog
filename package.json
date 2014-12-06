@@ -13,6 +13,10 @@
 		"passport": "*",
 		"passport-local": "*",
 		"ws": "*",
-		"sax": "*"
+		"sax": "*",
+		"bower": "*"
+	},
+	"scripts": {
+		"postinstall": "./node_modules/bower/bin/bower install"
 	}
 }
