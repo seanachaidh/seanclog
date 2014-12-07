@@ -24,6 +24,9 @@ clogapi.auth.initpassport(app); //dit mag niet van plek veranderen
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+//ervoor zorgen dat we bower components kunnen gebruiken
+app.use(express.static(path.join(__dirname, 'bower_components')));
+
 
 
 /*

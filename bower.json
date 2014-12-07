@@ -1,0 +1,28 @@
+{
+  "name": "seanclog",
+  "version": "0.0.1",
+  "homepage": "https://github.com/seanachaidh/seanclog",
+  "authors": [
+    "seanachaidh <pvankeymeulen@seanachaidh.be>"
+  ],
+  "description": "A fancy timetracker",
+  "main": "app.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+	  "jquery": "*",
+	  "angular": "*",
+	  "angular-translate": "*",
+	  "angular-route": "*",
+	  "angular-resource": "*"
+  }
+}
