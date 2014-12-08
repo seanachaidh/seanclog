@@ -54,6 +54,45 @@ dit het volgende in.
 \section{Interne structuur}
 
 \subsection{Gebruikte software}
+Voor dit project werd er bijna uitsluitend gebruik gemaakt van experimentele
+technologie. Tegenwoordig worden webapplicaties vaak ontwikkeld op de zogenaamde
+LAMP stack. Dit is een collectie software die meestal gebundeld gedistribueerd
+wordt omdat ze tezamen de gebruiker in staat stellen tot het hosten van een
+webapplicatie. De LAMP stack bestaat uit vier onderdelen.
+
+\begin{description}
+\item[Een Linux server] Dit is het besturingssysteem waarop de applicatie zal
+draaien
+\item[Apache] Dit is een daemon die het http protocol implementeert. Het stelt
+ons in staat tot het ontvangen en het verwerken van http requests.
+\item[Een MYSQL databank] Dit is te gebruiken databank bedoeld voor het oplaan
+van data. Dit kan gaan om klantengegevens en productgegevens. Andere databanken
+zoals postgresql zijn ook mogelijk, maar bij een LAMP stack gaat het specifiek
+om MYSQL.
+\item[PHP] De programmeertaal die gebruikt wordt voor het maken van de
+applicatie.
+\end{description}
+
+Deze LAMP stack wordt al jaren op deze manier gebruikt. Het is vrij oude
+technologie die al jaren meegaat en bijgevolg dus enorm betrouwbaar is. Het
+heeft echter een aantal zwakke punten.
+
+\begin{itemize}
+  \item Het onderhoud van een linux server is een tijdrovende bezigheid.
+  \item Apache is een modulair programma. Men kan functionaliteit toevoegen en
+  verwijderen. Veel van de functionaliteit staat standaard aan of kan zelfs
+  helemaal niet verwijderd worden. Dat terwijl de meesten niet zoveel
+  functionaliteit nodig hebben. Daarbij kan het ook ervoor zorgen dat Apache
+  onveiliger wordt en gemakkelijker is om in in te breken.
+\end{itemize}
+
+\subsubsection{Nodejs}
+
+\subsubsection{MongoDB}
+
+\subsubsection{Express}
+
+\subsubsection{Angular}
 
 \subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
 Hier bespreken wij de RESTAPI
