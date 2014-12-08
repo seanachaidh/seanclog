@@ -23,6 +23,7 @@
 	  "angular": "*",
 	  "angular-translate": "*",
 	  "angular-route": "*",
-	  "angular-resource": "*"
+	  "angular-resource": "*",
+	  "angular-translate-loader-url": "*"
   }
 }
