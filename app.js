@@ -27,8 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //ervoor zorgen dat we bower components kunnen gebruiken
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
-
-
 /*
  * Alles dat te maken heeft met authenticatie
  */
