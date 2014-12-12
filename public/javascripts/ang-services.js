@@ -12,6 +12,10 @@ clogService.factory('Projects', [ '$resource', function($resource) {
 		'post' : {
 			method : 'POST',
 			params : {}
+		},
+		'remove': {
+			method: 'DELETE',
+			params: {}
 		}
 	});
 	return fact;
@@ -43,6 +47,10 @@ clogService.factory('Tracks', [ '$resource', function($resource) {
 		'post' : {
 			method : 'POST',
 			params : {}
+		},
+		'remove': {
+			method: 'DELETE';
+			params: {}
 		}
 	});
 	return fact;
@@ -57,6 +65,10 @@ clogService.factory('Klanten', [ '$resource', function($resource) {
 		'post' : {
 			method : 'POST',
 			params : {}
+		},
+		'remove': {
+			method: 'DELETE',
+			params: {}
 		}
 	});
 	return fact;
