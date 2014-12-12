@@ -33,11 +33,11 @@ exports.pdfProject = function(req, res) {
 	query.exec(function(err, docs) {
 		
 	});
-},
+};
 
 exports.deleteProject = function(req, res) {
 	//TODO: Het verwijderen van projecten implementeren
-}
+};
 
 exports.saveProject = function(req, res) {
 	var gebruikerid = req.user._id;
@@ -51,7 +51,7 @@ exports.saveProject = function(req, res) {
 			console.log('het bewaren van het project is goed verlopen (hopelijk)');
 		}
 	});
-}
+};
 
 exports.getProject = function(req, res) {
 	if (req.user) {
@@ -66,4 +66,4 @@ exports.getProject = function(req, res) {
 	} else {
 		res.send('niet aangemeld');
 	}
-}
+};

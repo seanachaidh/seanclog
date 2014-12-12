@@ -10,7 +10,7 @@ exports.getClientsOfUser = function(req, res) {
 			res.json(k);
 		});
 	}
-}
+};
 
 exports.pdfClient = function(req, res) {
 	res.send('Een pdf van een kant');
@@ -18,7 +18,7 @@ exports.pdfClient = function(req, res) {
 
 exports.deleteClient = function(req, res) {
 	//TODO: Het verwijderen van klanten implementeren
-}
+};
 
 exports.saveClient = function(req, res) {
 	var new_naam = req.body.naam,

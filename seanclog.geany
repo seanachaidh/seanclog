@@ -24,13 +24,10 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fapp.js;0;4
-FILE_NAME_1=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Froutes%2Findex.js;0;4
-FILE_NAME_2=336;LaTeX;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Freport%2Freport.tex;0;4
-FILE_NAME_3=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fapi%2Fmodel.js;0;4
+FILE_NAME_0=1632;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fapi%2Fprojects.js;0;4
 
 [VTE]
-last_dir=/home/pieter/Projecten/objc/oefeningen
+last_dir=/home/pieter/workspace/seanclog
 
 [gproject]
 source_patterns=*.js;*.json;*.tex;
