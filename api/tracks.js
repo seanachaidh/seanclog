@@ -16,8 +16,23 @@ exports.pdfTrack = function(req, res) {
 	res.send('een pdf van een track');
 };
 
+/**
+ * Dit verwijdert een track op basis van het identificatienummer
+ * Geeft waar terug als de verwijdering gelukt is
+ * Vals als de verwijdering niet gelukt is
+ */
 exports.deleteTrack = function(req, res) {
-	//TODO: Het verwijderen van tracks implementeren
+	var id = req.body.track._id;
+	
+	model.Track.remove({_id: id}, function(err) {
+		if(err) {
+			console.log('De track is niet verwijderd');
+			res.json({value: false});
+		} else {
+			console.log('De track is verwijderd');
+			res.json({value: true}):
+		}
+	});
 }
 
 exports.saveTrack = function(req, res) {

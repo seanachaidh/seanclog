@@ -16,8 +16,21 @@ exports.pdfClient = function(req, res) {
 	res.send('Een pdf van een kant');
 };
 
+/**
+ * Dit verwijdert een klant op het identificatienummer
+ * Geeft true terug als het gelukt is en false als het mislukt is
+ */
 exports.deleteClient = function(req, res) {
-	//TODO: Het verwijderen van klanten implementeren
+	var id = req.body.client._id;
+	Klant.remove({_id: new ObjectId(id)}, function(err) {
+		if(err){
+			console.log('het verwijderen is niet gelukt');
+			res.json({value: false});
+		} else {
+			console.log('het verwijderen van een klant is gelukt');
+			res.json({value: true});
+		}
+	});
 };
 
 exports.saveClient = function(req, res) {

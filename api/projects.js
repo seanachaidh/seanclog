@@ -36,7 +36,22 @@ exports.pdfProject = function(req, res) {
 };
 
 exports.deleteProject = function(req, res) {
-	//TODO: Het verwijderen van projecten implementeren
+	/**
+	 * dit is gebasseerd op de id van een project
+	 * Geeft false terug wanneer het verwijderen niet gelukt is
+	 * en true wanneer het wel gelukt is
+	 */
+	 var id = req.body.project._id;
+	 
+	 model.Project.remove({_id: id}, function(err) {
+		 if(err) {
+			 console.log('het verwijderen is niet gelukt');
+			 res.json({value: false}});
+		 } else {
+			 console.log('het verwijderen is gelukt');
+			 res.json({value: true});
+		 }
+	 });
 };
 
 exports.saveProject = function(req, res) {
