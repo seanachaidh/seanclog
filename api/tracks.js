@@ -30,7 +30,7 @@ exports.deleteTrack = function(req, res) {
 			res.json({value: false});
 		} else {
 			console.log('De track is verwijderd');
-			res.json({value: true}):
+			res.json({value: true});
 		}
 	});
 }
