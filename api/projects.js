@@ -46,7 +46,7 @@ exports.deleteProject = function(req, res) {
 	 model.Project.remove({_id: id}, function(err) {
 		 if(err) {
 			 console.log('het verwijderen is niet gelukt');
-			 res.json({value: false}});
+			 res.json({value: false});
 		 } else {
 			 console.log('het verwijderen is gelukt');
 			 res.json({value: true});
