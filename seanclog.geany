@@ -14,7 +14,7 @@ indent_mode=2
 
 [project]
 name=seanclog
-base_path=/home/pieter/workspace/seanclog/
+base_path=/home/pieter/Projecten/seanclog/
 description=
 file_patterns=
 
@@ -23,20 +23,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=3
-FILE_NAME_0=1633;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fapi%2Fprojects.js;0;4
-FILE_NAME_1=2073;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fapp.js;0;4
-FILE_NAME_2=68;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Fpublic%2Fjavascripts%2Fang-services.js;0;4
-FILE_NAME_3=4738;LaTeX;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2Fworkspace%2Fseanclog%2Freport%2Freport.tex;1;4
 
 [VTE]
-last_dir=/home/pieter/workspace/seanclog
-
-[gproject]
-source_patterns=*.js;*.json;*.tex;
-header_patterns=*.h;*.H;*.hpp;*.hxx;*.h++;*.hh;*.m;
-ignored_dirs_patterns=.*;CVS;
-generate_tags=true
+last_dir=/home/pieter/Projecten/seanclog/
 
 [build-menu]
 EX_00_LB=Uitvo_eren
