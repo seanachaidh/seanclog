@@ -12,7 +12,7 @@
 		"mongoose": "*",
 		"passport": "*",
 		"passport-local": "*",
-		"passport-bearer-strategy": "*",
+		"passport-http-bearer": "*",
 		"ws": "*",
 		"sax": "*",
 		"bower": "*"
