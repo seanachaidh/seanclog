@@ -49,7 +49,7 @@ clogService.factory('Tracks', [ '$resource', function($resource) {
 			params : {}
 		},
 		'remove': {
-			method: 'DELETE';
+			method: 'DELETE',
 			params: {}
 		}
 	});
