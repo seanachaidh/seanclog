@@ -6,7 +6,8 @@
  * de controller module mot hier nog aan worden toegevoegd
  */
 var seanclogApp = angular.module('seanclogApp',
-		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid']);
+		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
+		 'pascalprecht.translate']);
 
 /*
  * definieer alle routes
