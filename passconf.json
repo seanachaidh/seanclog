@@ -1,5 +1,5 @@
 {
-	"host": "lennon@mongohq.com:10094",
+	"host": "lennon.mongohq.com:10094",
 	"db": "app29880742",
 	"user": "pietervk",
 	"password": "ragnarok"
