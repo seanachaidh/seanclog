@@ -37,6 +37,3 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 		redirectTo: '/tracks'
 	});
 }]);
-
-seanclogApp.config([
-                    ]);
