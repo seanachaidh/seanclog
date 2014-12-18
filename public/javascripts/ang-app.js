@@ -38,8 +38,5 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 	});
 }]);
 
-seanclogApp.config(function($http, $translationProvider){
-	$http.get('/translations/english.json').success(function(data, status) {
-		$translationProvider.translations('en', data);
-	});
-});
+seanclogApp.config([
+                    ]);
