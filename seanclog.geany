@@ -1,3 +1,4 @@
+
 [file_prefs]
 final_new_line=true
 ensure_convert_new_lines=false
@@ -14,7 +15,7 @@ indent_mode=2
 
 [project]
 name=seanclog
-base_path=/home/pieter/Projecten/seanclog/
+base_path=C:\\Users\\Pieter\\develop\\bachelorproef\\workspace\\seanclog
 description=
 file_patterns=
 
@@ -23,6 +24,7 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
+current_page=-1
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog/

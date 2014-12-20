@@ -1,6 +1,7 @@
 var passport = require('passport');
 var crypto = require('crypto');
 var LocalStrategy = require('passport-local').Strategy;
+var BearerStrategy = require('passport-http-bearer').Strategy
 
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
@@ -27,6 +28,20 @@ function authUser(username, password, done) {
 exports.initpassport = function (app) {
 	app.use(passport.initialize());
 	app.use(passport.session());
+	/*
+	 * Ik moet nog eens stap voor stap bekijken wat deze code allemaal betekent
+	 */
+	app.use(new BearerStrategy(function(token, done) {
+		model.Gebruiker.findOne({token: token}, function(err, docs) {
+			if(err) {
+				return done(err);
+			}
+			if(!docs) {
+				return done(null, false);
+			}
+			return done(null, docs, {scope: 'all'});
+		});
+	}));
 	
 	passport.serializeUser(function(user, done) {
 		done(null, user._id);
