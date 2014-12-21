@@ -39,14 +39,14 @@ seanControllers.controller('TracksController',
 				$route.reload();
 			};
 			
-			Tracks.query(function(t){
+			Tracks.query({access_token: $routeParams.access_token}, function(t){
 				$scope.myData = t;
 			});
 			/*
 			 * Nous avons besoin de tous les projects de l' utilisateur
 			 * Ansi l' utilisateur peut choisisez un project 
 			 */
-			Projects.query(function(proj){
+			Projects.query({access_token: $routeParams.access_token}, function(proj){
 				$scope.projects = proj;
 			});
 		}]);
@@ -56,9 +56,10 @@ seanControllers.controller('TestController', ['$scope', 'Tests', function($scope
 	$scope.resp = resp;
 }]);
 
-seanControllers.controller('KlantenController', ['$scope', '$route', 'Klanten', function($scope, $route, Klanten){
+seanControllers.controller('KlantenController', ['$scope', '$route', '$routeParams', 'Klanten',
+function($scope, $route, $routeParams, Klanten){
 	$scope.tableTitle = "Mijn Klanten";
-	Klanten.query(function(k) {
+	Klanten.query({access_token: $routeParams.access_token}, function(k) {
 		$scope.myData = k;
 	});
 	$scope.createForm = "/partials/forms/form_createclient.html";
