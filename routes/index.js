@@ -4,5 +4,8 @@ exports.index = function(req, res) {
 };
 
 exports.app = function(req, res) {
-	res.render('index', {usernaam: req.user.naam});
+	res.render('index', {
+		usernaam: req.user.naam,
+		token: req.user._id
+	});
 };
