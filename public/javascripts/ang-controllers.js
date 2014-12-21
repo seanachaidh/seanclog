@@ -4,12 +4,12 @@
  */
 var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute']);
 
-seanControllers.controller('ProjectController', ['$scope', '$route', 'Projects',
-function($scope, $route, Projects){
+seanControllers.controller('ProjectController', ['$scope', '$route', '$routeParams', 'Projects',
+function($scope, $route, $routeParams, Projects){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	
 	$scope.tableTitle = "Mijn Projecten";
-	Projects.query(function(proj){
+	Projects.query({access_token: $routeParams.access_token},function(proj){
 		$scope.myData = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
 		$scope.createProj = function(proj) {

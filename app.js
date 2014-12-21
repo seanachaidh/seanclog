@@ -20,19 +20,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({secret: '72854'}));
-clogapi.auth.initpassport(app); //dit mag niet van plek veranderen
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 //ervoor zorgen dat we bower components kunnen gebruiken
 app.use(express.static(path.join(__dirname, 'bower_components')));
-
-/*
- * Alles dat te maken heeft met authenticatie
- */
-
-clogapi.auth.passroute(app);
-
 
 /* ------------------------------------------ */
 
@@ -40,15 +34,17 @@ if('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 
+require('./api/auth');
+
 app.get('/', routes.index);
 app.get('/app', routes.app);
 
-/**
+/*
  * Het verkrijgen van data
  */
-app.get('/api/tracks', clogapi.tracks.getTracksOfUser);
-app.get('/api/projects', clogapi.projects.getProjectsOfUser);
-app.get('/api/clients', clogapi.clients.getClientsOfUser);
+app.get('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.getTracksOfUser);
+app.get('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.getProjectsOfUser);
+app.get('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.getClientsOfUser);
 
 /*
  * commandes de pdf
@@ -58,14 +54,14 @@ app.get('/api/tracks/createpdf');
 app.get('/api/projects/createpdf');
 app.get('/api/clients/createpdf');
 
-/**
+/*
  * Het opslaan van data
  */
 app.post('/api/tracks', clogapi.tracks.saveTrack);
 app.post('/api/projects', clogapi.projects.saveProject);
 app.post('/api/clients', clogapi.clients.saveClient);
 
-/**
+/*
  * Het verwijderen van data
  * Welk record er precies verwijderd moet worden wordt gedetermineerd door de post variabelen
  */
@@ -76,6 +72,29 @@ app.del('/api/clients', clogapi.clients.deleteClient);
 
 app.post('/api/posttest', clogapi.tests.posttest);
 
+
+/* Het afhandelen van het inloggen van de gebruiker */
+app.post('/login', passport.authenticate('local'), function(req, res) {
+	//?gotoapp=1
+	if(req.query.gotoapp) {
+		/*
+		 * Hier gaan we direct naar de webapplicatie
+		 */
+		res.redirect('/app');
+	} else {
+		/*
+		 * hier sturen we enkel een jsonobject door met hierin de verificatie dat de
+		 * authenticatie juist is verlopen
+		 * Dit is handig voor het maken van extra clients, zoals mijn eigen android applicatie
+		 */
+		var username = req.user.gebruikersnaam;
+		var retval = {
+			success: true,
+			gebruikersnaam: username
+		};
+		res.json(retval);
+	}
+});
 
 var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
