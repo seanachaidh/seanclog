@@ -92,7 +92,7 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 		var ttoken = req.user._id;
 		var retval = {
 			success: true,
-			gebruikersnaam: username
+			gebruikersnaam: username,
 			token: ttoken;
 		};
 		res.json(retval);
