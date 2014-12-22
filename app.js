@@ -88,9 +88,12 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 		 * Dit is handig voor het maken van extra clients, zoals mijn eigen android applicatie
 		 */
 		var username = req.user.gebruikersnaam;
+		//ik moet hier een aparte token van maken
+		var ttoken = req.user._id;
 		var retval = {
 			success: true,
 			gebruikersnaam: username
+			token: ttoken;
 		};
 		res.json(retval);
 	}
