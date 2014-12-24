@@ -82,20 +82,7 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 		 */
 		res.redirect('/app');
 	} else {
-		/*
-		 * hier sturen we enkel een jsonobject door met hierin de verificatie dat de
-		 * authenticatie juist is verlopen
-		 * Dit is handig voor het maken van extra clients, zoals mijn eigen android applicatie
-		 */
-		var username = req.user.gebruikersnaam;
-		//ik moet hier een aparte token van maken
-		var ttoken = req.user._id;
-		var retval = {
-			success: true,
-			gebruikersnaam: username,
-			token: ttoken
-		};
-		res.json(retval);
+		res.json(req.user);
 	}
 });
 
