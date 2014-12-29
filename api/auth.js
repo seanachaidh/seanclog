@@ -45,6 +45,6 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 		}
 		
 		//Comment est-ce que je peux evoyer une reponse?
-		return done(null, user);
+		return done(null, {"token": user.token});
 	});
 }));
