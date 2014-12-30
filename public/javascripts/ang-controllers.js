@@ -71,3 +71,8 @@ function($scope, $route, $routeParams, Klanten){
 	};
 	
 }]);
+
+//Een controller die het inloggen van gebruikers regelt
+seanControllers.controller('LoginController', ['htAccessTokenManager', function(accessTokenManager) {
+	//code
+}]);

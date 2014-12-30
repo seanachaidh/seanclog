@@ -73,3 +73,15 @@ clogService.factory('Klanten', [ '$resource', function($resource) {
 	});
 	return fact;
 } ]);
+
+clogService.factory('Token', function() {
+	var currentToken;
+	var retval = {
+		setToken: function(toset) {
+			currentToken = toset;
+		},
+		getToken: function() {
+			return currentToken;
+		}
+	};
+});

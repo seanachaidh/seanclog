@@ -13,7 +13,7 @@ passport.use(new BearerStrategy({}, function(token, done) {
 	/*
 	 * Voorlopig zijn de userid's onze tokens
 	 */
-	model.Gebruiker.findOne({_id: token}, function(err, docs) {
+	model.Gebruiker.findOne({token: token}, function(err, docs) {
 		if(err) {
 			return done(err);
 		}
@@ -25,11 +25,11 @@ passport.use(new BearerStrategy({}, function(token, done) {
 }));
 
 passport.serializeUser(function(user, done) {
-	done(null, user);
+	done(null, user.token);
 });
 
 passport.deserializeUser(function(id, done) {
-	model.Gebruiker.findById(id, function(err, user) {
+	model.Gebruiker.find({token: id}, function(err, user) {
 		done(err, user);
 	});
 });
@@ -45,6 +45,6 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 		}
 		
 		//Comment est-ce que je peux evoyer une reponse?
-		return done(null, {"token": user.token});
+		return done(null, user);
 	});
 }));

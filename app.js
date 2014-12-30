@@ -57,24 +57,24 @@ app.get('/api/clients/createpdf');
 /*
  * Het opslaan van data
  */
-app.post('/api/tracks', clogapi.tracks.saveTrack);
-app.post('/api/projects', clogapi.projects.saveProject);
-app.post('/api/clients', clogapi.clients.saveClient);
+app.post('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.saveTrack);
+app.post('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.saveProject);
+app.post('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.saveClient);
 
 /*
  * Het verwijderen van data
  * Welk record er precies verwijderd moet worden wordt gedetermineerd door de post variabelen
  */
-app.del('/api/tracks', clogapi.tracks.deleteTrack);
-app.del('/api/projects', clogapi.projects.deleteProject);
-app.del('/api/clients', clogapi.clients.deleteClient);
+app.del('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.deleteTrack);
+app.del('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
+app.del('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
 
 
 app.post('/api/posttest', clogapi.tests.posttest);
 
 
 /* Het afhandelen van het inloggen van de gebruiker */
-app.post('/login', passport.authenticate('local'), function(req, res) {
+app.post('/login', passport.authenticate('local', {session: false}), function(req, res) {
 	//?gotoapp=1
 	if(req.query.gotoapp) {
 		/*
