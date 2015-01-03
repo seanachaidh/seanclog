@@ -15,7 +15,9 @@
 		"passport-http-bearer": "*",
 		"ws": "*",
 		"sax": "*",
-		"bower": "*"
+		"bower": "*",
+		"karma": "*",
+		"karma-jasmine": "*"
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/bower/bin/bower install"

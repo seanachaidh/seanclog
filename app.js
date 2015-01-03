@@ -74,7 +74,7 @@ app.post('/api/posttest', clogapi.tests.posttest);
 
 
 /* Het afhandelen van het inloggen van de gebruiker */
-app.post('/login', passport.authenticate('local', {session: false}), function(req, res) {
+app.post('/api/login', passport.authenticate('local', {session: false}), function(req, res) {
 	//?gotoapp=1
 	if(req.query.gotoapp) {
 		/*

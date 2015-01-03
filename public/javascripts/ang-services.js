@@ -74,6 +74,17 @@ clogService.factory('Klanten', [ '$resource', function($resource) {
 	return fact;
 } ]);
 
+clogService.factory('Login', ['$resource', function($resource) {
+	var fact = $resource('/api/login', {}, {
+		'getToken' : {
+			method : 'POST',
+			params : {}
+		}
+	});	
+	return fact;
+}]);
+	
+
 clogService.factory('Token', function() {
 	var currentToken;
 	var retval = {

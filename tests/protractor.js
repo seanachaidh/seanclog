@@ -1,3 +1,0 @@
-/**
- * het protractor configuratiebestand
- */
