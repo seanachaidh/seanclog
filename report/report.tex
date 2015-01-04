@@ -95,13 +95,27 @@ heeft echter een aantal zwakke punten.
 MongoDB is, in tegenstelling tot traditionele SQL databanken, een 
 no-sql databank. Dit wil zeggen dat de data niet voorgesteld wordt door 
 tabellen. Hoe de data dan wel voorgesteld wordt, wordt in de definitie 
-van no-sql niet vervat. Over het algemeen kan men spreken over de 
+van no-sql niet vervat. Over het algemeen wordt bij een gewone mysql 
+databank, een collectie aan data voorgesteld door een tabel. Bij een 
+nosql gaat men uit van andere metaforen die ieder beter bij het 
+werkveld passen waarvoor de databank specifiek ontworpen is. Stel nu 
+dat ik een complexe hierarchie binnen een bedrijf als gegeven heb. 
+Iedere werknemer van dit bedrijf heeft contacten, die op hun beurt 
+contacten hebben, die op hyun beyurt alweer contacten hebben. Dan zou 
+het leuk zijn mocht ik al de relaties die deze werknemers met elkaar 
+hebben op een efficiënte manier kunnen ophalen. Wanneer men vasthoudt 
+aan de klassieke tabel metafoor is dit echter heel moeilijk, maar 
+wanneer we de relaties op één of andere manier op voorhand in de data 
+kunnen programmeren, dan wordt het ineens een stuk makkelijker.
+dat ik  Over het algemeen kan men spreken over de 
 volgende types nosql databanken
 
 \begin{description}
 
 \item[Column]
-\item[Document]
+\item[Document] Hierbij wordt ieder stukje data, neem nu bijvoorbeeld 
+een student, voorgesteld als een document. In dit document zit dan alle 
+data vervat die een student moet voorstellen.
 \item[Key-value]
 \item[Graph]
 
