@@ -2,13 +2,24 @@ var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getTracksOfUser = function(req, res) {
-	if(!req.user) {
+	var token = req.param('access_token');
+	if(token == "") {
 		res.json([{value: false}]);
 	} else {
-		var id = req.user._id;
-		model.Track.find({gebruiker: new ObjectId(id)}, function(err,track) {
-			res.json(track);
+		var id = '';
+		var query = model.Gebruiker.find({token: token}).select('_id');
+		
+		query.exec(function(err, value){
+			if(err) {
+				res.json([{value: false}]);
+			} else {
+				model.Track.find({gebruiker: new ObjectId(value)}, function(err,track) {
+					res.json(track);
+				});
+			}
 		});
+		
+
 	}
 };
 

@@ -1,6 +1,6 @@
 {
-	"host": "localhost",
-	"db": "test",
-	"user": "",
-	"password": ""
+	"host": "lennon.mongohq.com:10094",
+	"db": "app29880742",
+	"user": "pietervk",
+	"password": "12345"
 }

@@ -8,7 +8,6 @@
 var seanclogApp = angular.module('seanclogApp',
 		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
 		 'pascalprecht.translate']);
-
 /*
  * definieer alle routes
  */
@@ -37,9 +36,10 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 		redirectTo: '/tracks'
 	});
 }]);
-
-seanclogApp.config(function($http, $translationProvider){
-	$http.get('/translations/english.json').success(function(data, status) {
-		$translationProvider.translations('en', data);
-	});
-});
+//seanclogApp.config(['$translateProvider', function($translateProvider) {
+//	$translateProvider.useStaticFilesLoader({
+//		prefix: "/translations/",
+//		suffix: ".json"
+//	});
+//	$translateProvider.preferredLanguage('en');
+//}]);

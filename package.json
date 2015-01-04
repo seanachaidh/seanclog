@@ -12,11 +12,14 @@
 		"mongoose": "*",
 		"passport": "*",
 		"passport-local": "*",
+		"passport-http-bearer": "*",
 		"ws": "*",
 		"sax": "*",
-		"bower": "*"
+		"bower": "*",
+		"karma": "*",
+		"karma-jasmine": "*"
 	},
 	"scripts": {
-		"postinstall": "./node_modules/bower/bin/bower install"
+		"postinstall": "node ./node_modules/bower/bin/bower install"
 	}
 }

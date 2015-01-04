@@ -24,6 +24,7 @@
 	  "angular-translate": "*",
 	  "angular-route": "*",
 	  "angular-resource": "*",
-	  "angular-translate-loader-url": "*"
+	  "angular-translate-loader-url": "*",
+	  "angular-translate-loader-static-files": "*"
   }
 }
