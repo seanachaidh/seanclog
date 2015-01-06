@@ -2,18 +2,24 @@ var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getTracksOfUser = function(req, res) {
+	
+	//TODO: Deze functie moet volledig herschreven worden want hij werkt niet!
+	
 	var token = req.param('access_token');
 	if(token == "") {
 		res.json([{value: false}]);
 	} else {
 		var id = '';
-		var query = model.Gebruiker.find({token: token}).select('_id');
+		var query = model.Gebruiker.findOne({token: token}).select('_id');
 		
 		query.exec(function(err, value){
+			console.log(value._id);
+			console.log(value);
+			
 			if(err) {
 				res.json([{value: false}]);
 			} else {
-				model.Track.find({gebruiker: new ObjectId(value)}, function(err,track) {
+				model.Track.find({gebruiker: new ObjectId(value._id)}, function(err,track) {
 					res.json(track);
 				});
 			}
