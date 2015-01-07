@@ -1,3 +1,4 @@
+
 [file_prefs]
 final_new_line=true
 ensure_convert_new_lines=false
@@ -24,7 +25,11 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=6462;LaTeX;0;EUTF-8;1;1;1;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Freport%2Freport.tex;1;4
+FILE_NAME_0=341;Javascript;0;EUTF-8;1;1;0;C%3A%5CUsers%5CPieter%5Cdevelop%5Cbachelorproef%5Cworkspace%5Cseanclog%5Capi%5Ctracks.js;0;4
+FILE_NAME_1=1553;Javascript;0;EUTF-8;1;1;0;C%3A%5CUsers%5CPieter%5Cdevelop%5Cbachelorproef%5Cworkspace%5Cseanclog%5Capi%5Cmodel.js;0;4
+FILE_NAME_2=0;Javascript;0;EUTF-8;1;1;0;C%3A%5CUsers%5CPieter%5Cdevelop%5Cbachelorproef%5Cworkspace%5Cseanclog%5Capi%5Cprojects.js;0;4
+FILE_NAME_3=0;Javascript;0;EUTF-8;1;1;0;C%3A%5CUsers%5CPieter%5Cdevelop%5Cbachelorproef%5Cworkspace%5Cseanclog%5Capi%5Cclients.js;0;4
+FILE_NAME_4=1183;Javascript;0;EUTF-8;1;1;0;C%3A%5CUsers%5CPieter%5Cdevelop%5Cbachelorproef%5Cworkspace%5Cseanclog%5Capi%5Cauth.js;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog
