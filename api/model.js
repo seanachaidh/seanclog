@@ -66,8 +66,8 @@ var klantSchema = new Schema ({
 
 var trackSchema = new Schema({
 	titel: String,
-	begintijd: Date,
-	eindtijd: Date,
+	begintijd: String,
+	eindtijd: String,
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
