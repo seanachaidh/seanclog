@@ -2,14 +2,15 @@ var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getClientsOfUser = function(req, res) {
-	if(!req.user) {
-		res.json([{value:false}]);
-	} else {
-		var id = req.user._id;
-		model.Klant.find({gebruiker: new ObjectId(id)}, function(err, k) {
-			res.json(k);
+	var token = req.param('access_token');
+	
+	model.Gebruiker.findOne({token: token}, function(err, doc){
+		var id = doc._id;
+		
+		model.Klant.find({gebruiker: id}, function(err, klant){
+			res.json(klant);
 		});
-	}
+	});
 };
 
 exports.pdfClient = function(req, res) {
