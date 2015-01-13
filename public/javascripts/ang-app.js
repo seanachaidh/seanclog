@@ -26,7 +26,8 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 		controller: 'KlantenController'
 	})
 	.when('/profile', {
-		templateUrl: 'partials/partial-profile.html'
+		templateUrl: 'partials/partial-profile.html',
+		controller: 'ProfileController'
 	})
 	.when('/test', {
 		templateUrl: 'partials/partial-test.html',

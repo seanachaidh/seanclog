@@ -2,7 +2,7 @@
  * De controllers van mijn app
  * auteur: Pieter Van Keymeulen
  */
-var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute']);
+var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute', 'ngCookies']);
 
 seanControllers.controller('ProjectController', ['$scope', '$route', '$routeParams', 'Projects',
 function($scope, $route, $routeParams, Projects){
@@ -73,8 +73,24 @@ function($scope, $route, $routeParams, Klanten){
 }]);
 
 //Een controller die het inloggen van gebruikers regelt
-seanControllers.controller('LoginController', ['$scope', function($scope){
+seanControllers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location',
+function($scope, $cookies, Login, $location){
 	$scope.dologin = function(user) {
-		//hier voeren we een login uit.
+		Login.getToken({username: user.username, password: user.password}, function(u) {
+			$cookies.token = u.token;
+			
+			/*
+			 * Is er echt geen manier om dit via angular te doen
+			 * Als ik $location.path(app) gebruik komt er telkens een hash
+			 * in de url
+			 */
+			window.location('app');
+		});
 	};
 }]);
+
+seanControllers.controller('ProfileController', ['$scope', '$cookies',
+function($scope, $cookies) {
+	console.log('token: ' + $cookies.token);
+}]);
+

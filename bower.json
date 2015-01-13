@@ -21,6 +21,7 @@
   "dependencies": {
 	  "jquery": "*",
 	  "angular": "*",
+	  "angular-cookies": "*",
 	  "angular-translate": "*",
 	  "angular-route": "*",
 	  "angular-resource": "*",

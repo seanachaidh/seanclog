@@ -95,4 +95,6 @@ clogService.factory('Token', function() {
 			return currentToken;
 		}
 	};
+	
+	return retval;
 });
