@@ -155,9 +155,28 @@ Een RESTApi bestaat uit de volgende componenten.
   \item [Post] Bewaar data
 \end{description}
 
-\subsection{Intern design}
+\subsection{AngularJS}
+Voor dit project gaan we gebruik maken van AngularJS. Dit is een javasript framework bedoeld voor het vergemakkelijken van een Model View Controller webapplicatie. In tegenstelling tot vele andere model-view-controller frameworks voor webapplicaties, is AngularJS volledig geschreven in JavaScript. Dit heeft tot gevolg dat de applicatie volledig client-side kan werken. Dit heeft dan weer het voordeel dat de applicatie veel sneller zal draaien omdat er minder requests nodig zijn naar de server. Het Angular framework is volledig modulair opgebouwd. Een Angular applicatie bestaat typisch uit enkele modules. Deze modules kunnen verspreid zijn over meerdere bestanden. Wanneer men een applicatie opstart moet men meegeven welke moduels de applicatie precies gebruikt. Dit gebeurd als volgt.
 
-\subsection{PhantomJS}
+\begin{verbatim}
+var var seanclogApp = angular.module('seanclogApp',
+		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
+		 'pascalprecht.translate']);
+\end{verbatim}
+
+Zoals u zelf waarschijnlijk zult merken is de applicatie zelf ook een module. Dit module systeem heeft zijn voordelen. Stel dat men de controllers van een de ene applicatie wilt gebruiken in een andere. Dan hoeft men enkel het bestand dat deze module bevat te kopiëren naar de broncode van de andere applicatei. Als dat gedaan is en het bronbestand geladen wordt door één van de webpagina's van uw applicatie moet men deze module registreren door deze aan de applicatie toe te voegen. Dit gaat als volgt.
+
+\begin{verbatim}
+var var seanclogApp = angular.module('seanclogApp',
+		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
+		 'pascalprecht.translate', 'mijnNieuweModule']);
+\end{verbatim}
+
+In dit voorbeeld staat "mijnNiueweModule" voor de module die u zopas heeft toegevoegd.
+
+\subsubsection{Controllers}
+
+\subsubsection{Services}
 
 \section{vormgeving}
 

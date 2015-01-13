@@ -48,3 +48,17 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 		return done(null, user);
 	});
 }));
+
+exports.performLogout = function(res, req) {
+	var token = req.param('access_token');
+	model.Gebruiker.find({}, function(err, docs){
+		if(err) {
+			console.log("er was een fout tijdens het uitloggen");
+			res.json({value: false});
+		} else {
+			for(var i = 0; i < docs.length; i++) {
+				//hier lopen we ieder resultaat over
+			}
+		}
+	});
+};

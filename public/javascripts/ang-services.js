@@ -79,6 +79,10 @@ clogService.factory('Login', ['$resource', function($resource) {
 		'getToken' : {
 			method : 'POST',
 			params : {}
+		},
+		'logout': {
+			method: 'GET'
+			params: {}
 		}
 	});	
 	return fact;

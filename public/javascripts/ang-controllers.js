@@ -4,12 +4,12 @@
  */
 var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute', 'ngCookies']);
 
-seanControllers.controller('ProjectController', ['$scope', '$route', '$routeParams', 'Projects',
-function($scope, $route, $routeParams, Projects){
+seanControllers.controller('ProjectController', ['$scope', '$route', '$cookies', 'Projects',
+function($scope, $route, $cookies, Projects){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	
 	$scope.tableTitle = "Mijn Projecten";
-	Projects.query({access_token: $routeParams.access_token},function(proj){
+	Projects.query({access_token: $cookies.token},function(proj){
 		$scope.myData = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
 		$scope.createProj = function(proj) {
@@ -26,27 +26,26 @@ function($scope, $route, $routeParams, Projects){
 }]);
 
 seanControllers.controller('TracksController',
-		['$scope', '$routeParams', 'Tracks', 'Projects',
-		 function($scope, $routeParams, Tracks, Projects){
+		['$scope', '$cookies', 'Tracks', 'Projects',
+		 function($scope, $cookies, Tracks, Projects){
 			$scope.tableTitle = "Mijn Tracks";
 			//choisit la dialogue pour faire des tracks
 			$scope.createForm = '/partials/forms/form_createtrack.html';
 			$scope.createTrack = function(track){
-				//ik moet nog nakijken of deze functie wel degelijk werkt.
 				Tracks.post(angular.copy(track));
 				angular.element('#createModal').modal('hide');
 				
 				$route.reload();
 			};
 			
-			Tracks.query({access_token: $routeParams.access_token}, function(t){
+			Tracks.query({access_token: $cookies.token}, function(t){
 				$scope.myData = t;
 			});
 			/*
 			 * Nous avons besoin de tous les projects de l' utilisateur
 			 * Ansi l' utilisateur peut choisisez un project 
 			 */
-			Projects.query({access_token: $routeParams.access_token}, function(proj){
+			Projects.query({access_token: $cookies.token}, function(proj){
 				$scope.projects = proj;
 			});
 		}]);

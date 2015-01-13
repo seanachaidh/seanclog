@@ -86,6 +86,8 @@ app.post('/api/login', passport.authenticate('local', {session: false}), functio
 	}
 });
 
+app.get('/api/login', clogapi.auth.performLogout);
+
 var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
