@@ -86,6 +86,10 @@ app.post('/api/login', passport.authenticate('local', {session: false}), functio
 	}
 });
 
+/*
+ * Dit komt een beetje vreemd over. Volgens mij maak ik hier beter een
+ * nieuwe route van met de naam logout.
+ */
 app.get('/api/login', clogapi.auth.performLogout);
 
 var server = http.createServer(app).listen(app.get('port'), function(){

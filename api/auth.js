@@ -7,6 +7,20 @@ var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 /*
+ * TODO: Ik moet deze functie verplaatsen zodat ik ze globaal
+ * kan gebruiken. Ik heb deze code van stack overflow
+ */
+function generateToken(length) {
+	var retval = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+	
+	for(var i = 0; i < length; i++) {
+		retval += possible.charAt(Math.floor(math.random() * possible.length));
+	}
+	return retval;
+}
+
+/*
  * Ik moet nog eens stap voor stap bekijken wat deze code allemaal betekent
  */
 passport.use(new BearerStrategy({}, function(token, done) {
@@ -49,16 +63,34 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 	});
 }));
 
+/*
+ * Deze methode werkt voorlopig nog niet
+ * Ik moet kijken hoe ik deze methode werkend krijg.
+ */
 exports.performLogout = function(res, req) {
-	var token = req.param('access_token');
+	var token = req.query.access_token
 	model.Gebruiker.find({}, function(err, docs){
 		if(err) {
 			console.log("er was een fout tijdens het uitloggen");
 			res.json({value: false});
 		} else {
-			for(var i = 0; i < docs.length; i++) {
-				//hier lopen we ieder resultaat over
+			
+			var breakloop = false;
+			var newtoken = "";
+			while(!breakloop) {
+				var breakloop = true;
+				newtoken = generateToken(10);
+				for(var i = 0; i < docs.length; i++) {
+					obj = docs[i];
+					if(obj.token == newtoken) {
+						breakloop = false;
+					}
+				}
 			}
+			
+			//hier hebben we ons nieuwe token
+			model.Gebruiker.findOneAndUpdate({token: token}, {$set: {token: newtoken}});
+			
 		}
 	});
 };
