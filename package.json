@@ -17,7 +17,8 @@
 		"sax": "*",
 		"bower": "*",
 		"karma": "*",
-		"karma-jasmine": "*"
+		"karma-jasmine": "*",
+		"nodemailer": "*"
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/bower/bin/bower install"

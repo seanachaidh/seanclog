@@ -15,7 +15,7 @@ function generateToken(length) {
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 	
 	for(var i = 0; i < length; i++) {
-		retval += possible.charAt(Math.floor(math.random() * possible.length));
+		retval += possible.charAt(Math.floor(Math.random() * possible.length));
 	}
 	return retval;
 }
@@ -64,33 +64,37 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 }));
 
 /*
+ * Deze functie maakt een nieuwe gebruiker aan en
+ * maakt een token aan voor deze gebruiker. Daarna
+ * wordt er een bevestigingsmail gestuur naar de gebruiker
+ */
+exports.createUser = function(req, res) {
+	var new_gebruikersnaam = req.body.gebruikersnaam,
+		new_naam = req.body.naam,
+		new_email = req.body.email,
+		new_password = req.body.password; //niet vergeten om hiervan een md5sum te maken
+	
+};
+
+/*
  * Deze methode werkt voorlopig nog niet
  * Ik moet kijken hoe ik deze methode werkend krijg.
  */
-exports.performLogout = function(res, req) {
-	var token = req.query.access_token
-	model.Gebruiker.find({}, function(err, docs){
-		if(err) {
-			console.log("er was een fout tijdens het uitloggen");
-			res.json({value: false});
-		} else {
-			
-			var breakloop = false;
-			var newtoken = "";
-			while(!breakloop) {
-				var breakloop = true;
-				newtoken = generateToken(10);
-				for(var i = 0; i < docs.length; i++) {
-					obj = docs[i];
-					if(obj.token == newtoken) {
-						breakloop = false;
-					}
-				}
-			}
-			
-			//hier hebben we ons nieuwe token
-			model.Gebruiker.findOneAndUpdate({token: token}, {$set: {token: newtoken}});
-			
-		}
-	});
+exports.performLogout = function(req, res) {
+	
+	var oldtoken = req.query.access_token;
+	console.log(oldtoken);
+	var newtoken = generateToken(10);
+	
+	/*
+	 * Om een of andere reden werkt deze update niet
+	 */
+	 
+	 model.Gebruiker.update({token: oldtoken}, {$set: {token: newtoken}}, function(err) {
+		 if(err) {
+			 res.json({value: false});
+		 } else {
+			 res.json({value: true});
+		 }
+	 });
 };
