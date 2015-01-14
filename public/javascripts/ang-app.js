@@ -33,8 +33,11 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 		templateUrl: 'partials/partial-test.html',
 		controller: 'TestController'
 	})
+	.when('/login', {
+		templateUrl: 'partials/partial-login.html',
+	}
 	.otherwise({
-		redirectTo: '/tracks'
+		redirectTo: '/login'
 	});
 
 	
