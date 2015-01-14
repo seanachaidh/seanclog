@@ -1,6 +1,16 @@
 <div class="container-fluid">
-	<h1>De project route</h1>
-	<p>
-		{{ projects }}
-	</p>
+	<h1>Projects</h1>
+	
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Price</th>
+		</tr>
+		
+		<tr ng-repeat="x in data">
+			<td>{{x.titel}}</td>
+			<td>{{x.prijs}}</td>
+		</tr>
+	</table>
+	
 </div>

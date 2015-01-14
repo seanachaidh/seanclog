@@ -81,8 +81,9 @@ clogService.factory('Login', ['$resource', function($resource) {
 			params : {}
 		},
 		'logout': {
-			method: 'GET'
-			params: {}
+			method: 'GET',
+			params: {},
+			url: '/api/logout'
 		}
 	});	
 	return fact;

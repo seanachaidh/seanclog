@@ -11,7 +11,7 @@ var seanclogApp = angular.module('seanclogApp',
 /*
  * definieer alle routes
  */
-seanclogApp.config(['$routeProvider', function($routeProvider) {
+seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/tracks', {
 		templateUrl: 'partials/partial-table.html',
@@ -36,6 +36,8 @@ seanclogApp.config(['$routeProvider', function($routeProvider) {
 	.otherwise({
 		redirectTo: '/tracks'
 	});
+
+	
 }]);
 //seanclogApp.config(['$translateProvider', function($translateProvider) {
 //	$translateProvider.useStaticFilesLoader({

@@ -7,10 +7,8 @@ var seanControllers = angular.module('seanClogControllers',['seanClogServices', 
 seanControllers.controller('ProjectController', ['$scope', '$route', '$cookies', 'Projects',
 function($scope, $route, $cookies, Projects){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
-	
-	$scope.tableTitle = "Mijn Projecten";
 	Projects.query({access_token: $cookies.token},function(proj){
-		$scope.myData = proj;
+		$scope.data = proj;
 		$scope.createForm = '/partials/forms/form_createproject.html';
 		$scope.createProj = function(proj) {
 			//Est-ce que ce function est necessaire?
@@ -28,7 +26,6 @@ function($scope, $route, $cookies, Projects){
 seanControllers.controller('TracksController',
 		['$scope', '$cookies', 'Tracks', 'Projects',
 		 function($scope, $cookies, Tracks, Projects){
-			$scope.tableTitle = "Mijn Tracks";
 			//choisit la dialogue pour faire des tracks
 			$scope.createForm = '/partials/forms/form_createtrack.html';
 			$scope.createTrack = function(track){
@@ -39,7 +36,7 @@ seanControllers.controller('TracksController',
 			};
 			
 			Tracks.query({access_token: $cookies.token}, function(t){
-				$scope.myData = t;
+				$scope.data = t;
 			});
 			/*
 			 * Nous avons besoin de tous les projects de l' utilisateur
@@ -57,9 +54,8 @@ seanControllers.controller('TestController', ['$scope', 'Tests', function($scope
 
 seanControllers.controller('KlantenController', ['$scope', '$route', '$routeParams', 'Klanten',
 function($scope, $route, $routeParams, Klanten){
-	$scope.tableTitle = "Mijn Klanten";
 	Klanten.query({access_token: $routeParams.access_token}, function(k) {
-		$scope.myData = k;
+		$scope.data = k;
 	});
 	$scope.createForm = "/partials/forms/form_createclient.html";
 	
@@ -83,7 +79,8 @@ function($scope, $cookies, Login, $location){
 			 * Als ik $location.path(app) gebruik komt er telkens een hash
 			 * in de url
 			 */
-			window.location('app');
+			 
+			$location.path('app');
 		});
 	};
 }]);

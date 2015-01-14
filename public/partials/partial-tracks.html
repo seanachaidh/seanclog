@@ -1,3 +1,19 @@
 <div class="container-fluid">
-	<h1>De tracks route</h1>
+	<h1>Tacks</h1>
+	
+	<table>
+		<tr>
+			<th>Titel</th>
+			<th>Begin</th>
+			<th>End</th>
+		</tr>
+		
+		<tr ng-repeat="x in data">
+			<td>{{x.titel}}</td>
+			<td>{{x.begintijd}}</td>
+			<td>{{x.eindtijd}}</td>
+		</tr>
+		
+	</table>
+	
 </div>

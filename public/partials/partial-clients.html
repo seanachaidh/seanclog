@@ -1,3 +1,18 @@
 <div class="container-fluid">
-	<h1>clients route</h1>
+	<h1>Clients</h1>
+	
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Tel.</th>
+			<th>Email</th>
+		</tr>
+		
+		<tr ng-repeat="x in data">
+			<td>{{x.naam}}</td>
+			<td>{{x.telefoonnummer}}</td>
+			<td>{{x.email}}</td>
+		</tr>
+	</table>
+	
 </div>
