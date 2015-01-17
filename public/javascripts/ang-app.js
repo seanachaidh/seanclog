@@ -14,7 +14,7 @@ var seanclogApp = angular.module('seanclogApp',
 seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/tracks', {
-		templateUrl: 'partials/partial-table.html',
+		templateUrl: 'partials/partial-tracks.html',
 		controller: 'TracksController'
 	})
 	.when('/projects', {
@@ -35,7 +35,8 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 	})
 	.when('/login', {
 		templateUrl: 'partials/partial-login.html',
-	}
+		controller: 'LoginController'
+	})
 	.otherwise({
 		redirectTo: '/login'
 	});

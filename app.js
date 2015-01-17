@@ -36,7 +36,7 @@ if('development' == app.get('env')) {
 
 require('./api/auth');
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
 app.get('/app', routes.app);
 
 /*

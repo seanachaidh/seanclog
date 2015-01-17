@@ -80,7 +80,7 @@ function($scope, $cookies, Login, $location){
 			 * in de url
 			 */
 			 
-			$location.path('app');
+			$location.path('tracks');
 		});
 	};
 }]);
