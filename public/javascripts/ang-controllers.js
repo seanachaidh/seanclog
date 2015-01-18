@@ -47,14 +47,9 @@ seanControllers.controller('TracksController',
 			});
 		}]);
 
-seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {
-	var resp = Tests.testuser({gebruikersnaam: 'Testuser', naam:'Pieter', wachtwoord:'12345', email:'hello@hello.com'});
-	$scope.resp = resp;
-}]);
-
-seanControllers.controller('KlantenController', ['$scope', '$route', '$routeParams', 'Klanten',
-function($scope, $route, $routeParams, Klanten){
-	Klanten.query({access_token: $routeParams.access_token}, function(k) {
+seanControllers.controller('KlantenController', ['$scope', '$route', '$cookies', 'Klanten',
+function($scope, $route, $cookies, Klanten){
+	Klanten.query({access_token: $cookies.token}, function(k) {
 		$scope.data = k;
 	});
 	$scope.createForm = "/partials/forms/form_createclient.html";
@@ -73,13 +68,9 @@ function($scope, $cookies, Login, $location){
 	$scope.dologin = function(user) {
 		Login.getToken({username: user.username, password: user.password}, function(u) {
 			$cookies.token = u.token;
-			
 			/*
-			 * Is er echt geen manier om dit via angular te doen
-			 * Als ik $location.path(app) gebruik komt er telkens een hash
-			 * in de url
+			 * Tracks is onze standaardpagina
 			 */
-			 
 			$location.path('tracks');
 		});
 	};
@@ -88,5 +79,11 @@ function($scope, $cookies, Login, $location){
 seanControllers.controller('ProfileController', ['$scope', '$cookies',
 function($scope, $cookies) {
 	console.log('token: ' + $cookies.token);
+}]);
+
+
+seanControllers.controller('TestController', ['$scope', 'Tests', function($scope, Tests) {
+	var resp = Tests.testuser({gebruikersnaam: 'Testuser', naam:'Pieter', wachtwoord:'12345', email:'hello@hello.com'});
+	$scope.resp = resp;
 }]);
 

@@ -22,7 +22,7 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 		controller: 'ProjectController'
 	})
 	.when('/clients', {
-		templateUrl: 'partials/partial-table.html',
+		templateUrl: 'partials/partial-clients.html',
 		controller: 'KlantenController'
 	})
 	.when('/profile', {
