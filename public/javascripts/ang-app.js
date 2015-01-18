@@ -18,7 +18,7 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 		controller: 'TracksController'
 	})
 	.when('/projects', {
-		templateUrl: 'partials/partial-table.html',
+		templateUrl: 'partials/partial-projects.html',
 		controller: 'ProjectController'
 	})
 	.when('/clients', {
