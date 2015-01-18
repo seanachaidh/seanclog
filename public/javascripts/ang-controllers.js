@@ -26,8 +26,6 @@ function($scope, $route, $cookies, Projects){
 seanControllers.controller('TracksController',
 		['$scope', '$cookies', 'Tracks', 'Projects',
 		 function($scope, $cookies, Tracks, Projects){
-			//choisit la dialogue pour faire des tracks
-			$scope.createForm = '/partials/forms/form_createtrack.html';
 			$scope.createTrack = function(track){
 				Tracks.post(angular.copy(track));
 				angular.element('#createModal').modal('hide');
