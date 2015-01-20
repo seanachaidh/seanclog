@@ -73,6 +73,21 @@ exports.createUser = function(req, res) {
 		new_naam = req.body.naam,
 		new_email = req.body.email,
 		new_password = req.body.password; //niet vergeten om hiervan een md5sum te maken
+	var token = generateToken(10);
+	
+	var tmp =  new model.Gebruiker({
+		gebruikersnaam: new_gebruikersnaam,
+		naam: new_naam,
+		email: new_email,
+		wachtwoord: new_password
+	});
+	tmp.save(function(err) {
+		if(err) {
+			console.log("Er was een error bij het maken van een gebruiker");
+		} else {
+			console.log("maken van de gebruiker gelukt!");
+		}
+	});
 	
 };
 
