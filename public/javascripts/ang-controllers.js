@@ -61,8 +61,8 @@ function($scope, $route, $cookies, Klanten){
 }]);
 
 //Een controller die het inloggen van gebruikers regelt
-seanControllers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location',
-function($scope, $cookies, Login, $location){
+seanControllers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'User',
+function($scope, $cookies, Login, $location, User){
 	$scope.dologin = function(user) {
 		Login.getToken({username: user.username, password: user.password}, function(u) {
 			$cookies.token = u.token;
@@ -72,6 +72,16 @@ function($scope, $cookies, Login, $location){
 			$location.path('tracks');
 		});
 	};
+	
+	$scope.createUser = function(user) {
+		User.createUser(user, function(retval) {
+			if(retval.value == true) {
+				angular.element("#createModal").modal('hide');
+			}
+			//wat moet ik doen wanneer het maken van een gebruiker faalt?
+		});
+	};
+	
 }]);
 
 seanControllers.controller('ProfileController', ['$scope', '$cookies',
