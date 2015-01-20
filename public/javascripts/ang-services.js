@@ -88,7 +88,17 @@ clogService.factory('Login', ['$resource', function($resource) {
 	});	
 	return fact;
 }]);
-	
+
+clogService.factory('User', ['$resource', function($resource) {
+	var fact = $resource('/api/user', {}, {
+		'createUser': {
+			method: 'POST',
+			params: {}
+		}
+	});
+	return fact;
+}]);
+
 
 clogService.factory('Token', function() {
 	var currentToken;
