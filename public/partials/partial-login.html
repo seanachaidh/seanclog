@@ -4,5 +4,10 @@
 		<input type="text" class="form-control" ng-model="user.username" />
 		<input type="password" class="form-control" ng-model="user.password" />
 		<button class="btn btn-lg btn-primary btn-block" ng-click="dologin(user)">Sign in!</button>
+		<!-- hier een modal openen -->
+		<button class="btn btn-lg btn-primary btn block" data-toggle="modal" data-target="#createModal">New user!</button>
 	</form>
+	
+	<div ng-include="'/partials/forms/form_createuser.html'"></div>
+	
 </div>
