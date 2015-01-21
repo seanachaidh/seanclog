@@ -13,7 +13,7 @@ function($scope, $route, $cookies, Projects){
 		$scope.createProj = function(proj) {
 			//Est-ce que ce function est necessaire?
 			var tmp = angular.copy(proj);
-			Projects.post(proj);
+			Projects.post({access_token: $cookies.token}, proj);
 			angular.element("#createModal").modal("hide");
 			
 			//Recharge la page

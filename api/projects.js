@@ -52,15 +52,27 @@ exports.deleteProject = function(req, res) {
 };
 
 exports.saveProject = function(req, res) {
-	var gebruikerid = req.user._id;
+	var curtoken = req.params.access_token;
 		new_titel = req.body.titel,
 		new_prijs = req.body.prijs;
-	var new_proj = new model.Project({titel: new_titel, prijs: new_prijs, gebruiker: new ObjectId(gebruikerid)});
-	new_proj.save(function(err) {
+	
+	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
 		if(err) {
-			console.log("Er was een fout bij het bewaren van een project");
+			console.log('projecten: De gebruiker werd niet gevonden');
+			res.json({value: false});
 		} else {
-			console.log('het bewaren van het project is goed verlopen (hopelijk)');
+			new_project = new model.Project({
+				titel: new_titel,
+				prijs: new_prijs,
+				gebruiker: g._id
+			});
+			new_project.save(function(err) {
+				if(err) {
+					console.log('project: bewaren mislukt');
+				} else {
+					console.log('project: bewaren gelukt');
+				}
+			});
 		}
 	});
 };
