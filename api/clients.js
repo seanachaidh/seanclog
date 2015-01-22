@@ -35,22 +35,28 @@ exports.deleteClient = function(req, res) {
 };
 
 exports.saveClient = function(req, res) {
+	var curtoken = req.query.access_token;
 	var new_naam = req.body.naam,
 		new_telefoonnummer = req.body.telefoonnummer,
-		new_email = req.body.email,
-		new_gebruiker = req.body.gebruiker;
-	var new_client = new model.Klant({
-		naam: new_naam,
-		telefoonnummer: new_telefoonnummer,
-		email: new_email,
-		gebruiker: new ObjectId(new_gebruiker)
-	});
-	
-	new_client.save(function(err){
-		if(err){
-			console.log('Het bewaren van een klant is niet gelukt');
+		new_email = req.body.email;
+		
+	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
+		if(err) {
+			console.log('klanten: De gebruiker werd niet gevonden');
 		} else {
-			console.log('De klant is successvol bewaard');
+			var new_client = new model.Klant({
+				naam: new_naam,
+				telefoonnummer: new_telefoonnummer,
+				email: new_email,
+				gebruiker: g._id
+			});
+			new_client.save(function(err) {
+				if(err) {
+					console.log('klanten: de klant kon niet worden bewaard');
+				} else {
+					console.log('klanten: De nieuwe klant is met success bewaard');
+				}
+			});
 		}
-	});
+	}); 
 }

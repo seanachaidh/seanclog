@@ -53,7 +53,7 @@ function($scope, $route, $cookies, Klanten){
 	});
 	
 	$scope.createclient = function(client) {
-		Klanten.post(angular.copy(client));
+		Klanten.post({access_token: $cookies.token}, angular.copy(client));
 		angular.element("#createModal").modal('hide');
 		$route.reload();
 	};

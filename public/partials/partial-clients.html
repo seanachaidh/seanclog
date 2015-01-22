@@ -1,7 +1,7 @@
 <div ng-include="'/partials/partial-menu.html'"></div>
 
 <div class="container-fluid">
-	<h1>Clients</h1>
+	<h1>Clients<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal">Create</button></h1>
 	
 	<table class="bordered-table">
 		<tr>
@@ -16,5 +16,5 @@
 			<td>{{x.email}}</td>
 		</tr>
 	</table>
-	
+	<div ng-include="'/partials/forms/form_createclient.html'"></div>
 </div>
