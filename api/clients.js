@@ -59,4 +59,4 @@ exports.saveClient = function(req, res) {
 			});
 		}
 	}); 
-}
+};

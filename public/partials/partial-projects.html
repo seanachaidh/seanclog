@@ -11,11 +11,13 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 		<tr>
 			<th>Title</th>
 			<th>Price</th>
+			<th>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
 			<td>{{x.prijs}}</td>
+			<td><button class="btn btn-default">Remove</button></td>
 		</tr>
 	</table>
 	<div ng-include="'/partials/forms/form_createproject.html'"></div>
