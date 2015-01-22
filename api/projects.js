@@ -52,7 +52,7 @@ exports.deleteProject = function(req, res) {
 };
 
 exports.saveProject = function(req, res) {
-	var curtoken = req.params.access_token;
+	var curtoken = req.query.access_token;
 		new_titel = req.body.titel,
 		new_prijs = req.body.prijs;
 	

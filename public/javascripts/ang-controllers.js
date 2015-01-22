@@ -8,19 +8,20 @@ seanControllers.controller('ProjectController', ['$scope', '$route', '$cookies',
 function($scope, $route, $cookies, Projects){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	Projects.query({access_token: $cookies.token},function(proj){
-		$scope.data = proj;
-		$scope.createForm = '/partials/forms/form_createproject.html';
-		$scope.createProj = function(proj) {
-			//Est-ce que ce function est necessaire?
-			var tmp = angular.copy(proj);
-			Projects.post({access_token: $cookies.token}, proj);
-			angular.element("#createModal").modal("hide");
-			
-			//Recharge la page
-			//je n'ai pas déjà testé cette function.
-			$route.reload();
-		}
+		$scope.data = proj
 	});
+	
+	$scope.createProj = function(proj) {
+		//Est-ce que ce function est necessaire?
+		var tmp = angular.copy(proj);
+		Projects.post({access_token: $cookies.token}, proj);
+		angular.element("#createModal").modal("hide");
+		
+		//Recharge la page
+		//je n'ai pas déjà testé cette function.
+		$route.reload();
+	}
+	
 }]);
 
 seanControllers.controller('TracksController',
@@ -50,7 +51,6 @@ function($scope, $route, $cookies, Klanten){
 	Klanten.query({access_token: $cookies.token}, function(k) {
 		$scope.data = k;
 	});
-	$scope.createForm = "/partials/forms/form_createclient.html";
 	
 	$scope.createclient = function(client) {
 		Klanten.post(angular.copy(client));
