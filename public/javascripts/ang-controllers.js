@@ -4,8 +4,8 @@
  */
 var seanControllers = angular.module('seanClogControllers',['seanClogServices', 'ngRoute', 'ngCookies']);
 
-seanControllers.controller('ProjectController', ['$scope', '$route', '$cookies', 'Projects',
-function($scope, $route, $cookies, Projects){
+seanControllers.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects',
+function($scope, $route, $cookies, $window, Projects){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	Projects.query({access_token: $cookies.token},function(proj){
 		$scope.data = proj
@@ -20,34 +20,48 @@ function($scope, $route, $cookies, Projects){
 		//Recharge la page
 		//je n'ai pas déjà testé cette function.
 		$route.reload();
-	}
+	};
 	
+	$scope.deleteProject = function(proj) {
+		$window.alert("nog niet gemaakt");
+		console.log('Project verwijderen');
+		console.log(proj);
+	};
 }]);
 
 seanControllers.controller('TracksController',
-		['$scope', '$cookies', 'Tracks', 'Projects',
-		 function($scope, $cookies, Tracks, Projects){
-			$scope.createTrack = function(track){
-				Tracks.post(angular.copy(track));
-				angular.element('#createModal').modal('hide');
-				
-				$route.reload();
-			};
-			
-			Tracks.query({access_token: $cookies.token}, function(t){
-				$scope.data = t;
-			});
-			/*
-			 * Nous avons besoin de tous les projects de l' utilisateur
-			 * Ansi l' utilisateur peut choisisez un project 
-			 */
-			Projects.query({access_token: $cookies.token}, function(proj){
-				$scope.projects = proj;
-			});
-		}]);
+		['$scope', '$cookies', '$window', 'Tracks', 'Projects',
+	function($scope, $cookies, $window, Tracks, Projects){
+	$scope.createTrack = function(track){
+		Tracks.post(angular.copy(track));
+		angular.element('#createModal').modal('hide');
+		
+		$route.reload();
+	};
 
-seanControllers.controller('KlantenController', ['$scope', '$route', '$cookies', 'Klanten',
-function($scope, $route, $cookies, Klanten){
+	$scope.deleteTrack = function(track) {
+		$window.alert("nog niet gemaakt");
+		console.log("Track verwijderen");
+		console.log(track);
+	};
+
+	Tracks.query({access_token: $cookies.token}, function(t){
+		$scope.data = t;
+	});
+	/*
+	 * Nous avons besoin de tous les projects de l' utilisateur
+	 * Ansi l' utilisateur peut choisisez un project 
+	 */
+	Projects.query({access_token: $cookies.token}, function(proj){
+		$scope.projects = proj;
+	});
+	
+	
+	
+}]);
+
+seanControllers.controller('KlantenController', ['$scope', '$route', '$cookies', '$window', 'Klanten',
+function($scope, $route, $cookies, $window, Klanten){
 	Klanten.query({access_token: $cookies.token}, function(k) {
 		$scope.data = k;
 	});
@@ -56,6 +70,12 @@ function($scope, $route, $cookies, Klanten){
 		Klanten.post({access_token: $cookies.token}, angular.copy(client));
 		angular.element("#createModal").modal('hide');
 		$route.reload();
+	};
+	
+	$scope.deleteClient = function(client) {
+		$window.alert("nog niet gemaakt");
+		console.log("Klant verwijderen");
+		console.log(client);
 	};
 	
 }]);

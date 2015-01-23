@@ -6,12 +6,14 @@
 			<th>Titel</th>
 			<th>Begin</th>
 			<th>End</th>
+			<th>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
 			<td>{{x.begintijd}}</td>
 			<td>{{x.eindtijd}}</td>
+			<td><button class="btn btn-default" ng-click="deleteTrack(x)">Remove</button></td>
 		</tr>
 		
 	</table>
