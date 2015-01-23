@@ -8,13 +8,15 @@
 			<th>Name</th>
 			<th>Tel.</th>
 			<th>Email</th>
+			<th>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.naam}}</td>
 			<td>{{x.telefoonnummer}}</td>
 			<td>{{x.email}}</td>
+			<td><button class="btn btn-default" ng-click="deleteClient(x)">Remove</button></td>
 		</tr>
 	</table>
-	
+	<div ng-include="'/partials/forms/form_createclient.html'"></div>
 </div>

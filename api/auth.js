@@ -72,7 +72,25 @@ exports.createUser = function(req, res) {
 	var new_gebruikersnaam = req.body.gebruikersnaam,
 		new_naam = req.body.naam,
 		new_email = req.body.email,
-		new_password = req.body.password; //niet vergeten om hiervan een md5sum te maken
+		new_password = crypto.createHash('md5').update(req.body.wachtwoord).digest('hex');
+	var new_token = generateToken(10);
+	
+	var tmp =  new model.Gebruiker({
+		gebruikersnaam: new_gebruikersnaam,
+		naam: new_naam,
+		email: new_email,
+		wachtwoord: new_password,
+		token: new_token
+	});
+	tmp.save(function(err) {
+		if(err) {
+			console.log("Er was een error bij het maken van een gebruiker");
+			res.json({value: false});
+		} else {
+			console.log("maken van de gebruiker gelukt!");
+			res.json({value: true});
+		}
+	});
 	
 };
 

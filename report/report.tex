@@ -175,9 +175,26 @@ var var seanclogApp = angular.module('seanclogApp',
 
 In dit voorbeeld staat "mijnNiueweModule" voor de module die u zopas heeft toegevoegd.
 
+\subsubsection{Views}
+Omdat deze applicatie het model view controller design pattern gaat volgen gaan we ook gebruik maken van views. Deze views worden beheerd door AngularJS. Wanneer de gebruiker naar de root van onze applicatie navigeert (dit wil zeggen http://mydomain.com/) levert de applicatie zoals gewoonlijk een html pagina geleverd genaamd "index.html". Dit is echter meteen de enige echte webpagina die de gebruiker zal ontvangen. De rest zit vervat in code die samen verzonden wordt met de webpagina. Deze code beslist welke views er op welk moment getoond moeten worden.
+
+Deze pagina ziet er als volgt uit
+\begin{verbatim}
+<html>
+	<head>
+		<!-- hier zetten we alle scripts die nodig zijn voor het draaien van de applicatie -->
+	</head>
+	<body>
+		<div ng-view> <!-- hier komen de views --></div>
+	</body>
+</html>
+\end{verbatim}
+
 \subsubsection{Controllers}
 
 \subsubsection{Services}
+
+\subsubsection{Filters}
 
 \section{vormgeving}
 

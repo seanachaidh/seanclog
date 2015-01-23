@@ -1,0 +1,43 @@
+<!--from om een nieuwe gebruiker te maken -->
+
+<div class="modal fade" id="createModal" role="dialog" data-backdrop="false">
+	<div class="modal-dialog">
+		
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Create new user</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form novalidate role="form">
+					<div class="form-group">
+						<label for="username">Name</label>
+						<input type="text" class="form-control" id="username" ng-model="user.gebruikersnaam" placeholder="username" />
+					</div>
+					
+					<div class=form-group">
+						<label for="fullname">Full name</label>
+						<input type="text" class="form-control" id="fullname" ng-model="user.naam" placeholder="Full name" />
+					</div>
+					
+					<div class="form-group">
+						<label for="useremail">E-mail</label>
+						<input type="eamil" class="form-control" id="useremail" ng-model="user.email" placeholder="e-mail" />
+					</div>
+					
+					<!-- Hier moet nog een confirm password veld bijkomen -->
+					<div class="form-group">
+						<label for="userpass">Password</label>
+						<input type="password" class="form-control" id="userpass" ng-model="user.wachtwoord" placeholder="Password" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="createUser(user)">Create!</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

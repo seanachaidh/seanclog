@@ -47,7 +47,8 @@ var userSchema = new Schema({
 	gebruikersnaam: String,
 	wachtwoord: String,
 	naam: String,
-	email: String
+	email: String,
+	token: String
 }, {collection: "gebruikers"});
 
 var projectSchema = new Schema({

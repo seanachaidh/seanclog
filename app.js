@@ -87,6 +87,11 @@ app.post('/api/login', passport.authenticate('local', {session: false}), functio
 });
 
 /*
+ * Gebruikersbeheer
+ */
+app.post('/api/user', clogapi.auth.createUser);
+
+/*
  * Dit komt een beetje vreemd over. Volgens mij maak ik hier beter een
  * nieuwe route van met de naam logout.
  */
