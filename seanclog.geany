@@ -23,12 +23,14 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=3
+current_page=6
 FILE_NAME_0=875;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fang-app.js;0;4
 FILE_NAME_1=397;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-tracks.html;0;4
 FILE_NAME_2=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-menu.html;0;4
 FILE_NAME_3=987;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fang-controllers.js;0;4
-FILE_NAME_4=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fforms%2Fform_createtrack.html;0;4
+FILE_NAME_4=1314;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fforms%2Fform_createtrack.html;0;4
+FILE_NAME_5=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-test.html;0;4
+FILE_NAME_6=455;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-profile.html;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog
