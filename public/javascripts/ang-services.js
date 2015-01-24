@@ -4,7 +4,7 @@
 
 var clogService = angular.module('seanClogServices', [ 'ngResource' ]);
 clogService.factory('Projects', [ '$resource', function($resource) {
-	var fact = $resource('/api/projects', {}, {
+	var fact = $resource('/api/projects/:id', {}, {
 		'query' : {
 			method : 'GET',
 			isArray : true

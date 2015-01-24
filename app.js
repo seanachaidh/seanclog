@@ -66,7 +66,7 @@ app.post('/api/clients', passport.authenticate('bearer', {session: false}), clog
  * Welk record er precies verwijderd moet worden wordt gedetermineerd door de post variabelen
  */
 app.del('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.deleteTrack);
-app.del('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
+app.del('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
 app.del('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
 
 

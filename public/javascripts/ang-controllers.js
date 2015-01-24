@@ -22,10 +22,16 @@ function($scope, $route, $cookies, $window, Projects){
 		$route.reload();
 	};
 	
-	$scope.deleteProject = function(proj) {
-		$window.alert("nog niet gemaakt");
-		console.log('Project verwijderen');
-		console.log(proj);
+	$scope.deleteProject = function(projid) {
+		
+		Projects.remove({id: projid, access_token: $cookies.token}, function(retval) {
+			if(retval.value == true) {
+				$window.alert("verwijderen gelukt");
+			} else {
+				$window.alert("verwijderen niet gelukt");
+			}
+		});		
+		console.log(projid);
 	};
 }]);
 
