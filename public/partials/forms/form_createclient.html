@@ -7,13 +7,13 @@
 				<h4>Create client</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<label>Naam</label> <input type="text" class="form-control"
-						ng-model="client.naam" placeholder="Naam" /> <label>Telefoonnummer</label>
-					<input type="text" class="form-control"
-						ng-model="client.telefoonnummer" placeholder="Tel." /> <label>Email</label>
-					<input type="email" class="form-control" ng-model="client.email"
-						placeholder="Email" />
+				<form novalidate role="form">
+					<label>Naam</label>
+					<input type="text" class="form-control" ng-model="client.naam" placeholder="Naam" />
+					<label>Telefoonnummer</label>
+					<input type="text" class="form-control" ng-model="client.telefoonnummer" placeholder="Tel." />
+					<label>Email</label>
+					<input type="email" class="form-control" ng-model="client.email" placeholder="Email" />
 				</form>
 			</div>
 			<div class="modal-footer">

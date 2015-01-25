@@ -11,22 +11,18 @@
 				 -->
 				<!-- Waarom is de novalidate nodig? -->
 				<form novalidate role="form">
-					<div class="form-group">
-						<label>Titel</label> 
-						<input type="text" class="form-control" ng-model="proj.titel" placeholder="Titel"/>
-					</div>
-					<div class="form-group">
-						<label>Prijs</label>
-						<!-- Zou ik ervoor kunnen zorgen dat de gebruiker
-							 hier alleenmaar een prijs kan invoeren?
-						 -->
-						<input type="text" class="form-control" ng-model="proj.prijs" placeholder="Prijs">
-					</div>
+					<label>Titel</label> 
+					<input type="text" class="form-control" ng-model="proj.titel" placeholder="Titel"/>
+					<label>Prijs</label>
+					<!-- Zou ik ervoor kunnen zorgen dat de gebruiker
+						 hier alleenmaar een prijs kan invoeren?
+					 -->
+					<input type="text" class="form-control" ng-model="proj.prijs" placeholder="Prijs">
 				</form>
 			</div>
 			<div class="modal-footer">
 				<!-- De functie createproj moet nog gemaakt worden -->
-				<button type="button" class="btn btn-default" ng-click="createProj(proj)">Create!</button>
+				<button type="button" class="btn btn-default" ng-click="createProj(proj)">Create project</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

@@ -43,6 +43,7 @@ exports.saveClient = function(req, res) {
 	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
 		if(err) {
 			console.log('klanten: De gebruiker werd niet gevonden');
+			res.json({value: false});
 		} else {
 			var new_client = new model.Klant({
 				naam: new_naam,
@@ -53,8 +54,10 @@ exports.saveClient = function(req, res) {
 			new_client.save(function(err) {
 				if(err) {
 					console.log('klanten: de klant kon niet worden bewaard');
+					res.json({value: false});
 				} else {
 					console.log('klanten: De nieuwe klant is met success bewaard');
+					res.json({value: true});
 				}
 			});
 		}

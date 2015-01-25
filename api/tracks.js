@@ -40,6 +40,9 @@ exports.deleteTrack = function(req, res) {
 	});
 }
 
+/*
+ * TODO: Deze functie moet nog herschreven worden
+ */
 exports.saveTrack = function(req, res) {
 	//sauvegarde un track
 	var new_titel = req.body.titel,

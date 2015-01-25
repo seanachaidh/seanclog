@@ -56,6 +56,8 @@ exports.saveProject = function(req, res) {
 		new_titel = req.body.titel,
 		new_prijs = req.body.prijs;
 	
+	console.log("begin van de saveproject functie");
+	
 	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
 		if(err) {
 			console.log('projecten: De gebruiker werd niet gevonden');
@@ -69,8 +71,10 @@ exports.saveProject = function(req, res) {
 			new_project.save(function(err) {
 				if(err) {
 					console.log('project: bewaren mislukt');
+					res.json({value: false});
 				} else {
 					console.log('project: bewaren gelukt');
+					res.json({value: true});
 				}
 			});
 		}
