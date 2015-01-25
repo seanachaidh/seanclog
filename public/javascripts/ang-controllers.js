@@ -26,12 +26,14 @@ function($scope, $route, $cookies, $window, Projects){
 		
 		Projects.remove({id: projid, access_token: $cookies.token}, function(retval) {
 			if(retval.value == true) {
-				$window.alert("verwijderen gelukt");
+				console.log('het verwijderen van het project is gelukt');
 			} else {
-				$window.alert("verwijderen niet gelukt");
+				console.log('het verwijderen van het project is niet gelukt');
 			}
 		});		
 		console.log(projid);
+		
+		$route.reload();
 	};
 }]);
 
@@ -79,9 +81,17 @@ function($scope, $route, $cookies, $window, Klanten){
 	};
 	
 	$scope.deleteClient = function(client) {
-		$window.alert("nog niet gemaakt");
-		console.log("Klant verwijderen");
+		
+		Klanten.remove({id: client, access_token: $cookies.token}, function(retval) {
+			if(retval.value == true) {
+				console.log('het verwijderen van de klant is gelukt');
+			} else {
+				console.log('het verwijderen van de klant is niet geluk');
+			}
+		});
+		
 		console.log(client);
+		$route.reload();
 	};
 	
 }]);

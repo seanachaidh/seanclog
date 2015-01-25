@@ -15,7 +15,7 @@
 			<td>{{x.naam}}</td>
 			<td>{{x.telefoonnummer}}</td>
 			<td>{{x.email}}</td>
-			<td><button class="btn btn-default" ng-click="deleteClient(x)">Remove</button></td>
+			<td><button class="btn btn-default" ng-click="deleteClient(x._id)">Remove</button></td>
 		</tr>
 	</table>
 	<div ng-include="'/partials/forms/form_createclient.html'"></div>

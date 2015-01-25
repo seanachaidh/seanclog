@@ -57,7 +57,7 @@ clogService.factory('Tracks', [ '$resource', function($resource) {
 } ]);
 
 clogService.factory('Klanten', [ '$resource', function($resource) {
-	var fact = $resource('/api/clients', {}, {
+	var fact = $resource('/api/clients/:id', {}, {
 		'query' : {
 			method : 'GET',
 			isArray : true

@@ -22,8 +22,8 @@ exports.pdfClient = function(req, res) {
  * Geeft true terug als het gelukt is en false als het mislukt is
  */
 exports.deleteClient = function(req, res) {
-	var id = req.body.client._id;
-	Klant.remove({_id: new ObjectId(id)}, function(err) {
+	var id = req.params.id;
+	model.Klant.remove({_id: new ObjectId(id)}, function(err) {
 		if(err){
 			console.log('het verwijderen is niet gelukt');
 			res.json({value: false});

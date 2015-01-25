@@ -67,7 +67,7 @@ app.post('/api/clients', passport.authenticate('bearer', {session: false}), clog
  */
 app.del('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.deleteTrack);
 app.del('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
-app.del('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
+app.del('/api/clients/:id', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
 
 
 app.post('/api/posttest', clogapi.tests.posttest);
