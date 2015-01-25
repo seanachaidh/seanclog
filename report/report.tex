@@ -125,6 +125,18 @@ data vervat die een student moet voorstellen.
 
 \end{description}
 
+MongoDB zelf valt onder de "document oriented" databanken. Hierbij wordt er niet uitgegaan van tabellen, maar van collecties. Een collectie kan bijvoorbeeld een verzameling klanten zijn. Iedere klant in de collectie wordt op zijn beurt voorgesteld als een document. Een document wordt voorgesteld als een JSONObject dat velden bezit. Die velden op hun beurt waarden. Als men SQL zou vergelijken met Mongo zou men de volgende tabel bekomen.
+
+\begin{tabular}{lcr}
+\hline
+\head{Begrip} & \head{SQL} & \head{Mongo} \\
+\hline
+Verzameling & Tabel & Collection \\
+Element van deze verzameling & Row & Document \\
+Een attribuut van een element & column & field
+
+\end{tabular}
+
 
 \subsubsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object
