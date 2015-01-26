@@ -64,7 +64,12 @@ seanControllers.controller('TracksController',
 		$scope.projects = proj;
 	});
 	
-	
+	$scope.opencal = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		
+		$scope.opened = true;
+	};
 	
 }]);
 

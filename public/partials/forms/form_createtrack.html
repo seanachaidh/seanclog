@@ -7,20 +7,17 @@
 			</div>
 			<div class="modal-body">
 				<form novalidate role="form">
-					<label>Titel</label> <input type="text" ng-model="track.titel"
-						class="form-control" placeholder="Titel" /> <label>Begintijd</label>
-					<!-- Ceci doit être remplacé par un calendier -->
-					<input type="text" ng-model="track.begintijd" class="form-control"
-						placeholder="Begintijd" /> <label>Eindtijd</label>
-					<!-- Ceci doit être remplacé par un calendier -->
-					<input type="text" ng-model="track.eindtijd" class="form-control"
-						placeholder="Eindtijd" /> <label>Project</label>
-					<!-- Comment est-ce que je peux faire un "combobox"? -->
-						
-					<!-- Les projects dans ce combobox ne sont pas visible -->
-					<select ng-model="track.project"
-						ng-options="project.titel for project in projects"></select>
-						
+					<label>Titel</label>
+					<input class="form-control" type="text" ng-model="track.titel" placeholder="titel" />
+					<label>Begintijd</label>
+					<div class="input-group">
+						<!-- niet vergeten de datum en de tijd samen te voegen! -->
+						<input type="text" class="from-control" ng-model="track.begindate" is-opened="opened" />
+						<span class="input-group-btn">
+							<!-- Hier nog een extra id meegeven aan ng-click om te weten om welke kalender het precies gaat -->
+							<button class="btn btn-default" type="button" ng-click="opencal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span> 
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
