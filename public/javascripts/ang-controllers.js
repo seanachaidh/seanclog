@@ -41,7 +41,7 @@ seanControllers.controller('TracksController',
 		['$scope', '$cookies', '$window', 'Tracks', 'Projects',
 	function($scope, $cookies, $window, Tracks, Projects){
 	$scope.createTrack = function(track){
-		Tracks.post(angular.copy(track));
+		Tracks.post({access_token: $cookies.token}, angular.copy(track));
 		angular.element('#createModal').modal('hide');
 		
 		$route.reload();
@@ -64,11 +64,18 @@ seanControllers.controller('TracksController',
 		$scope.projects = proj;
 	});
 	
-	$scope.opencal = function($event) {
+	$scope.openBegin = function($event) {
 		$event.preventDefault();
 		$event.stopPropagation();
 		
-		$scope.opened = true;
+		$scope.beginOpened = true;
+	};
+	
+	$scope.openEnd = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		
+		$scope.endOpened = true;
 	};
 	
 }]);

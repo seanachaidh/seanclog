@@ -67,8 +67,9 @@ var klantSchema = new Schema ({
 
 var trackSchema = new Schema({
 	titel: String,
-	begintijd: String,
-	eindtijd: String,
+	//Dit type datum (isodate) wordt niet geaccepteerd door android
+	begintijd: Date,
+	eindtijd: Date,
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
