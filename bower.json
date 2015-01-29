@@ -26,6 +26,9 @@
 	  "angular-route": "*",
 	  "angular-resource": "*",
 	  "angular-translate-loader-url": "*",
-	  "angular-translate-loader-static-files": "*"
+	  "angular-translate-loader-static-files": "*",
+	  "angular-bootstrap": "*",
+	  "bootstrap-ui-datetime-picker": "*"
+	  
   }
 }

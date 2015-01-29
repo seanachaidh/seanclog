@@ -12,7 +12,10 @@
 					<label>Begintijd</label>
 					<div class="input-group">
 						<!-- niet vergeten de datum en de tijd samen te voegen! -->
-						<input type="text" class="from-control" ng-model="track.begindate" is-opened="opened" />
+						
+						<input type="text" class="from-control" datepicker-popup="yyyy-MM-dd" ng-model="track.begindate" is-open="opened" />
+						<timepicker ng-model="track.begintijd"></timepicker>
+						
 						<span class="input-group-btn">
 							<!-- Hier nog een extra id meegeven aan ng-click om te weten om welke kalender het precies gaat -->
 							<button class="btn btn-default" type="button" ng-click="opencal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
