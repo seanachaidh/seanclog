@@ -27,6 +27,10 @@
 							<button class="btn btn-default" type="button" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</div>
+					
+					<label>Project</label>
+					<select class="form-control" ng-model="track.project" ng-options="p as p.titel for p in projects"></select>
+					
 				</form>
 			</div>
 			<div class="modal-footer">
