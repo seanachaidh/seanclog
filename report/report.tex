@@ -221,13 +221,15 @@ Dan zou men hier code uit een ander bestand er aan kunnen toevoegen.
 \subsubsection{Controllers}
 
 \subsubsection{Services}
-Het ophalen van data van de database door de client gebeurt door middel van services. Services zijn een concept binnen AngularJS en kunnen gezien worden als singletons. Een service wordt gemaakt door de factory methode op te roepen van de het applicatieobject. Dit krijg twee parameters mee. De eerste parameter is een naam. Deze naam zal later gebruikt worden om naar onze service te kunnen refereren. De tweede parameter is een functie die een object hoort terug te geven. Dit object kan allerlei dingen bevatten. Variabelen, functies, het is kortom een volwaardig object. De bedoeling is dat dit object vanaf elke plek binnen onze applicatie beschikbaar zal zijn. We kunnen deze services in andere modules gebruiken. Bij het maken van een module moet er namelijk een array doorgegeven worden. Deze array is een lijst met strings. Deze strings zijn namen van services. Zo weet angular welke services in een module worden gebruikt. De genoemde services moeten daarna enkel als parameter genoemd worden in de functie gekoppeld aan de module.
+Het ophalen van data van de database door de client gebeurt door middel van services. Services zijn een concept binnen AngularJS en kunnen gezien worden als singletons. Een service wordt gemaakt door de factory methode op te roepen van de het applicatieobject. Dit krijg twee parameters mee. De eerste parameter is een naam. Deze naam zal later gebruikt worden om naar onze service te kunnen refereren. De tweede parameter is een functie die een object hoort terug te geven. Dit object kan allerlei dingen bevatten. Variabelen, functies, het is kortom een volwaardig object. De bedoeling is dat dit object vanaf elke plek binnen onze applicatie beschikbaar zal zijn. We kunnen deze services in andere modules gebruiken. Bij het maken van een module moet er namelijk een array doorgegeven worden. Deze array is een lijst met strings. Deze strings zijn namen van services. Zo weet angular welke services in een module worden gebruikt. De genoemde services moeten daarna enkel als parameter genoemd worden in de functie gekoppeld aan de module. Daarbij zijn ze ook nog eens lui geïnitialiseerd. Dit wil zeggen dat Angular deze objecten enkel aanmaakt wanneer ze echt worden gebruikt. Men kan bijvoorbeeld een module laden waarin een service vervat zit, maar waarvan geen gebruik gemaakt wordt. Mocht deze service toch geïnitialiseerd worden, neemt deze onnodig plek in het geheugen en kan deze de applicatie nodeloos vertragen. Door deze techniek kan Angular sneller werken en hebben Angular applicaties een lagere memory-footprint.
 
 \begin{verbatim}
 Hier voorbeeldcode toevoegen
 \end{verbatim}
 
 \subsubsection{Filters}
+
+\subsubsection{Directives}
 
 \section{vormgeving}
 
