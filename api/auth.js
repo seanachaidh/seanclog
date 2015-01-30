@@ -59,7 +59,7 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 			return done(err);
 		}
 		if(!user) {
-			done(null, false, {message: 'Gebruiker niet gesvonden'});
+			return done(null, false, {message: 'Gebruiker niet gesvonden'});
 		}
 		
 		model.Token.findOne({gebruiker: user._id}, function(err, tok) {
@@ -70,7 +70,7 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 				 var tmp = generateToken(10);
 				 var new_token = new model.Token({
 					 token: tmp,
-					 made: Date.Now,
+					 made: Date.now(),
 					 gebruiker: user._id
 				 });
 				 new_token.save(function(err) {
@@ -83,13 +83,13 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 				  * Kijken of deze nog niet vervallen is
 				  */
 				  //Seconden in een week = 604800
-				  if((Date.Now - tok.made) > 604800) {
+				  if((Date.now() - tok.made.getTime()) > 604800) {
 					  tok.remove(function(err) {
 						  //token vervallen. Nieuwe token maken
 						  var tmp = generateToken(10);
 						  var new_token = new model.Token({
 							  token: tmp,
-							  made: Date.Now,
+							  made: Date.now(),
 							  gebruiker: user._id
 						  });
 						  
