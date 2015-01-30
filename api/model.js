@@ -74,7 +74,14 @@ var trackSchema = new Schema({
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
 
+var tokenSchema = new Schema({
+	token: String,
+	made: Date,
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'gebruiker'}
+}, {collections: 'tokens'});
+
 exports.Track = mongoose.model('Track', trackSchema);
 exports.Project = mongoose.model('Project', projectSchema);
 exports.Klant = mongoose.model('Klant', klantSchema);
 exports.Gebruiker = mongoose.model('Gebruiker', userSchema);
+exports.Token = mongoose.model('Token', tokenSchema);

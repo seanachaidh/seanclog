@@ -24,17 +24,14 @@ function generateToken(length) {
  * Ik moet nog eens stap voor stap bekijken wat deze code allemaal betekent
  */
 passport.use(new BearerStrategy({}, function(token, done) {
-	/*
-	 * Voorlopig zijn de userid's onze tokens
-	 */
-	model.Gebruiker.findOne({token: token}, function(err, docs) {
+	model.Token.findOne({token: token}, function(err, t) {
 		if(err) {
 			return done(err);
 		}
-		if(!docs) {
+		if(!t) {
 			return done(null, false);
 		}
-		return done(null, docs, {scope: 'all'});
+		return done(null, t, {scope: 'all'});
 	});
 }));
 
@@ -48,8 +45,15 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
+/*
+ * De gebruiker ophalen
+ * Kijken of er nog een token aanwezig is
+ * Een nieuwe token maken indien dit niet het geval is
+ * Deze token terugsturen
+ */
 passport.use(new LocalStrategy(function authUser(username, password, done) {
 	var pass = crypto.createHash('md5').update(password).digest('hex');
+	
 	model.Gebruiker.findOne({gebruikersnaam: username, wachtwoord: pass}, function(err, user) {
 		if(err) {
 			return done(err);
@@ -58,8 +62,48 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 			done(null, false, {message: 'Gebruiker niet gesvonden'});
 		}
 		
-		//Comment est-ce que je peux evoyer une reponse?
-		return done(null, user);
+		model.Token.findOne({gebruiker: user._id}, function(err, tok) {
+			if(!tok) {
+				/*
+				 * Geen token gevonden. Nieuwe token maken.
+				 */
+				 var tmp = generateToken(10);
+				 var new_token = new model.Token({
+					 token: tmp,
+					 made: Date.Now,
+					 gebruiker: user._id
+				 });
+				 new_token.save(function(err) {
+					 return done(null, new_token);
+				 });
+				 
+			 } else {
+				 /*
+				  * Token gevonden.
+				  * Kijken of deze nog niet vervallen is
+				  */
+				  //Seconden in een week = 604800
+				  if((Date.Now - tok.made) > 604800) {
+					  tok.remove(function(err) {
+						  //token vervallen. Nieuwe token maken
+						  var tmp = generateToken(10);
+						  var new_token = new model.Token({
+							  token: tmp,
+							  made: Date.Now,
+							  gebruiker: user._id
+						  });
+						  
+						  new_token.save(function(err) {
+							  return done(null, new_token);
+						  });
+					  });
+				  } else {
+					  //Alles in orde
+					  return done(null, tok);
+				  }
+			  }
+		});
+		//return done(null, user);
 	});
 }));
 
