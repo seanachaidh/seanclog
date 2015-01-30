@@ -147,7 +147,7 @@ Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakk
 \subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
 Hier bespreken wij de RESTAPI
 Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
-ervoor dat we makkelijk meerdere clients kunnen maken die ook op op desktops
+ervoor dat we makkelijk meerdere clents kunnen maken die ook op op desktops
 werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
 eindeloos.
 
@@ -169,6 +169,9 @@ Een RESTApi bestaat uit de volgende componenten.
   \item [Put] Verander data
   \item [Post] Bewaar data
 \end{description}
+
+\subsubsection{Beveiliging}
+Het hebben van een goede appllicatie betekent niet alleen dat de applicatie er goed uit moet zien. Klanten vertrouwen ons hun gegevens toe. Daarom moeten we erop toezien dat de applicatie goed beveiligd is. Dit hoop ik te bereiken door het gebruik van token based authenticatie. Wanneer een gebruiker zich aanmeldt zouden we alle gebruikers kunnen opsturen. Inclusief het wachtwoord. Wanneer de gebruiker dan data wilt opvragen zou deze terug zijn wachtwoord kunnen opsturen om zijn aanvraag te doen gelden. Dit gaan we echter niet doen. In plaats daarvan gaan we iedere gebruiker een token geven. De bedoeling is dat deze token opgestuurd zal worden in plaats van het wachtwoord. De tokens worden opgeslagen in een aparte collectie tezamen met de een veld waarin de datum staat wanneer de token is gemaakt. Telkens wanneer er een aanvraag afgehandeld wordt, wordt de token meegegeven via de query parameters. Dit wil zeggen de GET paramters. Hierna wordt er naar deze token gezocht. Als deze token bestaat, wordt er gekeken naar de leeftijd van de token. Mocht deze ouder zijn dan zeven dagen wordt er een foutboodschap teruggestuurd. Is dit niet het geval, dan is de aanvraag geautoriseerd en ontvangt de gebruiker zijn gevraagde gegevens. Mocht de token helemaal niet bestaan wordt er tevens een foutboodschap teruggestuurd. Telkens wanneer de token niet bestaat of deze vervallen is dient te gebruiker een nieuwe te genereren door zich opnieuw aan te melden.
 
 \subsection{AngularJS}
 Voor dit project gaan we gebruik maken van AngularJS. Dit is een javasript framework bedoeld voor het vergemakkelijken van een Model View Controller webapplicatie. In tegenstelling tot vele andere model-view-controller frameworks voor webapplicaties, is AngularJS volledig geschreven in JavaScript. Dit heeft tot gevolg dat de applicatie volledig client-side kan werken. Dit heeft dan weer het voordeel dat de applicatie veel sneller zal draaien omdat er minder requests nodig zijn naar de server. Het Angular framework is volledig modulair opgebouwd. Een Angular applicatie bestaat typisch uit enkele modules. Deze modules kunnen verspreid zijn over meerdere bestanden. Wanneer men een applicatie opstart moet men meegeven welke moduels de applicatie precies gebruikt. Dit gebeurd als volgt.
