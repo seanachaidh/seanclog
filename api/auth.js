@@ -83,7 +83,7 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 				  * Kijken of deze nog niet vervallen is
 				  */
 				  //Seconden in een week = 604800
-				  if((Date.now() - tok.made.getTime()) > 604800) {
+				  if((Date.now() - tok.made.getTime()) > 604800000) {
 					  tok.remove(function(err) {
 						  //token vervallen. Nieuwe token maken
 						  var tmp = generateToken(10);
