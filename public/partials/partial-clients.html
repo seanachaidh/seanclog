@@ -14,9 +14,13 @@
 		<tr ng-repeat="x in data">
 			<td>{{x.naam}}</td>
 			<td>{{x.telefoonnummer}}</td>
-			<td>{{x.email}}</td>
-			<td><button class="btn btn-default" ng-click="deleteClient(x._id)">Remove</button></td>
+			<td><div contenteditable>{{x.email}}</div></td>
+			<td>
+				<button class="btn btn-default" ng-click="deleteClient(x._id)">Remove</button>
+				<button class="btn btn-default" ng-click="showEditClient(x)">Edit</button>
+			</td>
 		</tr>
 	</table>
 	<div ng-include="'/partials/forms/form_createclient.html'"></div>
+	<div ng-include="'/partials/forms/form_editclient.html'"></div>
 </div>

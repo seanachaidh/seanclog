@@ -10,8 +10,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.getProjectsOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.Gebruiker.findOne({token: token}, function(err, doc) {
-		var id = doc._id;
+	model.Token.findOne({token: token}, function(err, doc) {
+		var id = doc.gebruiker;
 		
 		model.Project.find({gebruiker: id}, function(err, project){
 			res.json(project);

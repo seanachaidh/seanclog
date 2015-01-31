@@ -35,6 +35,21 @@ function($scope, $route, $cookies, $window, Projects){
 		
 		$route.reload();
 	};
+	
+	$scope.showEditProject = function(project) {
+		var titelInput = angular.element('#titelInput');
+		var prijsInput = angular.element('#prijsInput');
+		
+		titelInput.val(project.titel);
+		prijsInput.val(project.prijs);
+		
+		angular.element('#editModal').modal('show');
+	};
+	
+	$scope.editProject = function(project) {
+		//hier gaan we een project bijwerken.
+	};
+	
 }]);
 
 seanControllers.controller('TracksController',
@@ -78,6 +93,14 @@ seanControllers.controller('TracksController',
 		$scope.endOpened = true;
 	};
 	
+	$scope.editTrack = function(track) {
+		//hier gaan we een track bijwerken
+	};
+	
+	$scope.showEditTrack = function(track) {
+		//hier tonen we de dialoog om een track bij te werken
+	};
+	
 }]);
 
 seanControllers.controller('KlantenController', ['$scope', '$route', '$cookies', '$window', 'Klanten',
@@ -102,8 +125,26 @@ function($scope, $route, $cookies, $window, Klanten){
 			}
 		});
 		
+
+		
 		console.log(client);
 		$route.reload();
+	};
+	
+	$scope.showEditClient = function(client) {
+		 //~ $window.alert("nog niet geïmplementeerd");
+		 console.log('editclient functie');
+		 
+		 $scope.chosenName = client.naam;
+		 $scope.chosenEmail = client.email;
+		 $scope.chosenTel = client.telefoonnummer;
+		 
+		 angular.element('#createModal').modal('show');
+	 
+	};
+	
+	$scope.editClient = function(client) {
+		//hier werken we een klant bij
 	};
 	
 }]);

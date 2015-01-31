@@ -4,8 +4,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.getTracksOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.Gebruiker.findOne({token: token}, function(err, doc) {
-		var id = doc._id
+	model.token.findOne({token: token}, function(err, doc) {
+		var id = doc._gebruiker;
 		
 		console.log(doc);
 		console.log(id);
@@ -68,6 +68,7 @@ exports.saveTrack = function(req, res) {
 	
 }
 
+//TODO: Deze track moet nog herschreven worden
 exports.getTrack = function(req, res){
 	if(req.user){
 		var tofind = req.params.clientid;

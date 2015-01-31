@@ -17,8 +17,12 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
 			<td>{{x.prijs}}</td>
-			<td><button class="btn btn-default" ng-click="deleteProject(x._id)">Remove</button></td>
+			<td>
+				<button class="btn btn-default" ng-click="deleteProject(x._id)">Remove</button>
+				<button class="btn btn-default" ng-click="showEditProject(x)">Edit</button>
+			</td>
 		</tr>
 	</table>
 	<div ng-include="'/partials/forms/form_createproject.html'"></div>
+	<div ng-include="'/partials/forms/form_editproject.html'"></div>
 </div>

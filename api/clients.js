@@ -4,8 +4,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.getClientsOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.Gebruiker.findOne({token: token}, function(err, doc){
-		var id = doc._id;
+	model.Token.findOne({token: token}, function(err, doc){
+		var id = doc.gebruiker;
 		
 		model.Klant.find({gebruiker: id}, function(err, klant){
 			res.json(klant);
@@ -40,7 +40,7 @@ exports.saveClient = function(req, res) {
 		new_telefoonnummer = req.body.telefoonnummer,
 		new_email = req.body.email;
 		
-	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
+	model.Token.findOne({token: curtoken}, function(err, g) {
 		if(err) {
 			console.log('klanten: De gebruiker werd niet gevonden');
 			res.json({value: false});
@@ -49,7 +49,7 @@ exports.saveClient = function(req, res) {
 				naam: new_naam,
 				telefoonnummer: new_telefoonnummer,
 				email: new_email,
-				gebruiker: g._id
+				gebruiker: g.gebruiker
 			});
 			new_client.save(function(err) {
 				if(err) {
