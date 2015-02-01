@@ -11,12 +11,12 @@
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
-			<td>{{x.begintijd}}</td>
-			<td>{{x.eindtijd}}</td>
+			<td>{{x.begintijd|humandate}}</td>
+			<td>{{x.eindtijd|humandate}}</td>
 			<td>
 				<button class="btn btn-default" ng-click="deleteTrack(x)">Remove</button>
 				<!-- Ik zet dit in een functie zodat ik de invoervelden kan aanpassen -->
-				<button class="btn btn-default" ng-click="showEditTrack(x)">Edit</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditTrack(x)">Edit</button>
 			</td>
 		</tr>
 	</table>

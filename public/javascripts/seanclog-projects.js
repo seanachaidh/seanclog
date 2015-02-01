@@ -51,13 +51,7 @@ function($scope, $route, $cookies, $window, Projects){
 	};
 	
 	$scope.showEditProject = function(project) {
-		var titelInput = angular.element('#titelInput');
-		var prijsInput = angular.element('#prijsInput');
-		
-		titelInput.val(project.titel);
-		prijsInput.val(project.prijs);
-		
-		angular.element('#editModal').modal('show');
+		$scope.toedit = project;
 	};
 	
 	$scope.editProject = function(project) {

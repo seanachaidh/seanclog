@@ -4,8 +4,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.getTracksOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.token.findOne({token: token}, function(err, doc) {
-		var id = doc._gebruiker;
+	model.Token.findOne({token: token}, function(err, doc) {
+		var id = doc.gebruiker;
 		
 		console.log(doc);
 		console.log(id);
@@ -15,6 +15,31 @@ exports.getTracksOfUser = function(req, res) {
 		
 	});
 	
+};
+
+exports.updateTrack = function(req, res) {
+	var id = req.params.id;
+	
+	model.Track.findById(id, function(err, track) {
+		var new_begin = req.body.begintijd;
+		var new_end = req.body.eindtijd;
+		var new_titel = req.body.titel;
+		//Is dit een objectid of een string?
+		var new_project = req.body.project;
+		
+		track.titel = new_titel;
+		track.begintijd = new_begin
+		track.eindtijd = new_end;
+		//hier gaan we ervan uit dat het een objectid is
+		track.project = new_project;
+		
+		track.save(function(err) {
+			if(err)
+				res.json({value: false});
+			else
+				res.json({value: true});
+		});
+	});
 };
 
 exports.pdfTrack = function(req, res) {
@@ -39,34 +64,31 @@ exports.deleteTrack = function(req, res) {
 		}
 	});
 }
-
-/*
- * TODO: Deze functie moet nog herschreven worden
- */
 exports.saveTrack = function(req, res) {
-	//sauvegarde un track
-	var new_titel = req.body.titel,
-		new_begintijd = req.body.begintijd,
-		new_eindtijd = req.body.eindtijd,
-		new_project = req.body.project._id,
-		new_gebruiker = req.user._id;
-	//j' ai seulement besoin de l' Id du project et de l'utilisateur
-	
-	var new_track = new model.Track({
-		titel: new_titel,
-		begintijd: new_begintijd,
-		eindtijd: new_eindtijd,
-		project: new ObjectId(new_project._id),
-		gebruiker: new ObjectId(req.user._id)
-	});
-	
-	new_track.save(function(err){
-		if (err) {
-			console.log('Er was een fout bij het bewaren van een track');
+	var token = req.query.access_token;
+	model.Token.findOne({token: token}, function(err, tok) {
+		if(err || (tok == null)) {
+			console.log('token is niet geldig');
+			res.json({value: false });
 		}
-	});
-	
-}
+		
+		var new_track = new model.Track({
+			titel: req.body.titel,
+			begintijd: req.body.begintijd,
+			eindtijd: req.body.eindtijd,
+			project: req.body.project._id,
+			gebruiker: tok.gebruiker
+		});
+		
+		new_track.save(function(err) {
+			if(err) {
+				res.json({value: false});
+			} else {
+				res.json({value: true});
+			}
+		});
+	});	
+};
 
 //TODO: Deze track moet nog herschreven worden
 exports.getTrack = function(req, res){

@@ -44,15 +44,7 @@ function($scope, $route, $cookies, $window, Klanten){
 	};
 	
 	$scope.showEditClient = function(client) {
-		 //~ $window.alert("nog niet geïmplementeerd");
-		 console.log('editclient functie');
-		 
-		 $scope.chosenName = client.naam;
-		 $scope.chosenEmail = client.email;
-		 $scope.chosenTel = client.telefoonnummer;
-		 
-		 angular.element('#createModal').modal('show');
-	 
+		$scope.toedit = client;
 	};
 	
 	$scope.editClient = function(client) {

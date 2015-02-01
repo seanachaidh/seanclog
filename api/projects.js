@@ -19,6 +19,23 @@ exports.getProjectsOfUser = function(req, res) {
 	});
 };
 
+exports.updateProject = function(req, res) {
+	var id = req.param.id;
+	
+	model.Project.findById(id, function(err, proj) {
+		proj.titel = req.body.titel;
+		proj.prijs = req.body.prijs;
+		
+		proj.save(function(err) {
+			if(err) {
+				res.json({value: false});
+			} else {
+				res.json({value: true});
+			}
+		});
+	});
+};
+
 exports.pdfProject = function(req, res) {
 	var retval = {
 		names: ["titel", "prijs", "gebruiker"]
@@ -58,15 +75,15 @@ exports.saveProject = function(req, res) {
 	
 	console.log("begin van de saveproject functie");
 	
-	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
-		if(err) {
-			console.log('projecten: De gebruiker werd niet gevonden');
+	model.Token.findOne({token: curtoken}, function(err, tok) {
+		if(err || (tok == null)) {
+			console.log('projecten: De token werd niet gevonden');
 			res.json({value: false});
 		} else {
 			new_project = new model.Project({
 				titel: new_titel,
 				prijs: new_prijs,
-				gebruiker: g._id
+				gebruiker: tok.gebruiker
 			});
 			new_project.save(function(err) {
 				if(err) {

@@ -17,6 +17,25 @@ exports.pdfClient = function(req, res) {
 	res.send('Een pdf van een kant');
 };
 
+exports.updateClient = function(req, res) {
+	var id = req.param.id;
+	
+	model.Klant.findById(id, function(err, klant) {
+		klant.naam = req.body.naam;
+		klant.telefoonnummer = req.body.telefoonnummer;
+		klant.email = req.body.email;
+		klant.gebruiker = req.body.gebruiker;
+		
+		klant.save(function(err) {
+			if(err) {
+				res.json({value: false});
+			} else {
+				res.json({value: true});
+			}
+		});
+	});
+};
+
 /**
  * Dit verwijdert een klant op het identificatienummer
  * Geeft true terug als het gelukt is en false als het mislukt is

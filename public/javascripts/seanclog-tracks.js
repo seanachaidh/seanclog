@@ -19,8 +19,8 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 } ]);
 
 seanclogtracks.controller('TracksController',
-		['$scope', '$cookies', '$window', 'Tracks', 'Projects',
-	function($scope, $cookies, $window, Tracks, Projects){
+		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects',
+	function($scope, $cookies, $window, $route, Tracks, Projects){
 	$scope.createTrack = function(track){
 		Tracks.post({access_token: $cookies.token}, angular.copy(track));
 		angular.element('#createModal').modal('hide');
@@ -64,7 +64,18 @@ seanclogtracks.controller('TracksController',
 	};
 	
 	$scope.showEditTrack = function(track) {
-		//hier tonen we de dialoog om een track bij te werken
+		$scope.toedit = track;
 	};
 	
 }]);
+
+seanclogtracks.filter('humandate', function() {
+	var retval = function(mydate) {
+		var tmpdate = new Date(mydate);
+		var finalstring = tmpdate.toLocaleString();
+		
+		return finalstring;
+	};
+	return retval;
+});
+
