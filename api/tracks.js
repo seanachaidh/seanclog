@@ -31,7 +31,7 @@ exports.updateTrack = function(req, res) {
 		track.begintijd = new_begin
 		track.eindtijd = new_end;
 		//hier gaan we ervan uit dat het een objectid is
-		track.project = new_project;
+		track.project = new_project._id;
 		
 		track.save(function(err) {
 			if(err){

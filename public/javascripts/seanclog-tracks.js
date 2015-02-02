@@ -13,6 +13,10 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 		'remove': {
 			method: 'DELETE',
 			params: {}
+		},
+		'update': {
+			method: 'PUT',
+			params: {}
 		}
 	});
 	return fact;
@@ -63,7 +67,15 @@ seanclogtracks.controller('TracksController',
 	};
 	
 	$scope.editTrack = function(track) {
-		//hier gaan we een track bijwerken
+		Tracks.update({id: track._id, access_token: $cookies.token}, track, function(retval) {
+			if(retval.value == false) {
+				console.log('Tracks: Bijwerken van track niet gelukt');
+			} else {
+				console.log('Tracks: Bijwerken van track gelukt');
+			}
+			
+			$route.reload();
+		});
 	};
 	
 	$scope.showEditTrack = function(track) {
