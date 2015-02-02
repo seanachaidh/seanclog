@@ -13,6 +13,10 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 		'remove': {
 			method: 'DELETE',
 			params: {}
+		},
+		'update': {
+			method: 'PUT',
+			params: {}
 		}
 	});
 	return fact;
@@ -55,7 +59,14 @@ function($scope, $route, $cookies, $window, Projects){
 	};
 	
 	$scope.editProject = function(project) {
-		//hier gaan we een project bijwerken.
+		Projects.update({id: project._id, access_token: $cookies.token}, project, function(data) {
+			if(data.value == false) {
+				console.log('updaten project niet gelukt');
+			} else {
+				console.log('updaten project gelukt');
+			}
+		});
+		
 	};
 	
 }]);

@@ -74,8 +74,8 @@ app.del('/api/clients/:id', passport.authenticate('bearer', {session: false}), c
  * Het record dat moet worden bijgewerkt wort bepaald door de gegeven id
  */
 app.put('/api/tracks/:id', passport.authenticate('bearer', {session: false}), clogapi.tracks.updateTrack);
-app.put('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.tracks.updateProject);
-app.put('/api/clients/:id', passport.authenticate('bearer', {session: false}), clogapi.tracks.updateClient);
+app.put('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.projects.updateProject);
+app.put('/api/clients/:id', passport.authenticate('bearer', {session: false}), clogapi.clients.updateClient);
 
 
 app.post('/api/posttest', clogapi.tests.posttest);

@@ -1,7 +1,7 @@
 var seanclogtracks = angular.module('SeanclogTracks', ['ngRoute', 'ngCookies', 'SeanclogProjects', 'ngResource']);
 
 seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
-	var fact = $resource('/api/tracks', {}, {
+	var fact = $resource('/api/tracks/:id', {}, {
 		'query' : {
 			method : 'GET',
 			isArray : true
@@ -21,18 +21,7 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 seanclogtracks.controller('TracksController',
 		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects',
 	function($scope, $cookies, $window, $route, Tracks, Projects){
-	$scope.createTrack = function(track){
-		Tracks.post({access_token: $cookies.token}, angular.copy(track));
-		angular.element('#createModal').modal('hide');
-		
-		$route.reload();
-	};
 
-	$scope.deleteTrack = function(track) {
-		$window.alert("nog niet gemaakt");
-		console.log("Track verwijderen");
-		console.log(track);
-	};
 
 	Tracks.query({access_token: $cookies.token}, function(t){
 		$scope.data = t;
@@ -44,6 +33,21 @@ seanclogtracks.controller('TracksController',
 	Projects.query({access_token: $cookies.token}, function(proj){
 		$scope.projects = proj;
 	});
+	
+	$scope.createTrack = function(track){
+		Tracks.post({access_token: $cookies.token}, angular.copy(track));
+		angular.element('#createModal').modal('hide');
+		
+		$route.reload();
+	};
+
+	$scope.deleteTrack = function(track) {
+		console.log('Verwijderen Track');
+		console.log(track);
+		
+		Tracks.remove({id: track._id, access_token: $cookies.token}, track);
+		$route.reload();
+	};
 	
 	$scope.openBegin = function($event) {
 		$event.preventDefault();

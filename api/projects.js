@@ -20,7 +20,7 @@ exports.getProjectsOfUser = function(req, res) {
 };
 
 exports.updateProject = function(req, res) {
-	var id = req.param.id;
+	var id = req.params.id;
 	
 	model.Project.findById(id, function(err, proj) {
 		proj.titel = req.body.titel;
@@ -29,9 +29,9 @@ exports.updateProject = function(req, res) {
 		proj.save(function(err) {
 			if(err) {
 				res.json({value: false});
-			} else {
-				res.json({value: true});
 			}
+			
+			res.json({value: true});
 		});
 	});
 };
