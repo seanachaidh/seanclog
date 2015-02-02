@@ -13,6 +13,10 @@ seanclogclient.factory('Klanten', [ '$resource', function($resource) {
 		'remove': {
 			method: 'DELETE',
 			params: {}
+		},
+		'update': {
+			method: 'PUT',
+			params: {}
 		}
 	});
 	return fact;
@@ -47,7 +51,13 @@ function($scope, $route, $cookies, $window, Klanten){
 	};
 	
 	$scope.editClient = function(client) {
-		//hier werken we een klant bij
+		Klanten.update({id: client._id, access_token: $cookies.token}, client, function(retval) {
+			if(retval.value == false) {
+				console.log('Klanten: het bijwerken is niet gelukt');
+			} else {
+				console.log('Klanten: Het bijwerken is gelukt');
+			}
+		});
 	};
 	
 }]);

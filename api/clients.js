@@ -18,7 +18,7 @@ exports.pdfClient = function(req, res) {
 };
 
 exports.updateClient = function(req, res) {
-	var id = req.param.id;
+	var id = req.params.id;
 	
 	model.Klant.findById(id, function(err, klant) {
 		klant.naam = req.body.naam;
@@ -29,9 +29,8 @@ exports.updateClient = function(req, res) {
 		klant.save(function(err) {
 			if(err) {
 				res.json({value: false});
-			} else {
-				res.json({value: true});
 			}
+			res.json({value: true});
 		});
 	});
 };
