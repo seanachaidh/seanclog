@@ -52,7 +52,7 @@ exports.pdfTrack = function(req, res) {
  * Vals als de verwijdering niet gelukt is
  */
 exports.deleteTrack = function(req, res) {
-	var id = req.body.track._id;
+	var id = req.params.id;
 	
 	model.Track.remove({_id: id}, function(err) {
 		if(err) {
