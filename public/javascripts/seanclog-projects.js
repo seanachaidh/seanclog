@@ -33,7 +33,6 @@ function($scope, $route, $cookies, $window, Projects){
 		//Est-ce que ce function est necessaire?
 		var tmp = angular.copy(proj);
 		Projects.post({access_token: $cookies.token}, proj);
-		angular.element("#createModal").modal("hide");
 		
 		//Recharge la page
 		//je n'ai pas déjà testé cette function.

@@ -36,7 +36,6 @@ seanclogtracks.controller('TracksController',
 	
 	$scope.createTrack = function(track){
 		Tracks.post({access_token: $cookies.token}, angular.copy(track));
-		angular.element('#createModal').modal('hide');
 		
 		$route.reload();
 	};

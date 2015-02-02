@@ -59,7 +59,7 @@ function($scope, $cookies, Login, $location, User){
 	$scope.createUser = function(user) {
 		User.createUser(user, function(retval) {
 			if(retval.value == true) {
-				angular.element("#createModal").modal('hide');
+				console.log('maken van gebruiker gelukt');
 			}
 			//wat moet ik doen wanneer het maken van een gebruiker faalt?
 		});
