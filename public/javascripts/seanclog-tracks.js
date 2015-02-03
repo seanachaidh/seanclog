@@ -27,7 +27,7 @@ seanclogtracks.controller('TracksController',
 	function($scope, $cookies, $window, $route, Tracks, Projects){
 
 
-	Tracks.query({access_token: $cookies.token}, function(t){
+	Tracks.query({access_token: $cookies.token, include_projects: true}, function(t){
 		$scope.data = t;
 	});
 	/*

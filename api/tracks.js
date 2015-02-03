@@ -3,18 +3,16 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getTracksOfUser = function(req, res) {
 	var token = req.param('access_token');
-	
-	model.Token.findOne({token: token}, function(err, doc) {
-		var id = doc.gebruiker;
+	//Deze variable wordt voorlopig nog niet weet hoe ik dit kan afdwingen
+	var includeprojects = req.param('include_projects');
+	model.Token.findOne({token: token}, function(err, tok) {
+		var q = model.Track.find({gebruiker: tok.gebruiker});
+		q.populate('project');
 		
-		console.log(doc);
-		console.log(id);
-		model.Track.find({gebruiker: id}, function(err, tr) {
-			res.json(tr);
+		q.exec(function(err, proj) {
+			res.json(proj);
 		});
-		
 	});
-	
 };
 
 exports.updateTrack = function(req, res) {

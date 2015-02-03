@@ -23,8 +23,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=283;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-projects.js;0;4
+current_page=3
+FILE_NAME_0=2029;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-tracks.js;0;4
+FILE_NAME_1=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-tracks.html;0;4
+FILE_NAME_2=1764;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fforms%2Fform_edittrack.html;0;4
+FILE_NAME_3=2001;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Ftracks.js;0;4
+FILE_NAME_4=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fmodel.js;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog
