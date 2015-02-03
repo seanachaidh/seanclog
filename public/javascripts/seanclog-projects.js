@@ -1,4 +1,4 @@
-var seanclogproj = angular.module('SeanclogProjects', ['ngRoute', 'ngCookies', 'ngResource']);
+var seanclogproj = angular.module('SeanclogProjects', ['ngRoute', 'ngCookies', 'ngResource', 'SeanclogClients']);
 
 seanclogproj.factory('Projects', [ '$resource', function($resource) {
 	var fact = $resource('/api/projects/:id', {}, {
@@ -22,11 +22,15 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 	return fact;
 } ]);
 
-seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects',
-function($scope, $route, $cookies, $window, Projects){
+seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects', 'Klanten',
+function($scope, $route, $cookies, $window, Projects, Klanten){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	Projects.query({access_token: $cookies.token},function(proj){
 		$scope.data = proj
+	});
+	
+	Klanten.query({access_token: $cookies.token}, function(c) {
+		$scope.clients = c;
 	});
 	
 	$scope.createProj = function(proj) {

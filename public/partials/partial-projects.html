@@ -11,12 +11,14 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 		<tr>
 			<th>Title</th>
 			<th>Price</th>
+			<th>Klant</th>
 			<th>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
 			<td>{{x.prijs}}</td>
+			<td>{{x.klant.naam}}</td>
 			<td>
 				<button class="btn btn-default" ng-click="deleteProject(x._id)">Remove</button>
 				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditProject(x)">Edit</button>

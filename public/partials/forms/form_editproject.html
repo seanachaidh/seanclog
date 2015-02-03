@@ -18,6 +18,8 @@
 						 hier alleenmaar een prijs kan invoeren?
 					 -->
 					<input id="prijsInput" type="text" class="form-control" ng-model="toedit.prijs" placeholder="Prijs">
+					<label>Klant</label>
+					<select class="form-control" ng-model="toedit.klant" ng-options="c as c.naam for c in clients"></select>
 				</form>
 			</div>
 			<div class="modal-footer">

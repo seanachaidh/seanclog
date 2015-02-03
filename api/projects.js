@@ -13,8 +13,11 @@ exports.getProjectsOfUser = function(req, res) {
 	model.Token.findOne({token: token}, function(err, doc) {
 		var id = doc.gebruiker;
 		
-		model.Project.find({gebruiker: id}, function(err, project){
-			res.json(project);
+		var q = model.Project.find({gebruiker: id});
+		q.populate('klant');
+		
+		q.exec(function(err, projects) {
+			res.json(projects);
 		});
 	});
 };
@@ -25,6 +28,7 @@ exports.updateProject = function(req, res) {
 	model.Project.findById(id, function(err, proj) {
 		proj.titel = req.body.titel;
 		proj.prijs = req.body.prijs;
+		proj.klant = req.body.klant._id;
 		
 		proj.save(function(err) {
 			if(err) {
@@ -71,7 +75,8 @@ exports.deleteProject = function(req, res) {
 exports.saveProject = function(req, res) {
 	var curtoken = req.query.access_token;
 		new_titel = req.body.titel,
-		new_prijs = req.body.prijs;
+		new_prijs = req.body.prijs,
+		new_klant = req.body.klant;
 	
 	console.log("begin van de saveproject functie");
 	
@@ -83,6 +88,7 @@ exports.saveProject = function(req, res) {
 			new_project = new model.Project({
 				titel: new_titel,
 				prijs: new_prijs,
+				klant: new_klant._id,
 				gebruiker: tok.gebruiker
 			});
 			new_project.save(function(err) {
