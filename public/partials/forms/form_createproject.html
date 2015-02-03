@@ -12,12 +12,12 @@
 				<!-- Waarom is de novalidate nodig? -->
 				<form novalidate role="form">
 					<label>Titel</label> 
-					<input id="titelInput" type="text" class="form-control" ng-model="proj.titel" placeholder="Titel"/>
+					<input id="titelInput" type="text" class="form-control" ng-model="proj.titel" placeholder="Titel" required/>
 					<label>Prijs</label>
 					<!-- Zou ik ervoor kunnen zorgen dat de gebruiker
 						 hier alleenmaar een prijs kan invoeren?
 					 -->
-					<input id="prijsInput" type="text" class="form-control" ng-model="proj.prijs" placeholder="Prijs">
+					<input id="prijsInput" pattern="\d+\.\d{2}" type="text" class="form-control" ng-model="proj.prijs" placeholder="Prijs" required>
 					<label>Klant</label>
 					<select class="form-control" ng-model="proj.klant" ng-options="c as c.naam for c in clients"></select>
 				</form>

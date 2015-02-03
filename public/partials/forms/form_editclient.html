@@ -9,9 +9,9 @@
 			<div class="modal-body">
 				<form novalidate role="form">
 					<label>Naam</label>
-					<input id="naamInput" type="text" class="form-control" ng-model="toedit.naam" placeholder="Naam" value="{{chosenName}}" />
+					<input id="naamInput" type="text" class="form-control" ng-model="toedit.naam" placeholder="Naam" value="{{chosenName}}" required />
 					<label>Telefoonnummer</label>
-					<input id="telInput" type="text" class="form-control" ng-model="toedit.telefoonnummer" placeholder="Tel." value="{{chosenTel}}" />
+					<input id="telInput" pattern="[0-9]+" type="text" class="form-control" ng-model="toedit.telefoonnummer" placeholder="Tel." value="{{chosenTel}}" required />
 					<label>Email</label>
 					<input id="emailInput" type="email" class="form-control" ng-model="toedit.email" placeholder="Email" value="{{chosenEmail}}"/>
 				</form>

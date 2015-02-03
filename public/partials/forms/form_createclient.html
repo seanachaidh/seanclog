@@ -9,11 +9,11 @@
 			<div class="modal-body">
 				<form novalidate role="form">
 					<label>Naam</label>
-					<input id="naamInput" type="text" class="form-control" ng-model="client.naam" placeholder="Naam" />
+					<input id="naamInput" type="text" class="form-control" ng-model="client.naam" placeholder="Naam" required />
 					<label>Telefoonnummer</label>
-					<input id="telInput" type="text" class="form-control" ng-model="client.telefoonnummer" placeholder="Tel." />
+					<input id="telInput" pattern="[0-9]+" type="text" class="form-control" ng-model="client.telefoonnummer" placeholder="Tel." required />
 					<label>Email</label>
-					<input id="emailInput" type="email" class="form-control" ng-model="client.email" placeholder="Email" />
+					<input id="emailInput" type="email" class="form-control" ng-model="client.email" placeholder="Email" required />
 				</form>
 			</div>
 			<div class="modal-footer">

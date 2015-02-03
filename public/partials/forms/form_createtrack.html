@@ -8,12 +8,12 @@
 			<div class="modal-body">
 				<form novalidate role="form">
 					<label>Titel</label>
-					<input class="form-control" type="text" ng-model="track.titel" placeholder="titel" />
+					<input class="form-control" type="text" ng-model="track.titel" placeholder="titel" required />
 					<label>Begintijd</label>
 					<div class="input-group">
 						<!-- niet vergeten de datum en de tijd samen te voegen! -->
 						<!-- Ik moet nog nagaan welk ng-model hier correct is -->
-						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.begintijd" is-open="$parent.beginOpened" />
+						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.begintijd" is-open="$parent.beginOpened" required />
 						<span class="input-group-btn">
 							<!-- Hier nog een extra id meegeven aan ng-click om te weten om welke kalender het precies gaat -->
 							<button class="btn btn-default" type="button" ng-click="openBegin($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -22,7 +22,7 @@
 					
 					<label>Eindtijd</label>
 					<div class="input-group">
-						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.eindtijd" is-open="$parent.endOpened" />
+						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.eindtijd" is-open="$parent.endOpened" required />
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
