@@ -243,6 +243,15 @@ Hier voorbeeldcode toevoegen
 
 \subsubsection{Directives}
 
+\subsubsection{Data validatie}
+%Nagaan of de required direcitve wel degelijk iets van angular is
+Men kan er niet altijd op vertrouwen dat de gebruiker de data op de juiste manier invoert. Om er zeker van te zijn dat er valide gegegevens ingegeven worden in de formulieren gaan we de gebruiker hier dus in bijstaan en validatie toepasssen. AngularJS heeft hiervoor enkele systemen ingebouwd. Het is mogelijk om binnen een formulier, velden aan te duiden die noodzakelijk zijn. Stel dat men bijvoorbeeld een klant wilt aanmaken. Dan heeft die klant een naam nodig. We kunnen die als volgt adwingen
+\begin{lstlisting}[language=html]
+<input type="text" ng-model="klant.naam" class="form-control" required />
+\end{lstlisting}
+
+We kunnen ook een bepaald type invoer afdwingen. We kunnen ervoor zorgen dat de gebruiker enkel nummers kan invoeren. Dit doen we door het type-attribuut van text naan number te veranderen.
+
 \section{vormgeving}
 
 %Ik moet hier meer informatie over opzoeken
