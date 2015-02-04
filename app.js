@@ -1,6 +1,11 @@
 //de modules die onze app gebruikt
 var express = require('express');
 var http = require('http');
+
+//voor https
+var https = require('https');
+var fs = require('fs');
+
 var path = require('path');
 var routes = require('./routes');
 var mongodb = require('mongodb');
@@ -108,5 +113,14 @@ app.get('/api/logout', clogapi.auth.performLogout);
 var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
+var httpsOptions = {
+	key: fs.readFileSync('keys/server.key'),
+	cert: fs.readFileSync('keys/server.crt')
+};
+
+var httpsserver = https.createServer(httpsOptions, app).listen(8000, function() {
+	console.log('Express server with https listening on port 8000');
+});
+
 //dit zou normaalgezien een websocketservice moeten maken
 var wss = new ws.Server({server: server});
