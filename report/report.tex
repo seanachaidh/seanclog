@@ -93,7 +93,9 @@ heeft echter een aantal zwakke punten.
 \subsubsection{Nodejs}
 Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.
 
-Dit is echter slecht één van de redenen waarom het een handige tool is voor het gebruik bij server side scripting. Tegenwoordig worden er alsmaar meer webapplicaties gebouwd. De bedrijven die deze webapplicaties bouwen hebben alsmaar meer klanten. Al die klanten moeten tegelijk afgehandeld worden. Computers hebben echter hun limieten. Wanneer een gebruiker een webpagina zou opvragen, betekend dat dat deze gebruiker een html bestand doorgestuurd zal moeten krijgen. Dat HTML bestand dient ingelezen en doorgestuurd te worden. Wanneer het besturingssysteem een bestand inleest betekent dat dat deze een zogezegde lock op dat bestand legt. Enkel het proces dat de leesbewerking heeft aangevraagd, mag het bestand inlezen. Van zodra dit proces gedaan heeft met lezen, wordt deze lock vrijgegeven en is het de beurt aan het volgende proces.
+Dit is echter slecht één van de redenen waarom het een handige tool is voor het gebruik bij server side scripting. Tegenwoordig worden er alsmaar meer webapplicaties gebouwd. De bedrijven die deze webapplicaties bouwen hebben alsmaar meer klanten. Al die klanten moeten tegelijk afgehandeld worden. Computers hebben echter hun limieten. Wanneer een gebruiker een webpagina zou opvragen, betekend dat dat deze gebruiker een html bestand doorgestuurd zal moeten krijgen. Dat HTML bestand dient ingelezen en doorgestuurd te worden. Wanneer het besturingssysteem een bestand inleest betekent dat dat deze een zogezegde lock op dat bestand legt. Enkel het proces dat de leesbewerking heeft aangevraagd, mag het bestand inlezen. Van zodra dit proces gedaan heeft met lezen, wordt deze lock vrijgegeven en is het de beurt aan het volgende proces. Wanneer één van de processen die aanspraak willen maken op het bestand, nadat hij deze aanspraak gekregen heeft, in een lus gaat. Vormt dit een dead-lock. Dit wil zeggen dat alle input en output met betrekking tot dit bestand stilvalt en niemand meer aan het bestand kan. Het hele proces valt stil.
+
+In NodeJS zijn er echter geen locks.
 
 \subsubsection{MongoDB}
 MongoDB is, in tegenstelling tot traditionele SQL databanken, een 
@@ -137,7 +139,7 @@ Een attribuut van een element & column & field
 
 \end{tabular}
 
-Men kan in Mongo, net zoals in SQL, reffereren naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten.
+Men kan in Mongo, net zoals in SQL, reffereren naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig ristricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
 
 \subsubsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object
@@ -251,6 +253,8 @@ Men kan er niet altijd op vertrouwen dat de gebruiker de data op de juiste manie
 \end{lstlisting}
 
 We kunnen ook een bepaald type invoer afdwingen. We kunnen ervoor zorgen dat de gebruiker enkel nummers kan invoeren. Dit doen we door het type-attribuut van text naan number te veranderen.
+
+Wanneer een invoerveld binnen een formulier niet geldig blijkt te zijn, zal Angular dit invoerveld toewijzen aan de klasse "ng-invalid". Als programmeur kan ik dan op deze klasse enkele stijlen toepassen die er bijvoorbeeld voor zorgen dat niet geldige invoervelden rood kleuren. Hetzelfde gebeurd met geldige invoervelden door middel van de "ng-valid" klasse. Verder krijgt een formulier in AngularJS een aantal extra objecten mee. Eén van die objecten is een object genaamd \$error. Dit object bevat informatie over welke invoervelden er op dat moment geldig zijn en welke niet. Stel dat men een invoerveld heeft met de naam "email". Wanneer dit invoerveld de text "blahblah" bevat zal het object "myform.email.\$error.eamil" de waarde true bevatten.
 
 \section{vormgeving}
 
