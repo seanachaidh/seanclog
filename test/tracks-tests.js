@@ -27,7 +27,7 @@ describe('tracksapi', function() {
 		//data verwijderen
 	});
 	
-	it('should return false with false data', function(done) {
+	it('should save', function(done) {
 		request.post('http://localhost:5000/api/tracks')
 		.query({access_token: logintoken})
 		.send({
