@@ -1,6 +1,17 @@
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
+	var validator = require('validator');
+
+function validateTrack(track) {
+	
+	if(validator.isDate(track.begintijd) == false) return false;
+	if(validator.isDate(track.eindtijd) == false) return false;
+	if(validator.isJSON(track.project) == false) return false;
+	
+	return true;
+}
+
 exports.getTracksOfUser = function(req, res) {
 	var token = req.param('access_token');
 	//Deze variable wordt voorlopig nog niet weet hoe ik dit kan afdwingen

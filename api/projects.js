@@ -3,6 +3,13 @@
  */
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
+var validator = require('validator');
+
+function validateProject(project) {
+	
+	if(validator.iisFloat(project.prijs) == false) return false;
+	return true;
+}
 
 /*
  * Krijg alle projecten van de huidig aangemelde gebruiker

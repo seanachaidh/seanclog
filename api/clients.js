@@ -1,5 +1,14 @@
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
+var validator = require('validator');
+
+
+function validateClient(client) {
+	if(validator.isNummeric(client.telefoonnummer) == false) return false;
+	if(validator.isEmail(client.email) == false) return false
+	
+	return true;
+}
 
 exports.getClientsOfUser = function(req, res) {
 	var token = req.param('access_token');
