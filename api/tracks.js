@@ -104,15 +104,18 @@ exports.saveTrack = function(req, res) {
 			gebruiker: tok.gebruiker
 		});
 		
-		if(validateTrack(new_track) == false) {
-			res.json({value: false});
-		}
+		//~ if(validateTrack(new_track) == false) {
+			//~ res.json({value: false});
+		//~ }
 		
-		new_track.save(function(err) {
+		new_track.save(function(err, sav) {
 			if(err) {
 				res.json({value: false});
 			}
-			res.json({value: true});
+			res.json({
+				value: true,
+				savedId: sav.id
+			});
 		});
 	});	
 };

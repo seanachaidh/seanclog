@@ -6,6 +6,7 @@ var app = require('../app');
 describe('tracksapi', function() {
 	var logintoken;
 	var testproject;
+	var shouldBeDeleted = 0;
 	
 	before(function(done) {
 		//inloggen en testdata in de database stoppen
@@ -38,7 +39,19 @@ describe('tracksapi', function() {
 		.end(function(res) {
 			console.log(res.body);
 			expect(res.body.value).to.be(true);
+			shouldBeDeleted = res.body.savedId;
 			done();
 		});
+	});
+	
+	afterEach(function(done) {
+		if(shouldBeDeleted != 0){
+			request.del('http://localhost:5000/api/tracks/' + shouldBeDeleted)
+			.query({access_token: logintoken})
+			.end(function(res) {
+				shouldBeDeleted = 0;
+				done();
+			});
+		}
 	});
 });
