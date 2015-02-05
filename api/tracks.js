@@ -4,10 +4,15 @@ var ObjectId = require('mongoose').Types.ObjectId;
 	var validator = require('validator');
 
 function validateTrack(track) {
-	
-	if(validator.isDate(track.begintijd) == false) return false;
-	if(validator.isDate(track.eindtijd) == false) return false;
-	if(validator.isJSON(track.project) == false) return false;
+	if(validator.isDate(track.begintijd) == false) {
+		return false;
+	}
+	if(validator.isDate(track.eindtijd) == false){
+		return false;
+	}
+	if(validator.isJSON(track.project) == false) {
+		return false;
+	}
 	
 	return true;
 }
@@ -30,7 +35,7 @@ exports.updateTrack = function(req, res) {
 	var id = req.params.id;
 	
 	var valid = validateTrack({
-		begintijd: req.body.begintijd;
+		begintijd: req.body.begintijd,
 		eindtijd: req.body.eindtijd,
 		project: req.body.project
 	});
@@ -106,9 +111,8 @@ exports.saveTrack = function(req, res) {
 		new_track.save(function(err) {
 			if(err) {
 				res.json({value: false});
-			} else {
-				res.json({value: true});
 			}
+			res.json({value: true});
 		});
 	});	
 };

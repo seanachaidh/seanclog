@@ -19,7 +19,9 @@
 		"karma": "*",
 		"karma-jasmine": "*",
 		"nodemailer": "*",
-		"validator": "*"
+		"validator": "*",
+		"superagent": "*",
+		"expect.js": "*"
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/bower/bin/bower install"
