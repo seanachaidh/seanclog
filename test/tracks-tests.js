@@ -1,7 +1,7 @@
 var request = require('superagent');
 var expect = require('expect.js');
-var clogapi = require('../api');
 var app = require('../app');
+var clogapi = require('../api');
 
 describe('tracksapi', function() {
 	var logintoken;
@@ -11,7 +11,7 @@ describe('tracksapi', function() {
 	before(function(done) {
 		//inloggen en testdata in de database stoppen
 		request.post('http://localhost:5000/api/login')
-		.send({username: 'pieter', password:'ragnarok'})
+		.send({username: 'pieter', password:'12345'})
 		.end(function(res) {
 			logintoken = res.body.token;
 			//Ik weet niet zeker of dit wel een geldig project maakt

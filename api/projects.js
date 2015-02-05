@@ -112,13 +112,16 @@ exports.saveProject = function(req, res) {
 				res.json({value: false});
 			} 
 			
-			new_project.save(function(err) {
+			new_project.save(function(err, sav) {
 				if(err) {
 					console.log('project: bewaren mislukt');
 					res.json({value: false});
 				} else {
 					console.log('project: bewaren gelukt');
-					res.json({value: true});
+					res.json({
+						value: true,
+						savedId: sav.id
+					});
 				}
 			});
 		}

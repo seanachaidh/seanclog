@@ -4,7 +4,7 @@ var validator = require('validator');
 
 
 function validateClient(client) {
-	if(validator.isNummeric(client.telefoonnummer) == false) return false;
+	if(validator.isNumeric(client.telefoonnummer) == false) return false;
 	if(validator.isEmail(client.email) == false) return false
 	
 	return true;
@@ -95,13 +95,16 @@ exports.saveClient = function(req, res) {
 				res.json({value: false});
 			}
 			
-			new_client.save(function(err) {
+			new_client.save(function(err, sav) {
 				if(err) {
 					console.log('klanten: de klant kon niet worden bewaard');
 					res.json({value: false});
 				} else {
 					console.log('klanten: De nieuwe klant is met success bewaard');
-					res.json({value: true});
+					res.json({
+						value: true,
+						savedId: sav.id
+					});
 				}
 			});
 		}

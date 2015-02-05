@@ -5,14 +5,17 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 function validateTrack(track) {
 	if(validator.isDate(track.begintijd) == false) {
+		console.log('begintijd:' + track.begintijd);
 		return false;
 	}
 	if(validator.isDate(track.eindtijd) == false){
+		console.log('eindtijd:' + track.eindtijd);
 		return false;
 	}
-	if(validator.isJSON(track.project) == false) {
-		return false;
-	}
+	//Dit geeft altijd onwaar terug. Ook al klopt de waarde van project
+	//~ if(validator.isJSON(track.project) == false) {
+		//~ return false;
+	//~ }
 	
 	return true;
 }
@@ -104,9 +107,9 @@ exports.saveTrack = function(req, res) {
 			gebruiker: tok.gebruiker
 		});
 		
-		//~ if(validateTrack(new_track) == false) {
-			//~ res.json({value: false});
-		//~ }
+		if(validateTrack(new_track) == false) {
+			res.json({value: false});
+		}
 		
 		new_track.save(function(err, sav) {
 			if(err) {
