@@ -7,7 +7,7 @@ var validator = require('validator');
 
 function validateProject(project) {
 	
-	if(validator.iisFloat(project.prijs) == false) return false;
+	if(validator.isFloat(project.prijs) == false) return false;
 	return true;
 }
 
@@ -31,6 +31,15 @@ exports.getProjectsOfUser = function(req, res) {
 
 exports.updateProject = function(req, res) {
 	var id = req.params.id;
+	
+	var valid = validateProject({
+		prijs: req.body.prijs
+	});
+	
+	if(valid == false) {
+		console.log('update project: project is niet geldig');
+		res.json({value: false});
+	}
 	
 	model.Project.findById(id, function(err, proj) {
 		proj.titel = req.body.titel;
@@ -98,6 +107,11 @@ exports.saveProject = function(req, res) {
 				klant: new_klant._id,
 				gebruiker: tok.gebruiker
 			});
+			if(validateProject(new_project) == false) {
+				console.log('save project: project niet geldig');
+				res.json({value: false});
+			} 
+			
 			new_project.save(function(err) {
 				if(err) {
 					console.log('project: bewaren mislukt');

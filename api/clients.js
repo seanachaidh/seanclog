@@ -29,6 +29,16 @@ exports.pdfClient = function(req, res) {
 exports.updateClient = function(req, res) {
 	var id = req.params.id;
 	
+	var valid = validateClient({
+		telefoonnummer: req.body.telefoonnummer,
+		email: req.body.email
+	});
+	
+	if(valid == false) {
+		console.log('update client: de klant is niet geldig');
+		res.json({value: false});
+	}
+	
 	model.Klant.findById(id, function(err, klant) {
 		klant.naam = req.body.naam;
 		klant.telefoonnummer = req.body.telefoonnummer;
@@ -78,6 +88,13 @@ exports.saveClient = function(req, res) {
 				email: new_email,
 				gebruiker: g.gebruiker
 			});
+			
+			var valid = validateClient(new_client);
+			if(valid == false) {
+				console.log('save client: client niet geldig');
+				res.json({value: false});
+			}
+			
 			new_client.save(function(err) {
 				if(err) {
 					console.log('klanten: de klant kon niet worden bewaard');

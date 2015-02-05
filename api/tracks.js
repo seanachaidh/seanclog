@@ -29,6 +29,16 @@ exports.getTracksOfUser = function(req, res) {
 exports.updateTrack = function(req, res) {
 	var id = req.params.id;
 	
+	var valid = validateTrack({
+		begintijd: req.body.begintijd;
+		eindtijd: req.body.eindtijd,
+		project: req.body.project
+	});
+	
+	if(valid == false) {
+		res.json({value: false});
+	}
+	
 	model.Track.findById(id, function(err, track) {
 		var new_begin = req.body.begintijd;
 		var new_end = req.body.eindtijd;
@@ -88,6 +98,10 @@ exports.saveTrack = function(req, res) {
 			project: req.body.project._id,
 			gebruiker: tok.gebruiker
 		});
+		
+		if(validateTrack(new_track) == false) {
+			res.json({value: false});
+		}
 		
 		new_track.save(function(err) {
 			if(err) {
