@@ -27,6 +27,7 @@
 	  "angular-resource": "*",
 	  "angular-translate-loader-url": "*",
 	  "angular-translate-loader-static-files": "*",
+	  "bootstrap": "*",
 	  "angular-bootstrap": "*",
 	  "bootstrap-ui-datetime-picker": "*"
 	  
