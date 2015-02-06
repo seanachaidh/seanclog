@@ -47,7 +47,7 @@ seanclogusers.factory('Token', function() {
 seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'User',
 function($scope, $cookies, Login, $location, User){
 	$scope.dologin = function(user) {
-		Login.getToken({username: user.username, password: user.password}, function(u) {
+		Login.getToken({username: user.username, password: user.password}, function(u, status) {
 			$cookies.token = u.token;
 			/*
 			 * Tracks is onze standaardpagina

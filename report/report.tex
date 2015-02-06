@@ -179,6 +179,9 @@ Het hebben van een goede applicatie betekent niet alleen dat de applicatie er go
 De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplictatie. De applicatie moet erop gebouwd zijn dat deze redelijk veel requests kan ontvangen en vooral, mochten deze requests fout opgesteld zijn, dat de applicatie deze opvangt en afhandelt zonder zelf te crashen. We zouden dit kunnen testen door zelf via de front-end foute data in te voeren, maar dit is onpraktisch. De applicatie is er immers op gebouwd om nooit foute data door te geven. Iedere data die ingevoerd wordt, wordt gevalideerd. Dit wilt echter niet zeggen dat de back-end de data ook goed valideert. In de wereld van JavaScript bestaan er hiervoor vele tools.
 
 \subsection{AngularJS}
+%nog uit te leggen
+%	scopes.
+
 Voor dit project gaan we gebruik maken van AngularJS. Dit is een javascript framework bedoeld voor het vergemakkelijken van een Model View Controller webapplicatie. In tegenstelling tot vele andere model-view-controller frameworks voor webapplicaties, is AngularJS volledig geschreven in JavaScript. Dit heeft tot gevolg dat de applicatie volledig client-side kan werken. Dit heeft dan weer het voordeel dat de applicatie veel sneller zal draaien omdat er minder requests nodig zijn naar de server. Het Angular framework is volledig modulair opgebouwd. Een Angular applicatie bestaat typisch uit enkele modules. Deze modules kunnen verspreid zijn over meerdere bestanden. Wanneer men een applicatie opstart moet men meegeven welke moduels de applicatie precies gebruikt. Dit gebeurd als volgt.
 
 \begin{verbatim}
@@ -264,6 +267,13 @@ Wanneer een invoerveld binnen een formulier niet geldig blijkt te zijn, zal Angu
 %Ik moet hier meer informatie over opzoeken
 \subsection{Bootstrap}
 Zelf ben ik niet zo een goede designer. Daarom heb ik besloten om deze klus uit te besteden aan een voorgekauwde collectie van CSS templates beter bekend als Bootstrap. Boostrap word meestal gebruikt om er zeker van te zijn dat de uiteindelijke website cross-browser zal werken. Op dit moment werkt Bootstrap op zowat alle moderne browsers. Deze templates zijn ook zodanig gemaakt dat de layout zich gemakkelijk aanpast aan verschillende grootten van schermen. Hete ondersteunt verschillende complexe layouts. Men kan er bijvoorbeeld voor zorgen dat de widgets automatisch in rijen staan en de breedte van het browserscherm gelijkmatig verdeeld wordt tussen de widgets.
+
+\subsection{Filtering}
+Wanneer de gebruiker teveel data heeft opgeslagen, kan de het een beetje onoverzichtelijk beginnen worden. Daarom heb ik de front-end voorzien van een handige zoek functie. De gebruiker typt een tekst in en het systeem zoekt op basis hiervan tussen de gegevens van de huidige view.
+
+Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript te gebruiken. Angular zelf heeft hier ook een zogenaamde "filter" ingebouwd, maar die was ontoereikend. Deze filter werkt door gebruik te maken van een variabele in de scope als predicaat. Onze applicatie is zodanig gebouwd dat er voor iedere view dezelfde knop en invoerveld wordt gebruikt voor het ingeven van een zoekopdracht. Dit wordt gedaan doormiddel van "partials". Deze partials worden geladen door het gebruik van de angular ng-include directive. Dit creëert een aparte scope, waardoor het predicaat ontoegankelijk is voor de getoonde data.
+
+%Geef hier voorbeeld
 
 \section{handleiding}
 
