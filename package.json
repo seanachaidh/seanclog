@@ -21,8 +21,7 @@
     "nodemailer": "*",
     "validator": "*",
     "superagent": "*",
-    "expect.js": "*",
-    "jsdom": "*"
+    "expect.js": "*"
   },
   "devDependencies": {
     "karma-chrome-launcher": "^0.1.7",
