@@ -2,7 +2,7 @@
  * Deze module regelt zowel het loginsystem als het beheren van gebruikers
  */
 
-var seanclogusers = angular.module('SeanclogUsers', ['ngRoute', 'ngCookies', 'ngResource']);
+var seanclogusers = angular.module('SeanclogUsers', ['ngRoute', 'ngCookies', 'ngResource', 'SeanclogSecurity']);
 
 seanclogusers.factory('Login', ['$resource', function($resource) {
 	var fact = $resource('/api/login', {}, {
