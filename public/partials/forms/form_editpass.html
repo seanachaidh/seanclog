@@ -1,0 +1,24 @@
+<div class="modal fade" id="editModal" data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Edit password</h4>
+			</div>
+			<div class="modal-body">
+				<form novalidate role="form">
+					<label>New password</label>
+					<input id="newInput" type="password" class="form-control" ng-model="editpass.newpass" required />
+					<label>Retype password</label>
+					<!--
+						Dit invoerveld moet hetzelfde bevatten als de bovenste
+					-->
+					<input id="retypeInput" type="password" class="form-control" ng-model="editpass.retypepass" ng-match="editpass.newpass" required />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

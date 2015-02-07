@@ -53,7 +53,7 @@ var userSchema = new Schema({
 
 var projectSchema = new Schema({
 	titel: String,
-	//Is dit een geode naam voor deze kolom?
+	//Is dit een goede naam voor deze kolom?
 	prijs: Number,
 	klant: {type: Schema.Types.ObjectId, ref: 'Klant'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
