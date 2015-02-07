@@ -53,6 +53,8 @@ function($scope, $cookies, Login, $location, User){
 			 * Tracks is onze standaardpagina
 			 */
 			$location.path('tracks');
+		}, function(error) {
+			console.log(error.status);
 		});
 	};
 	

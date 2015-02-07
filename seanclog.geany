@@ -23,13 +23,10 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=353;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Ftracks-tests.js;0;4
-FILE_NAME_1=519;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fprojects-tests.js;0;4
-FILE_NAME_2=2402;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fprojects.js;0;4
-FILE_NAME_3=396;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Ftracks.js;0;4
-FILE_NAME_4=522;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fclients-tests.js;0;4
-FILE_NAME_5=2460;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fclients.js;0;4
+current_page=2
+FILE_NAME_0=1902;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-projects.js;0;4
+FILE_NAME_1=2091;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-tracks.js;0;4
+FILE_NAME_2=1231;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-users.js;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog
