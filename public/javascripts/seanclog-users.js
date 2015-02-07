@@ -54,7 +54,9 @@ function($scope, $cookies, Login, $location, User){
 			 */
 			$location.path('tracks');
 		}, function(error) {
-			console.log(error.status);
+			if(error.status == 401) {
+				$scope.usererror = true;
+			}
 		});
 	};
 	
