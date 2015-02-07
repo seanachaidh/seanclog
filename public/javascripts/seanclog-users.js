@@ -29,7 +29,6 @@ seanclogusers.factory('User', ['$resource', function($resource) {
 	return fact;
 }]);
 
-
 seanclogusers.factory('Token', function() {
 	var currentToken;
 	var retval = {

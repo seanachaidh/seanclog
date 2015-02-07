@@ -59,9 +59,6 @@ function($scope, $route, $cookies, $window, Klanten){
 			}
 		});
 	};
-	
-	
-	
 	/*
 	 * Ik moet een methode vinden waarin deze functie niet in elke
 	 * controller moet voorkomen

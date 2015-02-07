@@ -39,6 +39,7 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 
 	
 }]);
+
 //seanclogApp.config(['$translateProvider', function($translateProvider) {
 //	$translateProvider.useStaticFilesLoader({
 //		prefix: "/translations/",
