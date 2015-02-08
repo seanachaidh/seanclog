@@ -20,7 +20,7 @@ seanclogusers.factory('Login', ['$resource', function($resource) {
 }]);
 
 seanclogusers.factory('User', ['$resource', function($resource) {
-	var fact = $resource('/api/user', {}, {
+	var fact = $resource('/api/users', {}, {
 		'createUser': {
 			method: 'POST',
 			params: {}

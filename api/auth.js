@@ -67,6 +67,7 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 				/*
 				 * Geen token gevonden. Nieuwe token maken.
 				 */
+				 console.log('nieuwe token maken voor: ' + user.naam);
 				 var tmp = generateToken(10);
 				 var new_token = new model.Token({
 					 token: tmp,
@@ -124,7 +125,6 @@ exports.createUser = function(req, res) {
 		naam: new_naam,
 		email: new_email,
 		wachtwoord: new_password,
-		token: new_token
 	});
 	tmp.save(function(err) {
 		if(err) {
@@ -139,7 +139,7 @@ exports.createUser = function(req, res) {
 };
 
 exports.updateUser = function(req, res) {
-	var token = req.query.token;
+	var token = req.query.access_token;
 	model.Token.findOne({token: token}, function(err, retval) {
 		if(!retval) {
 			console.log('updateUser: geen geldige token meegekregen');
@@ -181,8 +181,7 @@ exports.updateUser = function(req, res) {
 };
 
 exports.removeUser = function(req, res) {
-	var id = req.params.id;
-	var token = req.query.token;
+	var token = req.query.access_token;
 	
 	//eerst kijken of de gebruiker bestaat
 	model.Token.findOne({token: token}, function(err, retval) {
@@ -191,10 +190,15 @@ exports.removeUser = function(req, res) {
 			res.json({value: false});
 		}
 		//vreemde constructie
-		model.Gebruiker.remove({_id: retval.gebruiker});
-		model.Token.remove({_id: retval._id});
+		model.Gebruiker.remove({_id: retval.gebruiker}, function(err) {
+			if(err) {
+				res.json({value: false});
+				throw(err);
+			} else {
+				res.json({value: true});
+			}
+		});
 		
-		res.json({value: true});
 	});
 };
 
