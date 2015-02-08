@@ -138,6 +138,66 @@ exports.createUser = function(req, res) {
 	
 };
 
+exports.updateUser = function(req, res) {
+	var token = req.query.token;
+	model.Token.findOne({token: token}, function(err, retval) {
+		if(!retval) {
+			console.log('updateUser: geen geldige token meegekregen');
+			res.json({value: false});
+		}
+		
+		model.Gebruiker.findById(retval._id, function(err, retval) {
+			if(!retval) {
+				console.log('updateUser: Token niet verbonden aan bestaande gebruiker');
+				res.json({value: false});
+			}
+			if(req.body.wachtwoord !== undefined) {
+				var tmppass = crypto.createHash("md5").update(req.body.wachtwoord).digest("hex");
+				retval.wachtwoord = tmppass;
+			}
+			
+			if(req.body.naam !== undefined) {
+				retval.naam = req.body.naam;
+			}
+			
+			if(req.body.gebruikersnaam !== undefined) {
+				retval.gebruikersnaam = req.body.gebruikersnaam;
+			}
+			
+			if(req.body.email !== undefined) {
+				retval.email = req.body.email;
+			}
+			
+			retval.save(function(err) {
+				if(err) {
+					console.log('updateUser: Bewaren van gebruiker is niet gelukt');
+					res.json({value: false});
+				}
+				res.json({value: true});
+			});
+		});
+				
+	});
+};
+
+exports.removeUser = function(req, res) {
+	var id = req.params.id;
+	var token = req.query.token;
+	
+	//eerst kijken of de gebruiker bestaat
+	model.Token.findOne({token: token}, function(err, retval) {
+		if(!retval) {
+			console.log('removeUser: token is ongeldig');
+			res.json({value: false});
+		}
+		//vreemde constructie
+		model.Gebruiker.remove({_id: retval.gebruiker});
+		model.Token.remove({_id: retval._id});
+		
+		res.json({value: true});
+	});
+};
+
 /*
  * Deze methode werkt voorlopig nog niet
  * Ik moet kijken hoe ik deze methode werkend krijg.

@@ -103,6 +103,8 @@ app.post('/api/login', passport.authenticate('local', {session: false}), functio
  * Gebruikersbeheer
  */
 app.post('/api/user', clogapi.auth.createUser);
+app.put('/api/user', passport.authenticate('bearer', {session: false}), clogapi.auth.updateUser);
+app.del('/api/user/:id', passport.authenticate('bearer', {session: false}, clogapi.auth.removeUser);
 
 /*
  * Dit komt een beetje vreemd over. Volgens mij maak ik hier beter een
