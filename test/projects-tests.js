@@ -33,6 +33,8 @@ describe('projectsapi', function() {
 				toBeDeleted = 0;
 				done()
 			});
+		} else {
+			done();
 		}
 	});
 	
@@ -51,6 +53,17 @@ describe('projectsapi', function() {
 		.end(function(res) {
 			expect(res.body.value).to.be(true);
 			toBeDeleted = res.body.savedId;
+			done();
+		});
+	});
+	
+	it('should not crash with empty project', function(done) {
+		var tmpproj = new model.Project({});
+		request.post('http://localhost:5000/api/projects')
+		.query({access_token: logintoken})
+		.send(tmpproj)
+		.end(function(res) {
+			expect(res.body.value).to.be(false);
 			done();
 		});
 	});

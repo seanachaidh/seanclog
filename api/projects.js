@@ -8,6 +8,7 @@ var validator = require('validator');
 function validateProject(project) {
 	
 	if(validator.isFloat(project.prijs) == false) return false;
+	if(project.klant == undefined) return false;
 	return true;
 }
 
@@ -93,6 +94,12 @@ exports.saveProject = function(req, res) {
 		new_titel = req.body.titel,
 		new_prijs = req.body.prijs,
 		new_klant = req.body.klant;
+		
+	
+	if(validateProject(req.body) == false) {
+		res.json({value: false});
+		return;
+	}
 	
 	console.log("begin van de saveproject functie");
 	
@@ -107,10 +114,6 @@ exports.saveProject = function(req, res) {
 				klant: new_klant._id,
 				gebruiker: tok.gebruiker
 			});
-			if(validateProject(new_project) == false) {
-				console.log('save project: project niet geldig');
-				res.json({value: false});
-			} 
 			
 			new_project.save(function(err, sav) {
 				if(err) {

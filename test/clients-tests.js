@@ -24,6 +24,8 @@ describe('tests voor klanten', function() {
 				toBeDeleted = 0;
 				done();
 			});
+		} else {
+			done();
 		}
 	});
 	
@@ -41,5 +43,16 @@ describe('tests voor klanten', function() {
 			toBeDeleted = res.body.savedId;
 			done();
 		});
+	});
+	
+	it('should not crash with empty client', function(done) {
+		var tmpclient = new model.Klant({});
+		request.post('http://localhost:5000/api/clients')
+		.query({access_token: logintoken})
+		.send(tmpclient)
+		.end(function(res) {
+			expect(res.body.value).to.be(false);
+			done();
+		})
 	});
 });
