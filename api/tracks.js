@@ -12,6 +12,11 @@ function validateTrack(track) {
 		console.log('eindtijd:' + track.eindtijd);
 		return false;
 	}
+	
+	if(track.project === undefined) {
+		return false;
+	}
+	
 	//Dit geeft altijd onwaar terug. Ook al klopt de waarde van project
 	//~ if(validator.isJSON(track.project) == false) {
 		//~ return false;
@@ -99,6 +104,11 @@ exports.saveTrack = function(req, res) {
 			res.json({value: false });
 		}
 		
+		if(validateTrack(req.body) == false) {
+			res.json({value: false});
+			return;
+		}
+		
 		var new_track = new model.Track({
 			titel: req.body.titel,
 			begintijd: req.body.begintijd,
@@ -106,10 +116,6 @@ exports.saveTrack = function(req, res) {
 			project: req.body.project._id,
 			gebruiker: tok.gebruiker
 		});
-		
-		if(validateTrack(new_track) == false) {
-			res.json({value: false});
-		}
 		
 		new_track.save(function(err, sav) {
 			if(err) {

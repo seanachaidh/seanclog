@@ -23,14 +23,17 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=6
-FILE_NAME_0=469;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fnonangular.js;0;4
-FILE_NAME_1=1638;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Findex.html;0;4
-FILE_NAME_2=822;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-menu.html;0;4
-FILE_NAME_3=1068;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fang-app.js;0;4
-FILE_NAME_4=1386;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-users.js;0;4
-FILE_NAME_5=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-tracks.js;0;4
-FILE_NAME_6=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-profile.js;0;4
+current_page=9
+FILE_NAME_0=5240;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fauth.js;0;4
+FILE_NAME_1=273;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fmodel.js;0;4
+FILE_NAME_2=3507;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapp.js;0;4
+FILE_NAME_3=1561;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fusers-tests.js;0;4
+FILE_NAME_4=416;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fclients-tests.js;0;4
+FILE_NAME_5=700;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fclients.js;0;4
+FILE_NAME_6=624;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-users.js;0;4
+FILE_NAME_7=0;None;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpackage.json;0;4
+FILE_NAME_8=445;None;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fbower.json;0;4
+FILE_NAME_9=2637;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Ftracks.js;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog

@@ -44,6 +44,16 @@ describe('tracksapi', function() {
 		});
 	});
 	
+	it('should not cracsh with empty track', function(done) {
+		request.post('http://localhost:5000/api/tracks')
+		.send(new model.Track({}))
+		.query({access_token: logintoken})
+		.end(function(res) {
+			expect(res.body.value).to.be(false);
+			done();
+		});
+	});
+	
 	afterEach(function(done) {
 		if(shouldBeDeleted != 0){
 			request.del('http://localhost:5000/api/tracks/' + shouldBeDeleted)
@@ -52,6 +62,8 @@ describe('tracksapi', function() {
 				shouldBeDeleted = 0;
 				done();
 			});
+		} else {
+			done();
 		}
 	});
 });
