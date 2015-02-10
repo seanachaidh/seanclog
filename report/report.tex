@@ -4,7 +4,41 @@
 
 \documentclass[a4paper,11pt]{article}
 \usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
 %Een commando voor een mooie tabelhoofding
 \newcommand{\head}[1]{\textnormal{\textbf{#1}}}
 
@@ -118,16 +152,31 @@ volgende types nosql databanken
 
 \begin{description}
 
-\item[Column]
+\item[Column] Hierbij wordt er bij het persisteren van data de nadruk geleld op de kolom in plaats van de rij. %Dit moet ik beter uitleggen
 \item[Document] Hierbij wordt ieder stukje data, neem nu bijvoorbeeld 
 een student, voorgesteld als een document. In dit document zit dan alle 
 data vervat die een student moet voorstellen.
-\item[Key-value]
-\item[Graph]
-
+\item[Key-value] Hierbij wordt iedere waarde die geschreven wordt naar de databank voorgesteld door middel van een sleutel. Later kan in de applicatie naar die sleutel gerefereerd worden.
+\item[Graph] Hierbij worden de gegevens voorgesteld door een graaf. Dit soort databank legt minder focus op de gegevens op zich, maar eerder op de relaties die de gegevens onderling hebben. %Hier een afbeelding van een graaf ingooien
 \end{description}
 
-MongoDB zelf valt onder de "document oriented" databanken. Hierbij wordt er niet uitgegaan van tabellen, maar van collecties. Een collectie kan bijvoorbeeld een verzameling klanten zijn. Iedere klant in de collectie wordt op zijn beurt voorgesteld als een document. Een document wordt voorgesteld als een JSONObject dat velden bezit. Die velden op hun beurt waarden. Als men SQL zou vergelijken met Mongo zou men de volgende tabel bekomen.
+Gezien dat er in deze applicatie eerder gebruik wordt gemaakt van een document-georiënteerde databank, gaat de focus van dit document hier voornamelijk naar uit. Zoals hierboven al is uitgelegd geweest stelt een document-georiënteerde databank, zoals MongoDB, de data voor als een collectie van documenten. Deze documenten kunnen in alle mogelijke vormen komen. XML, JSON, YAML, of zelfs gewoon een binaire blob. In wezen zou men zo document-georiënteerde databank in de vrij letterlijke zin kunnen gebruiken en er scans van bijvoorbeeld facturen in opslagen die dan verzameld worden in de collectie "facturen". In het geval van MongoDB worden documenten uitsluitend in het JSON format opgeslagen, of beter gezegd, BSON, wat MongoDB zijn eigen binaire variant is van JSON. Het gebruik van JSON heeft vele voordelen tegenover het gebruik van traditionele relationele tabellen.  Met JSON kan men immers een object nesten in ander object. Dit is vooral nuttig wanneer bepaalde gegevens altijd tezamen worden gebruikt. Stel nu dat men de gegevens van een werkgever zou bewaren. Dan wilt men meestal ook het adres van deze werknemer bewaren. Vanwege de enorme hoeveelheid kolommen dat adresgegevens gewoonlijk in beslag nemen, wordt dit meestal in een andere tabel gestoken. De persoonsgegevens en het gekoppelde adres worden echter altijd tezamen gebruikt, maar bij relationele systemen moet hier telkens een JOIN clausule worden gebruikt waar naar beide tabellen wordt gerefereerd om uiteindelijk de twee tabellen samen te voegen. Dit is enorm veel schrijfwerk. Zeker als die JOIN in tachtig procent van de gevallen gebruikt wordt.
+
+In MongoDB kan men dit allemaal vermijden. Wanneer men een werknemer in de databank aanmaakt kan men in MongoDB het adres van die werknemer opslaan als een object dat een werknemer "bezit". Het uiteindelijke JSON-object is dan als volgt.
+
+\begin{lstlisting}[language=javascript]
+{
+	naam: James bond,
+	werknemerid: 007
+	adres {
+		straat: to expensive yacht,
+		nummer: 666,
+		city: caribbean sea
+	}
+};
+\end{lstlisting}
+
+Tegenwoordig wordt er nog steeds veelvuldig gebruik gemaakt van relationele databanken. Er is echter een grote verschuiving gaande ten voordele van de niet relationele databanken. Deze verschuiving is begrijpelijk omdat laatstgenoemde veel meer voorzien is op het verwerken van grote hoeveelheden data. Sinds vijf jaar geleden hebben sociale netwerken almaar meer belang gekregen in onze samenleving. Deze worden voor diverse dingen gebruikt. Foto's delen, documenten delen, ervaringen delen. Veel van deze applicaties bieden al deze diensten aan binnen één platform. Vroeger was het de gewoonte dat iemand een aparte provider gebruikte voor zijn email, om te chatten, om te bloggen, om foto's te delen. In de laatste vijf jaar is het internet echter meer gecentraliseerd geraakt waardoor één organisatie een enorme hoeveelheid data beheert. Neem daarbij dat we met almaar meer mensen op deze wereld leven die almaar vaker toegang hebben tot ICT en het plaatje is compleet.
 
 \begin{tabular}{lcr}
 \hline
@@ -139,7 +188,7 @@ Een attribuut van een element & column & field
 
 \end{tabular}
 
-Men kan in Mongo, net zoals in SQL, reffereren naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig ristricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
+Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig ristricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
 
 \subsubsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object
@@ -184,19 +233,19 @@ De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplic
 
 Voor dit project gaan we gebruik maken van AngularJS. Dit is een javascript framework bedoeld voor het vergemakkelijken van een Model View Controller webapplicatie. In tegenstelling tot vele andere model-view-controller frameworks voor webapplicaties, is AngularJS volledig geschreven in JavaScript. Dit heeft tot gevolg dat de applicatie volledig client-side kan werken. Dit heeft dan weer het voordeel dat de applicatie veel sneller zal draaien omdat er minder requests nodig zijn naar de server. Het Angular framework is volledig modulair opgebouwd. Een Angular applicatie bestaat typisch uit enkele modules. Deze modules kunnen verspreid zijn over meerdere bestanden. Wanneer men een applicatie opstart moet men meegeven welke moduels de applicatie precies gebruikt. Dit gebeurd als volgt.
 
-\begin{verbatim}
+\begin{lstlisting}[language=javascript]
 var var seanclogApp = angular.module('seanclogApp',
 		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
 		 'pascalprecht.translate']);
-\end{verbatim}
+\end{lstlisting}
 
 Zoals u zelf waarschijnlijk zult merken is de applicatie zelf ook een module. Dit module systeem heeft zijn voordelen. Stel dat men de controllers van een de ene applicatie wilt gebruiken in een andere. Dan hoeft men enkel het bestand dat deze module bevat te kopiëren naar de broncode van de andere applicatie. Als dat gedaan is en het bronbestand geladen wordt door één van de webpagina's van uw applicatie moet men deze module registreren door deze aan de applicatie toe te voegen. Dit gaat als volgt.
 
-\begin{verbatim}
-var var seanclogApp = angular.module('seanclogApp',
+\begin{lstlisting}[language=javascript]
+var seanclogApp = angular.module('seanclogApp',
 		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
 		 'pascalprecht.translate', 'mijnNieuweModule']);
-\end{verbatim}
+\end{lstlisting}
 
 In dit voorbeeld staat "mijnNiueweModule" voor de module die u zopas heeft toegevoegd.
 
@@ -279,5 +328,6 @@ Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript t
 
 \section{handleiding}
 
+\section{Zelfevaluatie}
 
 \end{document}
