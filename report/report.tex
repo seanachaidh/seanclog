@@ -89,40 +89,52 @@ dit het volgende in.
 \section{Interne structuur}
 
 \subsection{Gebruikte software}
-Voor dit project werd er bijna uitsluitend gebruik gemaakt van experimentele
-technologie. Tegenwoordig worden webapplicaties vaak ontwikkeld op de zogenaamde
-LAMP stack. Dit is een collectie software die meestal gebundeld gedistribueerd
-wordt omdat ze tezamen de gebruiker in staat stellen tot het hosten van een
-webapplicatie. De LAMP stack bestaat uit vier onderdelen.
+%Voor dit project werd er bijna uitsluitend gebruik gemaakt van experimentele
+%technologie. Tegenwoordig worden webapplicaties vaak ontwikkeld op de zogenaamde
+%LAMP stack. Dit is een collectie software die meestal gebundeld gedistribueerd
+%wordt omdat ze tezamen de gebruiker in staat stellen tot het hosten van een
+%webapplicatie. De LAMP stack bestaat uit vier onderdelen.
+%
+%\begin{description}
+%\item[Een Linux server] Dit is het besturingssysteem waarop de applicatie zal
+%draaien
+%\item[Apache] Dit is een daemon die het http protocol implementeert. Het stelt
+%ons in staat tot het ontvangen en het verwerken van http requests.
+%\item[Een MYSQL databank] Dit is te gebruiken databank bedoeld voor het oplaan
+%van data. Dit kan gaan om klantengegevens en productgegevens. Andere databanken
+%zoals postgresql zijn ook mogelijk, maar bij een LAMP stack gaat het specifiek
+%om MYSQL.
+%\item[PHP] De programmeertaal die gebruikt wordt voor het maken van de
+%applicatie.
+%\end{description}
+%
+%Deze LAMP stack wordt al jaren op deze manier gebruikt. Het is vrij oude
+%technologie die al jaren meegaat en bijgevolg dus enorm betrouwbaar is. Het
+%heeft echter een aantal zwakke punten.
+%
+%\begin{itemize}
+%  \item Het onderhoud van een linux server is een tijdrovende bezigheid.
+%  \item Apache is een modulair programma. Men kan functionaliteit toevoegen en
+%  verwijderen. Veel van de functionaliteit staat standaard aan of kan zelfs
+%  helemaal niet verwijderd worden. Dat terwijl de meesten niet zoveel
+%  functionaliteit nodig hebben. Daarbij kan het ook ervoor zorgen dat Apache
+%  onveiliger wordt en gemakkelijker is om in in te breken.
+%  \item MYSQL heeft veel limitaties. We leven in een wereld waarin data alsmaar
+%  meer aandacht krijgt. Bedrijven verzamelen, analyseren en gebruiken. Dit
+%  allemaal om hun klantenervaring zo veel mogelijk te kunnen verbeteren.
+%\end{itemize}
+
+Voor dit project wordt er gebruik gemaakt van de MEAN-stack. Dit is variant op de LAMP stack. De LAMP stack wordt tegenwoordig het meest gebruikt. De MEAN stack daarentegen is een vrij jong concept. Veeleer omdat de MEAN stack uitsluitend uit nieuwe technologie bestaat.
+
+De MEAN stack is een collectie van software die er voor zorgt dat men de mogelijkheid heeft een webapplicatie te ontwikkelen. Deze MEAN stack bestaat uit de volgende onderdelen
 
 \begin{description}
-\item[Een Linux server] Dit is het besturingssysteem waarop de applicatie zal
-draaien
-\item[Apache] Dit is een daemon die het http protocol implementeert. Het stelt
-ons in staat tot het ontvangen en het verwerken van http requests.
-\item[Een MYSQL databank] Dit is te gebruiken databank bedoeld voor het oplaan
-van data. Dit kan gaan om klantengegevens en productgegevens. Andere databanken
-zoals postgresql zijn ook mogelijk, maar bij een LAMP stack gaat het specifiek
-om MYSQL.
-\item[PHP] De programmeertaal die gebruikt wordt voor het maken van de
-applicatie.
+\item[MongoDB] Dit is een niet-relationele databank. In plaats van de data voor te stellen als relationele tabellen gaat men de data voorstellen als een collectie van documenten. Ieder document is een JSON object. JSON formaat dat dezelfde stijl als javascript gebruikt om objecten op te slaan.
+\item[Express] Express is een nodejs framework waarmee makkelijk webapplicaties in nodejs kunnen worden gemaakt. Het voor ziet voornamelijk een manier om routes te programmeren binnen je applicatie alsook het toevoegen van middleware.
+\item[AngularJS] AngularJS is een javascript framework die de gebruiker in staat stelt om via javascript client-side een MVC patroon toe te passen. Dit doen ze door het voorzien van controllers, views en services. Meer informatie hierover later
+\item[NodeJS] Dit is een javascript interpreter die zonder browser werk. In plaats hiervan wordt de google V8 engine gebruikt om javascript code uit te voeren. Dit stelt ons in staat om javascript ook server side te gaan gebruiken. In tegenstelling tot veel andere programmeertalen, werkt file input/output volledig nog blocking. Hierdoor is het perfect voor het maken van webapplicaties omdat op die manier meerdere requests tegelijkertijd afgehandeld kunnen worden.
+
 \end{description}
-
-Deze LAMP stack wordt al jaren op deze manier gebruikt. Het is vrij oude
-technologie die al jaren meegaat en bijgevolg dus enorm betrouwbaar is. Het
-heeft echter een aantal zwakke punten.
-
-\begin{itemize}
-  \item Het onderhoud van een linux server is een tijdrovende bezigheid.
-  \item Apache is een modulair programma. Men kan functionaliteit toevoegen en
-  verwijderen. Veel van de functionaliteit staat standaard aan of kan zelfs
-  helemaal niet verwijderd worden. Dat terwijl de meesten niet zoveel
-  functionaliteit nodig hebben. Daarbij kan het ook ervoor zorgen dat Apache
-  onveiliger wordt en gemakkelijker is om in in te breken.
-  \item MYSQL heeft veel limitaties. We leven in een wereld waarin data alsmaar
-  meer aandacht krijgt. Bedrijven verzamelen, analyseren en gebruiken. Dit
-  allemaal om hun klantenervaring zo veel mogelijk te kunnen verbeteren.
-\end{itemize}
 
 \subsubsection{Nodejs}
 Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.
