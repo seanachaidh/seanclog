@@ -139,6 +139,8 @@ De MEAN stack is een collectie van software die er voor zorgt dat men de mogelij
 \subsubsection{Nodejs}
 Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.
 
+Eigenlijk is het ook niet correct om NodeJS een interpreter te noemen. NodeJS gebruikt immers google's v8 javascript engine. Waarin deze engine zich onderscheid van de andere engines is dat de code eerst wordt gecompileerd naar machinecode voor het wordt uitgevoerd. Hierdoor is er geen echt interpreting proces zoals bijvoorbeeld bij php het geval is.
+
 Dit is echter slecht één van de redenen waarom het een handige tool is voor het gebruik bij server side scripting. Tegenwoordig worden er alsmaar meer webapplicaties gebouwd. De bedrijven die deze webapplicaties bouwen hebben alsmaar meer klanten. Al die klanten moeten tegelijk afgehandeld worden. Computers hebben echter hun limieten. Wanneer een gebruiker een webpagina zou opvragen, betekend dat dat deze gebruiker een html bestand doorgestuurd zal moeten krijgen. Dat HTML bestand dient ingelezen en doorgestuurd te worden. Wanneer het besturingssysteem een bestand inleest betekent dat dat deze een zogezegde lock op dat bestand legt. Enkel het proces dat de leesbewerking heeft aangevraagd, mag het bestand inlezen. Van zodra dit proces gedaan heeft met lezen, wordt deze lock vrijgegeven en is het de beurt aan het volgende proces. Wanneer één van de processen die aanspraak willen maken op het bestand, nadat hij deze aanspraak gekregen heeft, in een lus gaat. Vormt dit een dead-lock. Dit wil zeggen dat alle input en output met betrekking tot dit bestand stilvalt en niemand meer aan het bestand kan. Het hele proces valt stil.
 
 In NodeJS zijn er echter geen locks.
@@ -277,18 +279,18 @@ Deze pagina ziet er als volgt uit
 </html>
 \end{lstlisting}
 Deze views zijn niets meer dan gewone webpagina's die tussen de broncode geworpen worden, op de plek waar de ngview tag staat. Deze code wordt dan in zijn geheel verwerkt door de webbrowser. De views kunnen bestaan uit één of meerdere subviews. Deze subviews kunnen worden toegevoegd door het gebruik van de ng-include tag. Stel dat men de volgende view heeft:
-\begin{verbatim}
+\begin{lstlisting}[language=html]
 <div id="myview">
 <p>Dit is een test</p>
 </div>
-\end{verbatim}
+\end{lstlisting}
 Dan zou men hier code uit een ander bestand er aan kunnen toevoegen.
-\begin{verbatim}
+\begin{lstlisting}[language=html]
 <div id="myview">
 <p>Dit is een test</p>
 <div ng-include="'/partials/view2'"
 </div>
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Controllers}
 %hier schrijven over het opsplitsen van de controllers
