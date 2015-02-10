@@ -22,14 +22,20 @@ seanclogclient.factory('Klanten', [ '$resource', function($resource) {
 	return fact;
 } ]);
 
-seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '$window', 'Klanten',
-function($scope, $route, $cookies, $window, Klanten){
+seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '$window', 'Klanten', 'toastr',
+function($scope, $route, $cookies, $window, Klanten, toastr){
 	Klanten.query({access_token: $cookies.token}, function(k) {
 		$scope.data = k;
 	});
 	
 	$scope.createclient = function(client) {
-		Klanten.post({access_token: $cookies.token}, angular.copy(client));
+		Klanten.post({access_token: $cookies.token}, angular.copy(client), function(res) {
+			if(res.value == true) {
+				toastr.success('The client has been saved');
+			} else {
+				toastr.error('The client has not been saved');
+			}
+		});
 		$route.reload();
 	};
 	
@@ -37,9 +43,9 @@ function($scope, $route, $cookies, $window, Klanten){
 		
 		Klanten.remove({id: client, access_token: $cookies.token}, function(retval) {
 			if(retval.value == true) {
-				console.log('het verwijderen van de klant is gelukt');
+				toastr.success('Client has been removed');
 			} else {
-				console.log('het verwijderen van de klant is niet geluk');
+				toastr.error('Client has not been removed');
 			}
 		});
 		console.log(client);
@@ -53,9 +59,9 @@ function($scope, $route, $cookies, $window, Klanten){
 	$scope.editClient = function(client) {
 		Klanten.update({id: client._id, access_token: $cookies.token}, client, function(retval) {
 			if(retval.value == false) {
-				console.log('Klanten: het bijwerken is niet gelukt');
+				toastr.error('the client has not been updated');
 			} else {
-				console.log('Klanten: Het bijwerken is gelukt');
+				toastr.success('the client has been updated');
 			}
 		});
 	};
@@ -87,4 +93,3 @@ function($scope, $route, $cookies, $window, Klanten){
 	};
 	
 }]);
-

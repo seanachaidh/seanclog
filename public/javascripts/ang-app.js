@@ -6,7 +6,7 @@
  * de controller module mot hier nog aan worden toegevoegd
  */
 var seanclogApp = angular.module('seanclogApp',
-		['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker',
+		['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'toastr',
 		'SeanclogProjects', 'SeanclogClients', 'SeanclogTracks', 'SeanclogUsers', 'SeanclogProfile']);
 /*
  * definieer alle routes

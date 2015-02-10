@@ -22,8 +22,8 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 	return fact;
 } ]);
 
-seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects', 'Klanten',
-function($scope, $route, $cookies, $window, Projects, Klanten){
+seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects', 'Klanten', 'toastr',
+function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	Projects.query({access_token: $cookies.token},function(proj){
 		$scope.data = proj
@@ -36,7 +36,13 @@ function($scope, $route, $cookies, $window, Projects, Klanten){
 	$scope.createProj = function(proj) {
 		//Est-ce que ce function est necessaire?
 		var tmp = angular.copy(proj);
-		Projects.post({access_token: $cookies.token}, proj);
+		Projects.post({access_token: $cookies.token}, proj, function(res){
+			if(res.value == true) {
+				toastr.success('the project has been saved');
+			} else {
+				toastr.error('the project has not been saved');
+			}
+		});
 		
 		//Recharge la page
 		//je n'ai pas déjà testé cette function.
@@ -47,9 +53,9 @@ function($scope, $route, $cookies, $window, Projects, Klanten){
 		
 		Projects.remove({id: projid, access_token: $cookies.token}, function(retval) {
 			if(retval.value == true) {
-				console.log('het verwijderen van het project is gelukt');
+				toastr.success('the project has been removed');
 			} else {
-				console.log('het verwijderen van het project is niet gelukt');
+				toastr.error('the project has not been removed');
 			}
 		});		
 		console.log(projid);
@@ -64,9 +70,9 @@ function($scope, $route, $cookies, $window, Projects, Klanten){
 	$scope.editProject = function(project) {
 		Projects.update({id: project._id, access_token: $cookies.token}, project, function(data) {
 			if(data.value == false) {
-				console.log('updaten project niet gelukt');
+				toastr.success('the project has been updated');
 			} else {
-				console.log('updaten project gelukt');
+				toastr('the project has not been updated');
 			}
 		});
 		

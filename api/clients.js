@@ -28,15 +28,12 @@ exports.pdfClient = function(req, res) {
 
 exports.updateClient = function(req, res) {
 	var id = req.params.id;
-	
-	var valid = validateClient({
-		telefoonnummer: req.body.telefoonnummer,
-		email: req.body.email
-	});
+	var valid = validateClient(req.body);
 	
 	if(valid == false) {
 		console.log('update client: de klant is niet geldig');
 		res.json({value: false});
+		return;
 	}
 	
 	model.Klant.findById(id, function(err, klant) {
@@ -48,6 +45,7 @@ exports.updateClient = function(req, res) {
 		klant.save(function(err) {
 			if(err) {
 				res.json({value: false});
+				return;
 			}
 			res.json({value: true});
 		});
@@ -76,6 +74,13 @@ exports.saveClient = function(req, res) {
 	var new_naam = req.body.naam,
 		new_telefoonnummer = req.body.telefoonnummer,
 		new_email = req.body.email;
+	
+	var valid = validateClient(req.body);
+	if(valid == false) {
+		console.log('save client: client niet geldig');
+		res.json({value: false});
+		return;
+	}
 		
 	model.Token.findOne({token: curtoken}, function(err, g) {
 		if(err) {
@@ -88,12 +93,6 @@ exports.saveClient = function(req, res) {
 				email: new_email,
 				gebruiker: g.gebruiker
 			});
-			
-			var valid = validateClient(new_client);
-			if(valid == false) {
-				console.log('save client: client niet geldig');
-				res.json({value: false});
-			}
 			
 			new_client.save(function(err, sav) {
 				if(err) {

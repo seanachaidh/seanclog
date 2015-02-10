@@ -23,8 +23,8 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 } ]);
 
 seanclogtracks.controller('TracksController',
-		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects',
-	function($scope, $cookies, $window, $route, Tracks, Projects){
+		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects', 'toastr',
+	function($scope, $cookies, $window, $route, Tracks, Projects, toastr){
 
 
 	Tracks.query({access_token: $cookies.token, include_projects: true}, function(t){
@@ -39,7 +39,13 @@ seanclogtracks.controller('TracksController',
 	});
 	
 	$scope.createTrack = function(track){
-		Tracks.post({access_token: $cookies.token}, angular.copy(track));
+		Tracks.post({access_token: $cookies.token}, angular.copy(track), function(res) {
+			if(res.value == false) {
+				toastr.error('Track is not saved');
+			} else {
+				toastr.success('Track has been saved');
+			}
+		});
 		
 		$route.reload();
 	};
@@ -69,9 +75,9 @@ seanclogtracks.controller('TracksController',
 	$scope.editTrack = function(track) {
 		Tracks.update({id: track._id, access_token: $cookies.token}, track, function(retval) {
 			if(retval.value == false) {
-				console.log('Tracks: Bijwerken van track niet gelukt');
+				toastr.error('the track has not been updated');
 			} else {
-				console.log('Tracks: Bijwerken van track gelukt');
+				toastr.success('the track has been updated');
 			}
 			
 			$route.reload();
