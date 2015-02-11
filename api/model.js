@@ -50,6 +50,7 @@ var userSchema = new Schema({
 	email: String,
 	token: String
 }, {collection: "gebruikers"});
+var usermod = mongoose.model('Gebruiker', userSchema);
 
 var projectSchema = new Schema({
 	titel: String,
@@ -58,13 +59,7 @@ var projectSchema = new Schema({
 	klant: {type: Schema.Types.ObjectId, ref: 'Klant'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "projecten"});
-
-projectSchema.pre('remove', function(next) {
-	debugger;
-	Track.remove({project: this.id}).exec();
-	//~ console.log('hook: removing Project');
-	next();
-});
+var projectmod = mongoose.model('Project', projectSchema);
 
 var klantSchema = new Schema ({
 	naam: String,
@@ -72,13 +67,9 @@ var klantSchema = new Schema ({
 	email: String,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "klanten"});
+var klantmod = mongoose.model('Klant', klantSchema);
 
-klantSchema.pre('remove', function(next) {
-	debugger;
-	Project.remove({klant: this.id}).exec();
-	//~ console.log('hook: removing client');
-	next();
-});
+
 
 var trackSchema = new Schema({
 	titel: String,
@@ -88,15 +79,45 @@ var trackSchema = new Schema({
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
+var trackmod = mongoose.model('Track', trackSchema);
 
 var tokenSchema = new Schema({
 	token: String,
 	made: Date,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'gebruiker'}
 }, {collections: 'tokens'});
+var tokenmod = mongoose.model('Token', tokenSchema);
+/*
+ * Om cascade mogelijk te maken
+ */
+projectSchema.pre('remove', function(next) {
+	console.log('project remove hook');
+	debugger;
+	trackmod.find({project: this.id}, function(err, docs) {
+		for(var i = 0; i < docs.length; i++) {
+			var tmpdoc = docs[i];
+			tmpdoc.remove();
+		}
+	});
+	//~ console.log('hook: removing Project');
+	next();
+});
 
-exports.Track = mongoose.model('Track', trackSchema);
-exports.Project = mongoose.model('Project', projectSchema);
-exports.Klant = mongoose.model('Klant', klantSchema);
-exports.Gebruiker = mongoose.model('Gebruiker', userSchema);
-exports.Token = mongoose.model('Token', tokenSchema);
+klantSchema.pre('remove', function(next) {
+	console.log('client remove hook');
+	debugger;
+	projectmod.find({klant: this.id}, function(err, docs) {
+		for(var i = 0; i < docs.length; i++) {
+			var tmpdoc = docs[i];
+			tmpdoc.remove();
+		}
+	});
+	//~ console.log('hook: removing client');
+	next();
+});
+
+exports.Track = trackmod;
+exports.Project = projectmod;
+exports.Klant = klantmod;
+exports.Gebruiker = usermod;
+exports.Token = tokenmod;
