@@ -58,12 +58,13 @@ exports.updateClient = function(req, res) {
  */
 exports.deleteClient = function(req, res) {
 	var id = req.params.id;
-	model.Klant.remove({_id: new ObjectId(id)}, function(err) {
+	model.Klant.findById(id, function(err, klant) {
 		if(err){
-			console.log('het verwijderen is niet gelukt');
+			console.log('deleteClient: Klant niet gevonden');
 			res.json({value: false});
 		} else {
 			console.log('het verwijderen van een klant is gelukt');
+			klant.remove();
 			res.json({value: true});
 		}
 	});

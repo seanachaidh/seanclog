@@ -78,12 +78,13 @@ exports.deleteProject = function(req, res) {
 	 */
 	 var id = req.params.id;
 	 
-	 model.Project.remove({_id: id}, function(err) {
+	 model.Project.findById(id, function(err, project) {
 		 if(err) {
-			 console.log('het verwijderen is niet gelukt');
+			 console.log('deleteProject: project niet gevonden');
 			 res.json({value: false});
 		 } else {
 			 console.log('het verwijderen is gelukt');
+			 project.remove();
 			 res.json({value: true});
 		 }
 	 });

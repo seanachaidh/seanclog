@@ -59,12 +59,26 @@ var projectSchema = new Schema({
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "projecten"});
 
+projectSchema.pre('remove', function(next) {
+	debugger;
+	Track.remove({project: this.id}).exec();
+	//~ console.log('hook: removing Project');
+	next();
+});
+
 var klantSchema = new Schema ({
 	naam: String,
 	telefoonnummer: String,
 	email: String,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "klanten"});
+
+klantSchema.pre('remove', function(next) {
+	debugger;
+	Project.remove({klant: this.id}).exec();
+	//~ console.log('hook: removing client');
+	next();
+});
 
 var trackSchema = new Schema({
 	titel: String,
