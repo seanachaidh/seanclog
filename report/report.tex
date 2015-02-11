@@ -88,7 +88,7 @@ dit het volgende in.
 
 \section{Interne structuur}
 
-\subsection{Gebruikte software}
+\section{Gebruikte software}
 %Voor dit project werd er bijna uitsluitend gebruik gemaakt van experimentele
 %technologie. Tegenwoordig worden webapplicaties vaak ontwikkeld op de zogenaamde
 %LAMP stack. Dit is een collectie software die meestal gebundeld gedistribueerd
@@ -136,7 +136,7 @@ De MEAN stack is een collectie van software die er voor zorgt dat men de mogelij
 
 \end{description}
 
-\subsubsection{Nodejs}
+\subsection{Nodejs}
 Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.
 
 Eigenlijk is het ook niet correct om NodeJS een interpreter te noemen. NodeJS gebruikt immers google's v8 javascript engine. Waarin deze engine zich onderscheid van de andere engines is dat de code eerst wordt gecompileerd naar machinecode voor het wordt uitgevoerd. Hierdoor is er geen echt interpreting proces zoals bijvoorbeeld bij php het geval is.
@@ -145,7 +145,7 @@ Dit is echter slecht één van de redenen waarom het een handige tool is voor he
 
 In NodeJS zijn er echter geen locks.
 
-\subsubsection{MongoDB}
+\subsection{MongoDB}
 MongoDB is, in tegenstelling tot traditionele SQL databanken, een 
 no-sql databank. Dit wil zeggen dat de data niet voorgesteld wordt door 
 tabellen. Hoe de data dan wel voorgesteld wordt, wordt in de definitie 
@@ -192,9 +192,11 @@ In MongoDB kan men dit allemaal vermijden. Wanneer men een werknemer in de datab
 
 Tegenwoordig wordt er nog steeds veelvuldig gebruik gemaakt van relationele databanken. Er is echter een grote verschuiving gaande ten voordele van de niet relationele databanken. Deze verschuiving is begrijpelijk omdat laatstgenoemde veel meer voorzien is op het verwerken van grote hoeveelheden data. Sinds vijf jaar geleden hebben sociale netwerken almaar meer belang gekregen in onze samenleving. Deze worden voor diverse dingen gebruikt. Foto's delen, documenten delen, ervaringen delen. Veel van deze applicaties bieden al deze diensten aan binnen één platform. Vroeger was het de gewoonte dat iemand een aparte provider gebruikte voor zijn email, om te chatten, om te bloggen, om foto's te delen. In de laatste vijf jaar is het internet echter meer gecentraliseerd geraakt waardoor één organisatie een enorme hoeveelheid data beheert. Neem daarbij dat we met almaar meer mensen op deze wereld leven die almaar vaker toegang hebben tot ICT en het plaatje is compleet.
 
+Omdat relationele databanken nog steeds veel gebruikt worden is het handig om hier een analogie te scheppen tussen relationele databanken en MongoDB
+
 \begin{tabular}{lcr}
 \hline
-\head{Begrip} & \head{SQL} & \head{Mongo} \\
+\head{Begrip} & \head{Relationele databank} & \head{Mongo} \\
 \hline
 Verzameling & Tabel & Collection \\
 Element van deze verzameling & Row & Document \\
@@ -203,43 +205,11 @@ Een attribuut van een element & column & field
 \end{tabular}
 
 Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig ristricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
+\subsubsection{GridFS}
+Een extraatje van MongoDB waar in deze applicatie geen gebruik van wordt gemaakt heet GridFS. Eerder ging het erover dat bij een document-georiënteerde databank, een gegeven ieder type bestand kan zijn. Dit kan gaan om afbeeldingen, muziek, of, in het geval van Mongo, om JSON documenten. Documenten kunnen maximum 16MB groot zijn. Dus zelfs al zou men iets anders willen bewaren dan een JSON-object. Dan zou het nog niet lukken. Of niet? MongoDB heeft hier namelijk een oplossing voor, genaamd GridFS. GridFS laat toe om andere types documenten op te slaan in plaats van een JSON-objecten. Deze andere documenten kunnen eventueel alsnog vergezeld worden door enkele JSON gegevens. Dit komt omdat GridFS bedoeld is om documenten op te splitsen over meerdere collecties. Wanneer het document opgevraagd wordt, stel MongoDB het document opnieuw samen.
 
-\subsubsection{Express}
+\subsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object
-
-\subsubsection{Angular}
-
-\subsection{RESTAPI} %hier heb ik wikipedia als bron gebruikt
-Hier bespreken wij de RESTAPI
-Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
-ervoor dat we makkelijk meerdere clents kunnen maken die ook op op desktops
-werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
-eindeloos.
-
-RestApi's worden doorgaans gebruikt voor het ophalen en het wegschrijven van
-data. Deze data kunnen uiteenlopende dingen zijn. Afbeeldingen, blogartikels,
-zelfs volledige objecten. Deze RestApi is meestal toegankelijk via het HTTP
-protocol. Dit zorgt ervoor dat het makkelijker is om clients te maken die deze
-API kunnen gebruiken omdat HTTP een alomvertegenwoordigd protocol heeft. Het is
-een protocol dat standaard in praktisch iedere networking api geïmplementeerd is
-en dat als dus danig door vele computers begrepen wordt.
-
-Elk type data (of resource) wordt voorgesteld door een uniform resource
-identifier (ofwel URI)
-
-Een RESTApi bestaat uit de volgende componenten.
-\begin{description}
-  \item [Get] Een get request
-  \item [Delete] Verwijder data
-  \item [Put] Verander data
-  \item [Post] Bewaar data
-\end{description}
-
-\subsubsection{Beveiliging}
-Het hebben van een goede applicatie betekent niet alleen dat de applicatie er goed uit moet zien. Klanten vertrouwen ons hun gegevens toe. Daarom moeten we erop toezien dat de applicatie goed beveiligd is. Dit hoop ik te bereiken door het gebruik van token based authenticatie. Wanneer een gebruiker zich aanmeldt zouden we alle gebruikers kunnen opsturen. Inclusief het wachtwoord. Wanneer de gebruiker dan data wilt opvragen zou deze terug zijn wachtwoord kunnen opsturen om zijn aanvraag te doen gelden. Dit gaan we echter niet doen. In plaats daarvan gaan we iedere gebruiker een token geven. De bedoeling is dat deze token opgestuurd zal worden in plaats van het wachtwoord. De tokens worden opgeslagen in een aparte collectie tezamen met de een veld waarin de datum staat wanneer de token is gemaakt. Telkens wanneer er een aanvraag afgehandeld wordt, wordt de token meegegeven via de query parameters. Dit wil zeggen de GET paramters. Hierna wordt er naar deze token gezocht. Als deze token bestaat, wordt er gekeken naar de leeftijd van de token. Mocht deze ouder zijn dan zeven dagen wordt er een foutboodschap teruggestuurd. Is dit niet het geval, dan is de aanvraag geautoriseerd en ontvangt de gebruiker zijn gevraagde gegevens. Mocht de token helemaal niet bestaan wordt er tevens een foutboodschap teruggestuurd. Telkens wanneer de token niet bestaat of deze vervallen is dient te gebruiker een nieuwe te genereren door zich opnieuw aan te melden.
-
-\subsection{Tests}
-De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplictatie. De applicatie moet erop gebouwd zijn dat deze redelijk veel requests kan ontvangen en vooral, mochten deze requests fout opgesteld zijn, dat de applicatie deze opvangt en afhandelt zonder zelf te crashen. We zouden dit kunnen testen door zelf via de front-end foute data in te voeren, maar dit is onpraktisch. De applicatie is er immers op gebouwd om nooit foute data door te geven. Iedere data die ingevoerd wordt, wordt gevalideerd. Dit wilt echter niet zeggen dat de back-end de data ook goed valideert. In de wereld van JavaScript bestaan er hiervoor vele tools.
 
 \subsection{AngularJS}
 %nog uit te leggen
@@ -305,9 +275,34 @@ Dit wil zeggen dat mochten we een resource genaamd klanten hebben, ik de applica
 \subsubsection{Services}
 Het ophalen van data van de database door de client gebeurt door middel van services. Services zijn een concept binnen AngularJS en kunnen gezien worden als singletons. Een service wordt gemaakt door de factory methode op te roepen van de het applicatieobject. Dit krijg twee parameters mee. De eerste parameter is een naam. Deze naam zal later gebruikt worden om naar onze service te kunnen refereren. De tweede parameter is een functie die een object hoort terug te geven. Dit object kan allerlei dingen bevatten. Variabelen, functies, het is kortom een volwaardig object. De bedoeling is dat dit object vanaf elke plek binnen onze applicatie beschikbaar zal zijn. We kunnen deze services in andere modules gebruiken. Bij het maken van een module moet er namelijk een array doorgegeven worden. Deze array is een lijst met strings. Deze strings zijn namen van services. Zo weet angular welke services in een module worden gebruikt. De genoemde services moeten daarna enkel als parameter genoemd worden in de functie gekoppeld aan de module. Daarbij zijn ze ook nog eens lui geïnitialiseerd. Dit wil zeggen dat Angular deze objecten enkel aanmaakt wanneer ze echt worden gebruikt. Men kan bijvoorbeeld een module laden waarin een service vervat zit, maar waarvan geen gebruik gemaakt wordt. Mocht deze service toch geïnitialiseerd worden, neemt deze onnodig plek in het geheugen en kan deze de applicatie nodeloos vertragen. Door deze techniek kan Angular sneller werken en hebben Angular applicaties een lagere memory-footprint.
 
-\begin{verbatim}
-Hier voorbeeldcode toevoegen
-\end{verbatim}
+De volgende voorbeeldcode stelt een service voor die toegang geeft tot de "Klant" route. De gekoppelde functie maakt een zogenaamd resource object aan. Dit is een object dat bij creatie een URI ontvangt (meestal is dit een route van een RESTAPI) en daarna enkele methodes maakt die een request versturen naar deze URI. Deze methodes zijn analoog met de REST methodes.
+\begin{lstlisting}
+
+seanclogclient.factory('Klanten', [ '$resource', function($resource) {
+	var fact = $resource('/api/clients/:id', {}, {
+		'query' : {
+			method : 'GET',
+			isArray : true
+		},
+		'post' : {
+			method : 'POST',
+			params : {}
+		},
+		'remove': {
+			method: 'DELETE',
+			params: {}
+		},
+		'update': {
+			method: 'PUT',
+			params: {}
+		}
+	});
+	return fact;
+}]);
+
+\end{lstlisting}
+
+Normaal gezien worden deze methodes impliciet aangemaakt. Men kan deze methodes echter ook expliciet aanmaken, zoals in het bovenstaande voorbeeld. Dit laat de programmeur toe om enkele standaard opties aan te passen.
 
 \subsubsection{Filters}
 %Hier schrijven over de datumfilter die ik heb gemaakt.
@@ -326,6 +321,39 @@ Men kan er niet altijd op vertrouwen dat de gebruiker de data op de juiste manie
 We kunnen ook een bepaald type invoer afdwingen. We kunnen ervoor zorgen dat de gebruiker enkel nummers kan invoeren. Dit doen we door het type-attribuut van text naan number te veranderen.
 
 Wanneer een invoerveld binnen een formulier niet geldig blijkt te zijn, zal Angular dit invoerveld toewijzen aan de klasse "ng-invalid". Als programmeur kan ik dan op deze klasse enkele stijlen toepassen die er bijvoorbeeld voor zorgen dat niet geldige invoervelden rood kleuren. Hetzelfde gebeurd met geldige invoervelden door middel van de "ng-valid" klasse. Verder krijgt een formulier in AngularJS een aantal extra objecten mee. Eén van die objecten is een object genaamd \$error. Dit object bevat informatie over welke invoervelden er op dat moment geldig zijn en welke niet. Stel dat men een invoerveld heeft met de naam "email". Wanneer dit invoerveld de text "blahblah" bevat zal het object "myform.email.\$error.eamil" de waarde true bevatten.
+
+
+\section{RESTAPI} %hier heb ik wikipedia als bron gebruikt
+Hier bespreken wij de RESTAPI
+Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
+ervoor dat we makkelijk meerdere clents kunnen maken die ook op op desktops
+werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
+eindeloos.
+
+RestApi's worden doorgaans gebruikt voor het ophalen en het wegschrijven van
+data. Deze data kunnen uiteenlopende dingen zijn. Afbeeldingen, blogartikels,
+zelfs volledige objecten. Deze RestApi is meestal toegankelijk via het HTTP
+protocol. Dit zorgt ervoor dat het makkelijker is om clients te maken die deze
+API kunnen gebruiken omdat HTTP een alomvertegenwoordigd protocol heeft. Het is
+een protocol dat standaard in praktisch iedere networking api geïmplementeerd is
+en dat als dus danig door vele computers begrepen wordt.
+
+Elk type data (of resource) wordt voorgesteld door een uniform resource
+identifier (ofwel URI)
+
+Een RESTApi bestaat uit de volgende componenten.
+\begin{description}
+  \item [Get] Een get request
+  \item [Delete] Verwijder data
+  \item [Put] Verander data
+  \item [Post] Bewaar data
+\end{description}
+
+\subsection{Beveiliging}
+Het hebben van een goede applicatie betekent niet alleen dat de applicatie er goed uit moet zien. Klanten vertrouwen ons hun gegevens toe. Daarom moeten we erop toezien dat de applicatie goed beveiligd is. Dit hoop ik te bereiken door het gebruik van token based authenticatie. Wanneer een gebruiker zich aanmeldt zouden we alle gebruikers kunnen opsturen. Inclusief het wachtwoord. Wanneer de gebruiker dan data wilt opvragen zou deze terug zijn wachtwoord kunnen opsturen om zijn aanvraag te doen gelden. Dit gaan we echter niet doen. In plaats daarvan gaan we iedere gebruiker een token geven. De bedoeling is dat deze token opgestuurd zal worden in plaats van het wachtwoord. De tokens worden opgeslagen in een aparte collectie tezamen met de een veld waarin de datum staat wanneer de token is gemaakt. Telkens wanneer er een aanvraag afgehandeld wordt, wordt de token meegegeven via de query parameters. Dit wil zeggen de GET paramters. Hierna wordt er naar deze token gezocht. Als deze token bestaat, wordt er gekeken naar de leeftijd van de token. Mocht deze ouder zijn dan zeven dagen wordt er een foutboodschap teruggestuurd. Is dit niet het geval, dan is de aanvraag geautoriseerd en ontvangt de gebruiker zijn gevraagde gegevens. Mocht de token helemaal niet bestaan wordt er tevens een foutboodschap teruggestuurd. Telkens wanneer de token niet bestaat of deze vervallen is dient te gebruiker een nieuwe te genereren door zich opnieuw aan te melden.
+
+\subsection{Tests}
+De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplictatie. De applicatie moet erop gebouwd zijn dat deze redelijk veel requests kan ontvangen en vooral, mochten deze requests fout opgesteld zijn, dat de applicatie deze opvangt en afhandelt zonder zelf te crashen. We zouden dit kunnen testen door zelf via de front-end foute data in te voeren, maar dit is onpraktisch. De applicatie is er immers op gebouwd om nooit foute data door te geven. Iedere data die ingevoerd wordt, wordt gevalideerd. Dit wilt echter niet zeggen dat de back-end de data ook goed valideert. In de wereld van JavaScript bestaan er hiervoor vele tools.
 
 \section{vormgeving}
 

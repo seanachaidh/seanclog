@@ -1,4 +1,12 @@
 /node_modules/
-/report/
 /bower_components/
 geany_run_script.bat
+report/model.dia~
+report/report.aux
+report/report.bbl
+report/report.blg
+report/report.dvi
+report/report.log
+report/report.pdf
+report/report.synctex.gz
+report/tex.bib
