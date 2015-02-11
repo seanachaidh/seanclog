@@ -24,6 +24,8 @@ seanclogclient.factory('Klanten', [ '$resource', function($resource) {
 
 seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '$window', 'Klanten', 'toastr',
 function($scope, $route, $cookies, $window, Klanten, toastr){
+	$scope.dataView = true;
+	
 	Klanten.query({access_token: $cookies.token}, function(k) {
 		$scope.data = k;
 	});

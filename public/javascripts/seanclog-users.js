@@ -24,6 +24,11 @@ seanclogusers.factory('User', ['$resource', function($resource) {
 		'createUser': {
 			method: 'POST',
 			params: {}
+		},
+		'getUser': {
+			method: 'GET',
+			params: {},
+			isArray: false
 		}
 	});
 	return fact;

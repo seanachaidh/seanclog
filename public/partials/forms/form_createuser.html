@@ -9,7 +9,7 @@
 			</div>
 			
 			<div class="modal-body">
-				<form novalidate role="form">
+				<form novalidate name="createForm" role="form">
 					<div class="form-group">
 						<label for="username">Name</label>
 						<input type="text" class="form-control" id="username" ng-model="user.gebruikersnaam" placeholder="username" required />
@@ -33,7 +33,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createUser(user)">Create!</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createUser(user)" ng-disabled="createForm.$invalid">Create!</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

@@ -25,7 +25,7 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 seanclogtracks.controller('TracksController',
 		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects', 'toastr',
 	function($scope, $cookies, $window, $route, Tracks, Projects, toastr){
-
+	$scope.dataView = true;
 
 	Tracks.query({access_token: $cookies.token, include_projects: true}, function(t){
 		$scope.data = t;

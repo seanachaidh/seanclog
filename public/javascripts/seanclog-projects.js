@@ -24,6 +24,7 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 
 seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects', 'Klanten', 'toastr',
 function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
+	$scope.dataView = true;
 	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
 	Projects.query({access_token: $cookies.token},function(proj){
 		$scope.data = proj

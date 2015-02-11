@@ -202,6 +202,32 @@ exports.removeUser = function(req, res) {
 	});
 };
 
+exports.getUser = function(req, res) {
+	var token = req.query.access_token;
+	
+	model.Token.findOne({token: token}, function(err, tok) {
+		if(err) {
+			console.log('getUser: ongeldige token');
+			res.json({value: false});
+			return;
+		}
+		model.Gebruiker.findById(tok.gebruiker).select('naam email').exec(function(err, gebr) {
+			if(err) {
+				console.log('getUser: er was een fout');
+				res.json({value: false});
+				return;
+			}
+			if(!gebr) {
+				console.log('getUser: de gebruiker is niet opgehaald');
+				res.json({value: false});
+				return;
+			}
+			
+			res.json(gebr);
+		});
+	});
+};
+
 /*
  * Deze methode werkt voorlopig nog niet
  * Ik moet kijken hoe ik deze methode werkend krijg.

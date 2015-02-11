@@ -10,7 +10,7 @@
 					ieder veld corespondeert met een veld van een projectobject
 				 -->
 				<!-- Waarom is de novalidate nodig? -->
-				<form novalidate role="form">
+				<form novalidate name="editForm" role="form">
 					<label>Titel</label> 
 					<input id="titelInput" type="text" class="form-control" ng-model="toedit.titel" placeholder="Titel" required />
 					<label>Prijs</label>
@@ -24,7 +24,7 @@
 			</div>
 			<div class="modal-footer">
 				<!-- De functie createproj moet nog gemaakt worden -->
-				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProject(toedit)">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProject(toedit)" ng-disabled="editForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

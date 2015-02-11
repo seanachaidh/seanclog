@@ -6,7 +6,7 @@
 				<h4>Track maken</h4>
 			</div>
 			<div class="modal-body">
-				<form novalidate role="form">
+				<form novalidate name="editForm" role="form">
 					<label>Titel</label>
 					<input id="inputTitel" class="form-control" type="text" ng-model="toedit.titel" placeholder="titel" required />
 					<label>Begintijd</label>
@@ -34,7 +34,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="editTrack(toedit)">Save</button>
+				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="editTrack(toedit)" ng-disabled="editForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

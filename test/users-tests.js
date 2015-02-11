@@ -39,6 +39,23 @@ describe('usertests', function() {
 		});
 	}
 	
+	it('should get a user', function(done) {
+		function actualTest() {
+			request.post("http://localhost:5000/api/login")
+			.send({username: tmpuser.gebruikersnaam, password: tmpuser.wachtwoord})
+			.end(function(res) {
+				request.get("http://localhost:5000/api/users")
+				.query({access_token: res.body.token})
+				.end(function(res) {
+					expect(res.body.naam).to.be("mocha testgebruiker");
+					deleteUser(res, done);
+				});
+			});
+		}
+		
+		createUser(actualTest);
+	});
+	
 	it('should create a user', function(done) {
 		request.post('http://localhost:5000/api/users')
 		.send(tmpuser)

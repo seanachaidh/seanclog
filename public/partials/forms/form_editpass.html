@@ -5,7 +5,7 @@
 				<h4>Edit password</h4>
 			</div>
 			<div class="modal-body">
-				<form novalidate role="form">
+				<form novalidate name="editForm" role="form">
 					<label>New password</label>
 					<input id="newInput" type="password" class="form-control" ng-model="editpass.newpass" required />
 					<label>Retype password</label>
@@ -16,7 +16,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="editForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
