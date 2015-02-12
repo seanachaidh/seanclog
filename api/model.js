@@ -129,12 +129,12 @@ userSchema.pre('save', function(next) {
 	next();
 });
 
-userSchema.post('save', function(next) {
+userSchema.post('save', function(doc) {
 	if(devmode) {
-		var tmpmail = new MailgunMail(user);
-		tmpmail.sendMail();
-	} else {
 		console.log('in devmode. Geen validatie vereist');
+	} else {
+		var tmpmail = new mailgunmail(doc);
+		tmpmail.sendMail();
 	}
 });
 

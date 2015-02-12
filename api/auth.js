@@ -130,8 +130,7 @@ exports.createUser = function(req, res) {
 		gebruikersnaam: new_gebruikersnaam,
 		naam: new_naam,
 		email: new_email,
-		wachtwoord: new_password,
-		validated: isvalidated
+		wachtwoord: new_password
 	});
 	tmp.save(function(err) {
 		if(err) {
