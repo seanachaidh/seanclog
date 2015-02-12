@@ -7,8 +7,7 @@ var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 /*
- * TODO: Ik moet deze functie verplaatsen zodat ik ze globaal
- * kan gebruiken. Ik heb deze code van stack overflow
+ * Ik heb deze code van stack overflow
  */
 function generateToken(length) {
 	var retval = "";
@@ -60,6 +59,10 @@ passport.use(new LocalStrategy(function authUser(username, password, done) {
 		}
 		if(!user) {
 			return done(null, false, {message: 'Gebruiker niet gesvonden'});
+		}
+		
+		if(user.validated == false) {
+			return done(null, false, {message: 'Gebruiker is nog niet gevalideerd'});
 		}
 		
 		model.Token.findOne({gebruiker: user._id}, function(err, tok) {
@@ -120,11 +123,15 @@ exports.createUser = function(req, res) {
 		new_password = crypto.createHash('md5').update(req.body.wachtwoord).digest('hex');
 	var new_token = generateToken(10);
 	
+	/*
+	 * TODO: implement validation skip secret
+	 */
 	var tmp =  new model.Gebruiker({
 		gebruikersnaam: new_gebruikersnaam,
 		naam: new_naam,
 		email: new_email,
 		wachtwoord: new_password,
+		validated: isvalidated
 	});
 	tmp.save(function(err) {
 		if(err) {
@@ -249,4 +256,32 @@ exports.performLogout = function(req, res) {
 			 res.json({value: true});
 		 }
 	 });
+};
+
+exports.validateuser = function(req, res) {
+	var id = req.params.id;
+	model.Gebruiker.findById(id, function(err, gebr) {
+		if(err) {
+			console.log('Er was een fout');
+			res.json({value: false});
+			return;
+		}
+		if(!gebr) {
+			console.log('De gebruiker werd niet gevonden');
+			res.json({value: false});
+			return;
+		}
+		gebr.validated = true;
+		gebr.save(function(err) {
+			if(err) {
+				console.log('validateuser: er was een fout bij het bewaren');
+				res.json({value: false});
+				return;
+			}
+			/*
+			 * Gebruiker werd met success gevalideerd
+			 */
+			res.redirect('/');
+		});
+	});
 };

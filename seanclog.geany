@@ -23,13 +23,15 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=5842;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fauth.js;0;4
-FILE_NAME_1=1489;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fmodel.js;0;4
-FILE_NAME_2=1343;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fusers-tests.js;0;4
-FILE_NAME_3=3995;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapp.js;0;4
-FILE_NAME_4=1816;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fprojects.js;0;4
-FILE_NAME_5=1530;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fclients.js;0;4
+current_page=2
+FILE_NAME_0=1381;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Ftest%2Fusers-tests.js;0;4
+FILE_NAME_1=3995;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapp.js;0;4
+FILE_NAME_2=623;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fprojects.js;0;4
+FILE_NAME_3=1530;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fapi%2Fclients.js;0;4
+FILE_NAME_4=167;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-clients.js;0;4
+FILE_NAME_5=96;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-menu.html;0;4
+FILE_NAME_6=181;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fjavascripts%2Fseanclog-profile.js;0;4
+FILE_NAME_7=249;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fpieter%2FProjecten%2Fseanclog%2Fpublic%2Fpartials%2Fpartial-tracks.html;0;4
 
 [VTE]
 last_dir=/home/pieter/Projecten/seanclog

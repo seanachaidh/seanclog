@@ -9,16 +9,17 @@ describe('usertests', function() {
 	var toBeDeleted = 0;
 	var curtoken = 0;
 	
-	var tmpuser = new model.Gebruiker({
+	var tmpuser1 = new model.Gebruiker({
 		naam: 'mocha testgebruiker',
 		wachtwoord: 'test',
 		email: 'test@mocha.be',
-		gebruikersnaam: 'testmocha'
+		gebruikersnaam: 'testmocha',
+		validated: true
 	});
 	
-	function createUser(callback) {
+	function createUser(user, callback) {
 		request.post('http://localhost:5000/api/users')
-		.send(tmpuser)
+		.send(user)
 		.end(function(res) {
 			if(typeof callback === 'function') {
 				callback();
@@ -53,7 +54,7 @@ describe('usertests', function() {
 			});
 		}
 		
-		createUser(actualTest);
+		createUser(tmpuser1, actualTest);
 	});
 	
 	it('should create a user', function(done) {
@@ -79,12 +80,20 @@ describe('usertests', function() {
 				});
 			});
 		}
-		createUser(actualTest);
+		createUser(tmpuser1, actualTest);
 		
 	});
 	
 	it('should update a user', function(done) {
 		expect().fail('test nog niet gemaakt');
+	});
+	
+	it('should validate a user', function(done) {
+		function actualTest() {
+			request.post
+		}
+		
+		createUser(actualTest);
 	});
 	
 	//~ after(function(done) {

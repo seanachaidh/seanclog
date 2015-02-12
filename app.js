@@ -108,6 +108,11 @@ app.del('/api/users', passport.authenticate('bearer', {session: false}), clogapi
 app.get('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.getUser);
 
 /*
+ * valideer gebruikers
+ */
+app.get("/api/validateuser/:id", clogapi.auth.validateuser);
+
+/*
  * Dit komt een beetje vreemd over. Volgens mij maak ik hier beter een
  * nieuwe route van met de naam logout.
  */
@@ -127,3 +132,6 @@ var httpsserver = https.createServer(httpsOptions, app).listen(8000, function() 
 
 //dit zou normaalgezien een websocketservice moeten maken
 var wss = new ws.Server({server: server});
+
+//expose app
+exports.app = app;

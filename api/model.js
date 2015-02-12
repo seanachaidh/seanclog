@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+var mailgunmail = require('./mailgunmail');
 
 //de text die op dit moment geparsed is
 var ctext = '';
@@ -12,7 +13,8 @@ var fs = require('fs');
 var pass = '',
 	host = '',
 	user = '',
-	db = '';
+	db = '',
+	devmode = '',
 	connectstr = '';
 
 fs.readFile('passconf.json', 'utf8', function(err, data) {
@@ -28,6 +30,7 @@ fs.readFile('passconf.json', 'utf8', function(err, data) {
 		host = tmpobj.host;
 		user = tmpobj.user;
 		db = tmpobj.db;
+		devmode = tmpobj.devmode;
 		
 		//connecteren
 		if((user == '') && (pass == '')) {
@@ -48,7 +51,8 @@ var userSchema = new Schema({
 	wachtwoord: String,
 	naam: String,
 	email: String,
-	token: String
+	token: String,
+	validated: Boolean
 }, {collection: "gebruikers"});
 var usermod = mongoose.model('Gebruiker', userSchema);
 
@@ -115,6 +119,27 @@ klantSchema.pre('remove', function(next) {
 	//~ console.log('hook: removing client');
 	next();
 });
+
+userSchema.pre('save', function(next) {
+	if(devmode == true) {
+		this.validated = true;
+	} else {
+		this.validated = false;
+	}
+	next();
+});
+
+userSchema.post('save', function(next) {
+	if(devmode) {
+		var tmpmail = new MailgunMail(user);
+		tmpmail.sendMail();
+	} else {
+		console.log('in devmode. Geen validatie vereist');
+	}
+});
+
+exports.isDevMode = function() {return devmode;};
+exports.setDevMode = function(mode) {devmode = mode;}
 
 exports.Track = trackmod;
 exports.Project = projectmod;
