@@ -3,8 +3,12 @@
 %Titre: Seanclog: Simple and Fancy timetracker
 
 \documentclass[a4paper,11pt]{article}
+
+\usepackage[dutch]{babel}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{graphicx}
+\usepackage{placeins}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -85,9 +89,6 @@ dit het volgende in.
   \item Een interface met zo weinig mogelijk afleiding
   \item Gemakkelijke filtering van ingevoerde tracks
 \end{itemize}
-
-\section{Interne structuur}
-
 \section{Gebruikte software}
 %Voor dit project werd er bijna uitsluitend gebruik gemaakt van experimentele
 %technologie. Tegenwoordig worden webapplicaties vaak ontwikkeld op de zogenaamde
@@ -323,31 +324,56 @@ We kunnen ook een bepaald type invoer afdwingen. We kunnen ervoor zorgen dat de 
 Wanneer een invoerveld binnen een formulier niet geldig blijkt te zijn, zal Angular dit invoerveld toewijzen aan de klasse "ng-invalid". Als programmeur kan ik dan op deze klasse enkele stijlen toepassen die er bijvoorbeeld voor zorgen dat niet geldige invoervelden rood kleuren. Hetzelfde gebeurd met geldige invoervelden door middel van de "ng-valid" klasse. Verder krijgt een formulier in AngularJS een aantal extra objecten mee. Eén van die objecten is een object genaamd \$error. Dit object bevat informatie over welke invoervelden er op dat moment geldig zijn en welke niet. Stel dat men een invoerveld heeft met de naam "email". Wanneer dit invoerveld de text "blahblah" bevat zal het object "myform.email.\$error.eamil" de waarde true bevatten.
 
 
-\section{RESTAPI} %hier heb ik wikipedia als bron gebruikt
-Hier bespreken wij de RESTAPI
-Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
-ervoor dat we makkelijk meerdere clents kunnen maken die ook op op desktops
-werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
-eindeloos.
+\section{Interne structuur} %hier heb ik wikipedia als bron gebruikt
+\FloatBarrier
+De meeste applicaties zijn bedoeld voor het persisteren en het beheren van bepaalde gegevens. In sommige gevallen zijn dat gegevens van studenten. In ons geval zijn dat gegevens van klanten, projecten en tracks. Een computer kan hoofdzakelijk alleen wiskunde. Men zegt vaak dat een computer heel slim is, maar met alleen wiskunde kom je er in het leven. Wat we wel kunnen doen is de werkelijkheid proberen herleiden tot wiskunde. We kunnen de het gegeven dat wij willen bereiken op een zodanige manier noteren dat dit voor een computer begrijpbaar wordt. Hiervoor zijn programmeertalen erg handig. Ze laten ons toe om onszelf uit te drukken tegenover een computer. Als we alle gegevens op die manier zouden uitdrukken zouden we het volgende schema moeten bekomen.
 
-RestApi's worden doorgaans gebruikt voor het ophalen en het wegschrijven van
-data. Deze data kunnen uiteenlopende dingen zijn. Afbeeldingen, blogartikels,
-zelfs volledige objecten. Deze RestApi is meestal toegankelijk via het HTTP
-protocol. Dit zorgt ervoor dat het makkelijker is om clients te maken die deze
-API kunnen gebruiken omdat HTTP een alomvertegenwoordigd protocol heeft. Het is
-een protocol dat standaard in praktisch iedere networking api geïmplementeerd is
-en dat als dus danig door vele computers begrepen wordt.
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[scale=0.5]{model}
+\end{minipage}
+\end{center}
 
-Elk type data (of resource) wordt voorgesteld door een uniform resource
-identifier (ofwel URI)
+\subsection{RestAPI}
+%Hier bespreken wij de RESTAPI
+%Wij gaan voor deze applicatie gebruik maken van een RESTFUL api. Dit zorgt
+%ervoor dat we makkelijk meerdere clents kunnen maken die ook op op desktops
+%werken, telefoons, misschien zelfs een tv. De mogelijkheden zijn nagenoeg
+%eindeloos.
+%
+%RestApi's worden doorgaans gebruikt voor het ophalen en het wegschrijven van
+%data. Deze data kunnen uiteenlopende dingen zijn. Afbeeldingen, blogartikels,
+%zelfs volledige objecten. Deze RestApi is meestal toegankelijk via het HTTP
+%protocol. Dit zorgt ervoor dat het makkelijker is om clients te maken die deze
+%API kunnen gebruiken omdat HTTP een alomvertegenwoordigd protocol heeft. Het is
+%een protocol dat standaard in praktisch iedere networking api geïmplementeerd is
+%en dat als dus danig door vele computers begrepen wordt.
+%
+%Elk type data (of resource) wordt voorgesteld door een uniform resource
+%identifier (ofwel URI)
+%
+%Een RESTApi bestaat uit de volgende componenten.
+%\begin{description}
+%  \item [Get] Een get request
+%  \item [Delete] Verwijder data
+%  \item [Put] Verander data
+%  \item [Post] Bewaar data
+%\end{description}
 
-Een RESTApi bestaat uit de volgende componenten.
+Voor de ontwikkeling van de service werd er gekozen voor een RESTAPI. Een belangrijk gegeven dat men moet begrijpen bij het maken van een RESTAPI, is dat REST slechts een aantal regels zijn. Deze regels worden toegepast op het ontwerp van alle componenten van de applicatie om zodoende een schaalbare internetdienst te verkrijgen. Zo een dienst communiceert over het internet via het HTTP protocol door middel van de standaard HTTP methodes GET, POST, PUT, DELETE. Dit zijn de gewone standaard methodes die webbrowsers gebruiken voor het verkrijgen en verzenden van informatie via het internet
+
+Indien men de regels van een RESTAPI op een goede manier toepast, kan men een website met de volgende eigenschappen bekomen.
+
 \begin{description}
-  \item [Get] Een get request
-  \item [Delete] Verwijder data
-  \item [Put] Verander data
-  \item [Post] Bewaar data
+\item[Schaalbaar] Een oneindig aantal componenten kan worden ondersteunt die met elkaar kunnen communiceren. Dit aantal componenten is ook uitbreidbaar tot in het oneindige.
+\item[Simpelheid] De REST-architectuur zit heel simpel in elkaar, slechts gebruik makend van bestaande protocollen.
+\item[Beheerbaarheid] Een RESTAPI is over het algemeen gemakkelijk te beheren. Er kan op ieder moment in de ontwikkeling een component worden toegevoegd, verwijderd of geüpdatet.
+\item[Zichtbaarheid] De communicatie tussen client en server is zichtbaar voor programma's die het eventueel willen opvolgen. Tenzij er gebruik gemaakt wordt van https.
+\item[Portability] Een service is gemakkelijk overzetbaar van de ene server op de andere server
+\item[Betrouwbaarheid] Men kan de webserver die de API aanbiedt gemakkelijk zodanig afstellen dat er na 5 aanvragen gestopt moet worden met proberen. 
 \end{description}
+
 
 \subsection{Beveiliging}
 Het hebben van een goede applicatie betekent niet alleen dat de applicatie er goed uit moet zien. Klanten vertrouwen ons hun gegevens toe. Daarom moeten we erop toezien dat de applicatie goed beveiligd is. Dit hoop ik te bereiken door het gebruik van token based authenticatie. Wanneer een gebruiker zich aanmeldt zouden we alle gebruikers kunnen opsturen. Inclusief het wachtwoord. Wanneer de gebruiker dan data wilt opvragen zou deze terug zijn wachtwoord kunnen opsturen om zijn aanvraag te doen gelden. Dit gaan we echter niet doen. In plaats daarvan gaan we iedere gebruiker een token geven. De bedoeling is dat deze token opgestuurd zal worden in plaats van het wachtwoord. De tokens worden opgeslagen in een aparte collectie tezamen met de een veld waarin de datum staat wanneer de token is gemaakt. Telkens wanneer er een aanvraag afgehandeld wordt, wordt de token meegegeven via de query parameters. Dit wil zeggen de GET paramters. Hierna wordt er naar deze token gezocht. Als deze token bestaat, wordt er gekeken naar de leeftijd van de token. Mocht deze ouder zijn dan zeven dagen wordt er een foutboodschap teruggestuurd. Is dit niet het geval, dan is de aanvraag geautoriseerd en ontvangt de gebruiker zijn gevraagde gegevens. Mocht de token helemaal niet bestaan wordt er tevens een foutboodschap teruggestuurd. Telkens wanneer de token niet bestaat of deze vervallen is dient te gebruiker een nieuwe te genereren door zich opnieuw aan te melden.
