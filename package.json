@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "node ./node_modules/bower/bin/bower install"
+    "postinstall": "node ./node_modules/bower/bin/bower install",
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "3.2.6",
@@ -21,7 +22,8 @@
     "nodemailer": "*",
     "validator": "*",
     "superagent": "*",
-    "expect.js": "*"
+    "expect.js": "*",
+    "mailgun": "*"
   },
   "devDependencies": {
     "karma-chrome-launcher": "^0.1.7",

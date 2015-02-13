@@ -1,3 +1,4 @@
+var fs = require('fs');
 var passport = require('passport');
 var crypto = require('crypto');
 var LocalStrategy = require('passport-local').Strategy;
@@ -5,6 +6,17 @@ var BearerStrategy = require('passport-http-bearer').Strategy
 
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
+
+var devmode;
+
+fs.readFile('passconf.json', 'utf8', function(err, data) {
+	if(err) {
+		devmode = false;
+	} else {
+		var tmpobj = JSON.parse(data);
+		devmode = (tmpobj.devmode === "true");
+	}
+});
 
 /*
  * Ik heb deze code van stack overflow
@@ -123,21 +135,27 @@ exports.createUser = function(req, res) {
 		new_password = crypto.createHash('md5').update(req.body.wachtwoord).digest('hex');
 	var new_token = generateToken(10);
 	
-	/*
-	 * TODO: implement validation skip secret
-	 */
+	var validated;
+	debugger;
+	if(devmode == false)
+		validated = false;
+	else
+		validated = true;
+	 
 	var tmp =  new model.Gebruiker({
 		gebruikersnaam: new_gebruikersnaam,
 		naam: new_naam,
 		email: new_email,
-		wachtwoord: new_password
+		wachtwoord: new_password,
+		validated: validated
 	});
-	tmp.save(function(err) {
+	tmp.save(function(err, doc) {
 		if(err) {
 			console.log("Er was een error bij het maken van een gebruiker");
 			res.json({value: false});
 		} else {
 			console.log("maken van de gebruiker gelukt!");
+			model.sendMail(doc);
 			res.json({value: true});
 		}
 	});

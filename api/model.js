@@ -5,6 +5,12 @@
 var mongoose = require('mongoose');
 var mailgunmail = require('./mailgunmail');
 
+/*
+ * mailgun
+ */
+var Mailgun = require('mailgun').Mailgun;
+var mg = new Mailgun('key-a39bbd94c3832b05c42f6385f396c31e');
+
 //de text die op dit moment geparsed is
 var ctext = '';
 var fs = require('fs');
@@ -15,7 +21,10 @@ var pass = '',
 	user = '',
 	db = '',
 	devmode = '',
-	connectstr = '';
+	connectstr = '',
+	baseurl = '';
+
+var modelOptions = {};
 
 fs.readFile('passconf.json', 'utf8', function(err, data) {
 	if(err) {
@@ -31,6 +40,7 @@ fs.readFile('passconf.json', 'utf8', function(err, data) {
 		user = tmpobj.user;
 		db = tmpobj.db;
 		devmode = tmpobj.devmode;
+		baseurl = tmpobj.baseurl;
 		
 		//connecteren
 		if((user == '') && (pass == '')) {
@@ -41,6 +51,15 @@ fs.readFile('passconf.json', 'utf8', function(err, data) {
 		
 		console.log(connectstr);
 		mongoose.connect(connectstr);
+		
+		modelOptions = {
+			pass: pass,
+			host: host,
+			user: user,
+			db: db,
+			devmode: devmode,
+			baseurl: baseurl
+		};
 	}
 });
 
@@ -120,23 +139,33 @@ klantSchema.pre('remove', function(next) {
 	next();
 });
 
-userSchema.pre('save', function(next) {
-	if(devmode == true) {
-		this.validated = true;
-	} else {
-		this.validated = false;
-	}
-	next();
-});
+//~ userSchema.pre('save', function(next) {
+	//~ if(devmode == true) {
+		//~ this.validated = true;
+	//~ } else {
+		//~ this.validated = false;
+	//~ }
+	//~ next();
+//~ });
 
-userSchema.post('save', function(doc) {
-	if(devmode) {
-		console.log('in devmode. Geen validatie vereist');
+function sendMail(doc) {
+	debugger;
+	if(doc.validated == true) {
+		console.log('Geen validatie vereist');
 	} else {
-		var tmpmail = new mailgunmail(doc);
-		tmpmail.sendMail();
+		mg.sendText('pvankeymeulen@seanachaidh.be',
+			doc.email, 'seanclog validation',
+			doc.naam + ', please validate your mail\n'
+			+ baseurl + '/api/validateuser/' + doc._id + '\n'
+			+ 'kind regards, Seanachaidh', {},
+		function(err) {
+			if(err) console.log('er is iets fout gegaan');
+			else console.log('validatie bericht met succes verzonden');
+		});
 	}
-});
+};
+
+
 
 exports.isDevMode = function() {return devmode;};
 exports.setDevMode = function(mode) {devmode = mode;}
@@ -146,3 +175,6 @@ exports.Project = projectmod;
 exports.Klant = klantmod;
 exports.Gebruiker = usermod;
 exports.Token = tokenmod;
+
+exports.sendMail = sendMail;
+exports.modelOptions = modelOptions;
