@@ -3,5 +3,6 @@
 	"db": "cc_SAwudMXeuzcM",
 	"user": "SAwudMXeuzcM",
 	"password": "XRtwNuMbjvlr",
-	"devmode": "false"
+	"devmode": "false",
+	"baseurl": "seanclogtwo.herokuapp.com"
 }

@@ -1,8 +1,8 @@
 {
-	"host": "localhost",
-	"db": "test",
-	"user": "",
-	"password": "",
+	"host": "mongosoup-cont002.mongosoup.de:31758",
+	"db": "cc_SAwudMXeuzcM",
+	"user": "SAwudMXeuzcM",
+	"password": "XRtwNuMbjvlr",
 	"devmode": "false",
-	"baseurl": "http://localhost:5000"
+	"baseurl": "seanclogtwo.herokuapp.com"
 }

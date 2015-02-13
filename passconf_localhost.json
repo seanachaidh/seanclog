@@ -3,5 +3,6 @@
 	"db": "test",
 	"user": "",
 	"password": "",
-	"devmode": "true"
+	"devmode": "true",
+	"baseurl": "http://localhost:5000"
 }
