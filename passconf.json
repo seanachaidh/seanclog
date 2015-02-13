@@ -3,6 +3,6 @@
 	"db": "app29880742",
 	"user": "pietervk",
 	"password": "12345",
-	"devmode": "true",
+	"devmode": "false",
 	"baseurl": "http://seanclog.herokuapp.com"
 }
