@@ -1,7 +1,6 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#" />
 			<ul class="nav navbar-nav">
 				<li><a href="#/tracks">Tracks</a></li>
 				<li><a href="#/projects">Projects</a></li>
@@ -9,9 +8,10 @@
 				<li><a href="#/profile">Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right" role="search">
-				<div class="form-group"><input type="text" class="form-control" placeholder="search" /></div>
-				<button type="submit" class="btn btn-default">Search!</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal">Create</button>
+				<div class="form-group"><input type="text" class="form-control" ng-model="searchText" placeholder="search" ng-show="dataView"/></div>
+				<button type="button" class="btn btn-default" ng-click="filterResults(searchText)" ng-show="dataView">Search!</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal" ng-show="dataView">Create</button>
+				<button type="button" class="btn btn-default" onClick="performLogout()">Logout</button>
 			</div>
 		</div>
 	</div>

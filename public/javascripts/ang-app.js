@@ -6,8 +6,8 @@
  * de controller module mot hier nog aan worden toegevoegd
  */
 var seanclogApp = angular.module('seanclogApp',
-		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
-		 'pascalprecht.translate']);
+		['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'toastr',
+		'SeanclogProjects', 'SeanclogClients', 'SeanclogTracks', 'SeanclogUsers', 'SeanclogProfile']);
 /*
  * definieer alle routes
  */
@@ -23,15 +23,11 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 	})
 	.when('/clients', {
 		templateUrl: 'partials/partial-clients.html',
-		controller: 'KlantenController'
+		controller: 'ClientController'
 	})
 	.when('/profile', {
 		templateUrl: 'partials/partial-profile.html',
 		controller: 'ProfileController'
-	})
-	.when('/test', {
-		templateUrl: 'partials/partial-test.html',
-		controller: 'TestController'
 	})
 	.when('/login', {
 		templateUrl: 'partials/partial-login.html',
@@ -43,6 +39,7 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 
 	
 }]);
+
 //seanclogApp.config(['$translateProvider', function($translateProvider) {
 //	$translateProvider.useStaticFilesLoader({
 //		prefix: "/translations/",

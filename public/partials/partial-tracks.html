@@ -1,22 +1,27 @@
 <div ng-include="'/partials/partial-menu.html'"></div>
 <div class="container-fluid">
-	<h1>Tacks</h1>
+	<h1>Tracks</h1>
 	<table>
 		<tr>
 			<th>Titel</th>
 			<th>Begin</th>
 			<th>End</th>
+			<th>Project</th>
 			<th>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
-			<td>{{x.begintijd}}</td>
-			<td>{{x.eindtijd}}</td>
-			<td><button class="btn btn-default" ng-click="deleteTrack(x)">Remove</button></td>
+			<td>{{x.begintijd|humandate}}</td>
+			<td>{{x.eindtijd|humandate}}</td>
+			<td>{{x.project.titel}}</td>
+			<td>
+				<button class="btn btn-default" ng-click="deleteTrack(x)">Remove</button>
+				<!-- Ik zet dit in een functie zodat ik de invoervelden kan aanpassen -->
+				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditTrack(x)">Edit</button>
+			</td>
 		</tr>
-		
 	</table>
-	
 	<div ng-include="'/partials/forms/form_createtrack.html'"></div>
+	<div ng-include="'/partials/forms/form_edittrack.html'"></div>
 </div>

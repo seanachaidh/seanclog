@@ -1,11 +1,13 @@
 <div class="container">
 	<form novalidate class="simple-form">
-		<h2 class="form-signin-heading">Please sign in</h2>
-		<input type="text" class="form-control" ng-model="user.username" />
-		<input type="password" class="form-control" ng-model="user.password" />
+		<h2 class="form-signin-heading">Please sign in.
+			<span class="errortext" ng-show="usererror">Foute gebruikersnaam</span>
+		</h2>
+		<input type="text" class="form-control" ng-model="user.username" required />
+		<input type="password" class="form-control" ng-model="user.password" required />
 		<button class="btn btn-lg btn-primary btn-block" ng-click="dologin(user)">Sign in!</button>
 		<!-- hier een modal openen -->
-		<button class="btn btn-lg btn-primary btn block" data-toggle="modal" data-target="#createModal">New user!</button>
+		<button class="btn btn-lg btn-block" data-toggle="modal" data-target="#createModal">New user!</button>
 	</form>
 	
 	<div ng-include="'/partials/forms/form_createuser.html'"></div>

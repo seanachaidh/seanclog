@@ -7,21 +7,20 @@
 				<h4>Create client</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<label>Naam</label> <input type="text" class="form-control"
-						ng-model="client.naam" placeholder="Naam" /> <label>Telefoonnummer</label>
-					<input type="text" class="form-control"
-						ng-model="client.telefoonnummer" placeholder="Tel." /> <label>Email</label>
-					<input type="email" class="form-control" ng-model="client.email"
-						placeholder="Email" />
+				<form name="createForm" novalidate role="form">
+					<label>Naam</label>
+					<input id="naamInput" type="text" class="form-control" ng-model="client.naam" placeholder="Naam" required />
+					<label>Telefoonnummer</label>
+					<input id="telInput" pattern="[0-9]+" type="text" class="form-control" ng-model="client.telefoonnummer" placeholder="Tel." required />
+					<label>Email</label>
+					<input id="emailInput" type="email" class="form-control" ng-model="client.email" placeholder="Email" required />
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-default" type="button"
-					ng-click="createclient(client)">Create client</button>
+				<button class="btn btn-default" type="button" data-dismiss="modal"
+					ng-click="createclient(client)" ng-disabled="createForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
-
 	</div>
 </div>

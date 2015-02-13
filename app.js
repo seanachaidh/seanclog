@@ -1,6 +1,11 @@
 //de modules die onze app gebruikt
 var express = require('express');
 var http = require('http');
+
+//voor https
+var https = require('https');
+var fs = require('fs');
+
 var path = require('path');
 var routes = require('./routes');
 var mongodb = require('mongodb');
@@ -65,9 +70,17 @@ app.post('/api/clients', passport.authenticate('bearer', {session: false}), clog
  * Het verwijderen van data
  * Welk record er precies verwijderd moet worden wordt gedetermineerd door de post variabelen
  */
-app.del('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.deleteTrack);
-app.del('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
-app.del('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
+app.del('/api/tracks/:id', passport.authenticate('bearer', {session: false}), clogapi.tracks.deleteTrack);
+app.del('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.projects.deleteProject);
+app.del('/api/clients/:id', passport.authenticate('bearer', {session: false}), clogapi.clients.deleteClient);
+
+/*
+ * Het bijwerken van data
+ * Het record dat moet worden bijgewerkt wort bepaald door de gegeven id
+ */
+app.put('/api/tracks/:id', passport.authenticate('bearer', {session: false}), clogapi.tracks.updateTrack);
+app.put('/api/projects/:id', passport.authenticate('bearer', {session: false}), clogapi.projects.updateProject);
+app.put('/api/clients/:id', passport.authenticate('bearer', {session: false}), clogapi.clients.updateClient);
 
 
 app.post('/api/posttest', clogapi.tests.posttest);
@@ -89,7 +102,15 @@ app.post('/api/login', passport.authenticate('local', {session: false}), functio
 /*
  * Gebruikersbeheer
  */
-app.post('/api/user', clogapi.auth.createUser);
+app.post('/api/users', clogapi.auth.createUser);
+app.put('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.updateUser);
+app.del('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.removeUser);
+app.get('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.getUser);
+
+/*
+ * valideer gebruikers
+ */
+app.get("/api/validateuser/:id", clogapi.auth.validateuser);
 
 /*
  * Dit komt een beetje vreemd over. Volgens mij maak ik hier beter een
@@ -100,5 +121,17 @@ app.get('/api/logout', clogapi.auth.performLogout);
 var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
+var httpsOptions = {
+	key: fs.readFileSync('keys/server.key'),
+	cert: fs.readFileSync('keys/server.crt')
+};
+
+var httpsserver = https.createServer(httpsOptions, app).listen(8000, function() {
+	console.log('Express server with https listening on port 8000');
+});
+
 //dit zou normaalgezien een websocketservice moeten maken
 var wss = new ws.Server({server: server});
+
+//expose app
+exports.app = app;

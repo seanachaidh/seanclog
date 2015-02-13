@@ -7,3 +7,15 @@
 table {
 	width: 100%;
 }
+
+input.ng-invalid.ng-touched {
+	background-color: #FD5959;
+}
+
+input.ng-valid.ng-touched {
+	background-color: #00FF6A;
+}
+
+.errortext {
+	color: #FF0000;
+}

@@ -3,6 +3,14 @@
  */
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
+var validator = require('validator');
+
+function validateProject(project) {
+	
+	if(validator.isFloat(project.prijs) == false) return false;
+	if(project.klant == undefined) return false;
+	return true;
+}
 
 /*
  * Krijg alle projecten van de huidig aangemelde gebruiker
@@ -10,11 +18,41 @@ var ObjectId = require('mongoose').Types.ObjectId;
 exports.getProjectsOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.Gebruiker.findOne({token: token}, function(err, doc) {
-		var id = doc._id;
+	model.Token.findOne({token: token}, function(err, doc) {
+		var id = doc.gebruiker;
 		
-		model.Project.find({gebruiker: id}, function(err, project){
-			res.json(project);
+		var q = model.Project.find({gebruiker: id});
+		q.populate('klant');
+		
+		q.exec(function(err, projects) {
+			res.json(projects);
+		});
+	});
+};
+
+exports.updateProject = function(req, res) {
+	var id = req.params.id;
+	
+	var valid = validateProject({
+		prijs: req.body.prijs
+	});
+	
+	if(valid == false) {
+		console.log('update project: project is niet geldig');
+		res.json({value: false});
+	}
+	
+	model.Project.findById(id, function(err, proj) {
+		proj.titel = req.body.titel;
+		proj.prijs = req.body.prijs;
+		proj.klant = req.body.klant._id;
+		
+		proj.save(function(err) {
+			if(err) {
+				res.json({value: false});
+			}
+			
+			res.json({value: true});
 		});
 	});
 };
@@ -38,14 +76,15 @@ exports.deleteProject = function(req, res) {
 	 * Geeft false terug wanneer het verwijderen niet gelukt is
 	 * en true wanneer het wel gelukt is
 	 */
-	 var id = req.body.project._id;
+	 var id = req.params.id;
 	 
-	 model.Project.remove({_id: id}, function(err) {
+	 model.Project.findById(id, function(err, project) {
 		 if(err) {
-			 console.log('het verwijderen is niet gelukt');
+			 console.log('deleteProject: project niet gevonden');
 			 res.json({value: false});
 		 } else {
 			 console.log('het verwijderen is gelukt');
+			 project.remove();
 			 res.json({value: true});
 		 }
 	 });
@@ -54,23 +93,39 @@ exports.deleteProject = function(req, res) {
 exports.saveProject = function(req, res) {
 	var curtoken = req.query.access_token;
 		new_titel = req.body.titel,
-		new_prijs = req.body.prijs;
+		new_prijs = req.body.prijs,
+		new_klant = req.body.klant;
+		
 	
-	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
-		if(err) {
-			console.log('projecten: De gebruiker werd niet gevonden');
+	if(validateProject(req.body) == false) {
+		res.json({value: false});
+		return;
+	}
+	
+	console.log("begin van de saveproject functie");
+	
+	model.Token.findOne({token: curtoken}, function(err, tok) {
+		if(err || (tok == null)) {
+			console.log('projecten: De token werd niet gevonden');
 			res.json({value: false});
 		} else {
 			new_project = new model.Project({
 				titel: new_titel,
 				prijs: new_prijs,
-				gebruiker: g._id
+				klant: new_klant._id,
+				gebruiker: tok.gebruiker
 			});
-			new_project.save(function(err) {
+			
+			new_project.save(function(err, sav) {
 				if(err) {
 					console.log('project: bewaren mislukt');
+					res.json({value: false});
 				} else {
 					console.log('project: bewaren gelukt');
+					res.json({
+						value: true,
+						savedId: sav.id
+					});
 				}
 			});
 		}

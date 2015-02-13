@@ -1,0 +1,26 @@
+<!-- Le dialogue pour faire une cliente -->
+
+<div class="modal fade" id="editModal" data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Create client</h4>
+			</div>
+			<div class="modal-body">
+				<form novalidate name="editForm" role="form">
+					<label>Naam</label>
+					<input id="naamInput" type="text" class="form-control" ng-model="toedit.naam" placeholder="Naam" value="{{chosenName}}" required />
+					<label>Telefoonnummer</label>
+					<input id="telInput" pattern="[0-9]+" type="text" class="form-control" ng-model="toedit.telefoonnummer" placeholder="Tel." value="{{chosenTel}}" required />
+					<label>Email</label>
+					<input id="emailInput" type="email" class="form-control" ng-model="toedit.email" placeholder="Email" value="{{chosenEmail}}"/>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" type="button" data-dismiss="modal"
+					ng-click="editClient(toedit)" ng-disabled="editForm.$invalid">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

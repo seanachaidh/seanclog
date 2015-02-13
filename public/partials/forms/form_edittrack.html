@@ -1,19 +1,19 @@
 <!-- Dialogue pour faire un track -->
-<div class="modal fade" id="createModal" data-backdrop="false">
+<div class="modal fade" id="editModal" data-backdrop="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4>Track maken</h4>
 			</div>
 			<div class="modal-body">
-				<form novalidate name="createForm" role="form">
+				<form novalidate name="editForm" role="form">
 					<label>Titel</label>
-					<input class="form-control" type="text" ng-model="track.titel" placeholder="titel" required />
+					<input id="inputTitel" class="form-control" type="text" ng-model="toedit.titel" placeholder="titel" required />
 					<label>Begintijd</label>
 					<div class="input-group">
 						<!-- niet vergeten de datum en de tijd samen te voegen! -->
 						<!-- Ik moet nog nagaan welk ng-model hier correct is -->
-						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.begintijd" is-open="$parent.beginOpened" required />
+						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="toedit.begintijd" is-open="$parent.beginOpened" required />
 						<span class="input-group-btn">
 							<!-- Hier nog een extra id meegeven aan ng-click om te weten om welke kalender het precies gaat -->
 							<button class="btn btn-default" type="button" ng-click="openBegin($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -22,19 +22,19 @@
 					
 					<label>Eindtijd</label>
 					<div class="input-group">
-						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.eindtijd" is-open="$parent.endOpened" required />
+						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="toedit.eindtijd" is-open="$parent.endOpened" required />
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</div>
 					
 					<label>Project</label>
-					<select class="form-control" ng-model="track.project" ng-options="p as p.titel for p in projects"></select>
+					<select class="form-control" ng-model="toedit.project" ng-options="p as p.titel for p in projects"></select>
 					
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="createTrack(track)" ng-invalid="createForm.$invalid">Maak track</button>
+				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="editTrack(toedit)" ng-disabled="editForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

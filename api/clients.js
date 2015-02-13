@@ -1,11 +1,20 @@
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
+var validator = require('validator');
+
+
+function validateClient(client) {
+	if(validator.isNumeric(client.telefoonnummer) == false) return false;
+	if(validator.isEmail(client.email) == false) return false
+	
+	return true;
+}
 
 exports.getClientsOfUser = function(req, res) {
 	var token = req.param('access_token');
 	
-	model.Gebruiker.findOne({token: token}, function(err, doc){
-		var id = doc._id;
+	model.Token.findOne({token: token}, function(err, doc){
+		var id = doc.gebruiker;
 		
 		model.Klant.find({gebruiker: id}, function(err, klant){
 			res.json(klant);
@@ -17,18 +26,45 @@ exports.pdfClient = function(req, res) {
 	res.send('Een pdf van een kant');
 };
 
+exports.updateClient = function(req, res) {
+	var id = req.params.id;
+	var valid = validateClient(req.body);
+	
+	if(valid == false) {
+		console.log('update client: de klant is niet geldig');
+		res.json({value: false});
+		return;
+	}
+	
+	model.Klant.findById(id, function(err, klant) {
+		klant.naam = req.body.naam;
+		klant.telefoonnummer = req.body.telefoonnummer;
+		klant.email = req.body.email;
+		klant.gebruiker = req.body.gebruiker;
+		
+		klant.save(function(err) {
+			if(err) {
+				res.json({value: false});
+				return;
+			}
+			res.json({value: true});
+		});
+	});
+};
+
 /**
  * Dit verwijdert een klant op het identificatienummer
  * Geeft true terug als het gelukt is en false als het mislukt is
  */
 exports.deleteClient = function(req, res) {
-	var id = req.body.client._id;
-	Klant.remove({_id: new ObjectId(id)}, function(err) {
+	var id = req.params.id;
+	model.Klant.findById(id, function(err, klant) {
 		if(err){
-			console.log('het verwijderen is niet gelukt');
+			console.log('deleteClient: Klant niet gevonden');
 			res.json({value: false});
 		} else {
 			console.log('het verwijderen van een klant is gelukt');
+			klant.remove();
 			res.json({value: true});
 		}
 	});
@@ -39,22 +75,36 @@ exports.saveClient = function(req, res) {
 	var new_naam = req.body.naam,
 		new_telefoonnummer = req.body.telefoonnummer,
 		new_email = req.body.email;
+	
+	var valid = validateClient(req.body);
+	if(valid == false) {
+		console.log('save client: client niet geldig');
+		res.json({value: false});
+		return;
+	}
 		
-	model.Gebruiker.findOne({token: curtoken}, function(err, g) {
+	model.Token.findOne({token: curtoken}, function(err, g) {
 		if(err) {
 			console.log('klanten: De gebruiker werd niet gevonden');
+			res.json({value: false});
 		} else {
 			var new_client = new model.Klant({
 				naam: new_naam,
 				telefoonnummer: new_telefoonnummer,
 				email: new_email,
-				gebruiker: g._id
+				gebruiker: g.gebruiker
 			});
-			new_client.save(function(err) {
+			
+			new_client.save(function(err, sav) {
 				if(err) {
 					console.log('klanten: de klant kon niet worden bewaard');
+					res.json({value: false});
 				} else {
 					console.log('klanten: De nieuwe klant is met success bewaard');
+					res.json({
+						value: true,
+						savedId: sav.id
+					});
 				}
 			});
 		}

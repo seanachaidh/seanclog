@@ -1,4 +1,4 @@
-<div class="modal fade" id="createModal" data-backdrop="false">
+<div class="modal fade" id="editModal" data-backdrop="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -10,21 +10,21 @@
 					ieder veld corespondeert met een veld van een projectobject
 				 -->
 				<!-- Waarom is de novalidate nodig? -->
-				<form novalidate name="createForm" role="form">
+				<form novalidate name="editForm" role="form">
 					<label>Titel</label> 
-					<input id="titelInput" type="text" class="form-control" ng-model="proj.titel" placeholder="Titel" required/>
+					<input id="titelInput" type="text" class="form-control" ng-model="toedit.titel" placeholder="Titel" required />
 					<label>Prijs</label>
 					<!-- Zou ik ervoor kunnen zorgen dat de gebruiker
 						 hier alleenmaar een prijs kan invoeren?
 					 -->
-					<input id="prijsInput" pattern="\d+\.\d{2}" type="text" class="form-control" ng-model="proj.prijs" placeholder="Prijs" required>
+					<input id="prijsInput" pattern="\d+\.\d{2}" type="text" class="form-control" ng-model="toedit.prijs" placeholder="Prijs" required />
 					<label>Klant</label>
-					<select class="form-control" ng-model="proj.klant" ng-options="c as c.naam for c in clients"></select>
+					<select class="form-control" ng-model="toedit.klant" ng-options="c as c.naam for c in clients"></select>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<!-- De functie createproj moet nog gemaakt worden -->
-				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createProj(proj)" ng-disabled="createForm.$invalid">Create project</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editProject(toedit)" ng-disabled="editForm.$invalid">Save</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

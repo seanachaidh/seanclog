@@ -3,6 +3,7 @@ exports.projects = require('./projects');
 exports.clients = require('./clients');
 exports.tests = require('./tests');
 exports.auth = require('./auth');
+exports.model = require('./model');
 
 /*
  * enkele nuttige hulpfuncties

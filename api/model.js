@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+var mailgunmail = require('./mailgunmail');
 
 //de text die op dit moment geparsed is
 var ctext = '';
@@ -12,7 +13,8 @@ var fs = require('fs');
 var pass = '',
 	host = '',
 	user = '',
-	db = '';
+	db = '',
+	devmode = '',
 	connectstr = '';
 
 fs.readFile('passconf.json', 'utf8', function(err, data) {
@@ -28,6 +30,7 @@ fs.readFile('passconf.json', 'utf8', function(err, data) {
 		host = tmpobj.host;
 		user = tmpobj.user;
 		db = tmpobj.db;
+		devmode = tmpobj.devmode;
 		
 		//connecteren
 		if((user == '') && (pass == '')) {
@@ -48,15 +51,19 @@ var userSchema = new Schema({
 	wachtwoord: String,
 	naam: String,
 	email: String,
-	token: String
+	token: String,
+	validated: Boolean
 }, {collection: "gebruikers"});
+var usermod = mongoose.model('Gebruiker', userSchema);
 
 var projectSchema = new Schema({
 	titel: String,
-	//Is dit een geode naam voor deze kolom?
+	//Is dit een goede naam voor deze kolom?
 	prijs: Number,
+	klant: {type: Schema.Types.ObjectId, ref: 'Klant'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "projecten"});
+var projectmod = mongoose.model('Project', projectSchema);
 
 var klantSchema = new Schema ({
 	naam: String,
@@ -64,16 +71,78 @@ var klantSchema = new Schema ({
 	email: String,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "klanten"});
+var klantmod = mongoose.model('Klant', klantSchema);
+
+
 
 var trackSchema = new Schema({
 	titel: String,
-	begintijd: String,
-	eindtijd: String,
+	//Dit type datum (isodate) wordt niet geaccepteerd door android
+	begintijd: Date,
+	eindtijd: Date,
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
+var trackmod = mongoose.model('Track', trackSchema);
 
-exports.Track = mongoose.model('Track', trackSchema);
-exports.Project = mongoose.model('Project', projectSchema);
-exports.Klant = mongoose.model('Klant', klantSchema);
-exports.Gebruiker = mongoose.model('Gebruiker', userSchema);
+var tokenSchema = new Schema({
+	token: String,
+	made: Date,
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'gebruiker'}
+}, {collections: 'tokens'});
+var tokenmod = mongoose.model('Token', tokenSchema);
+/*
+ * Om cascade mogelijk te maken
+ */
+projectSchema.pre('remove', function(next) {
+	console.log('project remove hook');
+	debugger;
+	trackmod.find({project: this.id}, function(err, docs) {
+		for(var i = 0; i < docs.length; i++) {
+			var tmpdoc = docs[i];
+			tmpdoc.remove();
+		}
+	});
+	//~ console.log('hook: removing Project');
+	next();
+});
+
+klantSchema.pre('remove', function(next) {
+	console.log('client remove hook');
+	debugger;
+	projectmod.find({klant: this.id}, function(err, docs) {
+		for(var i = 0; i < docs.length; i++) {
+			var tmpdoc = docs[i];
+			tmpdoc.remove();
+		}
+	});
+	//~ console.log('hook: removing client');
+	next();
+});
+
+userSchema.pre('save', function(next) {
+	if(devmode == true) {
+		this.validated = true;
+	} else {
+		this.validated = false;
+	}
+	next();
+});
+
+userSchema.post('save', function(doc) {
+	if(devmode) {
+		console.log('in devmode. Geen validatie vereist');
+	} else {
+		var tmpmail = new mailgunmail(doc);
+		tmpmail.sendMail();
+	}
+});
+
+exports.isDevMode = function() {return devmode;};
+exports.setDevMode = function(mode) {devmode = mode;}
+
+exports.Track = trackmod;
+exports.Project = projectmod;
+exports.Klant = klantmod;
+exports.Gebruiker = usermod;
+exports.Token = tokenmod;
