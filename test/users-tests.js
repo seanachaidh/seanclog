@@ -9,7 +9,7 @@ describe('usertests', function() {
 	var toBeDeleted = 0;
 	var curtoken = 0;
 	
-	var tmpuser1 = new model.Gebruiker({
+	var tmpuser = new model.Gebruiker({
 		naam: 'mocha testgebruiker',
 		wachtwoord: 'test',
 		email: 'test@mocha.be',
@@ -54,7 +54,7 @@ describe('usertests', function() {
 			});
 		}
 		
-		createUser(tmpuser1, actualTest);
+		createUser(tmpuser, actualTest);
 	});
 	
 	it('should create a user', function(done) {
@@ -80,7 +80,7 @@ describe('usertests', function() {
 				});
 			});
 		}
-		createUser(tmpuser1, actualTest);
+		createUser(tmpuser, actualTest);
 		
 	});
 	
@@ -88,13 +88,32 @@ describe('usertests', function() {
 		expect().fail('test nog niet gemaakt');
 	});
 	
-	it('should validate a user', function(done) {
+	it('should check a user', function(done) {
 		function actualTest() {
-			request.post
+			request.post('http://localhost:5000/api/login')
+			.send({username: 'testmocha', password: 'test'})
+			.end(function(res) {
+				var token = res.body.token;
+				model.checkUser(token, function(retval) {
+					expect(retval.value).to.be(true);
+					deleteUser(tmpuser, done);
+				});
+			});
 		}
 		
-		createUser(actualTest);
+		createUser(tmpuser, actualTest)
 	});
+	
+	/*
+	 * Waarop slaat deze test?
+	 */
+	//~ it('should validate a user', function(done) {
+		//~ function actualTest() {
+			//~ request.post
+		//~ }
+		//~ 
+		//~ createUser(actualTest);
+	//~ });
 	
 	//~ after(function(done) {
 		//~ if((toBeDeleted != 0) && (curtoken != 0)) {

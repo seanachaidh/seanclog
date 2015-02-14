@@ -29,7 +29,6 @@ function MailgunMail(user) {
 		.send(mailobj)
 		.end(function(err, res) {
 			if(err) {
-				debugger;
 				console.log('Er was een error bij het versturen van een mail');
 				if(typeof next === 'function') next();
 			} else {
@@ -43,7 +42,6 @@ function MailgunMail(user) {
 		});
 		//~ console.log(from);
 		//~ console.log(subject);
-		//~ debugger;
 	}
 }
 module.exports = MailgunMail;

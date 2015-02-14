@@ -389,6 +389,25 @@ Ieder bericht dat verzonden wordt naar de server bevat genoeg informatie voor he
 
 De status van zowel de server als de client moet verstuurd worden via "bodies" van doorgestuurde data (dit wil zeggen: doorgestuurde json objecten), query strings, request headers en ga zo maar door. Kort gezegd wordt de gehele status van de applicatie doorgegeven via hypermedia.
 
+\subsubsection{URI}
+\paragraph{/api/users}
+Hiermee worden de gegevens bewerkt in de gebruikers collectie. De gebruikers collectie bevat documenten met daarin de gegeven van, logisch, de gebruikers van de applicatie. Dit is onder andere het wachtwoord, de naam, het email adres en dergelijke. Het wachtwoord wordt niet opgeslagen als leesbare tekst. In plaats daarvan slaan we de tekst op met een MD5 codering. MD5 is een algoritme dat vrij tekst kan omzetten naar een tekenreeks die in de verste verte niet op de originele tekst lijkt. Maar telkens wanneer men eenzelfde tekst door het algoritme voert bekomt men dezelfde tekenreeks. Wanneer een gebruiker aanlogt wordt deze tekenreeks vergeleken met datgene wat we hebben opgeslagen in de databank. Op die manier moeten we nooit het echt wachtwoord opslaan. Deze route ondersteunt de volgende methodes.
+
+\begin{description}
+\item[GET] Stuurt de gebruikersgegevens terug van de gebruiker die gekoppeld is aan de token meegegeven in de query string
+\item[POST] Maakt een nieuwe gebruiker aan.
+\item[PUT] Werkt de gebruiker bij die gekoppeld is aan de meegegeven access token. De nieuwe gebruikersgegevens worden meegegeven als JSON object via de requestbody.
+\item[DELETE] Verwijdert de gebruiker die gekoppeld is aan de meegegeven access token.
+\end{description}
+
+\paragraph{/api/projects/:id}
+Hiermee worden de gegevens bewerkt in de "Projecten" collectie. Een project is een werk waar een gebruiker voor een lange tijd aan bezig is en wordt gekoppeld aan een klant. Deze route ondersteunt de volgende methodes.
+
+\begin{description}
+\item[GET] Stuurt alle projecten terug van de gebruiker die gekoppeld is aan de meegegeven access token
+\item[DELETE] Verwijdert het project gekoppeld aan het meegegeven ID
+\item[PUT] Werkt het project bij van de gebruiker gekoppeld aan aan de meegegeven access token. De gegevens die bijgewerkt moeten worden, worden bepaald door het JSON object in de de request body. Het project dat zal worden bijgewerkt is dat project met de ID gelijk aan het ID veld in de request body.
+\end{description}
 
 \subsection{Beveiliging}
 \subsubsection{Tokens}

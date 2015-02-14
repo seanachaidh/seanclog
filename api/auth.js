@@ -136,7 +136,6 @@ exports.createUser = function(req, res) {
 	var new_token = generateToken(10);
 	
 	var validated;
-	debugger;
 	if(devmode == false)
 		validated = false;
 	else

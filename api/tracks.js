@@ -41,6 +41,7 @@ exports.getTracksOfUser = function(req, res) {
 
 exports.updateTrack = function(req, res) {
 	var id = req.params.id;
+	var token = req.query.access_token;
 	
 	var valid = validateTrack({
 		begintijd: req.body.begintijd,
@@ -52,24 +53,26 @@ exports.updateTrack = function(req, res) {
 		res.json({value: false});
 	}
 	
-	model.Track.findById(id, function(err, track) {
-		var new_begin = req.body.begintijd;
-		var new_end = req.body.eindtijd;
-		var new_titel = req.body.titel;
-		//Is dit een objectid of een string?
-		var new_project = req.body.project;
-		
-		track.titel = new_titel;
-		track.begintijd = new_begin
-		track.eindtijd = new_end;
-		//hier gaan we ervan uit dat het een objectid is
-		track.project = new_project._id;
-		
-		track.save(function(err) {
-			if(err){
-				res.json({value: false});
-			}
-			res.json({value: true});
+	model.checkUser(token, function(retval) {
+		model.Track.findById(id, {gebruiker: retval.id}, function(err, track) {
+			var new_begin = req.body.begintijd;
+			var new_end = req.body.eindtijd;
+			var new_titel = req.body.titel;
+			//Is dit een objectid of een string?
+			var new_project = req.body.project;
+			
+			track.titel = new_titel;
+			track.begintijd = new_begin
+			track.eindtijd = new_end;
+			//hier gaan we ervan uit dat het een objectid is
+			track.project = new_project._id;
+			
+			track.save(function(err) {
+				if(err){
+					res.json({value: false});
+				}
+				res.json({value: true});
+			});
 		});
 	});
 };
@@ -85,16 +88,20 @@ exports.pdfTrack = function(req, res) {
  */
 exports.deleteTrack = function(req, res) {
 	var id = req.params.id;
+	var token = req.query.access_token;
 	
-	model.Track.remove({_id: id}, function(err) {
-		if(err) {
-			console.log('De track is niet verwijderd');
-			res.json({value: false});
-		} else {
-			console.log('De track is verwijderd');
-			res.json({value: true});
-		}
+	model.checkUser(token, function(retval) {
+		model.Track.findById(id, {gebruiker: id}, function(err, doc) {
+			if(err) {
+				console.log('De track is niet verwijderd');
+				res.json({value: false});
+			} else {
+				res.json({value: true});
+			}
+		});
 	});
+	
+
 }
 exports.saveTrack = function(req, res) {
 	var token = req.query.access_token;

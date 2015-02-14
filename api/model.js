@@ -115,7 +115,6 @@ var tokenmod = mongoose.model('Token', tokenSchema);
  */
 projectSchema.pre('remove', function(next) {
 	console.log('project remove hook');
-	debugger;
 	trackmod.find({project: this.id}, function(err, docs) {
 		for(var i = 0; i < docs.length; i++) {
 			var tmpdoc = docs[i];
@@ -128,7 +127,6 @@ projectSchema.pre('remove', function(next) {
 
 klantSchema.pre('remove', function(next) {
 	console.log('client remove hook');
-	debugger;
 	projectmod.find({klant: this.id}, function(err, docs) {
 		for(var i = 0; i < docs.length; i++) {
 			var tmpdoc = docs[i];
@@ -149,7 +147,6 @@ klantSchema.pre('remove', function(next) {
 //~ });
 
 function sendMail(doc) {
-	debugger;
 	if(doc.validated == true) {
 		console.log('Geen validatie vereist');
 	} else {
@@ -165,7 +162,34 @@ function sendMail(doc) {
 	}
 };
 
-
+function checkUser(token, callback) {
+	//callback is verplicht
+	if(typeof callback !== 'function') {
+		throw new Error('Geen callback opgegeven');
+	}
+	
+	model.Token.findOne({token: token}, function(err, tok) {
+		if(!tok){
+			callback({value: false});
+			return;
+		}
+		if(err) {
+			callback({value: false});
+			return;
+		}
+		model.Gebruiker.findById(tok.gebruiker, function(err, gebruiker) {
+			if(!gebruiker) {
+				callback({value: false});
+				return;
+			}
+			if(err) {
+				callback({value: false});
+				return;
+			}
+			callback({value: true, id: gebruiker._id});
+		});
+	});
+}
 
 exports.isDevMode = function() {return devmode;};
 exports.setDevMode = function(mode) {devmode = mode;}
@@ -178,3 +202,4 @@ exports.Token = tokenmod;
 
 exports.sendMail = sendMail;
 exports.modelOptions = modelOptions;
+exports.checkUser = checkUser;

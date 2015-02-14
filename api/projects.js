@@ -6,7 +6,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var validator = require('validator');
 
 function validateProject(project) {
-	
 	if(validator.isFloat(project.prijs) == false) return false;
 	if(project.klant == undefined) return false;
 	return true;
@@ -32,27 +31,32 @@ exports.getProjectsOfUser = function(req, res) {
 
 exports.updateProject = function(req, res) {
 	var id = req.params.id;
+	var token = req.query.access_token;
 	
 	var valid = validateProject({
-		prijs: req.body.prijs
+		prijs: req.body.prijs,
+		klant: req.body.klant
 	});
 	
 	if(valid == false) {
 		console.log('update project: project is niet geldig');
 		res.json({value: false});
+		return;
 	}
 	
-	model.Project.findById(id, function(err, proj) {
-		proj.titel = req.body.titel;
-		proj.prijs = req.body.prijs;
-		proj.klant = req.body.klant._id;
-		
-		proj.save(function(err) {
+	model.checkUser(token, function(retval) {
+		var tmpproj = {
+			prijs: req.body.prijs,
+			klant: req.body.klant._id,
+			titel: req.body.titel
+		}
+		model.Project.update({_id: new ObjectId(id), gebruiker: retval.id}, {$set: tmpproj}, function(err) {
 			if(err) {
+				console.log(err.message);
 				res.json({value: false});
 			}
-			
-			res.json({value: true});
+			else
+				res.json({value: true});
 		});
 	});
 };
@@ -76,18 +80,21 @@ exports.deleteProject = function(req, res) {
 	 * Geeft false terug wanneer het verwijderen niet gelukt is
 	 * en true wanneer het wel gelukt is
 	 */
-	 var id = req.params.id;
-	 
-	 model.Project.findById(id, function(err, project) {
-		 if(err) {
-			 console.log('deleteProject: project niet gevonden');
-			 res.json({value: false});
-		 } else {
-			 console.log('het verwijderen is gelukt');
-			 project.remove();
-			 res.json({value: true});
-		 }
-	 });
+	var id = req.params.id;
+	var token = req.query.access_token
+
+	model.checkUser(token, function(retval) {
+		model.Project.remove({_id: id, gebruiker: retval.id}, function(err) {
+			if(err) {
+				console.log(err.message);
+				res.json({value: false});
+			} else {
+				res.json({value: true});
+			}
+		});
+	});
+
+
 };
 
 exports.saveProject = function(req, res) {
