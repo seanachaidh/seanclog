@@ -29,6 +29,8 @@ exports.pdfClient = function(req, res) {
 exports.updateClient = function(req, res) {
 	var id = req.params.id;
 	var valid = validateClient(req.body);
+	var token = req.query.acces_token;
+	
 	
 	if(valid == false) {
 		console.log('update client: de klant is niet geldig');
@@ -36,18 +38,19 @@ exports.updateClient = function(req, res) {
 		return;
 	}
 	
-	model.Klant.findById(id, function(err, klant) {
-		klant.naam = req.body.naam;
-		klant.telefoonnummer = req.body.telefoonnummer;
-		klant.email = req.body.email;
-		klant.gebruiker = req.body.gebruiker;
-		
-		klant.save(function(err) {
+	model.checkUser(token, function(retval) {
+		model.Klant.findByIdAndUpdate(id, {$set: {
+			naam: req.body.naam,
+			telefoonnummer: req.body.telefoonnummer,
+			email: req.body.email,
+			gebruiker: req.body.gebruiker
+		}}, function(err) {
 			if(err) {
+				console.log(err.message);
 				res.json({value: false});
-				return;
+			} else {
+				res.json({value: true});
 			}
-			res.json({value: true});
 		});
 	});
 };
@@ -58,15 +61,23 @@ exports.updateClient = function(req, res) {
  */
 exports.deleteClient = function(req, res) {
 	var id = req.params.id;
-	model.Klant.findById(id, function(err, klant) {
-		if(err){
-			console.log('deleteClient: Klant niet gevonden');
-			res.json({value: false});
-		} else {
-			console.log('het verwijderen van een klant is gelukt');
-			klant.remove();
-			res.json({value: true});
-		}
+	var token = req.query.access_token;
+	model.checkUser(token, function(retval) {
+		model.Klant.findById(id, {gebruiker: retval.id}, function(err, doc) {
+			if(err) {
+				console.log(err.message);
+				res.json({value: false});
+			} else {
+				doc.remove(function(err) {
+					if(err) {
+						console.log(err.message);
+						res.json({value: false});
+					} else {
+						res.json({value: true});
+					}
+				});
+			}
+		});
 	});
 };
 
