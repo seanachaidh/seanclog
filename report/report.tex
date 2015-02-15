@@ -312,6 +312,38 @@ Normaal gezien worden deze methodes impliciet aangemaakt. Men kan deze methodes 
 %Het is niet de naam maar de ng-model
 Voor het maken van deze applicatie heb ik het voorzien van één custom directive genaamd ng-match. Deze zorgt ervoor dat de inhoud van het éne invoerveld overeenstemt met het andere. Stel dat men een formulier heeft en dat formulier heeft een invoerveld genaamd wachtwoord. Dan kan men de gebruiker dwingen dezelfde tekst in een tweede invoerveld te schrijven door dat invoerveld te voorzien van het ng-match attribuut, met als waarde dezelfde als de naam van het eerste invoerveld. Wanneer de waarde van het tweede invoerveld niet overeenstemt met de waarde van het eerste is de waarde niet geldig en wordt deze niet opgestuurd naar de server.
 
+\begin{lstlisting}[language=javascript]
+seanclogSecurity.directive('ngMatch', ['$parse', function($parse) {
+	//ngmatch directive
+	
+	function link(scope, elem, attrs, ctrl) {
+		if(!ctrl) return;
+		if(!attrs['ngMatch']) return;
+		
+		var firstPassword = $parse(attrs['ngMatch']);
+		
+		var validator = function(value) {
+			var temp = firstPassword(scope);
+			var v = (value === temp);
+			ctrl.$setValidity('match', v);
+			return value;
+		};
+		
+		ctrl.$parsers.unshift(validator);
+		ctrl.$formatters.push(validator);
+		attrs.$observe('ngMatch', function() {
+			validator(ctrl.$viewValue);
+		});
+	}
+	
+	return {
+		link: link,
+		restrict: 'A',
+		require: '?ngModel'
+	};
+}]);
+\end{lstlisting}
+
 \subsubsection{Data validatie}
 %Nagaan of de required direcitve wel degelijk iets van angular is
 Men kan er niet altijd op vertrouwen dat de gebruiker de data op de juiste manier invoert. Om er zeker van te zijn dat er valide gegegevens ingegeven worden in de formulieren gaan we de gebruiker hier dus in bijstaan en validatie toepasssen. AngularJS heeft hiervoor enkele systemen ingebouwd. Het is mogelijk om binnen een formulier, velden aan te duiden die noodzakelijk zijn. Stel dat men bijvoorbeeld een klant wilt aanmaken. Dan heeft die klant een naam nodig. We kunnen die als volgt adwingen
@@ -390,6 +422,8 @@ Ieder bericht dat verzonden wordt naar de server bevat genoeg informatie voor he
 De status van zowel de server als de client moet verstuurd worden via "bodies" van doorgestuurde data (dit wil zeggen: doorgestuurde json objecten), query strings, request headers en ga zo maar door. Kort gezegd wordt de gehele status van de applicatie doorgegeven via hypermedia.
 
 \subsubsection{URI}
+Zoals eerder gezegd wordt bij een RESTAPI de resources voorgesteld door URI's. Deze applicatie volgt hierin een gemakkelijk te volgen structuur. Iedere URI correspondeert met een collectie binnen MongoDB. Men start de URI met "/api/" om aan te geven dat men een oproep op de API wilt doen. Daarna geeft men de collectie op waarop men een bewerking wilt uitvoeren. De collectie projecten wordt bijvoorbeeld aangeduid door projects. Dit geeft "/api/projects". Daarna kan men, afhankelijk van de operatie die men wilt uitvoeren. Stel dat men bijvoorbeeld het project met de ID 12345 wilt bewerken geeft dit "/api/projects/12345". De applicatie ondersteunt enkel de methodes POST, UPDATE, en DELETE op deze manier. Normaal gesproken zou, in een complete RESTAPI dit ook met GET moeten werken. In dat geval zou enkel de resource met het opgegeven ID moet worden teruggestuurd, maar omdat dit nooit in één van de front ends van de applicatie nodig is geweest. Is dit bijgevolg dus nog niet geïmplementeerd. Wanneer dit gedaan is moet er nog een access token voorkomen in de query string. Dit is een token die gekoppeld is aan een gebruiker van de applicatie. Op deze manier wordt er nagekeken of de request legitiem is en of de gebruiker het recht heeft om de bewerking uit te voeren. Uiteindelijk zal men de volgende URI bekomen "/api/projects?access\_token=abcd1234".
+
 \paragraph{/api/users}
 Hiermee worden de gegevens bewerkt in de gebruikers collectie. De gebruikers collectie bevat documenten met daarin de gegeven van, logisch, de gebruikers van de applicatie. Dit is onder andere het wachtwoord, de naam, het email adres en dergelijke. Het wachtwoord wordt niet opgeslagen als leesbare tekst. In plaats daarvan slaan we de tekst op met een MD5 codering. MD5 is een algoritme dat vrij tekst kan omzetten naar een tekenreeks die in de verste verte niet op de originele tekst lijkt. Maar telkens wanneer men eenzelfde tekst door het algoritme voert bekomt men dezelfde tekenreeks. Wanneer een gebruiker aanlogt wordt deze tekenreeks vergeleken met datgene wat we hebben opgeslagen in de databank. Op die manier moeten we nooit het echt wachtwoord opslaan. Deze route ondersteunt de volgende methodes.
 
@@ -405,8 +439,33 @@ Hiermee worden de gegevens bewerkt in de "Projecten" collectie. Een project is e
 
 \begin{description}
 \item[GET] Stuurt alle projecten terug van de gebruiker die gekoppeld is aan de meegegeven access token
-\item[DELETE] Verwijdert het project gekoppeld aan het meegegeven ID
+\item[DELETE] Verwijdert het project gekoppeld aan het meegegeven ID. Ook alle tracks die gekoppeld zijn aan dit project worden automatisch verwijderd.
 \item[PUT] Werkt het project bij van de gebruiker gekoppeld aan aan de meegegeven access token. De gegevens die bijgewerkt moeten worden, worden bepaald door het JSON object in de de request body. Het project dat zal worden bijgewerkt is dat project met de ID gelijk aan het ID veld in de request body.
+\item[POST] Maakt een project aan voor de gebruiker gekoppeld aan de meegegeven access token. Het project dat aangemaakt moet worden wordt meegegeven als JSON via de request body
+\end{description}
+
+\paragraph{/api/clients/:id}
+Hiermee worden gegevens bewerkt in de "klanten collectie. Een klant is een bedrijf of een persoon waarvoor een gebruiker een project kan hebben.
+\begin{description}
+\item[GET] Stuurt alle klanten terug van de gebruiker die gekoppeld is aan de meegegeven access token.
+\item[DELETE] Verwijdert de klant met de meegegeven ID op voorwaarde dat deze klant aangemaakt is geweest door de gebruiker die gekoppeld is aan de meegegeven access token. Hiermee worden ook automatisch alle projecten verwijderd die gekoppeld zijn aan de klant die verwijderd wordt.
+\item[PUT] Werkt de klant bij met de meegegeven ID. De nieuwe gegevens voor de klant worden meegegeven via de request body in JSON formaat. Deze operatie wordt enkel uitgevoerd als de klant aangemaakt is geweest door de gebruiker die gekoppeld is aan de meegegeven access token.
+\item[POST] Maakt een nieuwe klant aan met de gegeven die meegegeven worden in JSON formaat via de request body.
+\end{description}
+
+\paragraph{/api/tracks/:id}
+Hiermee worden de gegevens bewerkt van de "Tracks" collectie. Een track is één bepaalde tijdspanne die een gebruiker aan één bepaald project spendeert.
+\begin{description}
+\item[GET] Dit stuurt alle tracks terug van de gebruiker die gekoppeld is aan de meegegeven access token.
+\item[POST] Hiermee wordt er een nieuwe track gemaakt. De track die aangemaakt moet worden, wordt meegegeven via de request body in de vorm van een JSON object. De track wordt gekoppeld aan de gebruiker met de meegegeven access token
+\item[PUT] Hiermee wordt de track bijgewerkt met de meegegeven ID. De nieuwe gegevens worden doorgegeven als JSON object via de request body. Deze operatie wordt niet uitgevoerd als de gebruiker die gekoppeld is aan de meegegeven access token, geen eigenaar is van de track.
+\item[DELETE] Hiermee wordt de track met de meegegeven ID verwijderd. Deze operatie wordt niet uitgevoerd als de gebruiker, gekoppeld aan de meegegeven access token geen eigenaar is van de track.
+\end{description}
+
+\paragraph{/api/users/changepassword}
+Deze route wordt enkel gebruikt voor het wijzigen van wachtwoorden en reageert slechts op één methode
+\begin{description}
+\item[PUT] Hiermee wordt het wachtwoord bewerkt van de gebruiker gekoppeld aan de meegegeven access token. Hierbij wordt er een JSON object meegegeven via de request body. Dit JSON object bevat slecht één veld genaamd wachtwoord, met daarin het nieuwe wachtwoord.
 \end{description}
 
 \subsection{Beveiliging}
