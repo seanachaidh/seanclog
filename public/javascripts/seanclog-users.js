@@ -29,6 +29,17 @@ seanclogusers.factory('User', ['$resource', function($resource) {
 			method: 'GET',
 			params: {},
 			isArray: false
+		},
+		'updateUser': {
+			method: 'PUT',
+			isArray: false,
+			params: {}
+		},
+		'changePassword': {
+			method: 'PUT',
+			isArray: false,
+			params: {},
+			url: '/api/users/changepassword'
 		}
 	});
 	return fact;

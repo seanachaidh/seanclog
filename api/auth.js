@@ -169,7 +169,7 @@ exports.updateUser = function(req, res) {
 			res.json({value: false});
 		}
 		
-		model.Gebruiker.findById(retval._id, function(err, retval) {
+		model.Gebruiker.findById(retval.gebruiker, function(err, retval) {
 			if(!retval) {
 				console.log('updateUser: Token niet verbonden aan bestaande gebruiker');
 				res.json({value: false});
@@ -298,6 +298,32 @@ exports.validateuser = function(req, res) {
 			 * Gebruiker werd met success gevalideerd
 			 */
 			res.redirect('/');
+		});
+	});
+};
+
+exports.changePassword = function(req, res) {
+	var token = req.query.access_token;
+	var newpass = crypto.createHash('md5').update(req.body.wachtwoord).digest('hex');
+	
+	model.checkUser(token, function(retval) {
+		var id = retval.id;
+		model.Gebruiker.findById(id, function(err, gebr) {
+			if(err) {
+				console.log(err.message);
+				res.json({value: false});
+				return;
+			} else {
+				gebr.wachtwoord = newpass;
+				gebr.save(function(err) {
+					if(err) {
+						console.log(err.message);
+						res.json({value: false})
+					} else {
+						res.json({value: true});
+					}
+				});
+			}
 		});
 	});
 };

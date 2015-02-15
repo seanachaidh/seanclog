@@ -106,7 +106,11 @@ app.post('/api/users', clogapi.auth.createUser);
 app.put('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.updateUser);
 app.del('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.removeUser);
 app.get('/api/users', passport.authenticate('bearer', {session: false}), clogapi.auth.getUser);
-
+/*
+ * Verander wachtwoorden
+ */
+app.put('/api/users/changepassword', passport.authenticate('bearer', {session: false}), clogapi.auth.changePassword);
+ 
 /*
  * valideer gebruikers
  */

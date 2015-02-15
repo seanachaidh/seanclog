@@ -85,7 +85,28 @@ describe('usertests', function() {
 	});
 	
 	it('should update a user', function(done) {
-		expect().fail('test nog niet gemaakt');
+		//~ expect().fail('test nog niet gemaakt');
+		function actualTest() {
+			request.post('http://localhost:5000/api/login')
+			.send({username: 'testmocha', password: 'test'})
+			.end(function(res) {
+				var token = res.body.token;
+				request.put('http://localhost:5000/api/users')
+				.send({naam: 'bewerkt'})
+				.query({access_token: token})
+				.end(function(res) {
+					expect(res.body.value).to.be(true);
+					request.get('http://localhost:5000/api/users')
+					.query({access_token: token})
+					.end(function(res) {
+						expect(res.body.naam).to.be('bewerkt');
+						deleteUser(tmpuser, done);
+					});
+				});
+			});
+		}
+		
+		createUser(tmpuser, actualTest);
 	});
 	
 	it('should check a user', function(done) {

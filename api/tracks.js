@@ -1,7 +1,6 @@
 var model = require('./model');
 var ObjectId = require('mongoose').Types.ObjectId;
-
-	var validator = require('validator');
+var validator = require('validator');
 
 function validateTrack(track) {
 	if(validator.isDate(track.begintijd) == false) {
@@ -89,14 +88,20 @@ exports.pdfTrack = function(req, res) {
 exports.deleteTrack = function(req, res) {
 	var id = req.params.id;
 	var token = req.query.access_token;
-	
 	model.checkUser(token, function(retval) {
-		model.Track.findById(id, {gebruiker: id}, function(err, doc) {
+		model.Track.findById(id, {gebruiker: retval.id}, function(err, doc) {
 			if(err) {
 				console.log('De track is niet verwijderd');
 				res.json({value: false});
 			} else {
-				res.json({value: true});
+				doc.remove(function(err) {
+					if(err) {
+						console.log(err.message);
+						res.json({value: false});
+					} else {
+						res.json({value: true});
+					}
+				});
 			}
 		});
 	});
