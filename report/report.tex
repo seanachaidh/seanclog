@@ -497,10 +497,63 @@ De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplic
 \subsection{Bootstrap}
 Zelf ben ik niet zo een goede designer. Daarom heb ik besloten om deze klus uit te besteden aan een voorgekauwde collectie van CSS templates beter bekend als Bootstrap. Boostrap word meestal gebruikt om er zeker van te zijn dat de uiteindelijke website cross-browser zal werken. Op dit moment werkt Bootstrap op zowat alle moderne browsers. Deze templates zijn ook zodanig gemaakt dat de layout zich gemakkelijk aanpast aan verschillende grootten van schermen. Hete ondersteunt verschillende complexe layouts. Men kan er bijvoorbeeld voor zorgen dat de widgets automatisch in rijen staan en de breedte van het browserscherm gelijkmatig verdeeld wordt tussen de widgets.
 
+\subsection{Vertalingen}
+We kunnen er niet van uit gaan dat iedereen dezelfde taal spreekt. Zeker niet in een land als België. Daarom gedragen we ons als een echte wereldburger en ondersteunen we meerdere talen. De vertalingen worden verzorgt door een extra angular module genaamd angular-gettext. Gettext is eigenlijk een technologie die deel uitmaakt van het GNU systeem. Omdat dit een opensource systeem is komt het vaak voor dat de mensen die eraan meewerken niet zozeer een enorme kennis hebben over ICT. Dit is één van de redenen waarom gettext tot leven werd geroepen.
+
+Bij het gebruik van gettext markeert men in de broncode welke strings er vertaald moeten worden. Bij de angular-gettext module gebeurt dit door een translate directive. Bijvoorbeeld.
+\begin{lstlisting}[language=html]
+<div class="mycontent">
+	<h1 class="heading"><translate>hello</translate></h1>
+</div>
+\end{lstlisting}
+Hier wordt aangeduid dat de inhoud van de hoofding met de inhoud "hello" vertaald kan worden. Nadat dit met iedere te vertalen tekst in de broncode is gebeurd, kan men overgaan tot het "extraheren" van de strings. Bij angular-gettext gebeurd dit via een Grunt task. Deze ziet er als volgt uit.
+\begin{lstlisting}
+module.exports = function(grunt) {
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		nggettext_extract: {
+			pot: {
+				files: {
+					'po/template.pot': [
+						'public/partials/*.html',
+						'public/partials/forms/*.html'
+					]
+				}
+			}
+		},
+		nggettext_compile: {
+			all: {
+				files: {
+					'public/translations.js': ['po/*.po']
+				},
+				options: {
+					module: 'seanclogApp'
+				}
+			}
+		}
+	});
+	grunt.loadNpmTasks('grunt-angular-gettext');
+	grunt.registerTask('default', ['nggettext_compile']);
+};
+\end{lstlisting}
+Het belangrijke gedeelte is hier alles bij nggettext\_extract. Hier wordt geconfigureerd uit welke bestanden er allemaal translate aanduidingen te vinden zijn. Wanneer al deze bestanden gescand zijn genereert angular-gettext een bestand genaamd template.pot. Dit bevat een template voor het vertalen in andere talen en zal er ongeveer als volgt uit zien. (gegeven het voorbeeld van hierboven).
+\begin{lstlisting}
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: public/partials/een_bestand.html:3
+msgid "hello"
+msgstr ""
+\end{lstlisting}
+Dit bestand kopieert men naargelang de locale naar waar men wilt vertalen.
+
 \subsection{Filtering}
 Wanneer de gebruiker teveel data heeft opgeslagen, kan de het een beetje onoverzichtelijk beginnen worden. Daarom heb ik de front-end voorzien van een handige zoek functie. De gebruiker typt een tekst in en het systeem zoekt op basis hiervan tussen de gegevens van de huidige view.
 
-Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript te gebruiken. Angular zelf heeft hier ook een zogenaamde "filter" ingebouwd, maar die was ontoereikend. Deze filter werkt door gebruik te maken van een variabele in de scope als predicaat. Onze applicatie is zodanig gebouwd dat er voor iedere view dezelfde knop en invoerveld wordt gebruikt voor het ingeven van een zoekopdracht. Dit wordt gedaan doormiddel van "partials". Deze partials worden geladen door het gebruik van de angular ng-include directive. Dit creëert een aparte scope, waardoor het predicaat ontoegankelijk is voor de getoonde data.
+Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript te gebruiken. Angular zelf heeft hier ook een zogenaamde "filter" ingebouwd, maar die was ontoereikend. Deze filter werkt door gebruik te maken van een variabele in de scope als predicaat. Onze applicatie is zodanig gebouwd dat er voor iedere view dezelfde knop en invoerveld wordt gebruikt voor het ingeven van een zoekopdracht. Dit wordt gedaan door middel van "partials". Deze partials worden geladen door het gebruik van de angular ng-include directive. Dit creëert een aparte scope, waardoor het predicaat ontoegankelijk is voor de getoonde data.
 
 %Geef hier voorbeeld
 
