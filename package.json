@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "node ./node_modules/bower/bin/bower install",
+    "postinstall": "node ./node_modules/grunt-cli/bin/grunt",
     "start": "node app.js"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "ws": "*",
     "sax": "*",
     "bower": "*",
+    "grunt-cli": "*",
     "karma": "*",
     "karma-jasmine": "*",
     "nodemailer": "*",
@@ -33,6 +34,7 @@
     "mocha": "^2.1.0",
     "requirejs": "^2.1.15",
     "grunt": "*",
-    "grunt-angular-gettext": "*"
+    "grunt-angular-gettext": "*",
+    "grunt-bower-task": "*"
   }
 }

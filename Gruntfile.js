@@ -21,8 +21,19 @@ module.exports = function(grunt) {
 					module: 'seanclogApp'
 				}
 			}
+		},
+		bower: {
+			install: {
+				options: {
+					targetDir: 'bower_components',
+					install: true
+				}
+			}
 		}
 	});
 	grunt.loadNpmTasks('grunt-angular-gettext');
+	grunt.loadNpmTasks('grunt-bower-task');
+	
+	grunt.registerTask('default', ['nggettext_compile', 'bower']);
 };
 
