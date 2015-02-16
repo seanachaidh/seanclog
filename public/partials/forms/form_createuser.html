@@ -11,30 +11,30 @@
 			<div class="modal-body">
 				<form novalidate name="createForm" role="form">
 					<div class="form-group">
-						<label for="username">Name</label>
+						<label for="username"><translate>Name</translate></label>
 						<input type="text" class="form-control" id="username" ng-model="user.gebruikersnaam" placeholder="username" required />
 					</div>
 					
 					<div class=form-group">
-						<label for="fullname">Full name</label>
+						<label for="fullname"><translate>Full name</translate></label>
 						<input type="text" class="form-control" id="fullname" ng-model="user.naam" placeholder="Full name" required />
 					</div>
 					
 					<div class="form-group">
-						<label for="useremail">E-mail</label>
+						<label for="useremail"><translate>Email</translate></label>
 						<input type="eamil" class="form-control" id="useremail" ng-model="user.email" placeholder="e-mail" required />
 					</div>
 					
 					<!-- Hier moet nog een confirm password veld bijkomen -->
 					<div class="form-group">
-						<label for="userpass">Password</label>
+						<label for="userpass"><translate>Password</translate></label>
 						<input type="password" class="form-control" id="userpass" ng-model="user.wachtwoord" placeholder="Password"  required />
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createUser(user)" ng-disabled="createForm.$invalid">Create!</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createUser(user)" ng-disabled="createForm.$invalid"><translate>Create</translate></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><translate>Close</translate></button>
 			</div>
 		</div>
 	</div>

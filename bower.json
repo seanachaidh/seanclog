@@ -23,6 +23,7 @@
     "angular": "1.3.12",
     "angular-cookies": "*",
     "angular-translate": "*",
+    "angular-gettext": "*",
     "angular-route": "*",
     "angular-resource": "*",
     "angular-translate-loader-url": "*",

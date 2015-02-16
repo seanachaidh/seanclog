@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: public/partials/forms/form_createuser.html:37
+msgid "Close"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:36
+msgid "Create"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:24
+msgid "Email"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:19
+msgid "Full name"
+msgstr ""
+
+#: public/partials/partial-login.html:8
+msgid "Login"
+msgstr ""
+
+#: public/partials/partial-login.html:4
+msgid "Login error"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:14
+msgid "Name"
+msgstr ""
+
+#: public/partials/partial-login.html:10
+msgid "New user"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:30
+msgid "Password"
+msgstr ""
+
+#: public/partials/partial-login.html:3
+msgid "Please sign in"
+msgstr ""

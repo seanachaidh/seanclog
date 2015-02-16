@@ -6,7 +6,7 @@
  * de controller module mot hier nog aan worden toegevoegd
  */
 var seanclogApp = angular.module('seanclogApp',
-		['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'toastr',
+		['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'toastr', 'gettext',
 		'SeanclogProjects', 'SeanclogClients', 'SeanclogTracks', 'SeanclogUsers', 'SeanclogProfile']);
 /*
  * definieer alle routes
@@ -38,6 +38,10 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 	});
 
 	
+}]);
+
+seanclogApp.run(['gettextCatalog', function(gettextCatalog) {
+	gettextCatalog.setCurrentLanguage('nl');
 }]);
 
 //seanclogApp.config(['$translateProvider', function($translateProvider) {
