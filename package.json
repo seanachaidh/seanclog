@@ -24,7 +24,10 @@
     "validator": "*",
     "superagent": "*",
     "expect.js": "*",
-    "mailgun": "*"
+    "mailgun": "*",
+    "grunt": "*",
+    "grunt-angular-gettext": "*",
+    "grunt-bower-task": "*"
   },
   "devDependencies": {
     "karma-chrome-launcher": "^0.1.7",
@@ -32,9 +35,6 @@
     "karma-mocha": "^0.1.10",
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.1.0",
-    "requirejs": "^2.1.15",
-    "grunt": "*",
-    "grunt-angular-gettext": "*",
-    "grunt-bower-task": "*"
+    "requirejs": "^2.1.15"
   }
 }
