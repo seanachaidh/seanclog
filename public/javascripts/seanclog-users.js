@@ -59,8 +59,8 @@ seanclogusers.factory('Token', function() {
 	return retval;
 });
 
-seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'User',
-function($scope, $cookies, Login, $location, User){
+seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'gettextCatalog', 'User',
+function($scope, $cookies, Login, $location, gettextCatalog, User){
 	$scope.dologin = function(user) {
 		Login.getToken({username: user.username, password: user.password}, function(u, status) {
 			$cookies.token = u.token;
@@ -84,4 +84,8 @@ function($scope, $cookies, Login, $location, User){
 		});
 	};
 	
+	$scope.setLanguage = function(toset) {
+		$cookies.lang = toset;
+		gettextCatalog.setCurrentLanguage(toset);
+	};
 }]);

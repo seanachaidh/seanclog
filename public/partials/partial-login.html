@@ -8,6 +8,12 @@
 		<button class="btn btn-lg btn-primary btn-block" ng-click="dologin(user)"><translate>Login</translate></button>
 		<!-- hier een modal openen -->
 		<button class="btn btn-lg btn-block" data-toggle="modal" data-target="#createModal"><translate>New user</translate></button>
+		
+		<label><translate>Select language</translate></label>
+		<select class="form-control" ng-model="langselect" ng-change="setLanguage(langselect)">
+			<option value="en">English</option>
+			<option value="nl">Nederlands</option>
+		</select>
 	</form>
 	
 	<div ng-include="'/partials/forms/form_createuser.html'"></div>

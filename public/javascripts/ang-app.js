@@ -37,11 +37,10 @@ seanclogApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 		redirectTo: '/login'
 	});
 
-	
 }]);
 
-seanclogApp.run(['gettextCatalog', function(gettextCatalog) {
-	gettextCatalog.setCurrentLanguage('nl');
+seanclogApp.run(['$cookies', 'gettextCatalog', function($cookies, gettextCatalog) {
+	gettextCatalog.setCurrentLanguage($cookies.lang);
 }]);
 
 //seanclogApp.config(['$translateProvider', function($translateProvider) {
