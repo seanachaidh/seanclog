@@ -50,7 +50,6 @@
 \title{Seanclog: Simple and Fancy timetracker}
 \author{Pieter Van Keymeulen}
 \maketitle
-
 \section{Inleiding}
 
 \subsection{Tijd. Planning. Al het andere}
@@ -138,13 +137,18 @@ De MEAN stack is een collectie van software die er voor zorgt dat men de mogelij
 \end{description}
 
 \subsection{Nodejs}
-Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.
+Nodejs is een javascript interpreter die in tegenstelling tot andere javascript interpreters niet gekoppeld is aan een webbrowser. Men kan hiermee javascripts uitvoeren alsof het gewone programma's zouden zijn. Dit heeft als neveneffect dat het ook gebruikt kan worden voor bijvoorbeeld server side scripting.\cite{NodeJS}
 
 Eigenlijk is het ook niet correct om NodeJS een interpreter te noemen. NodeJS gebruikt immers google's v8 javascript engine. Waarin deze engine zich onderscheid van de andere engines is dat de code eerst wordt gecompileerd naar machinecode voor het wordt uitgevoerd. Hierdoor is er geen echt interpreting proces zoals bijvoorbeeld bij php het geval is.
 
 Dit is echter slecht één van de redenen waarom het een handige tool is voor het gebruik bij server side scripting. Tegenwoordig worden er alsmaar meer webapplicaties gebouwd. De bedrijven die deze webapplicaties bouwen hebben alsmaar meer klanten. Al die klanten moeten tegelijk afgehandeld worden. Computers hebben echter hun limieten. Wanneer een gebruiker een webpagina zou opvragen, betekend dat dat deze gebruiker een html bestand doorgestuurd zal moeten krijgen. Dat HTML bestand dient ingelezen en doorgestuurd te worden. Wanneer het besturingssysteem een bestand inleest betekent dat dat deze een zogezegde lock op dat bestand legt. Enkel het proces dat de leesbewerking heeft aangevraagd, mag het bestand inlezen. Van zodra dit proces gedaan heeft met lezen, wordt deze lock vrijgegeven en is het de beurt aan het volgende proces. Wanneer één van de processen die aanspraak willen maken op het bestand, nadat hij deze aanspraak gekregen heeft, in een lus gaat. Vormt dit een dead-lock. Dit wil zeggen dat alle input en output met betrekking tot dit bestand stilvalt en niemand meer aan het bestand kan. Het hele proces valt stil.
 
-In NodeJS zijn er echter geen locks.
+In NodeJS zijn er echter geen locks. Bijna geen enkele functie binnen NodeJS voert directe input en output uit. NodeJS werkt volledig event driven. Waar bij andere talen event driven programming vaak gerealiseerd wordt via een extern framework en de gebruiker manueel een main event loop moet aanroepen is deze manier van programmeren een onderdeel van de taal zelf. NodeJS programma's worden vaak geprogrammeerd als een reeks van events. Het programma begint te draaien en registreert welke events er allemaal in het programma gedeclareerd zijn. Daarna wordt de main event loop automatisch opgebouwd en wordt er naar alle events gekeken. Wanneer NodeJS er zeker van is dat er geen enkel event meer afgevuurd zal worden, of wanneer de gebruiker het programma expliciet stop, wordt er uit de main event loop gesprongen en stopt het programma.
+
+\subsection{Heroku}
+Heroku is een bedrijf dat een PAAS dienst aanbiedt.\cite{wiki:heroku}. Ze bieden een volledig platform aan voor het hosten van webapplicaties. Standaard wordt een app gehost op een Ubuntu Linux. Deze Linux heeft geen andere voorzieningen. Die moet men bij het Heroku add-on center toevoegen. Vaak kosten deze toevoegingen geld. Heroku staat toe dat het gebruik van een postgresql databank gratis zolang de hoeveelheid data onder de tienduizend rijen blijft. Het is ook mogelijk om andere types databanken te gebruiken, zoals in dit geval MongoDB, maar hiervoor is men afhankelijk van add-ons van externe bedrijven. Bij het maken van van een app wordt deze in het begin gedraaid op één "dyno". Dit is heroku terminologie om te zeggen dat er één instantie van de applicatie draait. Men kan dit naar gelieve optrekken tot meerdere dyno's maar dat gaat geld kosten.
+
+De kosten bij Heroku worden berekend per uur. Niet per maand, zoals dat bij traditionele webhosting het geval is. Wanneer de applicatie een uur niet draait wordt er voor dat uur niets aangerekend. Men zou dus in principe, als men geld zou willen besparen, de applicatie op bepaald momenten niet kunnen draaien. Bij Heroku is dit echter geen probleem want de eerste 750 dyno uren zijn gratis. Dit betekent dat men een  applicatie een maand lang gratis kan draaien zolang deze maar één dyno gebruikt. Stel dat men twee instanties van de applicatie zou willen draaien, dan zou men slechts voor een halve maand niet gefactureerd worden.
 
 \subsection{MongoDB}
 MongoDB is, in tegenstelling tot traditionele SQL databanken, een 
@@ -210,7 +214,7 @@ Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er
 Een extraatje van MongoDB waar in deze applicatie geen gebruik van wordt gemaakt heet GridFS. Eerder ging het erover dat bij een document-georiënteerde databank, een gegeven ieder type bestand kan zijn. Dit kan gaan om afbeeldingen, muziek, of, in het geval van Mongo, om JSON documenten. Documenten kunnen maximum 16MB groot zijn. Dus zelfs al zou men iets anders willen bewaren dan een JSON-object. Dan zou het nog niet lukken. Of niet? MongoDB heeft hier namelijk een oplossing voor, genaamd GridFS. GridFS laat toe om andere types documenten op te slaan in plaats van een JSON-objecten. Deze andere documenten kunnen eventueel alsnog vergezeld worden door enkele JSON gegevens. Dit komt omdat GridFS bedoeld is om documenten op te splitsen over meerdere collecties. Wanneer het document opgevraagd wordt, stel MongoDB het document opnieuw samen.
 
 \subsection{Express}
-Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object
+Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object.
 
 \subsection{AngularJS}
 %nog uit te leggen
@@ -355,6 +359,50 @@ We kunnen ook een bepaald type invoer afdwingen. We kunnen ervoor zorgen dat de 
 
 Wanneer een invoerveld binnen een formulier niet geldig blijkt te zijn, zal Angular dit invoerveld toewijzen aan de klasse "ng-invalid". Als programmeur kan ik dan op deze klasse enkele stijlen toepassen die er bijvoorbeeld voor zorgen dat niet geldige invoervelden rood kleuren. Hetzelfde gebeurd met geldige invoervelden door middel van de "ng-valid" klasse. Verder krijgt een formulier in AngularJS een aantal extra objecten mee. Eén van die objecten is een object genaamd \$error. Dit object bevat informatie over welke invoervelden er op dat moment geldig zijn en welke niet. Stel dat men een invoerveld heeft met de naam "email". Wanneer dit invoerveld de text "blahblah" bevat zal het object "myform.email.\$error.eamil" de waarde true bevatten.
 
+\subsubsection{Scopes}
+\paragraph{Wat zijn scopes?}
+De scope is het object dat refereert naar het applicatiemodel. Het is de context waarin alle expressies binnen een controller worden uitgevoerd. Scopes worden geschikt in een hiërarchische structuur. Scopes kunnen expressies opvolgen en events invullen.\cite{angular:scopes}
+
+\paragraph{Kenmerken van scopes}
+Scopes voorzien in een aantal diensten. Een van die diensten heet "\$watch". Deze kan benut worden om voor het opvolgen van bepaalde variabelen binnen de scope. In de onderstaande code wordt te variabele met de naam "name" opgevolgd. Wanneer deze wordt veranderd wordt er een interne counter verhoogt. Welke nu precies de waarde was van "name" en welke die nu is wordt genegeerd.
+\begin{lstlisting}
+scope.$watch('name', function(newValue, oldValue) {
+  scope.counter = scope.counter + 1;
+});
+\end{lstlisting}
+
+Daarnaast is er nog een dienst genaamd "\$apply" Deze kan worden gebruikt om expressies te evalueren die geen deel uitmaken van het Angular framework en deze dan te gebruiken in de view.
+
+Scopes kunnen in elkaar genest worden. Zo kan men de toegang door componenten tot bepaalde variabelen verhinderen terwijl men toch een gedeeld model heeft. Scopes kunnen op die manier oftewel child scopes zijn. Wat betekent dat ze de eigenschappen van de parent overerven, oftewel een geïsoleerde scope, waar dit laatste dus niet gebeurd.
+
+\paragraph{Scope als datamodel}
+Scopes vormen de verbinding tussen de controller en de view. Bij het linken van de view aan de controller maken de Angular directives in de views \$watch expressies. Op die manier worden de directives gewaarschuwd wanneer één van de variabelen binnen de scope verandert. Op die manier kan de directive ervoor zorgen dat de DOM altijd geüpdatet is.
+
+Zowel de controllers als de directives gebruiken de scope om te kijken of er een bepaalde variabele geüpdatet is. Ze hebben echter geen kennis van elkaar. Enkel de scope. Dit is belangrijk in verband met testing gezien dit ervoor zorgt dat men de DOM kan veranderen en kijken of de controller erop reageert.
+
+\begin{lstlisting}
+angular.module('scopeExample', [])
+.controller('MyController', ['$scope', function($scope) {
+  $scope.username = 'World';
+
+  $scope.sayHello = function() {
+    $scope.greeting = 'Hello ' + $scope.username + '!';
+  };
+}]);
+\end{lstlisting}
+
+In het bovenstaande voorbeeld worden er drie variabelen in de scope gestoken. Username, die een string bevat en een functie genaamd sayhello die de inhoud van de variabele greeting veranderd naar hello plus datgene wat er in de username variabele zit. Neem de volgende code
+
+\begin{lstlisting}[language=html]
+<html ng-app="scopeExample">
+	<div ng-controller="MyController">
+		<input ng-model="username"/>
+		<button ng-click="sayHello">Click me</button>
+		<span>{{greeting}}</span>
+	</div>
+</html>
+\end{lstlisting}
+De waarde van de ng-app attribuut bepaald welke Angularmodule de hoofdmodule is. Het attribuut ng-controller maakt een nieuwe scope en bepaald de naam van de controller die gebruikt zal worden om deze scope aan te spreken. De input in deze code heeft een ng-model attribuut. Deze bepaald aan welke variabele deze input gebonden wordt binnen de scope. De button heeft een ng-click attribuut. Deze bevat een angular expressie die geëvalueerd zal worden wanneer er op deze button geklikt wordt. In ons geval bestaat deze expressie uit een functie die uitgevoerd zal worden. De span helemaal onderaan bevat als inhoud een Angular expressie. Deze onderscheiden zich door doordat ze omringd worden door twee paar accolades. De gebruiker voert een een naam in in het invoerveld waardoor de variabele username in de scope zal veranderen. Wanneer er op de button geklikt wordt wordt de variabele greeting veranderd naar de waarde in username plus hello. Doordat er een expressie tussen de span staat kreeg deze ook een \$watch. Hierdoor wordt de verandering opgevangen en krijgt de span automatisch de nieuwe waarde als inhoud.
 
 \section{Interne structuur} %hier heb ik wikipedia als bron gebruikt
 De meeste applicaties zijn bedoeld voor het persisteren en het beheren van bepaalde gegevens. In sommige gevallen zijn dat gegevens van studenten. In ons geval zijn dat gegevens van klanten, projecten en tracks. Een computer kan hoofdzakelijk alleen wiskunde. Men zegt vaak dat een computer heel slim is, maar met alleen wiskunde kom je er in het leven. Wat we wel kunnen doen is de werkelijkheid proberen herleiden tot wiskunde. We kunnen de het gegeven dat wij willen bereiken op een zodanige manier noteren dat dit voor een computer begrijpbaar wordt. Hiervoor zijn programmeertalen erg handig. Ze laten ons toe om onszelf uit te drukken tegenover een computer. Als we alle gegevens op die manier zouden uitdrukken zouden we het volgende schema moeten bekomen.
@@ -400,7 +448,7 @@ Het model van de applicatie is redelijk minimalistisch. Helemaal bovenaan staat 
 %  \item [Post] Bewaar data
 %\end{description}
 
-Voor de ontwikkeling van de service werd er gekozen voor een RESTAPI. Een belangrijk gegeven dat men moet begrijpen bij het maken van een RESTAPI, is dat REST slechts een aantal regels zijn. Deze regels worden toegepast op het ontwerp van alle componenten van de applicatie om zodoende een schaalbare internetdienst te verkrijgen. Zo een dienst communiceert over het internet via het HTTP protocol door middel van de standaard HTTP methodes GET, POST, PUT, DELETE. Dit zijn de gewone standaard methodes die webbrowsers gebruiken voor het verkrijgen en verzenden van informatie via het internet
+Voor de ontwikkeling van de service werd er gekozen voor een RESTAPI. Een belangrijk gegeven dat men moet begrijpen bij het maken van een RESTAPI, is dat REST slechts een aantal regels zijn. Deze regels worden toegepast op het ontwerp van alle componenten van de applicatie om zodoende een schaalbare internetdienst te verkrijgen. Zo een dienst communiceert over het internet via het HTTP protocol door middel van de standaard HTTP methodes GET, POST, PUT, DELETE. Dit zijn de gewone standaard methodes die webbrowsers gebruiken voor het verkrijgen en verzenden van informatie via het internet. \cite{wiki:restapi}
 
 Indien men de regels van een RESTAPI op een goede manier toepast, kan men een website met de volgende eigenschappen bekomen.
 
@@ -548,7 +596,31 @@ msgstr ""
 msgid "hello"
 msgstr ""
 \end{lstlisting}
-Dit bestand kopieert men naargelang de locale naar waar men wilt vertalen.
+Dit bestand kopieert men naargelang de locale naar waar men wilt vertalen. Indien men bijvoorbeeld een nieuwe vertaling van het programma wilt maken in het Nederlands, kopieert men dit bestand naar "nl.po". Wat men dan moet doen is op iedere regel met een msgstr de vertaling geven van de bovenliggende msgid. Bijvoorbeeld
+\begin{lstlisting}
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: public/partials/een_bestand.html:3
+msgid "hello"
+msgstr "hallo"
+\end{lstlisting}
+Voor deze laatste stap is geen enkele kennis over ICT vereist. Dat is nu juist de kracht van GNU gettext. Het koppelt de vertaling los van de programmeercode. Vertalers hoeven niet in de programmeercode te kijken om een vertaling te maken de programmeur moet niet aan zijn code sleutelen om een nieuwe vertaling toe te passen.
+
+Vertalingen hebben alleen is niet genoeg. De gebruiker moet ook nog de mogelijkheid hebben tot het kiezen van zijn taal. Bij deze applicatie gebeurd dat via het loginscherm. Onderaan de pagina staat een selectbox. Wanneer de gebruiker hierin een andere taal selecteert gaat er een angular event af die de huidige taal veranderd naar de gekozen taal. Diezelfde functie zet ook een nieuwe cookie met daarin de gekozen taal. Op die manier wordt, wanneer de gebruiker de site opnieuw bezoekt, de site gepresenteerd in dezelfde taal als de vorige keer.
+
+\begin{lstlisting}
+seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'gettextCatalog', 'User',
+function($scope, $cookies, Login, $location, gettextCatalog, User){	
+	$scope.setLanguage = function(toset) {
+		$cookies.lang = toset;
+		gettextCatalog.setCurrentLanguage(toset);
+	};
+}]);
+\end{lstlisting}
 
 \subsection{Filtering}
 Wanneer de gebruiker teveel data heeft opgeslagen, kan de het een beetje onoverzichtelijk beginnen worden. Daarom heb ik de front-end voorzien van een handige zoek functie. De gebruiker typt een tekst in en het systeem zoekt op basis hiervan tussen de gegevens van de huidige view.
@@ -561,4 +633,6 @@ Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript t
 
 \section{Zelfevaluatie}
 
+\bibliographystyle{alpha}
+\bibliography{tex}
 \end{document}
