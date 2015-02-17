@@ -26,9 +26,7 @@ seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '
 function($scope, $route, $cookies, $window, Klanten, toastr){
 	$scope.dataView = true;
 	
-	Klanten.query({access_token: $cookies.token}, function(k) {
-		$scope.data = k;
-	});
+	loadData();
 	
 	$scope.createclient = function(client) {
 		Klanten.post({access_token: $cookies.token}, angular.copy(client), function(res) {
@@ -37,25 +35,24 @@ function($scope, $route, $cookies, $window, Klanten, toastr){
 			} else {
 				toastr.error('The client has not been saved');
 			}
+			loadData();
 		});
-		$route.reload();
 	};
 	
 	$scope.deleteClient = function(client) {
-		
 		Klanten.remove({id: client, access_token: $cookies.token}, function(retval) {
 			if(retval.value == true) {
 				toastr.success('Client has been removed');
 			} else {
 				toastr.error('Client has not been removed');
 			}
+			loadData();
 		});
-		console.log(client);
-		$route.reload();
+		//~ console.log(client);
 	};
 	
 	$scope.showEditClient = function(client) {
-		$scope.toedit = client;
+		$scope.toedit = angular.copy(client);
 	};
 	
 	$scope.editClient = function(client) {
@@ -65,6 +62,7 @@ function($scope, $route, $cookies, $window, Klanten, toastr){
 			} else {
 				toastr.success('the client has been updated');
 			}
+			loadData();
 		});
 	};
 	/*
@@ -94,4 +92,9 @@ function($scope, $route, $cookies, $window, Klanten, toastr){
 		$scope.data = angular.copy(filteredData);
 	};
 	
+	function loadData() {
+		Klanten.query({access_token: $cookies.token}, function(k) {
+			$scope.data = k;
+		});
+	}
 }]);

@@ -27,16 +27,7 @@ seanclogtracks.controller('TracksController',
 	function($scope, $cookies, $window, $route, Tracks, Projects, toastr){
 	$scope.dataView = true;
 
-	Tracks.query({access_token: $cookies.token, include_projects: true}, function(t){
-		$scope.data = t;
-	});
-	/*
-	 * Nous avons besoin de tous les projects de l' utilisateur
-	 * Ansi l' utilisateur peut choisisez un project 
-	 */
-	Projects.query({access_token: $cookies.token}, function(proj){
-		$scope.projects = proj;
-	});
+	loadData();
 	
 	$scope.createTrack = function(track){
 		Tracks.post({access_token: $cookies.token}, angular.copy(track), function(res) {
@@ -45,17 +36,19 @@ seanclogtracks.controller('TracksController',
 			} else {
 				toastr.success('Track has been saved');
 			}
+			loadData();
 		});
-		
-		$route.reload();
 	};
 
 	$scope.deleteTrack = function(track) {
-		console.log('Verwijderen Track');
-		console.log(track);
-		
-		Tracks.remove({id: track._id, access_token: $cookies.token}, track);
-		$route.reload();
+		Tracks.remove({id: track._id, access_token: $cookies.token}, track, function(retval) {
+			if(retval.value == true) {
+				toastr.success('track has been deleted');
+			} else {
+				toastr.error('Track has not been removed');
+			}
+			loadData();
+		});
 	};
 	
 	$scope.openBegin = function($event) {
@@ -80,12 +73,12 @@ seanclogtracks.controller('TracksController',
 				toastr.success('the track has been updated');
 			}
 			
-			$route.reload();
+			loadData();
 		});
 	};
 	
 	$scope.showEditTrack = function(track) {
-		$scope.toedit = track;
+		$scope.toedit = angular.copy(track);
 	};
 	
 	/*
@@ -115,8 +108,15 @@ seanclogtracks.controller('TracksController',
 		$scope.data = angular.copy(filteredData);
 	};
 	
-	
-	
+	function loadData() {
+		Tracks.query({access_token: $cookies.token, include_projects: true}, function(t){
+			$scope.data = t;
+		});
+		
+		Projects.query({access_token: $cookies.token}, function(proj){
+			$scope.projects = proj;
+		});
+	}
 }]);
 
 seanclogtracks.filter('humandate', function() {

@@ -25,17 +25,10 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 seanclogproj.controller('ProjectController', ['$scope', '$route', '$cookies', '$window', 'Projects', 'Klanten', 'toastr',
 function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 	$scope.dataView = true;
-	//Dans cette function, on utilise le nom "proj" trop beaucoup pour un variable
-	Projects.query({access_token: $cookies.token},function(proj){
-		$scope.data = proj
-	});
-	
-	Klanten.query({access_token: $cookies.token}, function(c) {
-		$scope.clients = c;
-	});
+
+	loadData();
 	
 	$scope.createProj = function(proj) {
-		//Est-ce que ce function est necessaire?
 		var tmp = angular.copy(proj);
 		Projects.post({access_token: $cookies.token}, proj, function(res){
 			if(res.value == true) {
@@ -43,11 +36,8 @@ function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 			} else {
 				toastr.error('the project has not been saved');
 			}
+			loadData();
 		});
-		
-		//Recharge la page
-		//je n'ai pas déjà testé cette function.
-		$route.reload();
 	};
 	
 	$scope.deleteProject = function(projid) {
@@ -58,23 +48,23 @@ function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 			} else {
 				toastr.error('the project has not been removed');
 			}
-		});		
-		console.log(projid);
-		
-		$route.reload();
+			loadData();
+		});
+		//~ console.log(projid);
 	};
 	
 	$scope.showEditProject = function(project) {
-		$scope.toedit = project;
+		$scope.toedit = angular.copy(project);
 	};
 	
 	$scope.editProject = function(project) {
 		Projects.update({id: project._id, access_token: $cookies.token}, project, function(data) {
-			if(data.value == false) {
+			if(data.value == true) {
 				toastr.success('the project has been updated');
 			} else {
-				toastr('the project has not been updated');
+				toastr.error('the project has not been updated');
 			}
+			loadData();
 		});
 		
 	};
@@ -106,6 +96,14 @@ function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 		$scope.data = angular.copy(filteredData);
 	};
 	
-	
+	function loadData() {
+		Projects.query({access_token: $cookies.token},function(proj){
+			$scope.data = proj
+		});
+
+		Klanten.query({access_token: $cookies.token}, function(c) {
+			$scope.clients = c;
+		});
+	}
 }]);
 
