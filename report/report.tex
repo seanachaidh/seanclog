@@ -210,8 +210,32 @@ Een attribuut van een element & column & field
 \end{tabular}
 
 Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig restricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
+
+\subsubsection{Query's op MongoDB}
+
 \subsubsection{GridFS}
 Een extraatje van MongoDB waar in deze applicatie geen gebruik van wordt gemaakt heet GridFS. Eerder ging het erover dat bij een document-georiënteerde databank, een gegeven ieder type bestand kan zijn. Dit kan gaan om afbeeldingen, muziek, of, in het geval van Mongo, om JSON documenten. Documenten kunnen maximum 16MB groot zijn. Dus zelfs al zou men iets anders willen bewaren dan een JSON-object. Dan zou het nog niet lukken. Of niet? MongoDB heeft hier namelijk een oplossing voor, genaamd GridFS. GridFS laat toe om andere types documenten op te slaan in plaats van een JSON-objecten. Deze andere documenten kunnen eventueel alsnog vergezeld worden door enkele JSON gegevens. Dit komt omdat GridFS bedoeld is om documenten op te splitsen over meerdere collecties. Wanneer het document opgevraagd wordt, stel MongoDB het document opnieuw samen.
+
+\subsubsection{Full text search}
+MongoDB biedt de mogelijkheid voor het doorzoeken van text.\cite{mongodb:textindex} Dit gebeurt via tekstindexen. Een tekstindex kan gemaakt worden voor iedere veld waarvan de waarde een string is of waarvan de waarde een array van strings is. Het kan dus niet gebruikt worden op nummers. Om een query uit te voeren die gebruikt maakt van de tekstindex moet men gebruik maken van de \$text operator.
+
+Om een tekstindex te maken moeten we de ensureIndex methode gebruiken. Deze functie krijgt het veld mee en de waarde "text" om aan te duiden dat het om een tekstindex gaat. Zie hier een voorbeeld:
+
+\begin{lstlisting}
+db.projecten.ensureIndex({titel: "text"})
+\end{lstlisting}
+Een collectie kan slechts één tekstindex hebben, maar die index kan wel uit meerdere velden bestaan. Dan gaat Mongo alle data in deze velden catalogiseren om te gebruiken bij het doorzoeken van de collectie. Let hierbij op dat bij het doorzoeken altijd rekening gehouden wordt met alle velden waaruit de tekstindex bestaat. Men kan dus niet alleen het veld "subject" doorzoeken als de index bestaat uit "subject" en "title". Het zal altijd beide velden zijn.
+
+Voltekst bevat vaak bepaalde dingen waarop we niet willen zoeken, maar toch in de resultaten verschijnen omdat onze zoekopdracht nu éénmaal deze woorden bevat om deze grammaticaal correct te maken. Stel dat een gebruiker nu een "een huis" intypt als zoekopdracht. Het zou dan voor deze gebruiker vervelend kunnen zijn zouden ook alle resultaten met het woord "een" verschijnen. Deze informatie is immers irrelevant. In MongoDB kan men omwille van deze reden een taal specificeren bij het aanmaken van een tekstindex. Neem nu de volgende code.
+\begin{lstlisting}
+db.quotes.ensureIndex(
+   { content : "text" },
+   { default_language: "Dutch" }
+)
+\end{lstlisting}
+Dit vertelt MongoDB dat de data van het veld "content" Nederlandse tekst bevat. MongoDB kan hier dan op inspelen door automatisch veelgebruikte woorden zoals "een" en "het" uit de zoekopdracht te filteren.
+
+Wanneer de de index is aangemaakt en er enkele documenten aan toegevoegd zijn kan men de collectie doorzoeken via full text search. Zoals eerder uitgelegd is geweest doet men dit via de \$text operator
 
 \subsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object.
