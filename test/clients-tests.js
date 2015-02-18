@@ -55,4 +55,28 @@ describe('tests voor klanten', function() {
 			done();
 		})
 	});
+	
+	it('should do a full text search', function(done) {
+		var tmpclient = new model.Klant({
+			naam: 'dit is met full text',
+			email: 'blah@blah.com',
+			telefoonnummer: '202220210'
+		});
+		request.post('http://localhost:5000/api/clients')
+		.send(tmpclient)
+		.query({access_token: logintoken})
+		.end(function(res){
+			expect(res.body.value).to.be(true);
+			var savedId = res.body.savedId;
+			toBeDeleted = savedId;
+			request.get('http://localhost:5000/api/clients')
+			.query({access_token: logintoken, search: "dit full"})
+			.end(function(res) {
+				var found = res.body[0];
+				console.log(res.body);
+				expect(found.naam).to.be('dit is met full text');
+				done();
+			});
+		});
+	});
 });

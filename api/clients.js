@@ -12,12 +12,25 @@ function validateClient(client) {
 
 exports.getClientsOfUser = function(req, res) {
 	var token = req.param('access_token');
+	var search = req.query.search;
 	
 	model.Token.findOne({token: token}, function(err, doc){
 		var id = doc.gebruiker;
+		var query;
 		
-		model.Klant.find({gebruiker: id}, function(err, klant){
-			res.json(klant);
+		if(search !== undefined) {
+			query = model.Klant.find({gebruiker: id, $text:{$search: search}});
+		} else {
+			query = model.Klant.find({gebruiker: id});
+		}
+		
+		query.exec(function(err, klant){
+			if(err) {
+				console.log(err.message);
+				res.json([{}]);
+			} else {
+				res.json(klant);
+			}
 		});
 	});
 };

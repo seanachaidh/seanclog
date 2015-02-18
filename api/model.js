@@ -82,6 +82,7 @@ var projectSchema = new Schema({
 	klant: {type: Schema.Types.ObjectId, ref: 'Klant'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "projecten"});
+projectSchema.index({'titel': 'text'});
 var projectmod = mongoose.model('Project', projectSchema);
 
 var klantSchema = new Schema ({
@@ -90,9 +91,8 @@ var klantSchema = new Schema ({
 	email: String,
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "klanten"});
+klantSchema.index({'naam': 'text'});
 var klantmod = mongoose.model('Klant', klantSchema);
-
-
 
 var trackSchema = new Schema({
 	titel: String,
@@ -102,6 +102,7 @@ var trackSchema = new Schema({
 	project: {type: Schema.Types.ObjectId, ref: 'Project'},
 	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
 }, {collection: "tracks"});
+trackSchema.index({'titel': 'text'});
 var trackmod = mongoose.model('Track', trackSchema);
 
 var tokenSchema = new Schema({
