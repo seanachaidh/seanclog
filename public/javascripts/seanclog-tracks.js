@@ -85,27 +85,39 @@ seanclogtracks.controller('TracksController',
 	 * Ik moet een methode vinden waarin deze functie niet in elke
 	 * controller moet voorkomen
 	 */
-	var original = null;
+	//~ var original = null;
+	//~ $scope.filterResults = function(tofilter) {
+		//~ var exp = RegExp(tofilter);
+		//~ 
+		//~ if(original != null){
+			//~ $scope.data = angular.copy(original);
+		//~ } else {
+			//~ original = angular.copy($scope.data);
+		//~ }
+		//~ 
+		//~ var filteredData = $scope.data.filter(function(element) {
+			//~ var result = false;
+			//~ for(prop in element) {
+				//~ if(element.hasOwnProperty(prop)) {
+					//~ if(exp.test(element[prop]) == true) result = true;
+				//~ }
+			//~ }
+			//~ return result;
+		//~ });
+		//~ 
+		//~ $scope.data = angular.copy(filteredData);
+	//~ };
+	
 	$scope.filterResults = function(tofilter) {
-		var exp = RegExp(tofilter);
-		
-		if(original != null){
-			$scope.data = angular.copy(original);
+		if(tofilter.length > 0) {
+			Tracks.query({access_token: $cookies.token, include_projects:true, search: tofilter}, function(t) {
+				$scope.data = t;
+			});
 		} else {
-			original = angular.copy($scope.data);
+			Tracks.query({access_token: $cookies.token, include_projects: true}, function(t) {
+				$scope.data = t;
+			});
 		}
-		
-		var filteredData = $scope.data.filter(function(element) {
-			var result = false;
-			for(prop in element) {
-				if(element.hasOwnProperty(prop)) {
-					if(exp.test(element[prop]) == true) result = true;
-				}
-			}
-			return result;
-		});
-		
-		$scope.data = angular.copy(filteredData);
 	};
 	
 	function loadData() {

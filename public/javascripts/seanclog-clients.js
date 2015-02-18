@@ -65,33 +65,19 @@ function($scope, $route, $cookies, $window, Klanten, toastr){
 			loadData();
 		});
 	};
-	/*
-	 * Ik moet een methode vinden waarin deze functie niet in elke
-	 * controller moet voorkomen
-	 */
-	var original = null;
-	$scope.filterResults = function(tofilter) {
-		var exp = RegExp(tofilter);
-		
-		if(original != null){
-			$scope.data = angular.copy(original);
-		} else {
-			original = angular.copy($scope.data);
-		}
-		
-		var filteredData = $scope.data.filter(function(element) {
-			var result = false;
-			for(prop in element) {
-				if(element.hasOwnProperty(prop)) {
-					if(exp.test(element[prop]) == true) result = true;
-				}
-			}
-			return result;
-		});
-		
-		$scope.data = angular.copy(filteredData);
-	};
 	
+	$scope.filterResults = function(tofilter) {
+		if(tofilter.length > 0) {
+			Klanten.query({access_token: $cookies.token, search: tofilter}, function(k) {
+				$scope.data = k;
+			});
+		} else {
+			Klanten.query({access_token: $cookies.token}, function(k) {
+				$scope.data = k;
+			});
+		}
+	};
+		
 	function loadData() {
 		Klanten.query({access_token: $cookies.token}, function(k) {
 			$scope.data = k;
