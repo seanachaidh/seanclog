@@ -1,8 +1,8 @@
 {
-	"host": "lennon.mongohq.com:10094",
-	"db": "app29880742",
-	"user": "pietervk",
-	"password": "12345",
-	"devmode": "false",
-	"baseurl": "http://seanclog.herokuapp.com"
+	"host": "localhost",
+	"db": "test",
+	"user": "",
+	"password": "",
+	"devmode": "true",
+	"baseurl": "http://localhost:5000"
 }

@@ -67,6 +67,29 @@ describe('projectsapi', function() {
 			done();
 		});
 	});
+	
+	it('should do a full text search', function(done) {
+		var tmpproj = new api.model.Project({
+			titel: 'mocha test project',
+			prijs: 12.50,
+			klant: tmpclient
+		});
+		
+		request.post('http://localhost:5000/api/projects')
+		.send(tmpproj)
+		.query({access_token: logintoken})
+		.end(function(res) {
+			toBeDeleted = res.body.savedId;
+			request.get('http://localhost:5000/api/projects')
+			.query({access_token: logintoken, search: 'mocha project'})
+			.end(function(res) {
+				var found = res.body[0];
+				expect(found.titel).to.be("mocha test project");
+				done();
+			});
+		});
+	});
+	
 });
 
 

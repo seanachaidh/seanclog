@@ -26,14 +26,26 @@ function validateTrack(track) {
 
 exports.getTracksOfUser = function(req, res) {
 	var token = req.param('access_token');
-	//Deze variable wordt voorlopig nog niet weet hoe ik dit kan afdwingen
-	var includeprojects = req.param('include_projects');
+	var search = req.query.search;
+	
 	model.Token.findOne({token: token}, function(err, tok) {
-		var q = model.Track.find({gebruiker: tok.gebruiker});
+		var id = tok.gebruiker;
+		var q;
+		
+		if(search !== undefined) {
+			q = model.Track.find({gebruiker: id, $text:{$search: search}});
+		} else {
+			q = model.Track.find({gebruiker: id});
+		}
 		q.populate('project');
 		
-		q.exec(function(err, proj) {
-			res.json(proj);
+		q.exec(function(err, tracks) {
+			if(err) {
+				console.log(err.message);
+				res.json([{}]);
+			} else {
+				res.json(tracks);
+			}
 		});
 	});
 };

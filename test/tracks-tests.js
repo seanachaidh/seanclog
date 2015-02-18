@@ -44,6 +44,28 @@ describe('tracksapi', function() {
 		});
 	});
 	
+	it('should do mongo full text search', function(done) {
+		var track = {
+			titel: "mocha test track",
+			begintijd: new Date(),
+			eindtijd: new Date() + 3600000,
+			project: testproject
+		};
+		request.post('http://localhost:5000/api/tracks')
+		.send(track)
+		.query({access_token: logintoken})
+		.end(function(res) {
+			shouldBeDeleted = res.body.savedId;
+			request.get('http://localhost:5000/api/tracks')
+			.query({access_token: logintoken, search: "mocha track"})
+			.end(function(res) {
+				var found = res.body[0];
+				expect(found.titel).to.be("mocha test track");
+				done();
+			});
+		});
+	});
+	
 	it('should not cracsh with empty track', function(done) {
 		request.post('http://localhost:5000/api/tracks')
 		.send(new model.Track({}))

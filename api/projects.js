@@ -16,15 +16,26 @@ function validateProject(project) {
  */
 exports.getProjectsOfUser = function(req, res) {
 	var token = req.param('access_token');
+	var search = req.query.search;
 	
 	model.Token.findOne({token: token}, function(err, doc) {
 		var id = doc.gebruiker;
+		var q;
 		
-		var q = model.Project.find({gebruiker: id});
+		if(search !== undefined) {
+			q = model.Project.find({gebruiker: id, $text:{$search: search}});
+		} else {
+			q = model.Project.find({gebruiker: id});
+		}
 		q.populate('klant');
 		
 		q.exec(function(err, projects) {
-			res.json(projects);
+			if(err) {
+				console.log(err.message);
+				res.json([{}]);
+			} else {
+				res.json(projects);
+			}
 		});
 	});
 };
@@ -54,9 +65,9 @@ exports.updateProject = function(req, res) {
 			if(err) {
 				console.log(err.message);
 				res.json({value: false});
-			}
-			else
+			}else{
 				res.json({value: true});
+			}
 		});
 	});
 };
