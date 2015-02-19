@@ -7,7 +7,7 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 <div class="container-fluid">
 	<h1>Projects</h1>
 	
-	<table>
+	<table class="table supertable">
 		<tr>
 			<th>Title</th>
 			<th>Price</th>
@@ -21,7 +21,7 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 			<td>{{x.klant.naam}}</td>
 			<td>
 				<button class="btn btn-default" ng-click="deleteProject(x._id)">Remove</button>
-				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditProject(x)">Edit</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditProject(x)">Edit</button>			
 			</td>
 		</tr>
 	</table>
