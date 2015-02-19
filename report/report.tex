@@ -4,6 +4,7 @@
 
 \documentclass[a4paper,11pt]{article}
 
+\usepackage[utf8]{inputenc}
 \usepackage[dutch]{babel}
 \usepackage{listings}
 \usepackage{color}
@@ -26,6 +27,60 @@
   stringstyle=\color{red}\ttfamily,
   morestring=[b]',
   morestring=[b]"
+}
+
+\lstdefinelanguage{CSS}{
+morekeywords={accelerator,azimuth,background,background-attachment,
+background-color,background-image,background-position,
+background-position-x,background-position-y,background-repeat,
+behavior,border,border-bottom,border-bottom-color,
+border-bottom-style,border-bottom-width,border-collapse,
+border-color,border-left,border-left-color,border-left-style,
+border-left-width,border-right,border-right-color,
+border-right-style,border-right-width,border-spacing,
+border-style,border-top,border-top-color,border-top-style,
+border-top-width,border-width,bottom,caption-side,clear,
+clip,color,content,counter-increment,counter-reset,cue,
+cue-after,cue-before,cursor,direction,display,elevation,
+empty-cells,filter,float,font,font-family,font-size,
+font-size-adjust,font-stretch,font-style,font-variant,
+font-weight,height,ime-mode,include-source,
+layer-background-color,layer-background-image,layout-flow,
+layout-grid,layout-grid-char,layout-grid-char-spacing,
+layout-grid-line,layout-grid-mode,layout-grid-type,left,
+letter-spacing,line-break,line-height,list-style,
+list-style-image,list-style-position,list-style-type,margin,
+margin-bottom,margin-left,margin-right,margin-top,
+marker-offset,marks,max-height,max-width,min-height,
+min-width,-moz-binding,-moz-border-radius,
+-moz-border-radius-topleft,-moz-border-radius-topright,
+-moz-border-radius-bottomright,-moz-border-radius-bottomleft,
+-moz-border-top-colors,-moz-border-right-colors,
+-moz-border-bottom-colors,-moz-border-left-colors,-moz-opacity,
+-moz-outline,-moz-outline-color,-moz-outline-style,
+-moz-outline-width,-moz-user-focus,-moz-user-input,
+-moz-user-modify,-moz-user-select,orphans,outline,
+outline-color,outline-style,outline-width,overflow,
+overflow-X,overflow-Y,padding,padding-bottom,padding-left,
+padding-right,padding-top,page,page-break-after,
+page-break-before,page-break-inside,pause,pause-after,
+pause-before,pitch,pitch-range,play-during,position,quotes,
+-replace,richness,right,ruby-align,ruby-overhang,
+ruby-position,-set-link-source,size,speak,speak-header,
+speak-numeral,speak-punctuation,speech-rate,stress,
+scrollbar-arrow-color,scrollbar-base-color,
+scrollbar-dark-shadow-color,scrollbar-face-color,
+scrollbar-highlight-color,scrollbar-shadow-color,
+scrollbar-3d-light-color,scrollbar-track-color,table-layout,
+text-align,text-align-last,text-decoration,text-indent,
+text-justify,text-overflow,text-shadow,text-transform,
+text-autospace,text-kashida-space,text-underline-position,top,
+unicode-bidi,-use-link-source,vertical-align,visibility,
+voice-family,volume,white-space,widows,width,word-break,
+word-spacing,word-wrap,writing-mode,z-index,zoom},
+morestring=[s]{:}{;},
+sensitive,
+morecomment=[s]{/*}{*/}
 }
 
 \lstset{
@@ -213,6 +268,7 @@ Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er
 
 \subsubsection{Query's op MongoDB}
 
+
 \subsubsection{GridFS}
 Een extraatje van MongoDB waar in deze applicatie geen gebruik van wordt gemaakt heet GridFS. Eerder ging het erover dat bij een document-georiënteerde databank, een gegeven ieder type bestand kan zijn. Dit kan gaan om afbeeldingen, muziek, of, in het geval van Mongo, om JSON documenten. Documenten kunnen maximum 16MB groot zijn. Dus zelfs al zou men iets anders willen bewaren dan een JSON-object. Dan zou het nog niet lukken. Of niet? MongoDB heeft hier namelijk een oplossing voor, genaamd GridFS. GridFS laat toe om andere types documenten op te slaan in plaats van een JSON-objecten. Deze andere documenten kunnen eventueel alsnog vergezeld worden door enkele JSON gegevens. Dit komt omdat GridFS bedoeld is om documenten op te splitsen over meerdere collecties. Wanneer het document opgevraagd wordt, stel MongoDB het document opnieuw samen.
 
@@ -338,7 +394,7 @@ Normaal gezien worden deze methodes impliciet aangemaakt. Men kan deze methodes 
 
 \subsubsection{Directives}
 %Het is niet de naam maar de ng-model
-Voor het maken van deze applicatie heb ik het voorzien van één custom directive genaamd ng-match. Deze zorgt ervoor dat de inhoud van het éne invoerveld overeenstemt met het andere. Stel dat men een formulier heeft en dat formulier heeft een invoerveld genaamd wachtwoord. Dan kan men de gebruiker dwingen dezelfde tekst in een tweede invoerveld te schrijven door dat invoerveld te voorzien van het ng-match attribuut, met als waarde dezelfde als de naam van het eerste invoerveld. Wanneer de waarde van het tweede invoerveld niet overeenstemt met de waarde van het eerste is de waarde niet geldig en wordt deze niet opgestuurd naar de server.
+Voor het maken van deze applicatie heb ik het voorzien van één custom directive genaamd ng-match. Deze zorgt ervoor dat de inhoud van het éne invoerveld overeenstemt met het andere. Stel dat men een formulier heeft en dat formulier heeft een invoerveld genaamd wachtwoord. Dan kan men de gebruiker dwingen dezelfde tekst in een tweede invoerveld te schrijven door dat invoerveld te voorzien van het ng-match attribuut, met als waarde dezelfde als de naam van het eerste invoerveld. Wanneer de waarde van het tweede invoerveld niet overeenstemt met de waarde van het eerste is de waarde niet geldig en wordt deze niet opgestuurd naar de server. \cite{angular:directives}
 
 \begin{lstlisting}[language=javascript]
 seanclogSecurity.directive('ngMatch', ['$parse', function($parse) {
@@ -371,6 +427,36 @@ seanclogSecurity.directive('ngMatch', ['$parse', function($parse) {
 	};
 }]);
 \end{lstlisting}
+\paragraph{matchen van directives}
+Directives moeten door Angular op een bepaalde manier genormaliseerd worden zodat we naar deze directives kunnen refereren in de broncode. Normaal gesproken gebruiken we hiervoor camelcase. Omdat HTML echter niet hoofdletter gevoelig is worden aangepaste directives meestal aangeduid via een andere notatie. Stel dat men een directive maakt genaamd ngHello, dan wordt binnen Javascript gewoon de naam ngHello gebruikt en binnen HTML de naam "ng-hello".
+
+Eigen directives kunnen in de volgende vormen gematched worden \\
+\begin{large}
+\textbf{Via de naam van de tag}
+\end{large}
+\begin{lstlisting}
+<ng-hello>some data</ng-hello>
+\end{lstlisting}
+\begin{large}
+\textbf{Via de naam van de klasse}
+\end{large}
+\begin{lstlisting}
+<span class="ng-hello">some data</span>
+\end{lstlisting}
+\begin{large}
+\textbf{via de commentaar}
+\end{large}
+\begin{lstlisting}
+<!-- directive ng-hello some data -->
+\end{lstlisting}
+\begin{large}
+\textbf{Via de naam van het attribuut}
+\end{large}
+\begin{lstlisting}
+<span ng-hello="some data></span>
+\end{lstlisting}
+
+Angular zelf raadt aan om enkel gebruik te maken van de tag- en de attribuut-methode.
 
 \subsubsection{Data validatie}
 %Nagaan of de required direcitve wel degelijk iets van angular is
@@ -568,6 +654,27 @@ De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplic
 %Ik moet hier meer informatie over opzoeken
 \subsection{Bootstrap}
 Zelf ben ik niet zo een goede designer. Daarom heb ik besloten om deze klus uit te besteden aan een voorgekauwde collectie van CSS templates beter bekend als Bootstrap. Boostrap word meestal gebruikt om er zeker van te zijn dat de uiteindelijke website cross-browser zal werken. Op dit moment werkt Bootstrap op zowat alle moderne browsers. Deze templates zijn ook zodanig gemaakt dat de layout zich gemakkelijk aanpast aan verschillende grootten van schermen. Hete ondersteunt verschillende complexe layouts. Men kan er bijvoorbeeld voor zorgen dat de widgets automatisch in rijen staan en de breedte van het browserscherm gelijkmatig verdeeld wordt tussen de widgets.
+
+\subsubsection{Responsief design}
+Tegenwoordig gebruikt men meer dan alleen een computer. Andere toestellen zoals een Smartphone en een Tablet komen alsmaar vaker voor in het dagelijkse leven. Deze toestellen worden voor meer dan alleen bellen gebruikt. Een smartphone heeft tegenwoordig allerlei doeleinden. Om ervoor te zorgen dat deze applicatie ook tot één van die doeleinden zal behoren, werd er op bepaalde hoogte aandacht gespendeerd aan een responsief design.
+
+Wanneer het scherm te klein wordt om het hele menu op één regel te bevatten, wordt dit menu verdeeld over meerdere regels. Bovendien wordt ook het zoekveld en de zoekknop weggehaald. Wanneer de van de tabel niet meer op het scherm passen, worden deze kolommen onder elkaar geplaatst. Dit laatste wordt mogelijk gemaakt door de volgende code.
+
+\begin{lstlisting}[language=css]
+@media (max-width: 767px) {
+	.supertable th {
+		display: none;
+	}
+	.supertable td {
+		display: block;
+	}
+	.hidetobig {
+		display: none;
+	}
+	
+}
+
+\end{lstlisting}
 
 \subsection{Vertalingen}
 We kunnen er niet van uit gaan dat iedereen dezelfde taal spreekt. Zeker niet in een land als België. Daarom gedragen we ons als een echte wereldburger en ondersteunen we meerdere talen. De vertalingen worden verzorgt door een extra angular module genaamd angular-gettext. Gettext is eigenlijk een technologie die deel uitmaakt van het GNU systeem. Omdat dit een opensource systeem is komt het vaak voor dat de mensen die eraan meewerken niet zozeer een enorme kennis hebben over ICT. Dit is één van de redenen waarom gettext tot leven werd geroepen.
