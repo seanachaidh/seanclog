@@ -3,8 +3,8 @@
 		<h2 class="form-signin-heading"><translate>Please sign in</translate>
 			<span class="errortext" ng-show="usererror"><translate>Login error</translate></span>
 		</h2>
-		<input type="text" class="form-control" ng-model="user.username" required />
-		<input type="password" class="form-control" ng-model="user.password" required />
+		<input type="text" class="form-control novalidate" ng-model="user.username" required />
+		<input type="password" class="form-control novalidate" ng-model="user.password" required />
 		<button class="btn btn-lg btn-primary btn-block" ng-click="dologin(user)"><translate>Login</translate></button>
 		<!-- hier een modal openen -->
 		<button class="btn btn-lg btn-block" data-toggle="modal" data-target="#createModal"><translate>New user</translate></button>

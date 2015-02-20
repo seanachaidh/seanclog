@@ -4,11 +4,11 @@ table {
 	width: 100%;
 }
 
-input.ng-invalid.ng-touched {
+input.ng-invalid.ng-touched:not(.novalidate) {
 	background-color: #FD5959;
 }
 
-input.ng-valid.ng-touched {
+input.ng-valid.ng-touched:not(.novalidate) {
 	background-color: #00FF6A;
 }
 
@@ -23,15 +23,4 @@ input.ng-valid.ng-touched {
 	.supertable td {
 		display: block;
 	}
-/*
-	
-	.supertable button {
-		display: inline;
-	}
-	
-*/
-	.hidetobig {
-		display: none;
-	}
-	
 }

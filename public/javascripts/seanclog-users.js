@@ -59,8 +59,8 @@ seanclogusers.factory('Token', function() {
 	return retval;
 });
 
-seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'gettextCatalog', 'User',
-function($scope, $cookies, Login, $location, gettextCatalog, User){
+seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'gettextCatalog', 'toastr', 'User',
+function($scope, $cookies, Login, $location, gettextCatalog, toastr, User){
 	$scope.dologin = function(user) {
 		Login.getToken({username: user.username, password: user.password}, function(u, status) {
 			$cookies.token = u.token;
@@ -79,6 +79,9 @@ function($scope, $cookies, Login, $location, gettextCatalog, User){
 		User.createUser(user, function(retval) {
 			if(retval.value == true) {
 				console.log('maken van gebruiker gelukt');
+				toastr.success('A validation mail has been sended');
+			} else {
+				console.log('het maken van de gebruiker is mislukt');
 			}
 			//wat moet ik doen wanneer het maken van een gebruiker faalt?
 		});
