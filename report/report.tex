@@ -647,7 +647,70 @@ Om de applicatie beter te kunnen testen, kan deze functionaliteit uitgeschakeld 
 In dit voorbeeld is de emailverificatie uitgeschakeld.
 
 \subsection{Tests}
-De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplictatie. De applicatie moet erop gebouwd zijn dat deze redelijk veel requests kan ontvangen en vooral, mochten deze requests fout opgesteld zijn, dat de applicatie deze opvangt en afhandelt zonder zelf te crashen. We zouden dit kunnen testen door zelf via de front-end foute data in te voeren, maar dit is onpraktisch. De applicatie is er immers op gebouwd om nooit foute data door te geven. Iedere data die ingevoerd wordt, wordt gevalideerd. Dit wilt echter niet zeggen dat de back-end de data ook goed valideert. In de wereld van JavaScript bestaan er hiervoor vele tools.
+De reliability van de applicatie cruciaal. Het gaat hier immers om een webapplictatie. De applicatie moet erop gebouwd zijn dat deze redelijk veel requests kan ontvangen en vooral, mochten deze requests fout opgesteld zijn, dat de applicatie deze opvangt en afhandelt zonder zelf te crashen. We zouden dit kunnen testen door zelf via de front-end foute data in te voeren, maar dit is onpraktisch. De applicatie is er immers op gebouwd om nooit foute data door te geven. Iedere data die ingevoerd wordt, wordt gevalideerd. Dit wilt echter niet zeggen dat de back-end de data ook goed valideert. In de wereld van JavaScript bestaan er hiervoor vele tools. Voor deze applicatie werd er gekozen voor Mocha. Mocha laat toe tests te groeperen en te rangschikken. Men kan er ook mee beslissen wat er precies na een test moet gebeuren en ervoor. Ook is het mogelijk om via Mocha asynchrone functies te testen.
+
+\begin{lstlisting}
+describe('projectsapi', function() {
+	var logintoken;
+	var toBeDeleted = 0;
+	var tmpclient;
+	before(function(done) {
+		request.post('http://localhost:5000/api/login')
+		.send({username: 'pieter', password: '12345'})
+		.end(function(res) {
+			logintoken = res.body.token;
+			
+			tmpclient = new api.model.Klant({
+				naam: "mocha test klant",
+				telefoonnummer: '7522552',
+				email: 'ldkfjsqlkf@oqdfjlqdkfj.com'
+			});
+			
+			done();
+		});
+	});
+	afterEach(function(done) {
+		if(toBeDeleted != 0) {
+			request.del('http://localhost:5000/api/projects/' + toBeDeleted)
+			.query({access_token: logintoken})
+			.end(function(res) {
+				toBeDeleted = 0;
+				done()
+			});
+		} else {
+			done();
+		}
+	});
+	it('should do a full text search', function(done) {
+		var tmpproj = new api.model.Project({
+			titel: 'mocha test project',
+			prijs: 12.50,
+			klant: tmpclient
+		});
+		
+		request.post('http://localhost:5000/api/projects')
+		.send(tmpproj)
+		.query({access_token: logintoken})
+		.end(function(res) {
+			toBeDeleted = res.body.savedId;
+			request.get('http://localhost:5000/api/projects')
+			.query({access_token: logintoken, search: 'mocha project'})
+			.end(function(res) {
+				var found = res.body[0];
+				expect(found.titel).to.be("mocha test project");
+				done();
+			});
+		});
+	});	
+});
+\end{lstlisting}
+De bovenstaande code toont een test voor het uitproberen van Mongo full text search. De tests spreken hiervoor uiteraard de RESTAPI van de applicatie aan vermits deze getest moet worden. Het uitvoeren van de requests gebeurt door superfetch. Deze api voorziet de functies get, post, put en delete. Er wordt de uri van de te testen resource opgegeven en alle informatie, zoals logintoken en testdata, wordt doorgegeven via chained calls. Deze chained call wordt afgesloten door de functie "end" die een andere functie als parameter meekrijgt. Ieder request van superfetch loopt immers asynchroon. Omdat ieder request asynchroon loopt krijgt de test via mocha een extra parameter mee genaamd done. Het is de bedoeling dat deze functie aangeroepen wordt wanneer alles getest is zodat mocha weet dat de test afgelopen is.
+
+Om uiteindelijk de waarden te testen die de requests ons terugsturen maken we gebruik van nog een extra bibliotheek genaamd expect.js. Deze biedt functies die als parameter de teruggestuurde waarden van de request mee krijgen plus nog een extra parameter om de waarden aan te geven die we verwachten, mocht de test goed verlopen. Mochten de waarden niet kloppen, dan gooit expect.js een error object dat door mocha opgevangen wordt. Mocha interpreteert dit als een slecht afgelopen test.
+
+Buiten de test moet men ook rekening houden met wat er voor en wat er na een test moet gebeuren. Mocha biedt namelijk ondersteuning om dit te kunnen beïnvloeden. Dit gebeurt via de functies "before", "beforeEach", "after" en "afterEach". Met "before" en "after" beslist men wat er voor en na het starten van de gehele testsuite moet gebeuren. Met "afterEach" en "beforeEach" beslist men wat er na iedere test moet gebeuren.
+
+In deze testsuite wordt er op die manier voor het begin van de testsuite ingelogd en wordt, na iedere test, de testdata verwijderd. Ook deze functies kunnen voorzien worden van een "done" parameter om aan te geven dat de functies "before" en consorten zijn afgelopen.
 
 \section{vormgeving}
 
@@ -753,10 +816,32 @@ function($scope, $cookies, Login, $location, gettextCatalog, User){
 }]);
 \end{lstlisting}
 
-\subsection{Filtering}
-Wanneer de gebruiker teveel data heeft opgeslagen, kan de het een beetje onoverzichtelijk beginnen worden. Daarom heb ik de front-end voorzien van een handige zoek functie. De gebruiker typt een tekst in en het systeem zoekt op basis hiervan tussen de gegevens van de huidige view.
+\subsection{Animaties}
+Omdat de meeste gebruiker een niet actieve website maar saai vinden zijn er aan deze applicatie enkele animaties toegevoegd. Dit is mogelijk via gewone CSS3 tezamen met AngularJS. AngularJS voorzien namelijk vele "hooks" bij zijn directives waarmee bepaalde animatie kan worden toegepast.\cite{angular:animations}
 
-Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript te gebruiken. Angular zelf heeft hier ook een zogenaamde "filter" ingebouwd, maar die was ontoereikend. Deze filter werkt door gebruik te maken van een variabele in de scope als predicaat. Onze applicatie is zodanig gebouwd dat er voor iedere view dezelfde knop en invoerveld wordt gebruikt voor het ingeven van een zoekopdracht. Dit wordt gedaan door middel van "partials". Deze partials worden geladen door het gebruik van de angular ng-include directive. Dit creëert een aparte scope, waardoor het predicaat ontoegankelijk is voor de getoonde data.
+Deze "hooks" kunnen onder andere worden toegepast op containers die van inhoud kunnen veranderen. In deze applicatie gebruiken we een grote container via de directive ng-view. Dit is de container waar onze views in terechtkomen. Ook deze directive heeft ondersteuning voor animaties en we kunnen deze gebruiken om de overgang vlot te laten verlopen tussen de verschillende views.
+\begin{lstlisting}[language=css]
+.myfade {
+	-ms-transition: 1s;
+	-moz-transition: 1s;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+
+.myfade.ng-enter {
+	opacity: 0;
+}
+
+.myfade.ng-leave {
+	opacity: 1;
+}
+\end{lstlisting}
+We wijzen onze ng-view toe aan de klasse myfade. Op deze klassen passen we een overgang toe die exact één seconde gaat duren. Dit doen we door het transition keyword. Omdat ng-view angular animatie ondersteunt krijgt deze de klasse ng-enter wanneer er een nieuwe view binnengegaan wordt en ng-leave waneer er een oude view verlaten wordt. In het geval dat angular de klasse ng-leave toepast komt de opacity op één te staan, anders op nul
+
+%\subsection{Filtering}
+%Wanneer de gebruiker teveel data heeft opgeslagen, kan de het een beetje onoverzichtelijk beginnen worden. Daarom heb ik de front-end voorzien van een handige zoek functie. De gebruiker typt een tekst in en het systeem zoekt op basis hiervan tussen de gegevens van de huidige view.
+%
+%Voor de implementatie hiervan heb ik besloten om uitsluitend native javascript te gebruiken. Angular zelf heeft hier ook een zogenaamde "filter" ingebouwd, maar die was ontoereikend. Deze filter werkt door gebruik te maken van een variabele in de scope als predicaat. Onze applicatie is zodanig gebouwd dat er voor iedere view dezelfde knop en invoerveld wordt gebruikt voor het ingeven van een zoekopdracht. Dit wordt gedaan door middel van "partials". Deze partials worden geladen door het gebruik van de angular ng-include directive. Dit creëert een aparte scope, waardoor het predicaat ontoegankelijk is voor de getoonde data.
 
 %Geef hier voorbeeld
 
