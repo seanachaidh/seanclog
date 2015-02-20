@@ -1,9 +1,0 @@
-extends ./heading.jade
-
-block content
-	.container(ng-controller='LoginController')
-		form(novalidate, class='simple-form')
-			h2(class='form-signin-heading') Please sign in
-			input(type='text', class='form-control', ng-model='user.username')
-			input(type='password', class='form-control', ng-model='user.password')
-			button(class='btn btn-lg btn-primary btn-block', ng-click='dologin(user)') Sign in
