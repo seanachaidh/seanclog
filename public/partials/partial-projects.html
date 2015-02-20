@@ -2,10 +2,17 @@
 De single quotes en het feit dat het pad vanaf root begint
 zijn heel belangrijk bij ng-include. Anders werkt het niet.
 -->
-
-<div ng-include="'/partials/partial-menu.html'"></div>
 <div class="container-fluid">
-	<h1>Projects</h1>
+	<h1>
+		<translate>Projects</translate>
+		<form class="form-inline extrabuttons">
+			<div class="form-group">
+				<input type="text" class="form-control novalidate" ng-model="searchText" placeholder="Search" />
+				<button class="btn btn-default" ng-click="filterResults(searchText)"><translate>Search</translate></button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#createModal"><translate>Create</translate></button>
+			</div>
+		</form>
+	</h1>
 	
 	<table class="table supertable">
 		<tr>

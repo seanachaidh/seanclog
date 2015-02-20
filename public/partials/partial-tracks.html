@@ -1,6 +1,15 @@
-<div ng-include="'/partials/partial-menu.html'"></div>
 <div class="container-fluid">
-	<h1>Tracks</h1>
+	<h1>
+		Tracks
+		<form class="form-inline extrabuttons">
+			<div class="form-group">
+				<input type="text" class="form-control novalidate" ng-model="searchText" placeholder="Search" />
+				<button class="btn btn-default" ng-click="filterResults(searchText)"><translate>Search</translate></button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#createModal"><translate>Create</translate></button>
+			</div>
+		</form>
+	</h1>
+	
 	<table class="table supertable">
 		<tr>
 			<th translate>Title</th>

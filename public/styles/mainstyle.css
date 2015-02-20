@@ -16,6 +16,34 @@ input.ng-valid.ng-touched:not(.novalidate) {
 	color: #FF0000;
 }
 
+.extrabuttons {
+	float: right;
+}
+
+.myfade {
+	-ms-transition: 1s;
+	-moz-transition: 1s;
+}
+
+.myfade.ng-enter {
+	opacity: 0;
+}
+
+.myfade.ng-leave {
+	opacity: 1;
+}
+
+/*
+.myfade.ng-enter-active {
+	opacity: 1;
+}
+
+.myfade.ng-leave-active {
+	opacity: 0;
+	overflow: hidden;
+}
+*/
+
 @media (max-width: 767px) {
 	.supertable th {
 		display: none;
