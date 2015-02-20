@@ -3,13 +3,13 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4>Track maken</h4>
+				<h4><translate>Create track</translate></h4>
 			</div>
 			<div class="modal-body">
 				<form novalidate name="createForm" role="form">
-					<label>Titel</label>
+					<label><translate>Title</translate></label>
 					<input class="form-control" type="text" ng-model="track.titel" placeholder="titel" required />
-					<label>Begintijd</label>
+					<label><translate>Begin</translate></label>
 					<div class="input-group">
 						<!-- niet vergeten de datum en de tijd samen te voegen! -->
 						<!-- Ik moet nog nagaan welk ng-model hier correct is -->
@@ -20,7 +20,7 @@
 						</span> 
 					</div>
 					
-					<label>Eindtijd</label>
+					<label><translate>End</translate></label>
 					<div class="input-group">
 						<input type="text" class="form-control" datetime-picker="dd-MM-yyyy HH:mm" ng-model="track.eindtijd" is-open="$parent.endOpened" required />
 						<span class="input-group-btn">
@@ -34,8 +34,8 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="createTrack(track)" ng-invalid="createForm.$invalid">Maak track</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-default" type="button" data-dismiss="modal" ng-click="createTrack(track)" ng-invalid="createForm.$invalid" translate>Create</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" translate>Close</button>
 			</div>
 		</div>
 	</div>

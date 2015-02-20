@@ -12,16 +12,18 @@
 		
 		<div class="collapse navbar-collapse" id="mynavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="#/tracks">Tracks</a></li>
-				<li><a href="#/projects">Projects</a></li>
-				<li><a href="#/clients">Clients</a></li>
-				<li><a href="#/profile">Profile</a></li>
+				<li><a href="#/tracks" translate>Tracks</a></li>
+				<li><a href="#/projects" translate>Projects</a></li>
+				<li><a href="#/clients" translate>Clients</a></li>
+				<li><a href="#/profile" translate>Profile</a></li>
 			</ul>
 			<div class="navbar-form navbar-right" role="search">
-				<div class="form-group"><input type="text" class="form-control hidden-sm hidden-xs novalidate" ng-model="searchText" placeholder="search" ng-show="dataView"/></div>
-				<button type="button" class="btn btn-default hidden-sm hidden-xs" ng-click="filterResults(searchText)" ng-show="dataView">Search!</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal" ng-show="dataView">Create</button>
-				<button type="button" class="btn btn-default" onClick="performLogout()">Logout</button>
+				<div class="form-group">
+					<input type="text" class="form-control hidden-sm hidden-xs novalidate" ng-model="searchText" placeholder="search" ng-show="dataView"/>
+				</div>
+				<button type="button" class="btn btn-default hidden-sm hidden-xs" ng-click="filterResults(searchText)" ng-show="dataView" translate>Search!</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal" ng-show="dataView" translate>Create</button>
+				<button type="button" class="btn btn-default" onClick="performLogout()" translate>Logout</button>
 			</div>
 		</div>
 	</div>

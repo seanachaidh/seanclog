@@ -1,23 +1,23 @@
 <div ng-include="'/partials/partial-menu.html'"></div>
 <div ng-include="partial-menu.html"></div>
 <div class="container-fluid">
-	<h1>Edit profile</h1>
+	<h1 translate>Edit profile</h1>
 	<div class="row">
-		<div class="col-xs-1"><label>Naam</label></div>
-		<div class="col-xs-11"><input type="text" class="form-control" ng-model="currentUser.naam" placeholder="Dit is je naam" /></div>
+		<div class="col-xs-1"><label><translate>Name</translate></label></div>
+		<div class="col-xs-11"><input type="text" class="form-control" ng-model="currentUser.naam" placeholder="This is your name" /></div>
 	</div>
 	<form novalidate role="form" name="profileForm">
 		<div class="row">
-			<div class="col-xs-1"><label>Email</label></div>
-			<div class="col-xs-11"><input type="text" class="form-control" ng-model="currentUser.email" placeholder="Dit is je email" /></div>
+			<div class="col-xs-1"><label translate>Email</label></div>
+			<div class="col-xs-11"><input type="text" class="form-control" ng-model="currentUser.email" placeholder="This is your email" /></div>
 		</div>
 		
 		<div class="row">
 			<div class="col-xs-6">
-				<button class="btn btn-block" ng-click="saveProfile(currentUser)" type="button">Save</button>
+				<button class="btn btn-block" ng-click="saveProfile(currentUser)" type="button" translate>Save</button>
 			</div>
 			<div class="col-xs-6">
-				<button class="btn btn-block" data-toggle="modal" data-target="#editModal" type="button">Change password</button>
+				<button class="btn btn-block" data-toggle="modal" data-target="#editModal" type="button" translate>Change password</button>
 			</div>
 		</div>
 	</form>

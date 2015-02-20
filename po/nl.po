@@ -1,26 +1,107 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2015-02-16 13:11+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-02-20 13:07+0100\n"
 "Last-Translator:  <pvankeymeulen@seanachaidh.be>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.9\n"
 
+#: public/partials/partial-clients.html:11
+#: public/partials/partial-projects.html:15
+#: public/partials/partial-tracks.html:10
+msgid "Actions"
+msgstr "Acties"
+
+#: public/partials/forms/form_createtrack.html:12
+#: public/partials/forms/form_edittrack.html:12
+#: public/partials/partial-tracks.html:7
+msgid "Begin"
+msgstr "Begin"
+
+#: public/partials/partial-profile.html:20
+msgid "Change password"
+msgstr "Verander wachtwoord"
+
+#: public/partials/forms/form_createproject.html:21
+#: public/partials/forms/form_editproject.html:21
+#: public/partials/partial-projects.html:14
+msgid "Client"
+msgstr "Klant"
+
+#: public/partials/partial-clients.html:4 public/partials/partial-menu.html:17
+msgid "Clients"
+msgstr "Klanten"
+
+#: public/partials/forms/form_createclient.html:22
+#: public/partials/forms/form_createproject.html:28
+#: public/partials/forms/form_createtrack.html:38
 #: public/partials/forms/form_createuser.html:37
+#: public/partials/forms/form_editclient.html:22
+#: public/partials/forms/form_editpass.html:20
+#: public/partials/forms/form_editproject.html:28
+#: public/partials/forms/form_edittrack.html:38
 msgid "Close"
 msgstr "Sluiten"
 
+#: public/partials/forms/form_createproject.html:27
+#: public/partials/forms/form_createtrack.html:37
 #: public/partials/forms/form_createuser.html:36
+#: public/partials/partial-menu.html:25
 msgid "Create"
 msgstr "Maak"
 
+#: public/partials/forms/form_createproject.html:5
+#: public/partials/forms/form_editproject.html:5
+msgid "Create Project"
+msgstr "Maak project"
+
+#: public/partials/forms/form_createclient.html:7
+#: public/partials/forms/form_editclient.html:7
+msgid "Create client"
+msgstr "Maak klant"
+
+#: public/partials/forms/form_createuser.html:8
+msgid "Create new user"
+msgstr "Maak nieuwe gebruiker"
+
+#: public/partials/forms/form_createtrack.html:6
+#: public/partials/forms/form_edittrack.html:6
+msgid "Create track"
+msgstr "Maak track"
+
+#: public/partials/partial-clients.html:20
+#: public/partials/partial-projects.html:24
+#: public/partials/partial-tracks.html:21
+msgid "Edit"
+msgstr "Bewerk"
+
+#: public/partials/forms/form_editpass.html:5
+msgid "Edit password"
+msgstr "Bewerk wachtwoord"
+
+#: public/partials/partial-profile.html:4
+msgid "Edit profile"
+msgstr "Bewerk profiel"
+
+#: public/partials/forms/form_createclient.html:15
 #: public/partials/forms/form_createuser.html:24
+#: public/partials/forms/form_editclient.html:15
+#: public/partials/partial-clients.html:10
+#: public/partials/partial-profile.html:11
 msgid "Email"
 msgstr "Email"
+
+#: public/partials/forms/form_createtrack.html:23
+#: public/partials/forms/form_edittrack.html:23
+#: public/partials/partial-tracks.html:8
+msgid "End"
+msgstr "Eind"
 
 #: public/partials/forms/form_createuser.html:19
 msgid "Full name"
@@ -34,9 +115,21 @@ msgstr "Inloggen"
 msgid "Login error"
 msgstr "Login fout"
 
+#: public/partials/partial-menu.html:26
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: public/partials/forms/form_createclient.html:11
 #: public/partials/forms/form_createuser.html:14
+#: public/partials/forms/form_editclient.html:11
+#: public/partials/partial-clients.html:8
+#: public/partials/partial-profile.html:6
 msgid "Name"
 msgstr "Naam"
+
+#: public/partials/forms/form_editpass.html:9
+msgid "New password"
+msgstr "Nieuw wachtwoord"
 
 #: public/partials/partial-login.html:10
 msgid "New user"
@@ -49,3 +142,67 @@ msgstr "Wachtwoord"
 #: public/partials/partial-login.html:3
 msgid "Please sign in"
 msgstr "Gelieve aan te melden"
+
+#: public/partials/forms/form_createproject.html:16
+#: public/partials/forms/form_editproject.html:16
+#: public/partials/partial-projects.html:13
+msgid "Price"
+msgstr "Prijs"
+
+#: public/partials/partial-menu.html:18
+msgid "Profile"
+msgstr "Profiel"
+
+#: public/partials/partial-tracks.html:9
+msgid "Project"
+msgstr "Project"
+
+#: public/partials/partial-menu.html:16
+msgid "Projects"
+msgstr "Projecten"
+
+#: public/partials/partial-clients.html:19
+#: public/partials/partial-projects.html:23
+#: public/partials/partial-tracks.html:19
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: public/partials/forms/form_editpass.html:11
+msgid "Retype password"
+msgstr "Type wachtwoord opnieuw"
+
+#: public/partials/forms/form_createclient.html:20
+#: public/partials/forms/form_editclient.html:20
+#: public/partials/forms/form_editpass.html:19
+#: public/partials/forms/form_editproject.html:27
+#: public/partials/forms/form_edittrack.html:37
+#: public/partials/partial-profile.html:17
+msgid "Save"
+msgstr "Bewaren"
+
+#: public/partials/partial-menu.html:24
+msgid "Search!"
+msgstr "Zoeken!"
+
+#: public/partials/partial-login.html:12
+msgid "Select language"
+msgstr "Selecteer taal"
+
+#: public/partials/forms/form_createclient.html:13
+#: public/partials/forms/form_editclient.html:13
+#: public/partials/partial-clients.html:9
+msgid "Telephone"
+msgstr "Telefoon"
+
+#: public/partials/forms/form_createproject.html:14
+#: public/partials/forms/form_createtrack.html:10
+#: public/partials/forms/form_editproject.html:14
+#: public/partials/forms/form_edittrack.html:10
+#: public/partials/partial-projects.html:12
+#: public/partials/partial-tracks.html:6
+msgid "Title"
+msgstr "Titel"
+
+#: public/partials/partial-menu.html:15
+msgid "Tracks"
+msgstr "Tracks"

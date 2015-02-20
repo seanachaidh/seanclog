@@ -4,16 +4,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: public/partials/partial-clients.html:11
+#: public/partials/partial-projects.html:15
+#: public/partials/partial-tracks.html:10
+msgid "Actions"
+msgstr ""
+
+#: public/partials/forms/form_createtrack.html:12
+#: public/partials/forms/form_edittrack.html:12
+#: public/partials/partial-tracks.html:7
+msgid "Begin"
+msgstr ""
+
+#: public/partials/partial-profile.html:20
+msgid "Change password"
+msgstr ""
+
+#: public/partials/forms/form_createproject.html:21
+#: public/partials/forms/form_editproject.html:21
+#: public/partials/partial-projects.html:14
+msgid "Client"
+msgstr ""
+
+#: public/partials/partial-clients.html:4
+#: public/partials/partial-menu.html:17
+msgid "Clients"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:22
+#: public/partials/forms/form_createproject.html:28
+#: public/partials/forms/form_createtrack.html:38
 #: public/partials/forms/form_createuser.html:37
+#: public/partials/forms/form_editclient.html:22
+#: public/partials/forms/form_editpass.html:20
+#: public/partials/forms/form_editproject.html:28
+#: public/partials/forms/form_edittrack.html:38
 msgid "Close"
 msgstr ""
 
+#: public/partials/forms/form_createproject.html:27
+#: public/partials/forms/form_createtrack.html:37
 #: public/partials/forms/form_createuser.html:36
+#: public/partials/partial-menu.html:25
 msgid "Create"
 msgstr ""
 
+#: public/partials/forms/form_createproject.html:5
+#: public/partials/forms/form_editproject.html:5
+msgid "Create Project"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:7
+#: public/partials/forms/form_editclient.html:7
+msgid "Create client"
+msgstr ""
+
+#: public/partials/forms/form_createuser.html:8
+msgid "Create new user"
+msgstr ""
+
+#: public/partials/forms/form_createtrack.html:6
+#: public/partials/forms/form_edittrack.html:6
+msgid "Create track"
+msgstr ""
+
+#: public/partials/partial-clients.html:20
+#: public/partials/partial-projects.html:24
+#: public/partials/partial-tracks.html:21
+msgid "Edit"
+msgstr ""
+
+#: public/partials/forms/form_editpass.html:5
+msgid "Edit password"
+msgstr ""
+
+#: public/partials/partial-profile.html:4
+msgid "Edit profile"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:15
 #: public/partials/forms/form_createuser.html:24
+#: public/partials/forms/form_editclient.html:15
+#: public/partials/partial-clients.html:10
+#: public/partials/partial-profile.html:11
 msgid "Email"
+msgstr ""
+
+#: public/partials/forms/form_createtrack.html:23
+#: public/partials/forms/form_edittrack.html:23
+#: public/partials/partial-tracks.html:8
+msgid "End"
 msgstr ""
 
 #: public/partials/forms/form_createuser.html:19
@@ -28,8 +108,20 @@ msgstr ""
 msgid "Login error"
 msgstr ""
 
+#: public/partials/partial-menu.html:26
+msgid "Logout"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:11
 #: public/partials/forms/form_createuser.html:14
+#: public/partials/forms/form_editclient.html:11
+#: public/partials/partial-clients.html:8
+#: public/partials/partial-profile.html:6
 msgid "Name"
+msgstr ""
+
+#: public/partials/forms/form_editpass.html:9
+msgid "New password"
 msgstr ""
 
 #: public/partials/partial-login.html:10
@@ -42,4 +134,68 @@ msgstr ""
 
 #: public/partials/partial-login.html:3
 msgid "Please sign in"
+msgstr ""
+
+#: public/partials/forms/form_createproject.html:16
+#: public/partials/forms/form_editproject.html:16
+#: public/partials/partial-projects.html:13
+msgid "Price"
+msgstr ""
+
+#: public/partials/partial-menu.html:18
+msgid "Profile"
+msgstr ""
+
+#: public/partials/partial-tracks.html:9
+msgid "Project"
+msgstr ""
+
+#: public/partials/partial-menu.html:16
+msgid "Projects"
+msgstr ""
+
+#: public/partials/partial-clients.html:19
+#: public/partials/partial-projects.html:23
+#: public/partials/partial-tracks.html:19
+msgid "Remove"
+msgstr ""
+
+#: public/partials/forms/form_editpass.html:11
+msgid "Retype password"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:20
+#: public/partials/forms/form_editclient.html:20
+#: public/partials/forms/form_editpass.html:19
+#: public/partials/forms/form_editproject.html:27
+#: public/partials/forms/form_edittrack.html:37
+#: public/partials/partial-profile.html:17
+msgid "Save"
+msgstr ""
+
+#: public/partials/partial-menu.html:24
+msgid "Search!"
+msgstr ""
+
+#: public/partials/partial-login.html:12
+msgid "Select language"
+msgstr ""
+
+#: public/partials/forms/form_createclient.html:13
+#: public/partials/forms/form_editclient.html:13
+#: public/partials/partial-clients.html:9
+msgid "Telephone"
+msgstr ""
+
+#: public/partials/forms/form_createproject.html:14
+#: public/partials/forms/form_createtrack.html:10
+#: public/partials/forms/form_editproject.html:14
+#: public/partials/forms/form_edittrack.html:10
+#: public/partials/partial-projects.html:12
+#: public/partials/partial-tracks.html:6
+msgid "Title"
+msgstr ""
+
+#: public/partials/partial-menu.html:15
+msgid "Tracks"
 msgstr ""

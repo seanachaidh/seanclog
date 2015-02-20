@@ -9,10 +9,10 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 	
 	<table class="table supertable">
 		<tr>
-			<th>Title</th>
-			<th>Price</th>
-			<th>Klant</th>
-			<th>Actions</th>
+			<th translate>Title</th>
+			<th translate>Price</th>
+			<th translate>Client</th>
+			<th translate>Actions</th>
 		</tr>
 		
 		<tr ng-repeat="x in data">
@@ -20,8 +20,8 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 			<td>{{x.prijs}}</td>
 			<td>{{x.klant.naam}}</td>
 			<td>
-				<button class="btn btn-default" ng-click="deleteProject(x._id)">Remove</button>
-				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditProject(x)">Edit</button>			
+				<button class="btn btn-default" ng-click="deleteProject(x._id)" translate>Remove</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#editModal" ng-click="showEditProject(x)" translate>Edit</button>			
 			</td>
 		</tr>
 	</table>
