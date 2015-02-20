@@ -7,7 +7,6 @@ var https = require('https');
 var fs = require('fs');
 
 var path = require('path');
-var routes = require('./routes');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var clogapi = require('./api');
@@ -42,7 +41,6 @@ if('development' == app.get('env')) {
 require('./api/auth');
 
 //app.get('/', routes.index);
-app.get('/app', routes.app);
 
 /*
  * Het verkrijgen van data
