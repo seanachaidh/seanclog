@@ -293,6 +293,57 @@ Dit vertelt MongoDB dat de data van het veld "content" Nederlandse tekst bevat. 
 
 Wanneer de de index is aangemaakt en er enkele documenten aan toegevoegd zijn kan men de collectie doorzoeken via full text search. Zoals eerder uitgelegd is geweest doet men dit via de \$text operator
 
+\subsubsection{Mongoose}
+Mongo is op zichzelf slechts een simpele databank. MongoDB ondersteunt voornamelijk het opslaan en opvragen van JSON objecten. Achter MongoDB zit Javascript. De kunst bestaat eruit deze achterliggende javascript motor te gebruiken om ermee de data te manipuleren. Voor bijvoorbeeld het filteren en groeperen van data kan men de mapreducefunctionaliteit gebruiken.
+\begin{lstlisting}
+db.tracks.mapReduce(function() {
+	var hourDate = this.eindtijd - this.begintijd;
+	var onehour = 1000 * 60 * 60;
+	var finalhour = Math.round(hourDate/onehour);
+	emit(this.project, finalhour);
+}, function(key, values) {
+	return Array.sum(values);
+}, {
+	query: {gebruiker: ObjectId("54e468129300f83950bc2a63")},
+	out: {inline: 1}
+})
+\end{lstlisting}
+Dit bestaat uit enkele stappen. Eerst wordt de collectie doorzocht en gefilterd door een query. Elk document dat deze query oplevert wordt doorgegeven aan de mapfunctie die meegegeven werd met het mapreducecommando. Deze voert bij ieder document dat hij meekrijgt enkele regels code uit. De gebruiker is er vrij in om te bepalen welke code er precies moet worden uitgevoerd tijdens deze functie. Zolang dat de functie maar bestaat uit legitieme javascript code en hij puur functioneel is. Nadat deze functie is voeren we een "emit" uit waaraan we een key en een value geven. Als we nog nooit een document zijn tegengekomen met de key wordt er een nieuwe verzameling gemaakt. Als we wel al een ander document met de key zijn tegengekomen wordt deze aan de verzameling toegevoegd. Alle resulterende verzamelingen gaan vervolgens door de reducefunctie. Deze functie werd ook meegegeven aan het mapreduce commando en ook hier gelden dezelfde regels. Deze functie kan eender welke javascript code bevatten zolang het pure functionele code is. Deze functie zorgt ervoor dat de verzameling van values herleid wordt tot één value.
+
+Wanneer het volledige commando is uitgevoerd krijgen we uiteindelijk een nieuw gegeneerd object teruggestuurd dat bestaat uit alle keys die we zijn tegengekomen plus daarbij de gereduceerde value. Dit ziet er ongeveer zo uit.
+\begin{lstlisting}
+{
+	"results" : [
+		{
+			"_id" : ObjectId("54e49d7ad87060420fd417c5"),
+			"value" : 5
+		},
+		{
+			"_id" : ObjectId("54e4b13232c5b7ef11533c02"),
+			"value" : 3
+		}
+	],
+	"timeMillis" : 1,
+	"counts" : {
+		"input" : 4,
+		"emit" : 4,
+		"reduce" : 1,
+		"output" : 2
+	},
+	"ok" : 1
+}
+\end{lstlisting}
+
+Omdat het uitvoeren van zulke commando's echter moeilijk blijft, zorgt mongoose ervoor dat men bepaalde van mongo kan afdwingen zodat men een meer traditionelere ervaring heeft. Mongoose is een Javascript bibliotheek die ervoor zorgt dat men gebruik kan maken van zogenoemde schema's. Wanneer men een schema maakt legt men aan mongoose uit hoe de documenten er in een bepaalde collectie van je database er zouden moeten uitzien. Men kan bijvoorbeeld zeggen dat we een collectie met studenten hebben die bestaat uit documenten die allemaal een string hebben genaamd naam en een integer genaamd leeftijd. Mongoose zal dan zo goed en zo kwaad mogelijk proberen om dit model af te dwingen. Men kan nog steeds documenten in de databank hebben die niet aan deze waarden voldoen, maar men kan niet meer per ongeluk foute documenten maken zolang men de documenten aanmaakt via het mongoose framework. Voorbeeld van zulk een schema.
+\begin{lstlisting}
+var klantSchema = new Schema ({
+	naam: String,
+	telefoonnummer: String,
+	email: String,
+	gebruiker: {type: Schema.Types.ObjectId, ref: 'Gebruiker'}
+}, {collection: "klanten"});
+\end{lstlisting}
+
 \subsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object.
 
