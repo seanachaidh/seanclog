@@ -20,14 +20,20 @@ input.ng-valid.ng-touched:not(.novalidate) {
 	float: right;
 }
 
+.viewcontainer {
+	position: relative;
+	overflow: hidden;
+}
+
 .myfade {
-	-ms-transition: 1s;
-	-moz-transition: 1s;
-	-webkit-transition: 1s;
-	transition: 1s;
+	-ms-transition: all linear 1s;
+	-moz-transition: all linear 1s;
+	-webkit-transition: all linear 1s;
+	transition: all linear 1s;
 }
 
 .myfade.ng-enter {
+	position: absolute;
 	opacity: 0;
 }
 
@@ -35,16 +41,13 @@ input.ng-valid.ng-touched:not(.novalidate) {
 	opacity: 1;
 }
 
-/*
 .myfade.ng-enter-active {
 	opacity: 1;
 }
 
 .myfade.ng-leave-active {
 	opacity: 0;
-	overflow: hidden;
 }
-*/
 
 @media (max-width: 767px) {
 	.supertable th {
