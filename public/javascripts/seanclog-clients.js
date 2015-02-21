@@ -22,9 +22,11 @@ seanclogclient.factory('Klanten', [ '$resource', function($resource) {
 	return fact;
 } ]);
 
-seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '$window', 'Klanten', 'toastr',
+seanclogclient.controller('ClientController', ['$scope', '$route', '$cookies', '$window', '$location', 'Klanten', 'toastr',
 function($scope, $route, $cookies, $window, Klanten, toastr){
 	$scope.dataView = true;
+	
+	$scope.showMenu = true;
 	
 	loadData();
 	

@@ -61,12 +61,15 @@ seanclogusers.factory('Token', function() {
 
 seanclogusers.controller('LoginController', ['$scope', '$cookies', 'Login', '$location', 'gettextCatalog', 'toastr', 'User',
 function($scope, $cookies, Login, $location, gettextCatalog, toastr, User){
+	var elem = angular.element("#mainmenu").css('display', 'none');
+	
 	$scope.dologin = function(user) {
 		Login.getToken({username: user.username, password: user.password}, function(u, status) {
 			$cookies.token = u.token;
 			/*
 			 * Tracks is onze standaardpagina
 			 */
+			angular.element("#mainmenu").css('display', 'block');
 			$location.path('tracks');
 		}, function(error) {
 			if(error.status == 401) {

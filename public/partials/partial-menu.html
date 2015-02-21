@@ -1,30 +1,27 @@
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar">
-				<span class="sr-only">Toggle nav</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#/tracks">Brand</a>
-		</div>
-		
-		<div class="collapse navbar-collapse" id="mynavbar">
-			<ul class="nav navbar-nav">
-				<li><a href="#/tracks" translate>Tracks</a></li>
-				<li><a href="#/projects" translate>Projects</a></li>
-				<li><a href="#/clients" translate>Clients</a></li>
-				<li><a href="#/profile" translate>Profile</a></li>
-			</ul>
-			<div class="navbar-form navbar-right" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control hidden-sm hidden-xs novalidate" ng-model="searchText" placeholder="search" ng-show="dataView"/>
+<div id="mainmenu">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar">
+					<span class="sr-only">Toggle nav</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/tracks">brand</a>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="#/tracks" translate>Tracks</a></li>
+					<li><a href="#/projects" translate>Projects</a></li>
+					<li><a href="#/clients" translate>Clients</a></li>
+					<li><a href="#/profile" translate>Profile</a></li>
+				</ul>
+				<div class="navbar-form navbar-right" role="search">
+					<button type="button" class="btn btn-default" onClick="performLogout()" translate>Logout</button>
 				</div>
-				<button type="button" class="btn btn-default hidden-sm hidden-xs" ng-click="filterResults(searchText)" ng-show="dataView" translate>Search!</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#createModal" ng-show="dataView" translate>Create</button>
-				<button type="button" class="btn btn-default" onClick="performLogout()" translate>Logout</button>
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>

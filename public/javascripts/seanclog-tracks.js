@@ -23,10 +23,10 @@ seanclogtracks.factory('Tracks', [ '$resource', function($resource) {
 } ]);
 
 seanclogtracks.controller('TracksController',
-		['$scope', '$cookies', '$window', '$route', 'Tracks', 'Projects', 'toastr',
-	function($scope, $cookies, $window, $route, Tracks, Projects, toastr){
+		['$scope', '$cookies', '$window', '$route', '$rootScope', 'Tracks', 'Projects', 'toastr',
+	function($scope, $cookies, $window, $route, $rootScope, Tracks, Projects, toastr){
 	$scope.dataView = true;
-
+	
 	loadData();
 	
 	$scope.createTrack = function(track){
