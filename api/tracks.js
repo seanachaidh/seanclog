@@ -94,7 +94,7 @@ exports.updateTrack = function(req, res) {
 	//~ 
 	//~ checkUser(token, function(retval) {
 	//~ });
-}
+//~ }
 
 exports.pdfTrack = function(req, res) {
 	res.send('een pdf van een track');
