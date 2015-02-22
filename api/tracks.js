@@ -88,13 +88,35 @@ exports.updateTrack = function(req, res) {
 	});
 };
 
-//~ exports.getHoursPerProject(req, res) {
-	//~ var token = req.query.access_token;
-	//~ var o = {}
-	//~ 
-	//~ checkUser(token, function(retval) {
-	//~ });
-//~ }
+exports.getHoursPerProject = function(req, res) {
+	var token = req.param('access_token');
+	var o = {};
+	
+	o.map = function() {
+		var hourDate = this.eindtijd - this.begintijd;
+		var onehour = 1000 * 60 * 60;
+		var finalhour = Math.round(hourDate/onehour);
+		emit(this.project, finalhour);
+	};
+	
+	o.reduce = function(key, values) {
+		return Array.sum(values);
+	};
+	
+	model.checkUser(token, function(retval) {
+		o.query = {
+			gebruiker: retval.id
+		};
+		model.Track.mapReduce(o, function(err, retval) {
+			if(err) {
+				console.log(err.message);
+				res.json({value: false});
+			} else {
+				res.json(retval);
+			}
+		});
+	});
+}
 
 exports.pdfTrack = function(req, res) {
 	res.send('een pdf van een track');

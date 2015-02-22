@@ -48,6 +48,7 @@ require('./api/auth');
 app.get('/api/tracks', passport.authenticate('bearer', {session: false}), clogapi.tracks.getTracksOfUser);
 app.get('/api/projects', passport.authenticate('bearer', {session: false}), clogapi.projects.getProjectsOfUser);
 app.get('/api/clients', passport.authenticate('bearer', {session: false}), clogapi.clients.getClientsOfUser);
+app.get('/api/tracks/hours', passport.authenticate('bearer', {session: false}), clogapi.tracks.getHoursPerProject);
 
 /*
  * commandes de pdf

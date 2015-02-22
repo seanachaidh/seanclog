@@ -175,6 +175,7 @@ function checkUser(token, callback) {
 			return;
 		}
 		if(err) {
+			console.log(err.message);
 			callback({value: false});
 			return;
 		}

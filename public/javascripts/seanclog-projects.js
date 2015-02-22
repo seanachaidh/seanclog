@@ -17,6 +17,12 @@ seanclogproj.factory('Projects', [ '$resource', function($resource) {
 		'update': {
 			method: 'PUT',
 			params: {}
+		},
+		'getHours' : {
+			method: 'GET',
+			isArray: true,
+			url: '/api/tracks/hours',
+			params: {}
 		}
 	});
 	return fact;
@@ -84,7 +90,18 @@ function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 	
 	function loadData() {
 		Projects.query({access_token: $cookies.token},function(proj){
-			$scope.data = proj
+			Projects.getHours({access_token: $cookies.token}, function(c) {
+				for(var i = 0; i < c.length; i++) {
+					var hour = c[i];
+					for(var x = 0; x < proj.length; x++) {
+						var p = proj[x];
+						if(p._id == hour._id) {
+							proj[x].hours = hour.value
+						}
+					}
+				}
+				$scope.data = proj;
+			});
 		});
 
 		Klanten.query({access_token: $cookies.token}, function(c) {
@@ -93,3 +110,14 @@ function($scope, $route, $cookies, $window, Projects, Klanten, toastr){
 	}
 }]);
 
+seanclogproj.filter('filterhours', ['$scope', function($scope) {
+	var retval = function(projid) {
+		searchProject  = function(elem) {
+			return elem._id = projid;
+		}
+		finalproj = $scope.hours.filter(searchProject);
+		return finalproj.value;
+	};
+	
+	return retval;
+}]);

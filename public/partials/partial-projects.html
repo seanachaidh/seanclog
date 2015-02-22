@@ -5,6 +5,7 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 <div class="container-fluid">
 	<h1>
 		<translate>Projects</translate>
+		<span>{{getHours()}}</span>
 		<form class="form-inline extrabuttons">
 			<div class="form-group">
 				<input type="text" class="form-control novalidate" ng-model="searchText" placeholder="Search" />
@@ -18,6 +19,7 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 		<tr>
 			<th translate>Title</th>
 			<th translate>Price</th>
+			<th translate>Hours</th>
 			<th translate>Client</th>
 			<th translate>Actions</th>
 		</tr>
@@ -25,6 +27,7 @@ zijn heel belangrijk bij ng-include. Anders werkt het niet.
 		<tr ng-repeat="x in data">
 			<td>{{x.titel}}</td>
 			<td>{{x.prijs}}</td>
+			<td>{{x.hours}}</td>
 			<td>{{x.klant.naam}}</td>
 			<td>
 				<button class="btn btn-default" ng-click="deleteProject(x._id)" translate>Remove</button>
