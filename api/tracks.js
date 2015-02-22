@@ -88,6 +88,14 @@ exports.updateTrack = function(req, res) {
 	});
 };
 
+//~ exports.getHoursPerProject(req, res) {
+	//~ var token = req.query.access_token;
+	//~ var o = {}
+	//~ 
+	//~ checkUser(token, function(retval) {
+	//~ });
+}
+
 exports.pdfTrack = function(req, res) {
 	res.send('een pdf van een track');
 };

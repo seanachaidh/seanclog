@@ -28,8 +28,10 @@ input.ng-valid.ng-touched:not(.novalidate) {
 .myfade {
 	-ms-transition: all linear 1s;
 	-moz-transition: all linear 1s;
-	-webkit-transition: all linear 1s;
+	-webkit-transition: 1s linear all;
+/*
 	transition: all linear 1s;
+*/
 }
 
 .myfade.ng-enter {
