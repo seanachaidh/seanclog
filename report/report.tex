@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{placeins}
+\usepackage{capt-of}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -102,10 +103,17 @@ morecomment=[s]{/*}{*/}
 \newcommand{\head}[1]{\textnormal{\textbf{#1}}}
 
 \begin{document}
-\title{Seanclog: Simple and Fancy timetracker}
+\title{Seanclog: Timetracker met MEAN stack}
 \author{Pieter Van Keymeulen}
 \maketitle
+\newpage
+\tableofcontents
+\newpage
 \section{Inleiding}
+
+
+\subsection{Synopsis}
+Dit document is bedoeld om het verloop uit te leggen van mijn eindwerk. We beginnen bij het uitleggen van het het probleem. Wanneer dat gedaan is gaan we over tot het uitleggen van de middelen die we gebruikt hebben om dat probleem op te lossen. Deze uitleg wordt nog eens opgedeeld bij de technologieën waar dat vereist is. Het volgende onderdeel gaat over hoe ik deze technologieën heb gebruikt en hoe ik daarmee mijn project heb gestructureerd. Als laatste gaan we het hebben over de vormgeving van het uiteindelijke eindproduct.
 
 \subsection{Tijd. Planning. Al het andere}
 Dit project heeft zijn oorsprong in mijn eigen persoonlijkheid. Als je het mijn
@@ -179,6 +187,43 @@ dit het volgende in.
 %  allemaal om hun klantenervaring zo veel mogelijk te kunnen verbeteren.
 %\end{itemize}
 
+Voor dit project werd er gebruik gemaakt van allerlei technologieën. Belangrijk is te vertellen dat het gebruik van deze technologieën doorheen het project is geëvolueerd. In het begin werd er gebruik gemaakt van een klein aantal basistechnologieën, maar naarmate het project vorderde en er meer features bijkwamen, kwamen er ook meer technologieën bij om aan deze features te voldoen. Wat nu volgt is een lijst met van de technologieën die waarvan gebruikt werden gemaakt op achtentwintig februari plus een korte beschrijving van hun functie binnen het project.
+
+\begin{description}
+\item[Express] Dit is een NodeJS bibliotheek die werd gebruikt voor het opzetten van de server en het configureren van de routes. Iedere aanvraag die door de webdienst verwerkt wordt, gaat door NodeJS
+\item[MongoDB] Dit is de databankdienst die gebruikt werd voor het persisteren van gebruikersgegevens en data van de gebruiker.
+\item[Mongoose] Dit is de bibliotheek die werd gebruikt voor het modelleren van de documenten binnen MongoDB.
+\item[passport] Dit is de bibliotheek die zorgt voor de authenticatie van de gebruiker en de beveiliging van de RESTAPI
+\item[passport-local] Dit is een plugin voor passport en zorgt ervoor dat we de gebruiker zich kan authenticeren via het opgeven van een gebruikersnaam en wachtwoord.
+\item[passport-http-bearer] Dit is een plugin voor passport en zorgt ervoor dat de gebruiker zich kan authenticeren door het opgeven van een token.
+\item[ws] Deze bibliotheek zorgt ervoor dat we gebruik kunnen maken van het websocket protocol zodat Android devices met de RESTAPI kunnen communiceren
+\item[Bower] Hiermee kunnen we exta client-side javascript modules installeren
+\item[Grunt] Een taskrunner. Hiermee kunnen we extra commando's draaien na het uitrollen van de applicatie, zoals het installeren van bower modules en het genereren van vertalingen.
+\item[mailgun] Een bibliotheek waarmee we automatische emails kunnen versturen. Het wordt binnen de applicatie gebruikt voor het verzenden van een email nadat een nieuwe gebruiker een account heeft aangemaakt voor het bevestigen van diens emailadres.
+\item[Validator] Een bibliotheek waarmee data, die meegegeven wordt aan de RESTAPI, gevalideerd wordt, zodat, mocht deze niet valide zijn, ook niet opgenomen wordt door de databank.
+\item[Superagent] Een bibliotheek waarmee request kunnen worden gemaakt. Deze bibliotheek wordt voornamelijk gebruikt bij het testen van de applicatie.
+\item[Expect.js] Een bibliotheek waarmee asserties kunnen gemaakt worden. De functies binnen deze bibliotheek kunnen bepaalde waardes bekijken en nagaan of deze aan bepaalde verwachtingen voldoen. Als dit niet het geval is gooien ze een assertie ofwel fout.
+\item[Mailgun] Een internetdienst die gebruikt wordt voor het verzenden van de automatische emailberichten naar de gebruikers. Deze werkt volledig op een token-based RESTAPI zodat ik geen gebruik hoef te maken van mijn bestaande email adres en wachtwoord.
+\item[grunt-angular-gettext] Dit zorgt ervoor dat Grunt in staat is tot het compileren van Gettext bronbestanden.
+\item[grunt-bower-task] Dit zorgt ervoor dat Grunt in staat is tot het ophalen van bower modules.
+\end{description}
+
+Hier volgen nog enkele modules die enkel client-side gebruikt worden en geïnstalleerd worden via Bower
+\begin{description}
+\item[JQuery] Zorgt ervoor dat webpagina's op een elegante manier dynamisch kunnen worden aangepast.
+\item[Angular] Zorgt ervoor dat we client-side een model-view-controller patroon kunnen toepassen
+\item[Angular-cookies] Een extra module voor Angular die ervoor zorgt dat we gebruik kunnen maken van de cookie store.
+\item[Angular-gettext] Een extra module voor Angular die ervoor zorgt dat we de applicatie kunnen vertalen naar andere talen dan het Engels.
+\item[Angular-route] Een extra module voor Angular die ervoor zorgt dat we binnen de applicatie client-side gebruik kunnen maken van verschillende routes.
+\item[Angular-resource] Een extra module voor Angular die ervoor zorgt dat we kunnen communiceren met de RESTAPI.
+\item[Anguar-animate] Een extra module voor Angular die ervoor zorgt dat we gebruik kunnen maken van animaties binnen de applicatie.
+\item[bootstrap] Een CSS template met klasses die gebruikt wordt om de gebruikersinterface van de applicatie mooi te doen ogen.
+\item[angular-bootstrap] Een extra module voor Bootstrap die extra widgets levert die te programmeren zijn via Angular
+\item[angular-bootstrap-datetime-picker] Een extra module voor Bootstrap die ervoor zorgt dat er gebruik kan worden gemaakt van een mooie datumkiezer.
+\item[angular-toastr] Een extra module voor Angular die ervoor zorgt dat er binnen de applicatie flash-berichten verschijnen wanneer de gebruiker een bepaalde actie onderneemt.
+\end{description}
+
+\subsection{Gebruikte stack}
 Voor dit project wordt er gebruik gemaakt van de MEAN-stack. Dit is variant op de LAMP stack. De LAMP stack wordt tegenwoordig het meest gebruikt. De MEAN stack daarentegen is een vrij jong concept. Veeleer omdat de MEAN stack uitsluitend uit nieuwe technologie bestaat.
 
 De MEAN stack is een collectie van software die er voor zorgt dat men de mogelijkheid heeft een webapplicatie te ontwikkelen. Deze MEAN stack bestaat uit de volgende onderdelen
@@ -205,8 +250,12 @@ Heroku is een bedrijf dat een PAAS dienst aanbiedt.\cite{wiki:heroku}. Ze bieden
 
 De kosten bij Heroku worden berekend per uur. Niet per maand, zoals dat bij traditionele webhosting het geval is. Wanneer de applicatie een uur niet draait wordt er voor dat uur niets aangerekend. Men zou dus in principe, als men geld zou willen besparen, de applicatie op bepaald momenten niet kunnen draaien. Bij Heroku is dit echter geen probleem want de eerste 750 dyno uren zijn gratis. Dit betekent dat men een  applicatie een maand lang gratis kan draaien zolang deze maar één dyno gebruikt. Stel dat men twee instanties van de applicatie zou willen draaien, dan zou men slechts voor een halve maand niet gefactureerd worden.
 
+Het grootste voordeel aan Heroku is wel de continuous integration. Elke applicatie wordt gekoppeld aan een Git repository. Dit is een "versie controle systeem" dat bijhoudt welke veranderingen de broncode doorheen de tijd heeft doorgemaakt. Telkens wanneer de programmeur een aantal veranderingen heeft aangebracht kan hij deze veranderingen "committen". Wanneer dat gebeurt wordt het verschil met de vorige commit bijgehouden. De programmeur kan daarna de volledige code terugdraaien naar deze commit of naar andere commits die in het verleden zijn gebeurd.
+
+De "repository" (dit is de mapstructuur waarin de code bewaard wordt) kan gesynchroniseerd worden met een repository die zich op een server bevindt. De repository van een applicatie op Heroku is zo een repository. Telkens wanneer er een synchronisatie gebeurt, rolt Heroku de applicatie opnieuw uit en start Heroku de applicatie onmiddellijk. Na de synchronisatie wordt de nieuwe code gemarkeerd als een nieuwe versie van de applicatie. Ook hier kan er naar vorige versies teruggegaan worden. Door deze manier van werken kan men nieuwe features implementeren, testen en uitrollen zonder dat de gebruiker van de applicatie er ook maar iets van merkt.
+
 \subsection{MongoDB}
-MongoDB is, in tegenstelling tot traditionele SQL databanken, een 
+MongoDB \cite{mongodb:site} is, in tegenstelling tot traditionele SQL databanken, een 
 no-sql databank. Dit wil zeggen dat de data niet voorgesteld wordt door 
 tabellen. Hoe de data dan wel voorgesteld wordt, wordt in de definitie 
 van no-sql niet vervat. Over het algemeen wordt bij een gewone mysql 
@@ -267,7 +316,19 @@ Een attribuut van een element & column & field
 Men kan in Mongo, net zoals in SQL, verwijzen naar andere documenten. Wanneer er een nieuw document wordt aangemaakt wordt deze hetzij impliciet, hetzij expliciet voorzien van een ID. Dit ID kan als waarde voorkomen de velden van andere documenten. Men moet bij deze methode op enkele dingen letten. MongoDB is zo simpel mogelijk ontworpen en legt zelf heel weinig restricties op. Alle validatie van data wordt overgelaten aan de applicatie. MongoDB gaat onder meer geen types opleggen aan de velden van een document. Ieder veld kan ieder type bevatten dat Mongo ondersteunt. Dit wilt zeggen dat een veld genaamd datum niet zozeer een datum hoeft te bevatten en dat ook andere objecten met hetzelfde veld iets anders kunnen bevatten dan een datum. Ook het aantal velden wordt op databankniveau niet opgelegd. Het ene document van een collectie kan 10 velden bevatten en het andere 20.
 
 \subsubsection{Query's op MongoDB}
-
+Iedere collectie binnen MongoDB wordt behandeld als een object. Die objecten hebben enkele methodes, zoals bijvoorbeeld de find methode. Deze methode wordt gebruikt voor het opvragen van documenten binnen de collectie. Men kan deze methode zonder parameters oproepen
+\begin{lstlisting}
+db.klanten.find();
+\end{lstlisting}
+Indien dit het geval is zullen alle documenten met al hun teruggestuurd worden. Wanneer een collectie echter een groot aantal documenten bezit, kan dit gauw enorm onoverzichtelijk worden. Men kan daarom zoeken naar documenten die een bepaald veld met een bepaalde waarde hebben.
+\begin{lstlisting}
+db.klanten.find({naam: "hugo"});
+\end{lstlisting}
+Dit gaat alle klanten terugsturen die de naam "hugo" hebben. Zoals eerder gezegd kan een document in MongoDB een oneindig aantal velden hebben. Men kan daarom ook specificeren welke velden er precies moeten worden teruggestuurd.
+\begin{lstlisting}
+db.klanten.find({naam: "hugo"}, {adres: 1});
+\end{lstlisting}
+Dit stuurt enkel het veld genaamd adres terug van de klanten met de naam hugo.
 
 \subsubsection{GridFS}
 Een extraatje van MongoDB waar in deze applicatie geen gebruik van wordt gemaakt heet GridFS. Eerder ging het erover dat bij een document-georiënteerde databank, een gegeven ieder type bestand kan zijn. Dit kan gaan om afbeeldingen, muziek, of, in het geval van Mongo, om JSON documenten. Documenten kunnen maximum 16MB groot zijn. Dus zelfs al zou men iets anders willen bewaren dan een JSON-object. Dan zou het nog niet lukken. Of niet? MongoDB heeft hier namelijk een oplossing voor, genaamd GridFS. GridFS laat toe om andere types documenten op te slaan in plaats van een JSON-objecten. Deze andere documenten kunnen eventueel alsnog vergezeld worden door enkele JSON gegevens. Dit komt omdat GridFS bedoeld is om documenten op te splitsen over meerdere collecties. Wanneer het document opgevraagd wordt, stel MongoDB het document opnieuw samen.
@@ -347,6 +408,12 @@ var klantSchema = new Schema ({
 \subsection{Express}
 Express is een bibliotheek die het maken van webapplicaties met nodejs vergemakkelijkt. Het vormt een extra laag bovenop nodejs. Het ondersteunt verschillende features. De feature waar wij het meest gebruik van gaan maken is de routing feature. Dit laat ons toe om routes te maken. Dit wil zeggen dat men een bepaalde url gaat koppelen aan een functie in JavaScript. Wanneer er dan naar deze url gesurft wordt, wordt deze functie uitgevoerd. Meestal worden er dan dingen uit de databank opgehaald naargelang de parameters die bij het request worden meegegeven. Daarna sturen we dat resultaat terug als een JSON Object.
 
+Door middel van Express kunnen we ook gebruik maken van allerhande middleware, zoals passport. Dit is middleware voor Express die extra functionaliteit biedt zoals het authenticeren van de gebruiker. Door middel van extra plugins zorgen we ervoor dat de gebruiker kan aanmelden via zijn gebruikersnaam en wachtwoord en voor de andere requests gebruik kan maken van een token. De token kan bij requests waar het niet echt nodig is, de gebruikersnaam en wachtwoord vervangen. Zo hoeft de gebruiker niet telkens het wachtwoord door te sturen.
+
+Er kan ook gebruik worden gemaakt van verschillende soorten view engines zoals bijvoorbeeld Jade. Dit is een soort tussenformaat voor webpagina's waar we nog extra variabelen op kunnen toepassen. De waarde van deze variabelen kunnen we bepalen door server-side javascirpt. Dit kan bijvoorbeeld gaan om de naam van de gebruiker, of data die de gebruiker heeft opgeslagen. Omdat AngularJS echter al iets levert dat op een view engine lijkt, wordt hiervan geen gebruik gemaakt.
+
+Met express kan zelf bepaald worden welke bestanden de browser precies ter beschikking krijgt. De andere mappen worden niet door Express beschikbaar gemaakt. Deze mappen kunnen immers gevoelige informatie bevatten, zoals wachtwoorden.
+
 \subsection{AngularJS}
 %nog uit te leggen
 %	scopes.
@@ -357,6 +424,12 @@ Voor dit project gaan we gebruik maken van AngularJS. Dit is een javascript fram
 var var seanclogApp = angular.module('seanclogApp',
 		['seanClogServices', 'seanClogControllers', 'ngRoute', 'ui.grid',
 		 'pascalprecht.translate']);
+\end{lstlisting}
+Hierna moet men ook in de html code specificeren dat het om een Angular app gaat alsook om welke app het precies gaat. Dit wordt gedaan door de ng-app directive.
+\begin{lstlisting}
+<body ng-app="seanclogApp">
+	...
+</body>
 \end{lstlisting}
 
 Zoals u zelf waarschijnlijk zult merken is de applicatie zelf ook een module. Dit module systeem heeft zijn voordelen. Stel dat men de controllers van een de ene applicatie wilt gebruiken in een andere. Dan hoeft men enkel het bestand dat deze module bevat te kopiëren naar de broncode van de andere applicatie. Als dat gedaan is en het bronbestand geladen wordt door één van de webpagina's van uw applicatie moet men deze module registreren door deze aan de applicatie toe te voegen. Dit gaat als volgt.
@@ -403,10 +476,31 @@ Dan zou men hier code uit een ander bestand er aan kunnen toevoegen.
 %Iedere resource heeft zijn eigen controller en door middel van het angular modulesysteem zetten we iedere
 %controller in een eigen bestand. Op die manier blijft onze code ordelijk.
 
+
+Controllers worden in Angular gebruikt om de scope te "vullen". Bij het registeren van een controller wordt er een functie doorgegeven die een variabele genaamd \$scope vult met een aantal waarden die men daarna kan gebruiken in het gedeelte van de pagina waarop de controller van toepassing is. Deze waarden kunnen gewone integers zijn, maar het kan ook gaan om functies die uitgevoerd moeten worden wanneer een gebruiker op een bepaalde knop klikt.
+\begin{lstlisting}
+seanclogtracks.controller('MyController', ['$scope', function($scope){
+	$scope.hello = 'hello';
+	$scope.doSomething = function() {
+		console.log('something');
+	};
+}]);
+\end{lstlisting}
+Men kan direct naar deze waarden refereren binnenin de template op voorwaarde dat de referenties zich bevinden in een gedeelte dat deel uitmaakt van de scope.
+\begin{lstlisting}
+<div ng-controller="SpicyController">
+ <span>{{hello}}</span>
+ <button ng-click="doSomething()">Click me</button>
+ <p>The food is {{spice}} spicy!</p>
+</div>
+\end{lstlisting}
+Van welke scope precies het gedeelte deel uitmaakt wordt bepaald door de "ng-controller" directive. Alle kinderen onder de div met deze directive vallen onder de scope "mycontroller"
+
 Wat betreft de controllers heb ik besloten om volledig gebruik te maken van Angulars kracht. Het modulaire systeem van AngularJS staat de programmeur toe om het programma in meerdere bestanden op te splitsen zolang men deze javascripts maar laad in de applicatie. Dit rekeninghoudend met de afhankelijkheid tussen de modules onderling.
 
 Ik heb ervoor gekozen om voor iedere resource een controller te voorzien. Dit is in de meeste gevallen de aangewezen methode bij het maken van applicaties in het Model View controller patroon %Leg uit wat model view controller is.
 Dit wil zeggen dat mochten we een resource genaamd klanten hebben, ik de applicatie ga voorzien van een controller genaamd klanten waarin alle procedures voor het afhandelen van informatie omtrent klanten, in zit vervat.  Dit gaat onder meer over bewerken, verwijderen, maken, plus nog enkele mogelijke hulpfuncties.
+
 
 \subsubsection{Services}
 Het ophalen van data van de database door de client gebeurt door middel van services. Services zijn een concept binnen AngularJS en kunnen gezien worden als singletons. Een service wordt gemaakt door de factory methode op te roepen van de het applicatieobject. Dit krijg twee parameters mee. De eerste parameter is een naam. Deze naam zal later gebruikt worden om naar onze service te kunnen refereren. De tweede parameter is een functie die een object hoort terug te geven. Dit object kan allerlei dingen bevatten. Variabelen, functies, het is kortom een volwaardig object. De bedoeling is dat dit object vanaf elke plek binnen onze applicatie beschikbaar zal zijn. We kunnen deze services in andere modules gebruiken. Bij het maken van een module moet er namelijk een array doorgegeven worden. Deze array is een lijst met strings. Deze strings zijn namen van services. Zo weet angular welke services in een module worden gebruikt. De genoemde services moeten daarna enkel als parameter genoemd worden in de functie gekoppeld aan de module. Daarbij zijn ze ook nog eens lui geïnitialiseerd. Dit wil zeggen dat Angular deze objecten enkel aanmaakt wanneer ze echt worden gebruikt. Men kan bijvoorbeeld een module laden waarin een service vervat zit, maar waarvan geen gebruik gemaakt wordt. Mocht deze service toch geïnitialiseerd worden, neemt deze onnodig plek in het geheugen en kan deze de applicatie nodeloos vertragen. Door deze techniek kan Angular sneller werken en hebben Angular applicaties een lagere memory-footprint.
@@ -441,8 +535,26 @@ seanclogclient.factory('Klanten', [ '$resource', function($resource) {
 Normaal gezien worden deze methodes impliciet aangemaakt. Men kan deze methodes echter ook expliciet aanmaken, zoals in het bovenstaande voorbeeld. Dit laat de programmeur toe om enkele standaard opties aan te passen.
 
 \subsubsection{Filters}
-%Hier schrijven over de datumfilter die ik heb gemaakt.
-
+Angular biedt ook de mogelijkheid tot het maken van filters. Met deze filters kunnen bepaalde gegevens van het éne formaat, naar het andere omgezet worden. Normaal gezien worden deze filters gebruikt binnen de templates, maar ze kunnen ook binnen de controllers gebruikt worden.
+\begin{lstlisting}
+seanclogtracks.filter('humandate', function() {
+	var retval = function(mydate) {
+		var tmpdate = new Date(mydate);
+		var finalstring = tmpdate.toLocaleString();
+		
+		return finalstring;
+	};
+	return retval;
+});
+\end{lstlisting}
+Een filter wordt geregistreerd binnen een module.\cite{angular:filters} De filter krijgt een naam mee die dan, binnen de controllers waarin de filter geladen is, gebruikt kan worden. De filters krijgen bij registratie een functie mee, die op zijn beurt opnieuw een functie terugstuurt. Deze functie is bij voorkeur idempotent(wat betekent dat de functie altijd het zelfde resultaat zal terugsturen als de parameters ook dezelfde zijn) en kan enkele parameters meekrijgen. De eerste parameters is altijd de data waarop de filter wordt toegepast. De volgende zijn extra parameters die men kan meegeven via de template. Dit gebeurt op de volgende manier.
+\begin{lstlisting}
+<td>{{x.titel}}</td>
+<td>{{x.begintijd|humandate}}</td>
+<td>{{x.eindtijd|humandate:extaparam}}</td>
+<td>{{x.project.titel}}</td>
+\end{lstlisting}
+Hier worden de waarden van x.begintijd en x.eindtijd gefilterd door een filter genaamd humandate. x.eindtijd krijgt hierbij een extra parameter mee genaamd extraparam.
 \subsubsection{Directives}
 %Het is niet de naam maar de ng-model
 Voor het maken van deze applicatie heb ik het voorzien van één custom directive genaamd ng-match. Deze zorgt ervoor dat de inhoud van het éne invoerveld overeenstemt met het andere. Stel dat men een formulier heeft en dat formulier heeft een invoerveld genaamd wachtwoord. Dan kan men de gebruiker dwingen dezelfde tekst in een tweede invoerveld te schrijven door dat invoerveld te voorzien van het ng-match attribuut, met als waarde dezelfde als de naam van het eerste invoerveld. Wanneer de waarde van het tweede invoerveld niet overeenstemt met de waarde van het eerste is de waarde niet geldig en wordt deze niet opgestuurd naar de server. \cite{angular:directives}
@@ -897,8 +1009,60 @@ We wijzen onze ng-view toe aan de klasse myfade. Op deze klassen passen we een o
 %Geef hier voorbeeld
 
 \section{handleiding}
+\subsection{Loginscherm}
+Wanneer u naar de applicatie surft komt u terecht bij het loginscherm. Op dit scherm kan u zich aanmelden door uw gebruikersnaam en wachtwoord in de daarvoor voorziene velden te schrijven en daarna op de aanmeld knop te drukken. Indien u nog geen account heeft voor de applicatie kunt u deze aan maken via de Create user knop. U gaat dan een formulier gepresenteerd krijgen waarop u uw gegevens kan invullen. Eenmaal de gegevens ingevuld zijn en u op Create heeft geklikt gaat u een email teruggestuurd krijgen met daarin de vraag om uw account te bevestigen. Eenmaal dat gedaan is kan u met de applicatie aan de slag.
 
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[scale=0.5]{screenshots/loginscherm}
+\captionof{figure}{Het aanmeldscherm}
+\end{minipage}
+\end{center}
+
+\subsection{De views}
+Voor iedere soort data die u kan beheren krijgt u ene view ter beschikking. Er zijn drie soorten data
+\begin{description}
+\item[Tracks] Hiermee beheert u de tracks. (Tijdspanne voor een bepaald project)
+\item[Projects] Hiermee beheert u de projecten waaraan u werkt
+\item[Clients] Hiermee beheert u uw klanten voor wie u de projecten maakt.
+\end{description}
+
+U kunt van view verwisselen door de gewenste view te selecteren in het menu bovenaan. Met de views kunt u de data invoeren, verwijderen en bewerken van de type van de view. Als u zich bijvoorbeeld op de Project view bevindt kunt u een nieuw project aanmaken door op de Create knop te klikken. Wilt u een project bewerken of verwijderen dan kijkt u in de tabel en zoekt u naar het project dat u wenst te bewerken en klikt u ofwel op de bewerkknop, ofwel op de verwijderenknop van dat project dat u wenst te verwijderen of te bewerken. Als u een project wilt bewerken krijgt u een formulier gepresenteerd waar u de nieuwe data dient in te voeren. Dan hoeft u nog enkel op Save te klikken en de nieuwe data is bewaart. Indien er zich te veel data bevindt in een view kunt u deze filteren door gebruik te maken van de zoekfunctie. Deze bevindt zich naast de titel van iedere view. Typ de sleutelwoorden waarop u wenst te zoeken in de zoekbalk naast de zoekknop en klik op search en uw data zal gefilterd worden volgens de sleutelwoorden.
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{screenshots/projectscherm}
+\captionof{figure}{Voorbeeld van een view}
+\end{minipage}
+\end{center}
+U kunt op de uitlogknop rechtsovenbaan klikken indien uit zich wenst af te melden en de applicatie wenst af te sluiten. 
+
+\subsection{Profielgegevens}
+Uw profielgegevens kunt u bewerken op de profielview. Hier krijgt u velden waarin u uw emailadres en naam kunt veranderen. U doet dit door de velden in de view te bewerken. Daarna moet u op save klikken om uw bewerkingen te bewaren. U kunt ook uw wachtwoord veranderen door op change password te klikken. Dan moet u een formulier invullen waarin u uw nieuwe wachtwoord twee keer moet intikken. Daarna kan u op save klikken om uw nieuwe wachtwoord te bewaren
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{screenshots/profilescherm}
+\captionof{figure}{De profielview}
+\end{minipage}
+\end{center}
 \section{Zelfevaluatie}
+Dit is ondertussen de tweede bachelorproef die ik aanga. Ik denk dat het dus logisch is dat ik beide eens ga vergelijken. De eerste bachelorproef was een flop. Ik nam me toen voor om een volledige compiler te maken. Iets wat me mateloos interesseert, maar veel te ambitieus en veel te moeilijk was. Hoewel ik uiteindelijk iets heb afgeleverd, kwam het er niet door en dat was te begrijpen. Hoewel ik in de loop der tijd veel informatie over het onderwerp heb weten te vergaren, bleek het resultaat niet te werken.
+
+Het gaat hem hier echter niet om de eerste bachelorproef. Het gaat hem hier om de tweede. Ik zou het dit keer over een totaal andere boeg gooien. Ik zou een simpele applicatie maken met technologie waarover ik nog maar een paar jaar geleden gehoord had. Deze technologie zou Javascript worden. Meer bepaald AngularJS. Toen ik exact een jaar gelden een meetup bijwoonde over Angular, was ik enorm sceptisch. Ik was vroeger sowieso niet zo dol op web-development en Javascript. Ik had liever C++ en het ontwikkelen van applicaties voor op de desktop. Toen ik dus hoorde dat Angular bedoelt was om een complete applicatie te maken met javascript, was ik argwanend. Ik was van mening dat javascript niet bedoeld was voor het maken van een zware webapplicatie. Louter voor enkele kleine scripts. Ik heb daarna even geëxperimenteerd met AngularJS, maar het daarna weggesmeten.
+
+Een paar maanden later besprak ik de slechte afloop van mijn bachelorproef met mijn promotor. Wat nu? Ik stelde voor om een simpelere applicatie uit te proberen en mijn promotor begon over AngularJS. Mijn verrassing was groot. Hij stelde voor om die simpele applicatie (die uiteindelijk een timetracker zou worden) te maken met behulp van AngularJS. Dat niet alleen. De applicatie zou volledig in Javascript geschreven worden, met NodeJS en MongoDB. Na enkele dagen hierover te hebben nagedacht besloot ik ermee door te gaan. Een applicatie schrijven in een programmeertaal ik ten alle tijden probeer te vermijden. Ik was benieuwd naar wat het zou geven.
+
+Nu ik aan het einde van deze bachelorproef zit ben ik aangenaam verrast. Angular is één van mijn lievelingsframeworks geworden. Ik denk er nu zelfs aan om mijn eigen homepage ermee te maken. Over MongoDB ben ik iets minder tevreden. MongoDB is nog een jong project en vele features die je normaal gesproken zou verwachten binnen een databank zoals "cascade delete" of het samenvoegen van twee collecties, zijn niet geïmplementeerd. Ook is het zo dat, als je echt de kracht van MongoDB wilt gebruiken, je moet kunnen omgaan met mapreduce en functioneel programmeren. Iets wat nu nog niet onderwezen wordt op hogescholen. Enkel op universiteiten via Haskel. Misschien gaat dat ooit, in de toekomst, veranderen.
+
+NodeJS was ook een verandering na enkel PHP gekend te hebben voor het maken van een webapplicatie. Ik moet toegeven dat ik best graag in NodeJS programmeer. Persoonlijk heb ik niet zo graag PHP. Zelf gebruik ik het liefs Python als scriptingtaal, maar NodeJS is zeker ook een goede keuze om te gebruiken. De syntax is gebasseerd op C. Een van mijn lievelingsprogrammeertalen en het biedt juist de goede flexibiliteit om er op een snelle manier applicaties in te schrijven. Het vreemde daan NodeJS applicaties is dat ze blijkbaar kunnen crashen wanneer een request fout verloopt. PHP gaat dan gewoon door, maar NodeJS crasht en omdat bij NodeJS applicaties meestal de in NodeJS ingebouwde server wordt gebruikt en dus geen externe server zoals Apache, crasht de server mee.
+
+Dat gezegd zijnde is het zelfs meer dan prima. Mocht het hosten van een NodeJS applicatie niet zo duur zijn zou ik er zeker voor zorgen dat ik mijn website met NodeJS kon maken. Het kan op dit moment gauw dertig euro per maand kosten. De tijden zijn echter aan het veranderen. NodeJS wordt alsmaar meer gebruikt en ik heb er al een paar goedkopere gezien.
+
+Nu we het daarover hebben. In mijn zoektocht naar een goede raadde mijn promotor Heroku aan. Een cloud platform dat gratis blijft zolang je niet boven een bepaald gebruik gaat. Die gebruikerslimiet is natuurlijk veel te laag om een goede commerciële applicatie te maken, maar voor mijn bachelorproef, volstond het. Ik was er vrij tevreden over. Heroku biedt namelijk een git repostory aan waarmee je razendsnel nieuwe releases kan maken. Op die manier kon ik de laatste paar weken die ik kon gebruiken voor mijn bachelorproef, iedere dag een release maken en dat op Facebook melden. Op die manier konden vrienden en familie van mij de applicatie testen. Hieruit heb ik enorm goed feedback gekregen.
+
+Nu dit project afgelopen is kijk ik uit naar mijn volgende project. Ik heb enkele ideetjes die ik zou willen uitwerken. Ik voel dat ik door deze bachelorproef de dicipline heb gekregen om nog meer projecten te vervolledigen. Vroeger lukte me het nooit om een project af te werken. Tuurlijk, een ICT project is nooit af. Het lukte me alleen maar niet om een degelijk product af te leveren. Het is me nu eindelijk wel gelukt. Mits voldoende planning door het gebruik van de juiste planningssoftware. Ik popel om dit in de toekomst opnieuw te doen.
 
 \bibliographystyle{alpha}
 \bibliography{tex}
