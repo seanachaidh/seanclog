@@ -1,8 +1,0 @@
-{
-	"host": "localhost",
-	"db": "test",
-	"user": "",
-	"password": "",
-	"devmode": "true",
-	"baseurl": "http://localhost:5000"
-}
